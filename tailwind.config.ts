@@ -22,6 +22,9 @@ const config: Config = {
         900: '#101113',
       },
     },
+    fontFamily: {
+      pretendard: ['Pretendard-Regular', 'sans-serif'],
+    },
   },
   plugins: [
     function ({ addUtilities }: any) {
