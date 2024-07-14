@@ -6,6 +6,23 @@ const config: Config = {
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+  theme: {
+    colors: {
+      white: {
+        DEFAULT: '#FFFFFF',
+      },
+      gray: {
+        100: '#F1F3F6',
+        200: '#E1E2E4',
+        300: '#BEBEC0',
+        400: '#909097',
+        600: '#6B6C74',
+        700: '#494A50',
+        800: '#2A2A2E',
+        900: '#101113',
+      },
+    },
+  },
   plugins: [
     function ({ addUtilities }: any) {
       const newUtilities = {
