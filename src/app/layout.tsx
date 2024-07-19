@@ -18,10 +18,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang='ko' className={myFont.className}>
-      <body className='relative max-w-[495px] min-h-svh my-0 mx-auto shadow-lg'>
-        {children}
-      </body>
+    <html lang="ko" className={myFont.className}>
+      <body className="relative mx-auto my-0 min-h-svh max-w-[495px] shadow-lg">{children}</body>
     </html>
   );
 }

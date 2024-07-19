@@ -6,13 +6,9 @@ interface CelebProfileProps {
   border?: boolean;
 }
 
-const CelebProfile = ({
-  name,
-  imageUrl,
-  border = false,
-}: CelebProfileProps) => {
+const CelebProfile = ({ name, imageUrl, border = false }: CelebProfileProps) => {
   return (
-    <div className='flex flex-col flex-none items-center gap-[8px]'>
+    <div className="flex flex-none flex-col items-center gap-[8px]">
       <Image
         className={`rounded-full ${border && 'border-2 border-gray-600'}`}
         src={imageUrl}
@@ -20,7 +16,7 @@ const CelebProfile = ({
         width={68}
         height={68}
       />
-      <span className='body-13-rg'>{name}</span>
+      <span className="body-13-rg">{name}</span>
     </div>
   );
 };
