@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  html {
+    font-size: 25%;
+  }
+}
+
 @layer utilities {
   .scrollbar-hide {
     -ms-overflow-style: none;
