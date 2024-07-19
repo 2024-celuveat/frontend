@@ -12,7 +12,7 @@ const CelebProfile = ({
   border = false,
 }: CelebProfileProps) => {
   return (
-    <div className='flex flex-col items-center gap-[8px] min-w-[68px]'>
+    <div className='flex flex-col flex-none items-center gap-[8px]'>
       <Image
         className={`rounded-full ${border && 'border-2 border-gray-600'}`}
         src={imageUrl}
