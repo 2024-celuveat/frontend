@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import './globals.css';
+import BottomNavbar from '@/components/BottomNavbar';
 
 export const metadata: Metadata = {
   title: 'Celuveat',
@@ -19,7 +20,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko" className={myFont.className}>
-      <body className="relative mx-auto my-0 min-h-svh max-w-[495px] shadow-lg">{children}</body>
+      <body className="relative mx-auto my-0 min-h-svh max-w-[495px] shadow-lg">
+        {children}
+        <BottomNavbar />
+      </body>
     </html>
   );
 }
