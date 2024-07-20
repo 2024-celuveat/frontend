@@ -22,8 +22,21 @@ const config: Config = {
         900: '#101113',
       },
     },
-    fontFamily: {
-      pretendard: ['Pretendard-Regular', 'sans-serif'],
+    extend: {
+      keyframes: {
+        fadeIn: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+        slideUp: {
+          '0%': { transform: 'translateY(100%) translateX(50%)' },
+          '100%': { transform: 'translateY(0) translateX(50%)' },
+        },
+      },
+      animation: {
+        'fade-in': 'fadeIn 0.3s ease-in-out',
+        'slide-up': 'slideUp 0.3s ease-in-out',
+      },
     },
   },
   plugins: [
