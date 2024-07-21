@@ -24,8 +24,8 @@ const BottomNavbar = () => {
   };
   return (
     <OverlayProvider>
-      <div className="h-72" />
-      <nav className="fixed bottom-0 right-1/2 flex h-60 w-full max-w-[495px] translate-x-1/2 justify-around border-t bg-white px-24 py-8">
+      <div className="h-80" />
+      <nav className="fixed bottom-0 right-1/2 flex h-72 w-full max-w-[495px] translate-x-1/2 items-start justify-around border-t bg-white px-24 py-8">
         <Link href="/" className="flex flex-col items-center gap-6">
           <div className="h-24 w-24 rounded-full bg-gray-100"></div>
           <span className="caption-12-rg">홈</span>
