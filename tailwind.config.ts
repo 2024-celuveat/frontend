@@ -12,6 +12,7 @@ const config: Config = {
         DEFAULT: '#FFFFFF',
       },
       gray: {
+        50: '##F4F6F9',
         100: '#F1F3F6',
         200: '#E1E2E4',
         300: '#BEBEC0',
@@ -20,6 +21,11 @@ const config: Config = {
         700: '#494A50',
         800: '#2A2A2E',
         900: '#101113',
+      },
+      dim: {
+        5: 'rgba(0, 0, 0, 0.05)',
+        50: 'rgba(0, 0, 0, 0.5)',
+        85: 'rgba(0, 0, 0, 0.86)',
       },
     },
     extend: {
@@ -94,6 +100,12 @@ const config: Config = {
           fontSize: '14px',
           lineHeight: '20px',
           fontWeight: 400,
+          letterSpacing: '-0.3px',
+        },
+        '.body-13-semibold': {
+          fontSize: '13px',
+          lineHeight: '16px',
+          fontWeight: 600,
           letterSpacing: '-0.3px',
         },
         '.body-13-rg': {
