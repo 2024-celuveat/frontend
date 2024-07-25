@@ -1,6 +1,7 @@
 'use client';
 
 import CelebProfile from '@/components/CelebProfile';
+import Link from 'next/link';
 import { useState } from 'react';
 
 const IMAGE_URL =
@@ -109,9 +110,12 @@ const CelebBestSection = () => {
             <CelebBestSectionRestaurantCard />
             <CelebBestSectionRestaurantCard />
           </div>
-          <button className="mt-20 flex h-48 w-full items-center justify-center gap-8 rounded-[8px] bg-white">
+          <Link
+            href={`/celebs/${CELEBS.find(({ name }) => name === selected)?.id}`}
+            className="mt-20 flex h-48 w-full items-center justify-center gap-8 rounded-[8px] bg-white"
+          >
             <span className="body-16-md">셀럽 맛집 더보기</span>
-          </button>
+          </Link>
         </div>
       )}
     </section>
