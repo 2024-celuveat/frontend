@@ -1,6 +1,6 @@
-import CelebProfile from '@/components/CelebProfile';
 import RestaurantCard from '@/components/RestaurantCard';
-import Image from 'next/image';
+
+import CelebBestSection from './_client/CelebBestSection';
 
 const IMAGE_URL =
   'https://yt3.googleusercontent.com/vQrdlCaT4Tx1axJtSUa1oxp2zlnRxH-oMreTwWqB-2tdNFStIOrWWw-0jwPvVCUEjm_MywltBFY=s176-c-k-c0x00ffffff-no-rj';
@@ -11,19 +11,7 @@ export default function Home() {
       <section className="px-20 pt-20">
         <div className="h-48 w-full rounded-[12px] border border-gray-200 shadow-sm"></div>
       </section>
-      <section className="mt-28">
-        <h1 className="px-20 title-20-md">셀럽 BEST</h1>
-        <div className="scrollbar-hide mt-[16px] flex gap-[16px] overflow-x-scroll px-20">
-          <CelebProfile id={1} name="성시경" imageUrl={IMAGE_URL} border />
-          <CelebProfile id={2} name="성시경" imageUrl={IMAGE_URL} />
-          <CelebProfile id={3} name="성시경" imageUrl={IMAGE_URL} />
-          <CelebProfile id={4} name="성시경" imageUrl={IMAGE_URL} />
-          <CelebProfile id={5} name="성시경" imageUrl={IMAGE_URL} />
-          <CelebProfile id={6} name="성시경" imageUrl={IMAGE_URL} />
-          <CelebProfile id={7} name="성시경" imageUrl={IMAGE_URL} />
-          <CelebProfile id={8} name="성시경" imageUrl={IMAGE_URL} />
-        </div>
-      </section>
+      <CelebBestSection />
       <section className="mt-48">
         <h1 className="px-20 title-20-md">셀럽들의 추천 맛집</h1>
         <div className="scrollbar-hide mt-[16px] flex gap-[16px] overflow-x-scroll px-20">
@@ -111,11 +99,11 @@ export default function Home() {
       <section className="mt-48">
         <h1 className="px-20 title-20-md">어디로 가시나요?</h1>
         <div className="scrollbar-hide mt-[16px] flex gap-[16px] overflow-x-scroll px-20">
-          <div className="h-[68px] w-[68px] rounded-full bg-gray-200" />
-          <div className="h-[68px] w-[68px] rounded-full bg-gray-200" />
-          <div className="h-[68px] w-[68px] rounded-full bg-gray-200" />
-          <div className="h-[68px] w-[68px] rounded-full bg-gray-200" />
-          <div className="h-[68px] w-[68px] rounded-full bg-gray-200" />
+          <div className="h-[68px] w-[68px] flex-none rounded-full bg-gray-200" />
+          <div className="h-[68px] w-[68px] flex-none rounded-full bg-gray-200" />
+          <div className="h-[68px] w-[68px] flex-none rounded-full bg-gray-200" />
+          <div className="h-[68px] w-[68px] flex-none rounded-full bg-gray-200" />
+          <div className="h-[68px] w-[68px] flex-none rounded-full bg-gray-200" />
         </div>
       </section>
       <section className="mt-48">
