@@ -29,7 +29,7 @@ const CelebPage = () => {
               <span className="ml-12 body-14-rg">추천 매장</span>
               <span className="ml-2 body-14-md">50개</span>
             </div>
-            <p className="mt-14 pr-16">
+            <p className="mt-14 pr-16 body-13-rg">
               셀럽 소개글 가나다라마바사아자차카타파하 가나다라마바 최대 2줄 노출 후 말줄임 처리하기...셀럽 소개글
               가나다라마바사아자차카타파하 가나다라마바 최대 2줄 노출 후 말줄임 처리하기...
             </p>
