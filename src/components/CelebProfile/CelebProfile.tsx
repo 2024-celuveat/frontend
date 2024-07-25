@@ -2,15 +2,16 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 interface CelebProfileProps {
-  id: number;
   name: string;
   imageUrl: string;
   border?: boolean;
+
+  onClick?: () => void;
 }
 
-const CelebProfile = ({ id, name, imageUrl, border = false }: CelebProfileProps) => {
+const CelebProfile = ({ name, imageUrl, border = false, onClick }: CelebProfileProps) => {
   return (
-    <Link href={`celebs/${id}`} className="flex flex-none flex-col items-center gap-[8px]">
+    <div onClick={onClick} className="flex flex-none flex-col items-center gap-[8px]">
       <Image
         className={`rounded-full ${border && 'border-2 border-gray-600'}`}
         src={imageUrl}
@@ -19,7 +20,7 @@ const CelebProfile = ({ id, name, imageUrl, border = false }: CelebProfileProps)
         height={68}
       />
       <span className="body-13-rg">{name}</span>
-    </Link>
+    </div>
   );
 };
 
