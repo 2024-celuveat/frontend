@@ -14,7 +14,7 @@ const style = {
 };
 
 const BottomNavbar = () => {
-  const clickHandler = () => {
+  const openBottomSheet = () => {
     overlay.open(({ isOpen, close, unmount }) => {
       return (
         <BottomSheet open={isOpen} onClose={unmount} title="로그인">
@@ -34,6 +34,7 @@ const BottomNavbar = () => {
       );
     });
   };
+
   return (
     <OverlayProvider>
       <div className="h-80" />
@@ -50,7 +51,7 @@ const BottomNavbar = () => {
           <div className="h-24 w-24 rounded-full bg-gray-100"></div>
           <span className="caption-12-rg">관심</span>
         </Link>
-        <div onClick={clickHandler} className="flex cursor-pointer flex-col items-center gap-6">
+        <div onClick={openBottomSheet} className="flex cursor-pointer flex-col items-center gap-6">
           <div className="h-24 w-24 rounded-full bg-gray-100"></div>
           <span className="caption-12-rg">로그인</span>
         </div>
