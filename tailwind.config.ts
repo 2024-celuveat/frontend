@@ -38,10 +38,16 @@ const config: Config = {
           '0%': { transform: 'translateY(100%) translateX(50%)' },
           '100%': { transform: 'translateY(0) translateX(50%)' },
         },
+        slideDown: {
+          '0%': { maxHeight: '0', padding: '0 20px' },
+          '50%': { padding: '20px' },
+          '100%': { maxHeight: '100vh' },
+        },
       },
       animation: {
         'fade-in': 'fadeIn 0.3s ease-in-out',
         'slide-up': 'slideUp 0.3s ease-in-out',
+        'slide-down': 'slideDown 0.5s ease-in-out',
       },
     },
   },

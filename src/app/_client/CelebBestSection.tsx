@@ -104,7 +104,7 @@ const CelebBestSection = () => {
         ))}
       </div>
       {selected && (
-        <div className="mt-16 bg-gray-100 px-20 py-20">
+        <div className="animate-slide-down mt-16 overflow-hidden bg-gray-100 px-20 py-20">
           <div className="flex w-full gap-8">
             <CelebBestSectionRestaurantCard />
             <CelebBestSectionRestaurantCard />
