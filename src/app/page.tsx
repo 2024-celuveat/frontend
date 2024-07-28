@@ -1,48 +1,36 @@
 import RestaurantCard from '@/components/RestaurantCard';
 
 import CelebBestSection from './_client/CelebBestSection';
+import { Celeb, RestaurantData } from '@/@types';
 
-const IMAGE_URL =
-  'https://yt3.googleusercontent.com/vQrdlCaT4Tx1axJtSUa1oxp2zlnRxH-oMreTwWqB-2tdNFStIOrWWw-0jwPvVCUEjm_MywltBFY=s176-c-k-c0x00ffffff-no-rj';
+const getCelebs = async (): Promise<Celeb[]> => (await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/celebs`)).json();
 
-export default function Home() {
+const getCelebsRecommendations = async (): Promise<RestaurantData[]> =>
+  (await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/main-page/recommendation`)).json();
+
+export default async function Home() {
+  const celebs = await getCelebs();
+  const celebsRecommendations = await getCelebsRecommendations();
+
   return (
     <main className="">
       <section className="px-20 pt-20">
         <div className="h-48 w-full rounded-[12px] border border-gray-200 shadow-sm"></div>
       </section>
-      <CelebBestSection />
+      <CelebBestSection celebs={[...celebs].reverse()} />
       <section className="mt-48">
         <h1 className="px-20 title-20-md">셀럽들의 추천 맛집</h1>
         <div className="scrollbar-hide mt-[16px] flex gap-[16px] overflow-x-scroll px-20">
-          <RestaurantCard
-            name="올디스 타코"
-            category="양식"
-            imageUrl={IMAGE_URL}
-            location="서울시 종로구"
-            tag="성시경외 3명 추천 맛집"
-          />
-          <RestaurantCard
-            name="올디스 타코"
-            category="양식"
-            imageUrl={IMAGE_URL}
-            location="서울시 종로구"
-            tag="성시경외 3명 추천 맛집"
-          />
-          <RestaurantCard
-            name="올디스 타코"
-            category="양식"
-            imageUrl={IMAGE_URL}
-            location="서울시 종로구"
-            tag="성시경외 3명 추천 맛집"
-          />
-          <RestaurantCard
-            name="올디스 타코"
-            category="양식"
-            imageUrl={IMAGE_URL}
-            location="서울시 종로구"
-            tag="성시경외 3명 추천 맛집"
-          />
+          {[...celebsRecommendations].reverse().map(({ id, name, category, images, roadAddress }) => (
+            <RestaurantCard
+              key={id}
+              name={name}
+              category={category}
+              imageUrl={`${process.env.NEXT_PUBLIC_S3_BASE_URL}/${images[0].name}.webp`}
+              location={roadAddress}
+              tag="성시경외 3명 추천 맛집"
+            />
+          ))}
         </div>
       </section>
       <section className="mt-48 px-20">
@@ -109,34 +97,16 @@ export default function Home() {
       <section className="mt-48">
         <h1 className="px-20 title-20-md">지금 인기 있는 맛집!</h1>
         <div className="scrollbar-hide mt-[16px] flex gap-[16px] overflow-x-scroll px-20">
-          <RestaurantCard
-            name="올디스 타코"
-            category="양식"
-            imageUrl={IMAGE_URL}
-            location="서울시 종로구"
-            tag="성시경외 3명 추천 맛집"
-          />
-          <RestaurantCard
-            name="올디스 타코"
-            category="양식"
-            imageUrl={IMAGE_URL}
-            location="서울시 종로구"
-            tag="성시경외 3명 추천 맛집"
-          />
-          <RestaurantCard
-            name="올디스 타코"
-            category="양식"
-            imageUrl={IMAGE_URL}
-            location="서울시 종로구"
-            tag="성시경외 3명 추천 맛집"
-          />
-          <RestaurantCard
-            name="올디스 타코"
-            category="양식"
-            imageUrl={IMAGE_URL}
-            location="서울시 종로구"
-            tag="성시경외 3명 추천 맛집"
-          />
+          {celebsRecommendations.map(({ id, name, category, images, roadAddress }) => (
+            <RestaurantCard
+              key={id}
+              name={name}
+              category={category}
+              imageUrl={`${process.env.NEXT_PUBLIC_S3_BASE_URL}/${images[0].name}.webp`}
+              location={roadAddress}
+              tag="성시경외 3명 추천 맛집"
+            />
+          ))}
         </div>
       </section>
     </main>
