@@ -15,7 +15,14 @@ const BottomSheet = ({ title, open, onClose, children }: BottomSheetProps) => {
   useEffect(() => {
     if (open) {
       setIsVisible(true);
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
     }
+
+    return () => {
+      document.body.style.overflow = '';
+    };
   }, [open]);
 
   const handleAnimationEnd = () => {
@@ -29,11 +36,11 @@ const BottomSheet = ({ title, open, onClose, children }: BottomSheetProps) => {
     isVisible && (
       <>
         <div
-          className="animate-fade-in absolute left-0 top-0 h-full w-full bg-[rgba(0,_0,_0,_0.5)]"
+          className="absolute left-0 top-0 h-full w-full animate-fade-in bg-[rgba(0,_0,_0,_0.5)]"
           onAnimationEnd={handleAnimationEnd}
           onClick={onClose}
         />
-        <div className="animate-slide-up fixed bottom-0 right-1/2 w-full max-w-[495px] translate-x-1/2 rounded-[16px_16px_0_0] bg-white px-20 py-20">
+        <div className="fixed bottom-0 right-1/2 w-full max-w-[495px] translate-x-1/2 animate-slide-up rounded-[16px_16px_0_0] bg-white px-20 py-20">
           <h2 className="text-center title-16-sb">{title}</h2>
           <div className="mt-24">{children}</div>
         </div>
