@@ -1,16 +1,26 @@
 'use client';
 
-import { Celeb, RestaurantData } from '@/@types';
+import { Celeb } from '@/@types';
 import CelebProfile from '@/components/CelebProfile';
 import Link from 'next/link';
-import { use, useState } from 'react';
-import Image from 'next/image';
-import { useQuery } from '@tanstack/react-query';
+import { Suspense, useState } from 'react';
 import CelebBestSectionCards from './CelebBestSectionCards';
 
 interface CelebBestSectionProps {
   celebs: Celeb[];
 }
+
+const CelebBestSectionCardsSkeleton = () =>
+  Array(3).fill(
+    <div className="flex w-[calc((100%-20px)/3)] flex-col">
+      <div className="relative aspect-square animate-pulse overflow-hidden rounded-[8px] bg-gray-200" />
+      <div className="mt-10 flex flex-col gap-3 px-2">
+        <div className="h-[17px] w-full animate-pulse rounded-md bg-gray-200"></div>
+        <div className="h-[16.5px] w-1/5 animate-pulse rounded-md bg-gray-200"></div>
+      </div>
+      <div className="mt-8 h-16 w-1/2 animate-pulse rounded-md bg-gray-200"></div>
+    </div>,
+  );
 
 const CelebBestSection = ({ celebs }: CelebBestSectionProps) => {
   const [selectedId, setSelectedId] = useState<number | null>(null);
@@ -36,7 +46,9 @@ const CelebBestSection = ({ celebs }: CelebBestSectionProps) => {
       {selectedId && (
         <div className="animate-slide-down mt-16 overflow-hidden bg-gray-100 px-20 py-20">
           <div className="flex w-full gap-8">
-            <CelebBestSectionCards selectedId={selectedId} />
+            <Suspense fallback={<CelebBestSectionCardsSkeleton />}>
+              <CelebBestSectionCards selectedId={selectedId} />
+            </Suspense>
           </div>
           <Link
             href={`/celebs/${celebs.find(({ id }) => id === selectedId)?.id}`}
