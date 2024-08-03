@@ -18,6 +18,7 @@ const CelebProfile = ({ name, imageUrl, border = false, onClick }: CelebProfileP
         alt={name}
         width={68}
         height={68}
+        priority
       />
       <span className="body-13-rg">{name}</span>
     </div>

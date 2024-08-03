@@ -5,6 +5,7 @@ export const useCelebsRepresentativeRestaurants = (celebId: number) =>
   useSuspenseQuery({
     queryKey: ['celebsRepresentativeRestaurants', celebId],
     queryFn: () => getRestaurants({ celebId }),
+    select: data => data.content.slice(0, 3),
   });
 
 export const useCelebProfiles = (celebId: number) =>

@@ -11,16 +11,16 @@ interface CelebBestSectionProps {
 }
 
 const CelebBestSectionCardsSkeleton = () =>
-  Array(3).fill(
-    <div className="flex w-[calc((100%-20px)/3)] flex-col">
+  [1, 2, 3].map(value => (
+    <div className="flex w-[calc((100%-20px)/3)] flex-col" key={value}>
       <div className="relative aspect-square animate-pulse overflow-hidden rounded-[8px] bg-gray-200" />
       <div className="mt-10 flex flex-col gap-3 px-2">
         <div className="h-[17px] w-full animate-pulse rounded-md bg-gray-200"></div>
         <div className="h-[16.5px] w-1/5 animate-pulse rounded-md bg-gray-200"></div>
       </div>
       <div className="mt-8 h-16 w-1/2 animate-pulse rounded-md bg-gray-200"></div>
-    </div>,
-  );
+    </div>
+  ));
 
 const CelebBestSection = ({ celebs }: CelebBestSectionProps) => {
   const [selectedId, setSelectedId] = useState<number | null>(null);
@@ -44,7 +44,7 @@ const CelebBestSection = ({ celebs }: CelebBestSectionProps) => {
         ))}
       </div>
       {selectedId && (
-        <div className="animate-slide-down mt-16 overflow-hidden bg-gray-100 px-20 py-20">
+        <div className="mt-16 animate-slide-down overflow-hidden bg-gray-100 px-20 py-20">
           <div className="flex w-full gap-8">
             <Suspense fallback={<CelebBestSectionCardsSkeleton />}>
               <CelebBestSectionCards selectedId={selectedId} />

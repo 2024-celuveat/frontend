@@ -12,7 +12,7 @@ const RestaurantCard = ({ name, category, imageUrl, location, tag }: RestaurantC
   return (
     <div className="flex w-[140px] flex-none flex-col">
       <div className="relative h-[140px] w-full overflow-hidden rounded-[8px] bg-gray-200">
-        <Image src={imageUrl} fill alt={name} objectFit="cover" />
+        <Image src={imageUrl} fill alt={name} sizes="100%" className="object-cover" />
         <div className="absolute right-8 top-8 flex h-24 w-24 items-center justify-center rounded-full bg-white">
           <span className="caption-12-rg">찜</span>
         </div>
