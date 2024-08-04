@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 };
 
 const myFont = localFont({
-  src: './PretendardVariable.woff2',
+  src: './pretendard-variable.woff2',
   display: 'block',
 });
 
