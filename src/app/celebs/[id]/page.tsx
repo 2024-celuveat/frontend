@@ -18,7 +18,8 @@ const CelebPageRestaurantCard = ({ name, images, category, roadAddress }: Restau
           src={`${process.env.NEXT_PUBLIC_S3_BASE_URL}/${images[0].name}.webp`}
           fill
           alt={name}
-          objectFit="cover"
+          sizes="100%"
+          className="object-cover"
         />
       </div>
       <div className="relative flex flex-1 flex-col">

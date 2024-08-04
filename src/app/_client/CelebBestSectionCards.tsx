@@ -15,7 +15,7 @@ const CelebBestSectionCards = ({ selectedId }: CelebBestSectionCardsProps) => {
     <>
       {data.map(({ id, name, images, category, roadAddress }) => (
         <div className="flex w-[calc((100%-20px)/3)] flex-col" key={id}>
-          <div className="relative aspect-square overflow-hidden rounded-[8px]">
+          <div className="relative aspect-square overflow-hidden rounded-[8px] bg-gray-200">
             <Image
               fill
               alt={name}

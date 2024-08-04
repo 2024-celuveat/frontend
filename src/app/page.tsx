@@ -23,12 +23,12 @@ export default async function Home() {
         <div className="flex gap-2">
           <h1 className="pl-20 title-20-md">셀럽들의 추천 맛집</h1>
           <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="11.0002" cy="10.9999" r="8.47917" stroke="#E1E2E4" stroke-width="1.375" />
+            <circle cx="11.0002" cy="10.9999" r="8.47917" stroke="#E1E2E4" strokeWidth="1.375" />
             <path
               d="M11.0002 8.25008C11.5064 8.25008 11.9168 7.83968 11.9168 7.33341C11.9168 6.82715 11.5064 6.41675 11.0002 6.41675C10.4939 6.41675 10.0835 6.82715 10.0835 7.33341C10.0835 7.83968 10.4939 8.25008 11.0002 8.25008Z"
               fill="#909097"
             />
-            <path d="M11 10.0833V15.5833" stroke="#909097" stroke-width="1.375" />
+            <path d="M11 10.0833V15.5833" stroke="#909097" strokeWidth="1.375" />
           </svg>
         </div>
         <div className="scrollbar-hide mt-[16px] flex gap-[16px] overflow-x-scroll px-20">
