@@ -1,6 +1,6 @@
 'use client';
 
-import { IconArrow24 } from '@/assets/icons';
+import { IconArrowLeft } from '@/assets/icons';
 import { useRouter } from 'next/navigation';
 
 interface HeaderProps {
@@ -12,7 +12,7 @@ const Header = ({ title }: HeaderProps) => {
 
   return (
     <div className="relative flex h-[58px] w-full items-center justify-center">
-      <IconArrow24
+      <IconArrowLeft
         className="top-18 absolute left-20 h-24 w-24"
         onClick={() => {
           router.back();

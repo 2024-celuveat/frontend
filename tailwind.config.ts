@@ -96,6 +96,12 @@ const config: Config = {
           fontWeight: 500,
           letterSpacing: '-0.3px',
         },
+        '.body-15-rg': {
+          fontSize: '15px',
+          lineHeight: '18px',
+          fontWeight: 400,
+          letterSpacing: '-0.3px',
+        },
         '.body-14-md': {
           fontSize: '14px',
           lineHeight: '17px',
@@ -120,11 +126,23 @@ const config: Config = {
           fontWeight: 400,
           letterSpacing: '-0.3px',
         },
+        '.caption-12-md': {
+          fontSize: '12px',
+          lineHeight: '14px',
+          fontWeight: 500,
+          letterSpacing: '0',
+        },
         '.caption-12-rg': {
           fontSize: '12px',
           lineHeight: '14px',
           fontWeight: 400,
           letterSpacing: '0',
+        },
+        '.caption-11-md': {
+          fontSize: '11px',
+          lineHeight: '13px',
+          fontWeight: 500,
+          letterSpacing: '-0.3px',
         },
       };
 
