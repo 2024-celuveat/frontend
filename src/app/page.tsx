@@ -2,7 +2,7 @@ import RestaurantCard from '@/components/RestaurantCard';
 
 import CelebBestSection from './_client/CelebBestSection';
 import { Celeb, RestaurantData } from '@/@types';
-import { IconInfo24, IconNoticeFilled24 } from '@/assets/icons';
+import { IconNoticeFilled24, IconSearch24 } from '@/assets/icons';
 
 const getCelebs = async (): Promise<Celeb[]> => (await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/celebs`)).json();
 
@@ -16,7 +16,10 @@ export default async function Home() {
   return (
     <main className="">
       <section className="px-20 pt-20">
-        <div className="h-48 w-full rounded-[12px] border border-gray-200 shadow-sm"></div>
+        <div className="flex h-48 w-full items-center gap-10 rounded-[12px] bg-gray-100 pl-14 shadow-sm">
+          <IconSearch24 />
+          <span className="body-15-rg text-gray-400">원하는 식당을 검색해보세요.</span>
+        </div>
       </section>
       <CelebBestSection celebs={[...celebs].reverse()} />
       <section className="mt-48">
