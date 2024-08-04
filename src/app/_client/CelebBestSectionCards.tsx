@@ -28,8 +28,7 @@ const CelebBestSectionCards = ({ selectedId }: CelebBestSectionCardsProps) => {
             <span className="body-14-md">{name}</span>
             <span className="text-[11px] text-gray-600">{category}</span>
           </div>
-          <div className="mt-8 flex items-center gap-2">
-            <div className="h-16 w-16 rounded-full bg-gray-200"></div>
+          <div className="mt-6">
             <span className="caption-12-rg">{roadAddress.split(' ').slice(0, 2).join(' ')}</span>
           </div>
         </div>
