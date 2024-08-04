@@ -1,3 +1,4 @@
+import { transform } from 'next/dist/build/swc';
 import type { Config } from 'tailwindcss';
 
 const config: Config = {
@@ -26,6 +27,19 @@ const config: Config = {
         5: 'rgba(0, 0, 0, 0.05)',
         50: 'rgba(0, 0, 0, 0.5)',
         85: 'rgba(0, 0, 0, 0.86)',
+      },
+      main: {
+        500: '#FF7B54',
+        600: '#FF673A',
+        700: '#FC5524',
+      },
+      mainDim: {
+        15: '#FF7B5426',
+        8: '#FF7B5414',
+      },
+      sub: {
+        orange: '#FFB26C',
+        yellow: '#FFE48C',
       },
     },
     extend: {
@@ -143,6 +157,16 @@ const config: Config = {
           lineHeight: '13px',
           fontWeight: 500,
           letterSpacing: '-0.3px',
+        },
+        '.ballon': {
+          borderTop: '10px solid #FF7B54',
+          borderLeft: '10px solid transparent',
+          borderRight: '10px solid transparent',
+          content: '',
+          position: 'absolute',
+          top: '68px',
+          left: '50%',
+          transform: 'translateX(-50%)',
         },
       };
 
