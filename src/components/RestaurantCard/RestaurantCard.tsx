@@ -1,5 +1,6 @@
 import { IconGoodFilled12, IconHeartEmpty24 } from '@/assets/icons';
 import Image from 'next/image';
+import Link from 'next/link';
 
 interface RestaurantCardProps {
   name: string;
@@ -11,7 +12,7 @@ interface RestaurantCardProps {
 
 const RestaurantCard = ({ name, category, imageUrl, location, tag }: RestaurantCardProps) => {
   return (
-    <div className="flex w-[140px] flex-none flex-col">
+    <Link className="flex w-[140px] flex-none flex-col" href={`/restaurant/${name}`}>
       <div className="relative h-[140px] w-full overflow-hidden rounded-[8px] bg-gray-200">
         <Image src={imageUrl} fill alt={name} sizes="100%" className="object-cover" />
         <IconHeartEmpty24 className="absolute right-8 top-8 *:fill-white" />
@@ -25,7 +26,7 @@ const RestaurantCard = ({ name, category, imageUrl, location, tag }: RestaurantC
         <IconGoodFilled12 />
         <span className="text-main-700 caption-12-rg">{tag}</span>
       </div>
-    </div>
+    </Link>
   );
 };
 

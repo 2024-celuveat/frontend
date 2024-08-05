@@ -2,6 +2,7 @@ import Header from '@/components/Header';
 import CelebIntroductionSection from '../_client/CelebIntroductionSection';
 import { RestaurantData } from '@/@types';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const getCelebsRepresentationRestaurants = async (celebId: number): Promise<{ content: RestaurantData[] }> =>
   (
@@ -10,9 +11,9 @@ const getCelebsRepresentationRestaurants = async (celebId: number): Promise<{ co
     )
   ).json();
 
-const CelebPageRestaurantCard = ({ name, images, category, roadAddress }: RestaurantData) => {
+const CelebPageRestaurantCard = ({ id, name, images, category, roadAddress }: RestaurantData) => {
   return (
-    <li className="flex gap-12">
+    <Link href={`/restaurant/${id}`} className="flex gap-12">
       <div className="relative h-[112px] w-[112px] overflow-hidden rounded-[8px] bg-gray-200">
         <Image
           src={`${process.env.NEXT_PUBLIC_S3_BASE_URL}/${images[0].name}.webp`}
@@ -29,7 +30,7 @@ const CelebPageRestaurantCard = ({ name, images, category, roadAddress }: Restau
 
         <p className="absolute bottom-0 left-0 text-gray-600 body-13-rg">식당 소개글 가나다라마바사아자차타파...</p>
       </div>
-    </li>
+    </Link>
   );
 };
 

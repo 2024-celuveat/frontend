@@ -3,6 +3,7 @@
 import { useCelebsRepresentativeRestaurants } from '@/hooks/server';
 
 import Image from 'next/image';
+import Link from 'next/link';
 
 interface CelebBestSectionCardsProps {
   selectedId: number;
@@ -14,7 +15,7 @@ const CelebBestSectionCards = ({ selectedId }: CelebBestSectionCardsProps) => {
   return (
     <>
       {data.map(({ id, name, images, category, roadAddress }) => (
-        <div className="flex w-[calc((100%-20px)/3)] flex-col" key={id}>
+        <Link href={`/restaurant/${id}`} className="flex w-[calc((100%-20px)/3)] flex-col" key={id}>
           <div className="relative aspect-square overflow-hidden rounded-[8px] bg-gray-200">
             <Image
               fill
@@ -31,7 +32,7 @@ const CelebBestSectionCards = ({ selectedId }: CelebBestSectionCardsProps) => {
           <div className="mt-6">
             <span className="caption-12-rg">{roadAddress.split(' ').slice(0, 2).join(' ')}</span>
           </div>
-        </div>
+        </Link>
       ))}
     </>
   );

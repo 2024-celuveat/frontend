@@ -64,7 +64,7 @@ const CelebIntroductionSection = ({ celebId }: CelebIntroductionSectionProps) =>
       <div className="mt-20 flex gap-10">
         {isLiked ? (
           <button
-            className="flex flex-1 justify-center gap-4 rounded-[8px] bg-[#FF673A] py-12 title-15-md"
+            className="bg-main-600 flex flex-1 justify-center gap-4 rounded-[8px] py-12 title-15-md"
             onClick={() => {
               setIsLiked(false);
             }}
@@ -73,15 +73,16 @@ const CelebIntroductionSection = ({ celebId }: CelebIntroductionSectionProps) =>
           </button>
         ) : (
           <button
-            className="flex flex-1 justify-center gap-4 rounded-[8px] bg-[rgba(255,_123,_84,_0.15)] py-12 title-15-md"
+            className="flex flex-1 justify-center gap-4 rounded-[8px] bg-[rgba(255,_123,_84,_0.15)] py-12"
             onClick={() => {
               setIsLiked(true);
             }}
           >
-            <IconPlus20 /> <span className="text-[#FC5524]">관심 추가</span>
+            <IconPlus20 />
+            <span className="text-main-700 title-15-md">관심 추가</span>
           </button>
         )}
-        <button className="flex-1 rounded-[8px] bg-gray-100 py-12 title-15-md" onClick={openBottomSheet}>
+        <button className="flex-1 rounded-[8px] bg-gray-100 py-12 text-gray-700 title-15-md" onClick={openBottomSheet}>
           유튜브 바로가기
         </button>
       </div>
