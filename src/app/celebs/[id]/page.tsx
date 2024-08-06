@@ -1,5 +1,5 @@
 import Header from '@/components/Header';
-import CelebIntroductionSection from '../_client/CelebIntroductionSection';
+import CelebIntroductionSection from './_client/CelebIntroductionSection';
 import { RestaurantData } from '@/@types';
 import Image from 'next/image';
 import Link from 'next/link';

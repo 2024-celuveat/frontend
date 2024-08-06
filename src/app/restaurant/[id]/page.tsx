@@ -781,7 +781,7 @@ const RestaurantDetailPage = () => {
                   <circle cx="1" cy="1" r="1" fill="#BEBEC0" />
                 </svg>
                 <div className="flex items-center gap-2">
-                  <span className="text-gray-400 caption-12-rg">도움되요</span>
+                  <span className="text-gray-400 caption-12-rg">도움돼요</span>
                   <span className="caption-12-md text-gray-600">100</span>
                 </div>
               </div>
@@ -795,7 +795,7 @@ const RestaurantDetailPage = () => {
                     fill="#BEBEC0"
                   />
                 </svg>
-                <span className="text-gray-600 caption-12-rg">도움되요!</span>
+                <span className="text-gray-600 caption-12-rg">도움돼요!</span>
               </button>
             </li>
           </ul>

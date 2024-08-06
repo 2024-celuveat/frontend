@@ -18,7 +18,7 @@ const CelebIntroductionSection = ({ celebId }: CelebIntroductionSectionProps) =>
   const { data } = useCelebProfiles(celebId);
 
   const openBottomSheet = () => {
-    overlay.open(({ isOpen, close, unmount }) => {
+    overlay.open(({ isOpen, unmount }) => {
       return (
         <BottomSheet open={isOpen} onClose={unmount} title="유튜브 채널 바로가기">
           <Link
@@ -53,7 +53,7 @@ const CelebIntroductionSection = ({ celebId }: CelebIntroductionSectionProps) =>
         </div>
         {data && (
           <Image
-            className="h-72 w-72 rounded-full"
+            className="h-72 w-72 rounded-full bg-gray-200"
             src={data.profileImageUrl}
             alt={data?.name}
             width={72}

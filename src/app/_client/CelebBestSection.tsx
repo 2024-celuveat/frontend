@@ -48,7 +48,8 @@ const CelebBestSection = ({ celebs }: CelebBestSectionProps) => {
         <div className="bg-mainDim-8 mt-8 animate-slide-down overflow-hidden px-20 py-20">
           <div className="flex justify-between">
             <p className="title-16-sb">
-              <span className="text-main-500">홍석천이원일</span> 추천 맛집 이에요!
+              <span className="text-main-500">{celebs.find(({ id }) => id === selectedId)?.name}</span> 추천 맛집
+              이에요!
             </p>
             <Link className="flex items-center" href={`/celebs/${celebs.find(({ id }) => id === selectedId)?.id}`}>
               <span className="text-gray-400 body-13-rg">더보기</span>
