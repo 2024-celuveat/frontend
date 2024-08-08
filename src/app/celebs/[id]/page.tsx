@@ -4,13 +4,6 @@ import { RestaurantData } from '@/@types';
 import Image from 'next/image';
 import Link from 'next/link';
 
-const getCelebsRepresentationRestaurants = async (celebId: number): Promise<{ content: RestaurantData[] }> =>
-  (
-    await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/restaurants?lowLatitude=32&highLatitude=40&lowLongitude=120&highLongitude=132&sort=like&celebId=${celebId}`,
-    )
-  ).json();
-
 const CelebPageRestaurantCard = ({ id, name, images, category, roadAddress }: RestaurantData) => {
   return (
     <Link href={`/restaurant/${id}`} className="flex gap-12">
@@ -34,9 +27,15 @@ const CelebPageRestaurantCard = ({ id, name, images, category, roadAddress }: Re
   );
 };
 
-const CelebPage = async ({ params }: { params: { id: string } }) => {
-  const { id } = params;
-  const data = await getCelebsRepresentationRestaurants(Number(id));
+const getCelebsRestaurants = async (celebId: number): Promise<{ content: RestaurantData[] }> => {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/restaurants?lowLatitude=32&highLatitude=40&lowLongitude=120&highLongitude=132&sort=like&celebId=${celebId}&page=0`,
+  );
+  return response.json();
+};
+
+const CelebPage = async ({ params: { id } }: { params: { id: string } }) => {
+  const data = await getCelebsRestaurants(Number(id));
 
   return (
     <>

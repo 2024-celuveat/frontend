@@ -1,11 +1,10 @@
-import { getCelebProfiles, getRestaurants } from '@/api';
+import { getCelebProfiles, getCelebsRestaurants } from '@/api';
 import { useQuery, useSuspenseQuery } from '@tanstack/react-query';
 
-export const useCelebsRepresentativeRestaurants = (celebId: number) =>
+export const useCelebsRestaurants = (celebId: number) =>
   useSuspenseQuery({
-    queryKey: ['celebsRepresentativeRestaurants', celebId],
-    queryFn: () => getRestaurants({ celebId }),
-    select: data => data.content.slice(0, 3),
+    queryKey: ['celebsRestaurants', celebId],
+    queryFn: () => getCelebsRestaurants(celebId),
   });
 
 export const useCelebProfiles = (celebId: number) =>

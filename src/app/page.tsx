@@ -1,13 +1,9 @@
 import RestaurantCard from '@/components/RestaurantCard';
 
 import CelebBestSection from './_client/CelebBestSection';
-import { Celeb, RestaurantData } from '@/@types';
+
 import { IconNoticeFilled24, IconSearch24 } from '@/assets/icons';
-
-const getCelebs = async (): Promise<Celeb[]> => (await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/celebs`)).json();
-
-const getCelebsRecommendations = async (): Promise<RestaurantData[]> =>
-  (await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/main-page/recommendation`)).json();
+import { getCelebs, getCelebsRecommendations } from '@/api';
 
 export default async function Home() {
   const celebs = await getCelebs();
@@ -18,7 +14,7 @@ export default async function Home() {
       <section className="px-20 pt-20">
         <div className="flex h-48 w-full items-center gap-10 rounded-[12px] bg-gray-100 pl-14 shadow-sm">
           <IconSearch24 />
-          <span className="body-15-rg text-gray-400">원하는 식당을 검색해보세요.</span>
+          <span className="text-gray-400 body-15-rg">원하는 식당을 검색해보세요.</span>
         </div>
       </section>
       <CelebBestSection celebs={[...celebs].reverse()} />
@@ -48,7 +44,7 @@ export default async function Home() {
         </div>
       </section>
       <section className="mt-48 px-20">
-        <div className="bg-main-600 flex h-48 w-full items-center rounded-[8px] px-16 py-12">
+        <div className="flex h-48 w-full items-center rounded-[8px] bg-main-600 px-16 py-12">
           <IconNoticeFilled24 className="*:fill-sub-yellow" />
           <span className="ml-12 text-white title-15-md">이번 주 업데이트 된 맛집 확인하러 가기</span>
         </div>

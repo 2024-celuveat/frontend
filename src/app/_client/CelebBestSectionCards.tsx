@@ -1,6 +1,6 @@
 'use client';
 
-import { useCelebsRepresentativeRestaurants } from '@/hooks/server';
+import { useCelebsRestaurants } from '@/hooks/server';
 
 import Image from 'next/image';
 import Link from 'next/link';
@@ -10,11 +10,11 @@ interface CelebBestSectionCardsProps {
 }
 
 const CelebBestSectionCards = ({ selectedId }: CelebBestSectionCardsProps) => {
-  const { data } = useCelebsRepresentativeRestaurants(selectedId);
+  const { data } = useCelebsRestaurants(selectedId);
 
   return (
     <>
-      {data.map(({ id, name, images, category, roadAddress }) => (
+      {data.content.slice(0, 3).map(({ id, name, images, category, roadAddress }) => (
         <Link href={`/restaurant/${id}`} className="flex w-[calc((100%-20px)/3)] flex-col" key={id}>
           <div className="relative aspect-square overflow-hidden rounded-[8px] bg-gray-200">
             <Image

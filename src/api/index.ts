@@ -1,14 +1,23 @@
 import { Celeb, RestaurantData } from '@/@types';
-import axios from 'axios';
 
-export const getRestaurants = async ({ celebId }: { celebId: number }): Promise<{ content: RestaurantData[] }> => {
-  const response = await axios.get(
+export const getCelebs = async (): Promise<Celeb[]> => {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/celebs`);
+  return response.json();
+};
+
+export const getCelebsRecommendations = async (): Promise<RestaurantData[]> => {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/main-page/recommendation`);
+  return response.json();
+};
+
+export const getCelebsRestaurants = async (celebId: number): Promise<{ content: RestaurantData[] }> => {
+  const response = await fetch(
     `/api/restaurants?lowLatitude=32&highLatitude=40&lowLongitude=120&highLongitude=132&sort=like&celebId=${celebId}&page=0`,
   );
-  return response.data;
+  return response.json();
 };
 
 export const getCelebProfiles = async (): Promise<Celeb[]> => {
-  const response = await axios.get(`/api/celebs`);
-  return response.data;
+  const response = await fetch(`/api/celebs`);
+  return response.json();
 };
