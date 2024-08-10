@@ -12,8 +12,8 @@ export interface RestaurantData {
   isLiked: boolean;
   likeCount: number;
   rating: number;
-  celebs: { id: number; name: string; youtubeChannelName: string; profileImageUrl: string }[];
-  images: { id: number; name: string; author: string; sns: string }[];
+  celebs: { id: number; name: string; youtubeChannelName: string; profileImageUrl: string; restaurantId: number }[];
+  images: { id: number; name: string; author: string; sns: string; restaurantId: number }[];
 }
 
 export type Celeb = RestaurantData['celebs'][number];
