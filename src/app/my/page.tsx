@@ -1,6 +1,4 @@
-import Header from '@/components/Header';
 import Link from 'next/link';
-import { title } from 'process';
 
 interface MenuProps {
   label: string;
@@ -41,7 +39,6 @@ const MENUS2 = [
 const MyPage = () => {
   return (
     <>
-      <Header title="마이" />
       <section className="flex flex-col gap-20">
         <div className="flex items-center justify-between p-20">
           <div className="flex items-center gap-12">

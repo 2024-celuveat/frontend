@@ -3,6 +3,7 @@ import localFont from 'next/font/local';
 import './globals.css';
 import BottomNavbar from '@/components/BottomNavbar';
 import Providers from './providers';
+import Header from '@/components/Header';
 
 export const metadata: Metadata = {
   title: 'Celuveat',
@@ -23,6 +24,7 @@ export default function RootLayout({
     <html lang="ko" className={myFont.className}>
       <body className="relative mx-auto my-0 min-h-svh max-w-[495px] shadow-lg">
         <Providers>
+          <Header />
           {children}
           <BottomNavbar />
         </Providers>

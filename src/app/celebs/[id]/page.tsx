@@ -1,5 +1,3 @@
-import Header from '@/components/Header';
-
 import { RestaurantData } from '@/@types';
 import CelebIntroductionSection from '@/components/CelebIntroductionSection';
 import RestaurantCardRow from '@/components/RestaurantCardRow';
@@ -15,22 +13,19 @@ const CelebPage = async ({ params: { id } }: { params: { id: string } }) => {
   const data = await getCelebsRestaurants(Number(id));
 
   return (
-    <>
-      <Header title="맛집 추천 리스트" />
-      <main className="px-20 pt-16">
-        <CelebIntroductionSection celebId={Number(id)} />
-        <hr className="mt-28 h-1 w-full bg-gray-200" />
+    <main className="px-20 pt-16">
+      <CelebIntroductionSection celebId={Number(id)} />
+      <hr className="mt-28 h-1 w-full bg-gray-200" />
 
-        <div className="mt-28 flex justify-between">
-          <h2 className="title-20-md">{data.content?.length}개 매장</h2>
-          <span className="body-13-rg">최신순</span>
-        </div>
+      <div className="mt-28 flex justify-between">
+        <h2 className="title-20-md">{data.content?.length}개 매장</h2>
+        <span className="body-13-rg">최신순</span>
+      </div>
 
-        <ul className="mt-24 flex flex-col gap-20">
-          {data.content?.map(props => <RestaurantCardRow key={id} {...props} />)}
-        </ul>
-      </main>
-    </>
+      <ul className="mt-24 flex flex-col gap-20">
+        {data.content?.map(props => <RestaurantCardRow key={id} {...props} />)}
+      </ul>
+    </main>
   );
 };
 

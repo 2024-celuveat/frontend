@@ -1,5 +1,4 @@
 import { IconArrowRight14, IconHeartEmpty24, IconPlus20 } from '@/assets/icons';
-import Header from '@/components/Header';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -619,7 +618,6 @@ const mock = [
 const RestaurantDetailPage = () => {
   return (
     <div>
-      <Header title="맛집 정보" />
       <div className="h-[240px] w-full bg-gray-200" />
       <main className="relative bottom-16 rounded-t-[16px] bg-white p-20">
         <div className="flex justify-between">
@@ -641,7 +639,7 @@ const RestaurantDetailPage = () => {
                 src="https://yt3.googleusercontent.com/vQrdlCaT4Tx1axJtSUa1oxp2zlnRxH-oMreTwWqB-2tdNFStIOrWWw-0jwPvVCUEjm_MywltBFY=s176-c-k-c0x00ffffff-no-rj"
               />
               <p className="body-13-rg">
-                <span className="text-main-700 border-b-mainDim-15 border-b-[5px]">성시경</span>이 추천한 맛집
+                <span className="border-b-[5px] border-b-mainDim-15 text-main-700">성시경</span>이 추천한 맛집
               </p>
             </div>
           </div>
@@ -775,14 +773,14 @@ const RestaurantDetailPage = () => {
               <div className="mt-14 flex items-center gap-4">
                 <div className="flex items-center gap-2">
                   <span className="text-gray-400 caption-12-rg">조회수</span>
-                  <span className="caption-12-md text-gray-600">58</span>
+                  <span className="text-gray-600 caption-12-md">58</span>
                 </div>
                 <svg width="2" height="2" viewBox="0 0 2 2" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <circle cx="1" cy="1" r="1" fill="#BEBEC0" />
                 </svg>
                 <div className="flex items-center gap-2">
                   <span className="text-gray-400 caption-12-rg">도움돼요</span>
-                  <span className="caption-12-md text-gray-600">100</span>
+                  <span className="text-gray-600 caption-12-md">100</span>
                 </div>
               </div>
 
@@ -799,7 +797,7 @@ const RestaurantDetailPage = () => {
               </button>
             </li>
           </ul>
-          <button className="bg-mainDim-15 text-main-700 mt-24 h-[50px] w-full rounded-[8px] title-16-sb">
+          <button className="mt-24 h-[50px] w-full rounded-[8px] bg-mainDim-15 text-main-700 title-16-sb">
             방문 리뷰 남기기
           </button>
         </section>
