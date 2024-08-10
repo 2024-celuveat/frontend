@@ -8,6 +8,7 @@ const nextConfig = {
       },
     ],
   },
+  reactStrictMode: false,
   async rewrites() {
     return [
       {
@@ -16,7 +17,6 @@ const nextConfig = {
       },
     ];
   },
-
   webpack: config => {
     config.module.rules.push({
       test: /\.svg$/,

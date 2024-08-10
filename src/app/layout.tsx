@@ -22,8 +22,10 @@ export default function RootLayout({
   return (
     <html lang="ko" className={myFont.className}>
       <body className="relative mx-auto my-0 min-h-svh max-w-[495px] shadow-lg">
-        <Providers>{children}</Providers>
-        <BottomNavbar />
+        <Providers>
+          {children}
+          <BottomNavbar />
+        </Providers>
       </body>
     </html>
   );

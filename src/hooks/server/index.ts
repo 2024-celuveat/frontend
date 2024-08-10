@@ -1,5 +1,6 @@
-import { getCelebProfiles, getCelebsRestaurants } from '@/api';
-import { useQuery, useSuspenseQuery } from '@tanstack/react-query';
+import { SocialLoginType } from '@/@types/server/login.type';
+import { getAccessToken, getCelebProfiles, getCelebsRestaurants, getOAuthUrl } from '@/api';
+import { useMutation, useQuery, useSuspenseQuery } from '@tanstack/react-query';
 
 export const useCelebsRestaurants = (celebId: number) =>
   useSuspenseQuery({
@@ -12,4 +13,20 @@ export const useCelebProfiles = (celebId: number) =>
     queryKey: ['celebProfiles'],
     queryFn: getCelebProfiles,
     select: data => data.find(({ id }) => id === celebId),
+  });
+
+export const useAccessTokenQuery = (socialLoginType: SocialLoginType, authCode: string) =>
+  useQuery({
+    queryKey: ['getAccessToken'],
+    queryFn: () => getAccessToken(socialLoginType, authCode),
+  });
+0;
+
+export const useOauthUrlMutation = () =>
+  useMutation({
+    mutationKey: ['getOAuthUrl'],
+    mutationFn: getOAuthUrl,
+    onSuccess: url => {
+      window.location.href = url;
+    },
   });
