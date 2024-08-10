@@ -4,8 +4,9 @@ import { Celeb } from '@/@types';
 import CelebProfile from '@/components/CelebProfile';
 import Link from 'next/link';
 import { Suspense, useState } from 'react';
-import CelebBestSectionCards from './CelebBestSectionCards';
+
 import { IconArrowRight14 } from '@/assets/icons';
+import CelebBestSectionCardList from '../CelebBestSectionCardList';
 
 interface CelebBestSectionProps {
   celebs: Celeb[];
@@ -45,7 +46,7 @@ const CelebBestSection = ({ celebs }: CelebBestSectionProps) => {
         ))}
       </div>
       {selectedId && (
-        <div className="bg-mainDim-8 mt-8 animate-slide-down overflow-hidden px-20 py-20">
+        <div className="mt-8 animate-slide-down overflow-hidden bg-mainDim-8 px-20 py-20">
           <div className="flex justify-between">
             <p className="title-16-sb">
               <span className="text-main-500">{celebs.find(({ id }) => id === selectedId)?.name}</span> 추천 맛집
@@ -58,7 +59,7 @@ const CelebBestSection = ({ celebs }: CelebBestSectionProps) => {
           </div>
           <div className="mt-16 flex w-full gap-8">
             <Suspense fallback={<CelebBestSectionCardsSkeleton />}>
-              <CelebBestSectionCards selectedId={selectedId} />
+              <CelebBestSectionCardList selectedId={selectedId} />
             </Suspense>
           </div>
         </div>

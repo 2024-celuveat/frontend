@@ -1,9 +1,8 @@
 import RestaurantCard from '@/components/RestaurantCard';
 
-import CelebBestSection from './_client/CelebBestSection';
-
 import { IconNoticeFilled24, IconSearch24 } from '@/assets/icons';
 import { getCelebs, getCelebsRecommendations } from '@/api';
+import CelebBestSection from '@/components/CelebBestSection';
 
 export default async function Home() {
   const celebs = await getCelebs();

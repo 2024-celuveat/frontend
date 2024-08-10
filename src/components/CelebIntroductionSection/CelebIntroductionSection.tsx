@@ -2,7 +2,7 @@
 
 import { IconHeartFilled20, IconPlus20 } from '@/assets/icons';
 import BottomSheet from '@/components/@ui/BottomSheet';
-import { useCelebProfiles } from '@/hooks/server';
+import { useCelebProfilesQuery } from '@/hooks/server';
 import Image from 'next/image';
 import Link from 'next/link';
 import { overlay } from 'overlay-kit';
@@ -15,7 +15,7 @@ interface CelebIntroductionSectionProps {
 const CelebIntroductionSection = ({ celebId }: CelebIntroductionSectionProps) => {
   const [isLiked, setIsLiked] = useState(false);
 
-  const { data } = useCelebProfiles(celebId);
+  const { data } = useCelebProfilesQuery(celebId);
 
   const openBottomSheet = () => {
     overlay.open(({ isOpen, unmount }) => {
@@ -64,7 +64,7 @@ const CelebIntroductionSection = ({ celebId }: CelebIntroductionSectionProps) =>
       <div className="mt-20 flex gap-10">
         {isLiked ? (
           <button
-            className="bg-main-600 flex flex-1 justify-center gap-4 rounded-[8px] py-12 title-15-md"
+            className="flex flex-1 justify-center gap-4 rounded-[8px] bg-main-600 py-12 title-15-md"
             onClick={() => {
               setIsLiked(false);
             }}

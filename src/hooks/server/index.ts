@@ -2,13 +2,13 @@ import { SocialLoginType } from '@/@types/server/login.type';
 import { getAccessToken, getCelebProfiles, getCelebsRestaurants, getOAuthUrl } from '@/api';
 import { useMutation, useQuery, useSuspenseQuery } from '@tanstack/react-query';
 
-export const useCelebsRestaurants = (celebId: number) =>
+export const useCelebsRestaurantQuery = (celebId: number) =>
   useSuspenseQuery({
     queryKey: ['celebsRestaurants', celebId],
     queryFn: () => getCelebsRestaurants(celebId),
   });
 
-export const useCelebProfiles = (celebId: number) =>
+export const useCelebProfilesQuery = (celebId: number) =>
   useQuery({
     queryKey: ['celebProfiles'],
     queryFn: getCelebProfiles,

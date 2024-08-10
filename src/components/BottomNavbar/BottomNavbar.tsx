@@ -11,37 +11,43 @@ import google from '@/assets/icons/google.webp';
 import { getOAuthUrl } from '@/api';
 import { SocialLoginType } from '@/@types/server/login.type';
 import { useOauthUrlMutation } from '@/hooks/server';
+import { useState } from 'react';
 
 const style = {
   logo: 'flex h-56 w-full items-center justify-center gap-8 rounded-[8px]',
 };
 
 const BottomNavbar = () => {
+  const [isLogin, setIsLogin] = useState<boolean>(localStorage.getItem('accessToken') ? true : false);
   const { mutate } = useOauthUrlMutation();
 
-  const handleClickLoginButton = (socialLoginType: SocialLoginType) => {
+  const handleClickSocialLoginButton = (socialLoginType: SocialLoginType) => {
     mutate(socialLoginType);
   };
 
-  const openBottomSheet = () => {
+  const handleClickLoginIcon = () => {
     overlay.open(({ isOpen, unmount }) => {
       return (
         <BottomSheet open={isOpen} onClose={unmount} title="로그인">
-          <button className={`${style.logo} bg-[#FEE502]`} onClick={() => handleClickLoginButton('KAKAO')}>
+          <button className={`${style.logo} bg-[#FEE502]`} onClick={() => handleClickSocialLoginButton('KAKAO')}>
             <Image src={kakao} width={24} height={24} alt="카카오 로고" />
             <span className="body-16-md">카카오로 로그인하기</span>
           </button>
-          <button className={`${style.logo} mt-16 bg-[#03C75A]`} onClick={() => handleClickLoginButton('NAVER')}>
+          <button className={`${style.logo} mt-16 bg-[#03C75A]`} onClick={() => handleClickSocialLoginButton('NAVER')}>
             <Image src={naver} width={24} height={24} alt="네이버 로고" />
             <span className="text-white body-16-md">네이버로 로그인하기</span>
           </button>
-          <button className={`${style.logo} mt-16 bg-gray-100`} onClick={() => handleClickLoginButton('GOOGLE')}>
+          <button className={`${style.logo} mt-16 bg-gray-100`} onClick={() => handleClickSocialLoginButton('GOOGLE')}>
             <Image src={google} width={24} height={24} alt="구글 로고" />
             <span className="body-16-md">구글로 로그인하기</span>
           </button>
         </BottomSheet>
       );
     });
+  };
+
+  const handleClickMyIcon = () => {
+    window.location.href = '/my';
   };
 
   return (
@@ -76,7 +82,10 @@ const BottomNavbar = () => {
           </svg>
           <span className="text-gray-400 caption-12-rg">관심</span>
         </Link>
-        <div onClick={openBottomSheet} className="flex cursor-pointer flex-col items-center gap-6">
+        <div
+          onClick={isLogin ? handleClickMyIcon : handleClickLoginIcon}
+          className="flex cursor-pointer flex-col items-center gap-6"
+        >
           <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
               d="M13.9998 15.1666C5.74777 15.1666 2.69966 19.3224 2.36472 24.6392C2.32903 25.2057 2.79325 25.6666 3.36088 25.6666H24.6387C25.2063 25.6666 25.6705 25.2057 25.6348 24.6392C25.2999 19.3224 22.2518 15.1666 13.9998 15.1666Z"
@@ -87,7 +96,7 @@ const BottomNavbar = () => {
               className="fill-gray-200"
             />
           </svg>
-          <span className="text-gray-400 caption-12-rg">로그인</span>
+          <span className="text-gray-400 caption-12-rg">{isLogin ? '마이' : '로그인'}</span>
         </div>
       </nav>
     </OverlayProvider>

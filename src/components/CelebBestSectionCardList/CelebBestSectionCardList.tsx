@@ -1,16 +1,16 @@
 'use client';
 
-import { useCelebsRestaurants } from '@/hooks/server';
+import { useCelebsRestaurantQuery } from '@/hooks/server';
 
 import Image from 'next/image';
 import Link from 'next/link';
 
-interface CelebBestSectionCardsProps {
+interface CelebBestSectionCardListProps {
   selectedId: number;
 }
 
-const CelebBestSectionCards = ({ selectedId }: CelebBestSectionCardsProps) => {
-  const { data } = useCelebsRestaurants(selectedId);
+const CelebBestSectionCardList = ({ selectedId }: CelebBestSectionCardListProps) => {
+  const { data } = useCelebsRestaurantQuery(selectedId);
 
   return (
     <>
@@ -38,4 +38,4 @@ const CelebBestSectionCards = ({ selectedId }: CelebBestSectionCardsProps) => {
   );
 };
 
-export default CelebBestSectionCards;
+export default CelebBestSectionCardList;
