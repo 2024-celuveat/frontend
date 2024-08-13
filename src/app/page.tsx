@@ -1,13 +1,12 @@
 import RestaurantCard from '@/components/RestaurantCard';
 
 import { IconNoticeFilled24, IconSearch24 } from '@/assets/icons';
-import { getCelebritiesBest, getCelebsRecommendations } from '@/api';
+import { getBestCelebrities, getRecommendedRestaurantsByCelebrities } from '@/api';
 import CelebBestSection from '@/components/CelebBestSection';
 
 export default async function Home() {
-  const celebritiesBest = await getCelebritiesBest();
-  console.log(celebritiesBest[0].restaurants);
-  const celebsRecommendations = await getCelebsRecommendations();
+  const bestCelebrities = await getBestCelebrities();
+  const recommendedRestaurants = await getRecommendedRestaurantsByCelebrities();
 
   return (
     <main className="">
@@ -17,7 +16,7 @@ export default async function Home() {
           <span className="text-gray-400 body-15-rg">원하는 식당을 검색해보세요.</span>
         </div>
       </section>
-      <CelebBestSection celebritiesBest={celebritiesBest} />
+      <CelebBestSection bestCelebrities={bestCelebrities} />
       <section className="mt-48">
         <div className="flex gap-2">
           <h1 className="pl-20 title-20-md">셀럽들의 추천 맛집</h1>
@@ -31,12 +30,12 @@ export default async function Home() {
           </svg>
         </div>
         <div className="scrollbar-hide mt-[16px] flex gap-[16px] overflow-x-scroll px-20">
-          {[...celebsRecommendations].reverse().map(({ id, name, category, images, roadAddress }) => (
+          {[...recommendedRestaurants].reverse().map(({ id, name, category, images, roadAddress }) => (
             <RestaurantCard
               key={id}
               name={name}
               category={category}
-              imageUrl={`${process.env.NEXT_PUBLIC_S3_BASE_URL}/${images[0].name}.webp`}
+              imageUrl={images[0].url}
               location={roadAddress}
               tag="성시경외 3명 추천 맛집"
             />
@@ -107,12 +106,12 @@ export default async function Home() {
       <section className="mt-48">
         <h1 className="px-20 title-20-md">지금 인기 있는 맛집!</h1>
         <div className="scrollbar-hide mt-[16px] flex gap-[16px] overflow-x-scroll px-20">
-          {celebsRecommendations.map(({ id, name, category, images, roadAddress }) => (
+          {recommendedRestaurants.map(({ id, name, category, images, roadAddress }) => (
             <RestaurantCard
               key={id}
               name={name}
               category={category}
-              imageUrl={`${process.env.NEXT_PUBLIC_S3_BASE_URL}/${images[0].name}.webp`}
+              imageUrl={images[0].url}
               location={roadAddress}
               tag="성시경외 3명 추천 맛집"
             />

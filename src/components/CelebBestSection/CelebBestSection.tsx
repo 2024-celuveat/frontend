@@ -1,6 +1,6 @@
 'use client';
 
-import { CelebritiesBest } from '@/@types';
+import { BestCelebrities } from '@/@types';
 import CelebProfile from '@/components/CelebProfile';
 import Link from 'next/link';
 import { useState } from 'react';
@@ -9,10 +9,10 @@ import { IconArrowRight14 } from '@/assets/icons';
 import Image from 'next/image';
 
 interface CelebBestSectionProps {
-  celebritiesBest: CelebritiesBest[];
+  bestCelebrities: BestCelebrities[];
 }
 
-const CelebBestSection = ({ celebritiesBest }: CelebBestSectionProps) => {
+const CelebBestSection = ({ bestCelebrities }: CelebBestSectionProps) => {
   const [sequence, setSequence] = useState<number>(0);
 
   const handleClickCelebProfile = async (index: number) => {
@@ -23,7 +23,7 @@ const CelebBestSection = ({ celebritiesBest }: CelebBestSectionProps) => {
     <section className="mt-28">
       <h1 className="px-20 title-20-md">셀럽 BEST </h1>
       <div className="scrollbar-hide mt-[16px] flex gap-[16px] overflow-y-auto overflow-x-scroll px-20 py-11 pt-3">
-        {celebritiesBest.map(({ celebrity: { id, name, profileImageUrl } }, index) => (
+        {bestCelebrities.map(({ celebrity: { id, name, profileImageUrl } }, index) => (
           <CelebProfile
             key={id}
             name={name}
@@ -36,15 +36,15 @@ const CelebBestSection = ({ celebritiesBest }: CelebBestSectionProps) => {
       <div className="mt-8 overflow-hidden bg-mainDim-8 px-20 py-20">
         <div className="flex justify-between">
           <p className="title-16-sb">
-            <span className="text-main-500">{celebritiesBest[sequence].celebrity.name}</span> 추천 맛집 이에요!
+            <span className="text-main-500">{bestCelebrities[sequence].celebrity.name}</span> 추천 맛집 이에요!
           </p>
-          <Link className="flex items-center" href={`/celebs/${celebritiesBest[sequence].celebrity.id}`}>
+          <Link className="flex items-center" href={`/celebs/${bestCelebrities[sequence].celebrity.id}`}>
             <span className="text-gray-400 body-13-rg">더보기</span>
             <IconArrowRight14 />
           </Link>
         </div>
         <div className="mt-16 flex w-full gap-8">
-          {celebritiesBest[sequence].restaurants.map(({ id, name, images, category, roadAddress }) => (
+          {bestCelebrities[sequence].restaurants.map(({ id, name, images, category, roadAddress }) => (
             <Link href={`/restaurant/${id}`} className="flex w-[calc((100%-20px)/3)] flex-col" key={id}>
               <div className="relative aspect-square overflow-hidden rounded-[8px] bg-gray-200">
                 <Image fill alt={name} src={images[0].url} sizes="100%" className="object-cover" />

@@ -1,15 +1,15 @@
 export * from './login.api';
 
-import { Celeb, CelebritiesBest, Restaurant } from '@/@types';
+import { Celeb, BestCelebrities, Restaurant } from '@/@types';
 
-export const getCelebritiesBest = async (): Promise<CelebritiesBest[]> => {
+export const getBestCelebrities = async (): Promise<BestCelebrities[]> => {
   const response = await fetch(`${process.env.NEXT_PUBLIC_NEW_BASE_URL}/celebrities/best`);
 
   return await response.json();
 };
 
-export const getCelebsRecommendations = async (): Promise<Restaurant[]> => {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/main-page/recommendation`);
+export const getRecommendedRestaurantsByCelebrities = async (): Promise<Restaurant[]> => {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_NEW_BASE_URL}/restaurants/celebrity/recommend`);
 
   return await response.json();
 };

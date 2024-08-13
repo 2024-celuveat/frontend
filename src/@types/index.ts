@@ -27,7 +27,7 @@ export interface Restaurant {
   images: RestaurantImage[];
 }
 
-export interface CelebritiesBest {
+export interface BestCelebrities {
   celebrity: Celebrity;
   restaurants: Restaurant[];
 }
