@@ -1,8 +1,8 @@
-import { RestaurantData } from '@/@types';
+import { Restaurant } from '@/@types';
 import CelebIntroductionSection from '@/components/CelebIntroductionSection';
 import RestaurantCardRow from '@/components/RestaurantCardRow';
 
-const getCelebsRestaurants = async (celebId: number): Promise<{ content: RestaurantData[] }> => {
+const getCelebsRestaurants = async (celebId: number): Promise<{ content: Restaurant[] }> => {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_BASE_URL}/restaurants?lowLatitude=32&highLatitude=40&lowLongitude=120&highLongitude=132&sort=like&celebId=${celebId}&page=0`,
   );

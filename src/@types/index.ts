@@ -1,19 +1,33 @@
-export interface RestaurantData {
-  lat: number;
-  lng: number;
+export type Celeb = { id: number; name: string; profileImageUrl: string };
+
+export interface Celebrity {
+  id: number;
+  name: string;
+  profileImageUrl: string;
+}
+
+export interface RestaurantImage {
+  name: string;
+  author: string;
+  url: string;
+  isThumbnail: boolean;
+}
+
+export interface Restaurant {
   id: number;
   name: string;
   category: string;
   roadAddress: string;
   phoneNumber: string;
   naverMapUrl: string;
-  viewCount: number;
-  distance: number;
-  isLiked: boolean;
-  likeCount: number;
-  rating: number;
-  celebs: { id: number; name: string; youtubeChannelName: string; profileImageUrl: string; restaurantId: number }[];
-  images: { id: number; name: string; author: string; sns: string; restaurantId: number }[];
+  latitude: number;
+  longitude: number;
+  liked: boolean;
+  visitedCelebrities: Celebrity[];
+  images: RestaurantImage[];
 }
 
-export type Celeb = RestaurantData['celebs'][number];
+export interface CelebritiesBest {
+  celebrity: Celebrity;
+  restaurants: Restaurant[];
+}

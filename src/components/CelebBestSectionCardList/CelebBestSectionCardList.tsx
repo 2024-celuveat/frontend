@@ -1,20 +1,19 @@
 'use client';
 
+import { Restaurant } from '@/@types';
 import { useCelebsRestaurantQuery } from '@/hooks/server';
 
 import Image from 'next/image';
 import Link from 'next/link';
 
 interface CelebBestSectionCardListProps {
-  selectedId: number;
+  restaurants: Restaurant[];
 }
 
-const CelebBestSectionCardList = ({ selectedId }: CelebBestSectionCardListProps) => {
-  const { data } = useCelebsRestaurantQuery(selectedId);
-
+const CelebBestSectionCardList = ({ restaurants }: CelebBestSectionCardListProps) => {
   return (
     <>
-      {data.content.slice(0, 3).map(({ id, name, images, category, roadAddress }) => (
+      {restaurants.map(({ id, name, images, category, roadAddress }) => (
         <Link href={`/restaurant/${id}`} className="flex w-[calc((100%-20px)/3)] flex-col" key={id}>
           <div className="relative aspect-square overflow-hidden rounded-[8px] bg-gray-200">
             <Image

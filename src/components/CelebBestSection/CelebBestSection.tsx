@@ -1,69 +1,65 @@
 'use client';
 
-import { Celeb } from '@/@types';
+import { CelebritiesBest } from '@/@types';
 import CelebProfile from '@/components/CelebProfile';
 import Link from 'next/link';
-import { Suspense, useState } from 'react';
+import { useState } from 'react';
 
 import { IconArrowRight14 } from '@/assets/icons';
-import CelebBestSectionCardList from '../CelebBestSectionCardList';
+import Image from 'next/image';
 
 interface CelebBestSectionProps {
-  celebs: Celeb[];
+  celebritiesBest: CelebritiesBest[];
 }
 
-const CelebBestSectionCardsSkeleton = () =>
-  [1, 2, 3].map(value => (
-    <div className="flex w-[calc((100%-20px)/3)] flex-col" key={value}>
-      <div className="relative aspect-square animate-pulse overflow-hidden rounded-[8px] bg-gray-200" />
-      <div className="mt-10 flex flex-col gap-3 px-2">
-        <div className="h-[17px] w-full animate-pulse rounded-md bg-gray-200"></div>
-        <div className="h-[16.5px] w-1/5 animate-pulse rounded-md bg-gray-200"></div>
-      </div>
-      <div className="mt-6 h-[14.5px] w-1/2 animate-pulse rounded-md bg-gray-200"></div>
-    </div>
-  ));
+const CelebBestSection = ({ celebritiesBest }: CelebBestSectionProps) => {
+  const [sequence, setSequence] = useState<number>(0);
 
-const CelebBestSection = ({ celebs }: CelebBestSectionProps) => {
-  const [selectedId, setSelectedId] = useState<number | null>(null);
-
-  const handleClickCelebProfile = async (id: number) => {
-    setSelectedId(prev => (prev === id ? null : id));
+  const handleClickCelebProfile = async (index: number) => {
+    setSequence(index);
   };
 
   return (
     <section className="mt-28">
       <h1 className="px-20 title-20-md">셀럽 BEST </h1>
       <div className="scrollbar-hide mt-[16px] flex gap-[16px] overflow-y-auto overflow-x-scroll px-20 py-11 pt-3">
-        {celebs.map(({ id, name, profileImageUrl }) => (
+        {celebritiesBest.map(({ celebrity: { id, name, profileImageUrl } }, index) => (
           <CelebProfile
             key={id}
             name={name}
             imageUrl={profileImageUrl}
-            outlined={selectedId === id}
-            onClick={() => handleClickCelebProfile(id)}
+            outlined={sequence === index}
+            onClick={() => handleClickCelebProfile(index)}
           />
         ))}
       </div>
-      {selectedId && (
-        <div className="mt-8 animate-slide-down overflow-hidden bg-mainDim-8 px-20 py-20">
-          <div className="flex justify-between">
-            <p className="title-16-sb">
-              <span className="text-main-500">{celebs.find(({ id }) => id === selectedId)?.name}</span> 추천 맛집
-              이에요!
-            </p>
-            <Link className="flex items-center" href={`/celebs/${celebs.find(({ id }) => id === selectedId)?.id}`}>
-              <span className="text-gray-400 body-13-rg">더보기</span>
-              <IconArrowRight14 />
-            </Link>
-          </div>
-          <div className="mt-16 flex w-full gap-8">
-            <Suspense fallback={<CelebBestSectionCardsSkeleton />}>
-              <CelebBestSectionCardList selectedId={selectedId} />
-            </Suspense>
-          </div>
+      <div className="mt-8 overflow-hidden bg-mainDim-8 px-20 py-20">
+        <div className="flex justify-between">
+          <p className="title-16-sb">
+            <span className="text-main-500">{celebritiesBest[sequence].celebrity.name}</span> 추천 맛집 이에요!
+          </p>
+          <Link className="flex items-center" href={`/celebs/${celebritiesBest[sequence].celebrity.id}`}>
+            <span className="text-gray-400 body-13-rg">더보기</span>
+            <IconArrowRight14 />
+          </Link>
         </div>
-      )}
+        <div className="mt-16 flex w-full gap-8">
+          {celebritiesBest[sequence].restaurants.map(({ id, name, images, category, roadAddress }) => (
+            <Link href={`/restaurant/${id}`} className="flex w-[calc((100%-20px)/3)] flex-col" key={id}>
+              <div className="relative aspect-square overflow-hidden rounded-[8px] bg-gray-200">
+                <Image fill alt={name} src={images[0].url} sizes="100%" className="object-cover" />
+              </div>
+              <div className="mt-10 flex flex-col gap-3 px-2">
+                <span className="body-14-md">{name}</span>
+                <span className="text-[11px] text-gray-600">{category}</span>
+              </div>
+              <div className="mt-6">
+                <span className="caption-12-rg">{roadAddress.split(' ').slice(0, 2).join(' ')}</span>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </div>
     </section>
   );
 };

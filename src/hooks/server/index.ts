@@ -5,7 +5,7 @@ import { useMutation, useQuery, useSuspenseQuery } from '@tanstack/react-query';
 export const useCelebsRestaurantQuery = (celebId: number) =>
   useSuspenseQuery({
     queryKey: ['celebsRestaurants', celebId],
-    queryFn: () => getCelebsRestaurants(celebId),
+    queryFn: getCelebsRestaurants,
   });
 
 export const useCelebProfilesQuery = (celebId: number) =>
