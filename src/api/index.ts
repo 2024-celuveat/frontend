@@ -14,8 +14,10 @@ export const getRecommendedRestaurantsByCelebrities = async (): Promise<Restaura
   return await response.json();
 };
 
-export const getCelebsRestaurants = async (): Promise<{ content: Restaurant[] }> => {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/restaurants/celebrity/recommend`);
+export const getCelebrityRestaurants = async (
+  celebrityId: number,
+): Promise<{ contents: Restaurant[]; currentPage: number; hasNext: boolean; size: number }> => {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_NEW_BASE_URL}/restaurants/celebrity/${celebrityId}`);
 
   return await response.json();
 };

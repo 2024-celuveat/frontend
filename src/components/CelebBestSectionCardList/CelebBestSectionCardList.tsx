@@ -1,7 +1,6 @@
 'use client';
 
 import { Restaurant } from '@/@types';
-import { useCelebsRestaurantQuery } from '@/hooks/server';
 
 import Image from 'next/image';
 import Link from 'next/link';

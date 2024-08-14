@@ -2,7 +2,6 @@
 
 import { IconHeartFilled20, IconPlus20 } from '@/assets/icons';
 import BottomSheet from '@/components/@ui/BottomSheet';
-import { useCelebProfilesQuery } from '@/hooks/server';
 import Image from 'next/image';
 import Link from 'next/link';
 import { overlay } from 'overlay-kit';
