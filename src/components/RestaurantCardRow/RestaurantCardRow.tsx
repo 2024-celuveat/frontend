@@ -1,13 +1,14 @@
-import { RestaurantData } from '@/@types';
+import { Restaurant } from '@/@types';
 import Image from 'next/image';
 import Link from 'next/link';
 
-const RestaurantCardRow = ({ id, name, images, category, roadAddress }: RestaurantData) => {
+const RestaurantCardRow = ({ id, name, images, category, roadAddress }: Restaurant) => {
+  console.log(images[0].url);
   return (
     <Link href={`/restaurant/${id}`} className="flex gap-12">
       <div className="relative h-[112px] w-[112px] overflow-hidden rounded-[8px] bg-gray-200">
         <Image
-          src={`${process.env.NEXT_PUBLIC_S3_BASE_URL}/${images[0].name}.webp`}
+          src={images[0].url}
           fill
           alt={name}
           sizes="100%"
