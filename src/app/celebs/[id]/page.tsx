@@ -1,12 +1,14 @@
 import { getCelebrityRestaurants } from '@/api';
+import CelebIntroductionSection from '@/components/CelebIntroductionSection';
 import RestaurantCardRow from '@/components/RestaurantCardRow';
+import { useCelebrityInfoQuery } from '@/hooks/server';
 
 const CelebPage = async ({ params: { id } }: { params: { id: string } }) => {
   const data = await getCelebrityRestaurants(Number(id));
 
   return (
     <main className="px-20 pt-16">
-      {/* <CelebIntroductionSection celebId={Number(id)} /> */}
+      <CelebIntroductionSection celebId={Number(id)} />
       <hr className="mt-28 h-1 w-full bg-gray-200" />
 
       <div className="mt-28 flex justify-between">

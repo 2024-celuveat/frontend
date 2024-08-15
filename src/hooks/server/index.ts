@@ -1,6 +1,12 @@
 import { SocialLoginType } from '@/@types/server/login.type';
-import { getAccessToken, getOAuthUrl } from '@/api';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { getAccessToken, getCelebrityInfo, getOAuthUrl } from '@/api';
+import { useMutation, useQuery, useSuspenseQuery } from '@tanstack/react-query';
+
+export const useCelebrityInfoQuery = (celebrityId: number) =>
+  useSuspenseQuery({
+    queryKey: ['getCelebrityInfo'],
+    queryFn: () => getCelebrityInfo(celebrityId),
+  });
 
 export const useAccessTokenQuery = (socialLoginType: SocialLoginType, authCode: string) =>
   useQuery({

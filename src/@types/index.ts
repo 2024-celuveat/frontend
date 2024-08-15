@@ -1,9 +1,9 @@
-export type Celeb = { id: number; name: string; profileImageUrl: string };
-
 export interface Celebrity {
   id: number;
   name: string;
   profileImageUrl: string;
+  introduction: string;
+  youtubeContentResults: YoutubeContentResult[];
 }
 
 export interface RestaurantImage {
@@ -30,4 +30,19 @@ export interface Restaurant {
 export interface BestCelebrities {
   celebrity: Celebrity;
   restaurants: Restaurant[];
+}
+
+export interface YoutubeContentResult {
+  id: number;
+  contentsName: string;
+  channelId: string;
+  channelUrl: string;
+  channelName: string;
+  restaurantCount: number;
+  subscriberCount: number;
+}
+
+export interface CelebrityDetail {
+  celebrity: Celebrity;
+  interested: boolean;
 }
