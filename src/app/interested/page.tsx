@@ -6,36 +6,37 @@ import { useState } from 'react';
 const mock1 = {
   contents: [
     {
-      "id": 1,
-      "name": "맛집",
-      "category": "한식",
-      "roadAddress": "서울특별시 강남구 역삼동 123-456",
-      "phoneNumber": "02-1234-5678",
-      "naverMapUrl": "https://map.naver.com/v5/entry/place/12345678",
-      "latitude": 37.123456,
-      "longitude": 127.123456,
-      "liked": true,
-      "visitedCelebrities": [
+      id: 1,
+      name: '맛집',
+      category: '한식',
+      roadAddress: '서울특별시 강남구 역삼동 123-456',
+      phoneNumber: '02-1234-5678',
+      naverMapUrl: 'https://map.naver.com/v5/entry/place/12345678',
+      latitude: 37.123456,
+      longitude: 127.123456,
+      liked: true,
+      visitedCelebrities: [
         {
-          "id": 1,
-          "name": "성시경",
-          "profileImageUrl": "https://yt3.googleusercontent.com/vQrdlCaT4Tx1axJtSUa1oxp2zlnRxH-oMreTwWqB-2tdNFStIOrWWw-0jwPvVCUEjm_MywltBFY=s176-c-k-c0x00ffffff-no-rj"
-        }
+          id: 1,
+          name: '성시경',
+          profileImageUrl:
+            'https://yt3.googleusercontent.com/vQrdlCaT4Tx1axJtSUa1oxp2zlnRxH-oMreTwWqB-2tdNFStIOrWWw-0jwPvVCUEjm_MywltBFY=s176-c-k-c0x00ffffff-no-rj',
+        },
       ],
-      "images": [
+      images: [
         {
-          "name": "맛집",
-          "author": "홍길동",
-          "url": "https://www.celuveat.com/images-data/webp/bXVrenppX29uZS0x.webp",
-          "isThumbnail": true
-        }
-      ]
-    }
+          name: '맛집',
+          author: '홍길동',
+          url: 'https://www.celuveat.com/images-data/webp/bXVrenppX29uZS0x.webp',
+          isThumbnail: true,
+        },
+      ],
+    },
   ],
-  "currentPage": 0,
-  "hasNext": true,
-  "size": 0
-}
+  currentPage: 0,
+  hasNext: true,
+  size: 0,
+};
 
 const InterestedPage = () => {
   const [tab, setTab] = useState<'맛집' | '셀럽'>('맛집');
@@ -60,8 +61,8 @@ const InterestedPage = () => {
           <div className="title-20-md">
             <span className="text-main-700 title-20-bold">00</span>개
             <ul className="mt-16 flex flex-col gap-24">
-              {mock1.contents.map((item, index) => (
-                <RestaurantCardRow key={index} {...item} />
+              {mock1.contents.map(item => (
+                <RestaurantCardRow key={item.id} {...item} />
               ))}
             </ul>
           </div>
@@ -71,7 +72,7 @@ const InterestedPage = () => {
           <div className="title-20-md">
             <span className="text-main-700 title-20-bold">00</span>명
             <ul className="mt-16 flex flex-col gap-24">
-              {mock1.contents.map((item) => (
+              {mock1.contents.map(item => (
                 <li key={item.id} className="flex items-center gap-10">
                   <div className="h-[56px] w-[56px] rounded-full bg-gray-100" />
                   <div className="flex flex-1 flex-col justify-center">

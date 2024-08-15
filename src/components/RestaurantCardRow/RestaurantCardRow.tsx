@@ -3,17 +3,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 const RestaurantCardRow = ({ id, name, images, category, roadAddress }: Restaurant) => {
-  console.log(images[0].url);
   return (
     <Link href={`/restaurant/${id}`} className="flex gap-12">
       <div className="relative h-[112px] w-[112px] overflow-hidden rounded-[8px] bg-gray-200">
-        <Image
-          src={images[0].url}
-          fill
-          alt={name}
-          sizes="100%"
-          className="object-cover"
-        />
+        <Image src={images[0].url} fill alt={name} sizes="100%" className="object-cover" />
       </div>
       <div className="relative flex flex-1 flex-col">
         <h3 className="mt-2 title-16-sb">{name}</h3>

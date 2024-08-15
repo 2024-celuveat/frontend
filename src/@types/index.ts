@@ -2,8 +2,8 @@ export interface Celebrity {
   id: number;
   name: string;
   profileImageUrl: string;
-  introduction: string;
-  youtubeContentResults: YoutubeContentResult[];
+  introduction?: string;
+  youtubeContentResults?: YoutubeContentResult[];
 }
 
 export interface RestaurantImage {
