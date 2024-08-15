@@ -2,8 +2,6 @@ export interface Celebrity {
   id: number;
   name: string;
   profileImageUrl: string;
-  introduction?: string;
-  youtubeContentResults?: YoutubeContentResult[];
 }
 
 export interface RestaurantImage {
@@ -43,6 +41,6 @@ export interface YoutubeContentResult {
 }
 
 export interface CelebrityDetail {
-  celebrity: Celebrity;
+  celebrity: Celebrity & { introduction: string; youtubeContentResults: YoutubeContentResult[] };
   interested: boolean;
 }
