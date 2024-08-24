@@ -1,45 +1,15 @@
 'use client';
 
 import RestaurantCardRow from '@/components/RestaurantCardRow';
+import { useInterestedCelebritiesQuery, useInterestedRestaurantQuery } from '@/hooks/server';
+import Image from 'next/image';
 import { useState } from 'react';
-
-const mock1 = {
-  contents: [
-    {
-      id: 1,
-      name: '맛집',
-      category: '한식',
-      roadAddress: '서울특별시 강남구 역삼동 123-456',
-      phoneNumber: '02-1234-5678',
-      naverMapUrl: 'https://map.naver.com/v5/entry/place/12345678',
-      latitude: 37.123456,
-      longitude: 127.123456,
-      liked: true,
-      visitedCelebrities: [
-        {
-          id: 1,
-          name: '성시경',
-          profileImageUrl:
-            'https://yt3.googleusercontent.com/vQrdlCaT4Tx1axJtSUa1oxp2zlnRxH-oMreTwWqB-2tdNFStIOrWWw-0jwPvVCUEjm_MywltBFY=s176-c-k-c0x00ffffff-no-rj',
-        },
-      ],
-      images: [
-        {
-          name: '맛집',
-          author: '홍길동',
-          url: 'https://www.celuveat.com/images-data/webp/bXVrenppX29uZS0x.webp',
-          isThumbnail: true,
-        },
-      ],
-    },
-  ],
-  currentPage: 0,
-  hasNext: true,
-  size: 0,
-};
 
 const InterestedPage = () => {
   const [tab, setTab] = useState<'맛집' | '셀럽'>('맛집');
+  const { data: interestedRestaurants } = useInterestedRestaurantQuery();
+  const { data: interestedCelebrities } = useInterestedCelebritiesQuery();
+
   return (
     <main className="p-20">
       <div className="flex h-52 rounded-[8px] bg-gray-100 p-4">
@@ -61,9 +31,7 @@ const InterestedPage = () => {
           <div className="title-20-md">
             <span className="text-main-700 title-20-bold">00</span>개
             <ul className="mt-16 flex flex-col gap-24">
-              {mock1.contents.map(item => (
-                <RestaurantCardRow key={item.id} {...item} />
-              ))}
+              {interestedRestaurants?.contents?.map(item => <RestaurantCardRow key={item.id} {...item} />)}
             </ul>
           </div>
         )}
@@ -72,16 +40,27 @@ const InterestedPage = () => {
           <div className="title-20-md">
             <span className="text-main-700 title-20-bold">00</span>명
             <ul className="mt-16 flex flex-col gap-24">
-              {mock1.contents.map(item => (
+              {interestedCelebrities?.map(item => (
                 <li key={item.id} className="flex items-center gap-10">
-                  <div className="h-[56px] w-[56px] rounded-full bg-gray-100" />
+                  <div className="relative">
+                    <Image
+                      className={'h-[56px] rounded-full object-cover'}
+                      src={item.profileImageUrl}
+                      alt={item.name}
+                      width={56}
+                      height={56}
+                      priority
+                    />
+                  </div>
                   <div className="flex flex-1 flex-col justify-center">
-                    <span className="title-16-sb">성시경 SUNG SI KYUNG</span>
+                    <span className="title-16-sb">{item.name}</span>
                     <div className="">
                       <span className="body-14-rg">구독자</span>
-                      <span className="ml-2 body-14-md">10만명</span>
+                      <span className="ml-2 body-14-md">{item.youtubeContentResults[0].subscriberCount}</span>
                       <span className="ml-12 body-14-rg">추천 매장</span>
-                      <span className="ml-2 body-14-md">50개</span>
+                      <span className="ml-2 body-14-md">
+                        {item.youtubeContentResults.reduce((acc, { restaurantCount }) => acc + restaurantCount, 0)}
+                      </span>
                     </div>
                   </div>
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
