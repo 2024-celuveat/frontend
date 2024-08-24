@@ -36,8 +36,8 @@ export default async function Home() {
         </div>
       </section>
       <section className="mt-48 px-20">
-        <div className="flex h-48 w-full items-center rounded-[8px] bg-main-600 px-16 py-12">
-          <IconNoticeFilled24 className="*:fill-sub-yellow" />
+        <div className="flex h-48 w-full items-center rounded-[8px] bg-gray-800 px-16 py-12">
+          <IconNoticeFilled24 className="*:fill-main-600" />
           <span className="ml-12 text-white title-15-md">이번 주 업데이트 된 맛집 확인하러 가기</span>
         </div>
       </section>

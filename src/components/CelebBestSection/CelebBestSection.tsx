@@ -37,7 +37,7 @@ const CelebBestSection = ({ bestCelebrities }: CelebBestSectionProps) => {
           />
         ))}
       </div>
-      <div className="mt-8 overflow-hidden bg-mainDim-8 px-20 py-20">
+      <div className="mt-8 overflow-hidden bg-gray-50 px-20 py-20">
         <div className="flex justify-between">
           <p className="title-16-sb">
             <span className="text-main-500">{data[sequence].celebrity.name}</span> 추천 맛집 이에요!

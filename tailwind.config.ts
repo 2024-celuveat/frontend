@@ -13,7 +13,7 @@ const config: Config = {
         DEFAULT: '#FFFFFF',
       },
       gray: {
-        50: '##F4F6F9',
+        50: '#F4F6F9',
         100: '#F1F3F6',
         200: '#E1E2E4',
         300: '#BEBEC0',
