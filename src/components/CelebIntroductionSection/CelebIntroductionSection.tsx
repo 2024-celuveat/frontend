@@ -2,7 +2,11 @@
 
 import { IconHeartFilled20, IconPlus20 } from '@/assets/icons';
 import BottomSheet from '@/components/@ui/BottomSheet';
-import { useCelebrityInfoQuery } from '@/hooks/server';
+import {
+  useCelebrityInfoQuery,
+  useDeleteInterestedCelebrityMutation,
+  useInterestedCelebrityMutation,
+} from '@/hooks/server';
 import Image from 'next/image';
 import Link from 'next/link';
 import { overlay } from 'overlay-kit';
@@ -13,11 +17,31 @@ interface CelebIntroductionSectionProps {
 }
 
 const CelebIntroductionSection = ({ celebId }: CelebIntroductionSectionProps) => {
-  const [isLiked, setIsLiked] = useState(false);
-
   const {
-    data: { celebrity },
+    data: { celebrity, interested },
   } = useCelebrityInfoQuery(celebId);
+  const [isLiked, setIsLiked] = useState(interested);
+
+  const { mutateAsync } = useInterestedCelebrityMutation();
+  const { mutateAsync: deleteMutateAsync } = useDeleteInterestedCelebrityMutation();
+
+  const handleClickLike = async () => {
+    try {
+      await mutateAsync(celebrity.id);
+      setIsLiked(true);
+    } catch (err) {
+      setIsLiked(false);
+    }
+  };
+
+  const handleClickUnlike = async () => {
+    try {
+      await deleteMutateAsync(celebrity.id);
+      setIsLiked(false);
+    } catch (err) {
+      setIsLiked(true);
+    }
+  };
 
   const openBottomSheet = () => {
     overlay.open(({ isOpen, unmount }) => {
@@ -69,18 +93,14 @@ const CelebIntroductionSection = ({ celebId }: CelebIntroductionSectionProps) =>
         {isLiked ? (
           <button
             className="flex flex-1 justify-center gap-4 rounded-[8px] bg-main-600 py-12 title-15-md"
-            onClick={() => {
-              setIsLiked(false);
-            }}
+            onClick={handleClickUnlike}
           >
             <IconHeartFilled20 /> <span className="text-white">관심</span>
           </button>
         ) : (
           <button
             className="flex flex-1 justify-center gap-4 rounded-[8px] bg-[rgba(255,_123,_84,_0.15)] py-12"
-            onClick={() => {
-              setIsLiked(true);
-            }}
+            onClick={handleClickLike}
           >
             <IconPlus20 />
             <span className="text-main-700 title-15-md">관심 추가</span>
