@@ -25,7 +25,7 @@ const RestaurantCard = async ({ id, name, category, images, roadAddress, visited
           </span>
         </div>
       </Link>
-      <RestaurantLikeButton restaurantId={id} liked={liked} />
+      <RestaurantLikeButton restaurantId={id} liked={liked} cn="absolute top-8 right-8" />
     </div>
   );
 };

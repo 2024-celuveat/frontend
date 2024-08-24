@@ -31,7 +31,7 @@ const InterestedPage = () => {
           <div className="title-20-md">
             <span className="text-main-700 title-20-bold">00</span>개
             <ul className="mt-16 flex flex-col gap-24">
-              {interestedRestaurants?.contents?.map(item => <RestaurantCardRow key={item.id} {...item} />)}
+              {interestedRestaurants.contents?.map(item => <RestaurantCardRow key={item.id} {...item} />)}
             </ul>
           </div>
         )}
@@ -40,7 +40,7 @@ const InterestedPage = () => {
           <div className="title-20-md">
             <span className="text-main-700 title-20-bold">00</span>명
             <ul className="mt-16 flex flex-col gap-24">
-              {interestedCelebrities?.map(item => (
+              {interestedCelebrities.map(item => (
                 <li key={item.id} className="flex items-center gap-10">
                   <div className="relative">
                     <Image
