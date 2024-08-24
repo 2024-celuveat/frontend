@@ -51,7 +51,7 @@ const CelebIntroductionSection = ({ celebId }: CelebIntroductionSectionProps) =>
             <Link
               key={id}
               href={channelUrl}
-              className="rounded-[8px]] flex h-56 w-full items-center justify-center gap-8 bg-gray-100"
+              className="flex h-56 w-full items-center justify-center gap-8 rounded-[8px] bg-gray-100"
             >
               <span className="body-16-md">{contentsName} 채널 바로가기</span>
             </Link>
