@@ -168,6 +168,9 @@ const config: Config = {
           left: '50%',
           transform: 'translateX(-50%)',
         },
+        '.font-synthesis-none': {
+          fontSynthesis: 'none',
+        },
       };
 
       addUtilities(newUtilities);

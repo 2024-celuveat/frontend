@@ -22,7 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko" className={myFont.className}>
-      <body className="relative mx-auto my-0 min-h-svh max-w-[495px] shadow-lg">
+      <body className="font-synthesis-none relative mx-auto my-0 min-h-svh max-w-[495px] shadow-lg">
         <Providers>
           <Header />
           {children}
