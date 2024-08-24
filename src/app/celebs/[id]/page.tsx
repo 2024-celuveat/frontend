@@ -1,7 +1,6 @@
 import { getCelebrityRestaurants } from '@/api';
 import CelebIntroductionSection from '@/components/CelebIntroductionSection';
 import RestaurantCardRow from '@/components/RestaurantCardRow';
-import { useCelebrityInfoQuery } from '@/hooks/server';
 
 const CelebPage = async ({ params: { id } }: { params: { id: string } }) => {
   const data = await getCelebrityRestaurants(Number(id));
