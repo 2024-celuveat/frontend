@@ -1,7 +1,8 @@
 import { Restaurant } from '@/@types';
+import { api } from '@/utils/api';
 
 export const getRecommendedRestaurantsByCelebrities = async (): Promise<Restaurant[]> => {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_NEW_BASE_URL}/restaurants/celebrity/recommend`);
+  const response = await api(`/restaurants/celebrity/recommend`);
 
   return await response.json();
 };
@@ -9,7 +10,7 @@ export const getRecommendedRestaurantsByCelebrities = async (): Promise<Restaura
 export const getCelebrityRestaurants = async (
   celebrityId: number,
 ): Promise<{ contents: Restaurant[]; currentPage: number; hasNext: boolean; size: number }> => {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_NEW_BASE_URL}/restaurants/celebrity/${celebrityId}`);
+  const response = await api(`/restaurants/celebrity/${celebrityId}`);
 
   return await response.json();
 };
