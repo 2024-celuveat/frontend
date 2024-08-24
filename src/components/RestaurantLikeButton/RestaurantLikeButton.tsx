@@ -7,9 +7,10 @@ import { useState } from 'react';
 interface RestaurantLikeButtonProps {
   liked: boolean;
   restaurantId: number;
+  cn?: string;
 }
 
-const RestaurantLikeButton = ({ liked, restaurantId }: RestaurantLikeButtonProps) => {
+const RestaurantLikeButton = ({ liked, restaurantId, cn }: RestaurantLikeButtonProps) => {
   const [isLiked, setIsLiked] = useState(liked);
   const { mutateAsync } = useInterestedRestaurantMutation();
   const { mutateAsync: deleteMutateAsync } = useDeleteInterestedRestaurantMutation();
@@ -33,11 +34,11 @@ const RestaurantLikeButton = ({ liked, restaurantId }: RestaurantLikeButtonProps
   };
 
   return (
-    <div className="z-0">
+    <div className={`z-0 ${cn}`}>
       {isLiked ? (
-        <IconHeartFilled24 className="absolute right-8 top-8 *:fill-main-500" onClick={handleClickUnlike} />
+        <IconHeartFilled24 className="*:fill-main-500" onClick={handleClickUnlike} />
       ) : (
-        <IconHeartEmpty24 className="absolute right-8 top-8 *:fill-white" onClick={handleClickLike} />
+        <IconHeartEmpty24 className="*:fill-white" onClick={handleClickLike} />
       )}
     </div>
   );
