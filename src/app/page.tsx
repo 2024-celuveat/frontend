@@ -7,7 +7,6 @@ import CelebBestSection from '@/components/CelebBestSection';
 export default async function Home() {
   const bestCelebrities = await getBestCelebrities();
   const recommendedRestaurants = await getRecommendedRestaurantsByCelebrities();
-  console.log(recommendedRestaurants[0].visitedCelebrities);
 
   return (
     <main className="">
@@ -31,22 +30,9 @@ export default async function Home() {
           </svg>
         </div>
         <div className="scrollbar-hide mt-[16px] flex gap-[16px] overflow-x-scroll px-20">
-          {[...recommendedRestaurants]
-            .reverse()
-            .map(({ id, name, category, images, roadAddress, visitedCelebrities }) => (
-              <RestaurantCard
-                key={id}
-                name={name}
-                category={category}
-                imageUrl={images[0].url}
-                location={roadAddress}
-                tag={
-                  visitedCelebrities.length - 1 === 0
-                    ? `${visitedCelebrities[0].name} 추천 맛집`
-                    : `${visitedCelebrities[0].name}외 ${visitedCelebrities.length - 1}명 추천 맛집`
-                }
-              />
-            ))}
+          {[...recommendedRestaurants].reverse().map(restaurant => (
+            <RestaurantCard key={restaurant.id} {...restaurant} />
+          ))}
         </div>
       </section>
       <section className="mt-48 px-20">
@@ -113,19 +99,8 @@ export default async function Home() {
       <section className="mt-48">
         <h1 className="px-20 title-20-md">지금 인기 있는 맛집!</h1>
         <div className="scrollbar-hide mt-[16px] flex gap-[16px] overflow-x-scroll px-20">
-          {recommendedRestaurants.map(({ id, name, category, images, roadAddress, visitedCelebrities }) => (
-            <RestaurantCard
-              key={id}
-              name={name}
-              category={category}
-              imageUrl={images[0].url}
-              location={roadAddress}
-              tag={
-                visitedCelebrities.length - 1 === 0
-                  ? `${visitedCelebrities[0].name} 추천 맛집`
-                  : `${visitedCelebrities[0].name}외 ${visitedCelebrities.length - 1}명 추천 맛집`
-              }
-            />
+          {recommendedRestaurants.map(restaurant => (
+            <RestaurantCard key={restaurant.id} {...restaurant} />
           ))}
         </div>
       </section>
