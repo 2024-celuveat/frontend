@@ -1,3 +1,4 @@
+import LogoutButton from '@/components/LogoutButton';
 import Link from 'next/link';
 
 interface MenuProps {
@@ -94,9 +95,7 @@ const MyPage = () => {
       </div>
       <Menu label="기타" menus={MENUS2} />
       <section className="px-20 py-16">
-        <button className="flex h-[50px] w-full items-center justify-center rounded-[8px] bg-gray-100 text-gray-700 body-16-md">
-          로그아웃
-        </button>
+        <LogoutButton />
         <button className="h-[50px] w-full items-center justify-center text-gray-400 body-14-md">회원탈퇴</button>
       </section>
     </>
