@@ -4,7 +4,6 @@ import './globals.css';
 import BottomNavbar from '@/components/BottomNavbar';
 import Providers from './providers';
 import Header from '@/components/Header';
-import { Suspense } from 'react';
 
 export const metadata: Metadata = {
   title: 'Celuveat',
@@ -25,11 +24,9 @@ export default function RootLayout({
     <html lang="ko" className={myFont.className}>
       <body className="relative mx-auto my-0 min-h-svh max-w-[495px] shadow-lg font-synthesis-none">
         <Providers>
-          <Suspense fallback={<div>Loading...</div>}>
-            <Header />
-            {children}
-            <BottomNavbar />
-          </Suspense>
+          <Header />
+          {children}
+          <BottomNavbar />
         </Providers>
       </body>
     </html>
