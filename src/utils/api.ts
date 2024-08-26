@@ -4,7 +4,7 @@ export const api = async (path: string, options?: RequestInit) => {
 
 export const apiClient = async (path: string, options?: RequestInit) => {
   const headers: RequestInit['headers'] = {};
-  const token = localStorage.getItem('accessToken');
+  const token = localStorage?.getItem('accessToken');
 
   if (token) {
     headers['Authorization'] = `Bearer ${localStorage.getItem('accessToken')}`;

@@ -1,9 +1,9 @@
-import { getCelebrityRestaurants } from '@/api';
+import { getCelebrityRestaurantsOnServer } from '@/api';
 import CelebIntroductionSection from '@/components/CelebIntroductionSection';
-import RestaurantCardRow from '@/components/RestaurantCardRow';
+import CelebRestaurantList from '@/components/CelebRestaurantList';
 
 const CelebPage = async ({ params: { id } }: { params: { id: string } }) => {
-  const data = await getCelebrityRestaurants(Number(id));
+  const data = await getCelebrityRestaurantsOnServer(Number(id));
 
   return (
     <main className="px-20 pt-16">
@@ -15,9 +15,7 @@ const CelebPage = async ({ params: { id } }: { params: { id: string } }) => {
         <span className="body-13-rg">최신순</span>
       </div>
 
-      <ul className="mt-24 flex flex-col gap-20">
-        {data.contents?.map(props => <RestaurantCardRow key={id} {...props} />)}
-      </ul>
+      <CelebRestaurantList celebId={Number(id)} />
     </main>
   );
 };
