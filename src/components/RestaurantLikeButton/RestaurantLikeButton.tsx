@@ -38,7 +38,7 @@ const RestaurantLikeButton = ({ liked, restaurantId, cn }: RestaurantLikeButtonP
       {isLiked ? (
         <IconHeartFilled24 className="*:fill-main-500" onClick={handleClickUnlike} />
       ) : (
-        <IconHeartEmpty24 className="*:fill-white" onClick={handleClickLike} />
+        <IconHeartEmpty24 className="*:fill-gray-200" onClick={handleClickLike} />
       )}
     </div>
   );
