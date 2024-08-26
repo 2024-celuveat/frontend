@@ -5,6 +5,7 @@ import {
   postInterestedRestaurant,
   deleteInterestedRestaurant,
   getInterestedRestaurant,
+  getRecommendedRestaurantsByCelebrities,
 } from '@/api';
 import { useSuspenseQuery, useMutation } from '@tanstack/react-query';
 import { revalidateTag } from 'next/cache';
@@ -46,4 +47,10 @@ export const useInterestedRestaurantQuery = () =>
     queryFn: getInterestedRestaurant,
     staleTime: 0,
     gcTime: 0,
+  });
+
+export const useRecommendedRestaurantsByCelebritiesQuery = () =>
+  useSuspenseQuery({
+    queryKey: ['getRecommendedRestaurantsByCelebrities'],
+    queryFn: getRecommendedRestaurantsByCelebrities,
   });
