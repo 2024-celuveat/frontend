@@ -1,12 +1,11 @@
 import RestaurantCard from '@/components/RestaurantCard';
 
 import { IconNoticeFilled24, IconSearch24 } from '@/assets/icons';
-import { getBestCelebrities, getRecommendedRestaurantsByCelebrities } from '@/api';
+import { getRecommendedRestaurantsByCelebritiesOnServer } from '@/api';
 import CelebBestSection from '@/components/CelebBestSection';
 
 export default async function Home() {
-  const bestCelebrities = await getBestCelebrities();
-  const recommendedRestaurants = await getRecommendedRestaurantsByCelebrities();
+  const recommendedRestaurants = await getRecommendedRestaurantsByCelebritiesOnServer();
 
   return (
     <main className="">
@@ -16,7 +15,7 @@ export default async function Home() {
           <span className="text-gray-400 body-15-rg">원하는 식당을 검색해보세요.</span>
         </div>
       </section>
-      <CelebBestSection bestCelebrities={bestCelebrities} />
+      <CelebBestSection />
       <section className="mt-48">
         <div className="flex gap-2">
           <h1 className="pl-20 title-20-md">셀럽들의 추천 맛집</h1>
