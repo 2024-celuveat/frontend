@@ -1,12 +1,7 @@
 import { BestCelebrities, CelebrityDetail } from '@/@types';
-import { api, apiClient } from '@/utils/api';
+import { apiClient } from '@/utils/api';
 
 // 인기 셀럽 조회
-export const getBestCelebritiesOnServer = async (): Promise<BestCelebrities[]> => {
-  const response = await api(`/celebrities/best`);
-
-  return await response.json();
-};
 export const getBestCelebrities = async (): Promise<BestCelebrities[]> => {
   const response = await apiClient(`/celebrities/best`);
 

@@ -1,4 +1,3 @@
-import { BestCelebrities } from '@/@types';
 import {
   getCelebrityInfo,
   getBestCelebrities,
@@ -14,12 +13,11 @@ export const useCelebrityInfoQuery = (celebrityId: number) =>
     queryFn: () => getCelebrityInfo(celebrityId),
   });
 
-export const useBestCelebritiesQuery = ({ initialData }: { initialData: BestCelebrities[] }) =>
+export const useBestCelebritiesQuery = () =>
   useSuspenseQuery({
     queryKey: ['getBestCelebrities'],
     queryFn: getBestCelebrities,
-    initialData,
-    refetchInterval: 10000,
+    staleTime: 0,
   });
 
 export const useInterestedCelebritiesQuery = () =>

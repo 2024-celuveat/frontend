@@ -1,12 +1,8 @@
-import RestaurantCard from '@/components/RestaurantCard';
-
 import { IconNoticeFilled24, IconSearch24 } from '@/assets/icons';
-import { getRecommendedRestaurantsByCelebritiesOnServer } from '@/api';
 import CelebBestSection from '@/components/CelebBestSection';
+import RestaurantRecommendedSection from '@/components/RestaurantRecommendedSection';
 
 export default async function Home() {
-  const recommendedRestaurants = await getRecommendedRestaurantsByCelebritiesOnServer();
-
   return (
     <main className="">
       <section className="px-20 pt-20">
@@ -28,11 +24,7 @@ export default async function Home() {
             <path d="M11 10.0833V15.5833" stroke="#909097" strokeWidth="1.375" />
           </svg>
         </div>
-        <div className="scrollbar-hide mt-[16px] flex gap-[16px] overflow-x-scroll px-20">
-          {[...recommendedRestaurants].reverse().map(restaurant => (
-            <RestaurantCard key={restaurant.id} {...restaurant} />
-          ))}
-        </div>
+        <RestaurantRecommendedSection />
       </section>
       <section className="mt-48 px-20">
         <div className="flex h-48 w-full items-center rounded-[8px] bg-gray-800 px-16 py-12">
@@ -97,11 +89,7 @@ export default async function Home() {
       </section>
       <section className="mt-48">
         <h1 className="px-20 title-20-md">지금 인기 있는 맛집!</h1>
-        <div className="scrollbar-hide mt-[16px] flex gap-[16px] overflow-x-scroll px-20">
-          {recommendedRestaurants.map(restaurant => (
-            <RestaurantCard key={restaurant.id} {...restaurant} />
-          ))}
-        </div>
+        <RestaurantRecommendedSection />
       </section>
     </main>
   );

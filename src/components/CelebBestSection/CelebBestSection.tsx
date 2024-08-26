@@ -1,6 +1,5 @@
 'use client';
 
-import { BestCelebrities } from '@/@types';
 import CelebProfile from '@/components/CelebProfile';
 import Link from 'next/link';
 import { useState } from 'react';
@@ -10,14 +9,9 @@ import Image from 'next/image';
 import RestaurantLikeButton from '@/components/RestaurantLikeButton';
 import { useBestCelebritiesQuery } from '@/hooks/server';
 
-interface CelebBestSectionProps {
-  bestCelebrities: BestCelebrities[];
-}
-
-const CelebBestSection = ({ bestCelebrities }: CelebBestSectionProps) => {
+const CelebBestSection = () => {
   const [sequence, setSequence] = useState<number>(0);
-
-  const { data } = useBestCelebritiesQuery({ initialData: bestCelebrities });
+  const { data } = useBestCelebritiesQuery();
 
   const handleClickCelebProfile = async (index: number) => {
     setSequence(index);
