@@ -6,7 +6,7 @@ import { useSearchParams } from 'next/navigation';
 
 const OAuthRedirectPage = ({ params }: { params: { socialLoginType: SocialLoginType } }) => {
   const searchParams = useSearchParams();
-  const authCode = searchParams.get('code');
+  const authCode = searchParams?.get('code');
   const { isSuccess, data } = useAccessTokenQuery(params.socialLoginType, authCode as string);
 
   if (isSuccess) {

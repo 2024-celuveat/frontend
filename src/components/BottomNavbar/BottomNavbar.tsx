@@ -8,7 +8,6 @@ import Image from 'next/image';
 import kakao from '@/assets/icons/kakao.webp';
 import naver from '@/assets/icons/naver.webp';
 import google from '@/assets/icons/google.webp';
-import { getOAuthUrl } from '@/api';
 import { SocialLoginType } from '@/@types/server/login.type';
 import { useOauthUrlMutation } from '@/hooks/server';
 import { useEffect, useState } from 'react';

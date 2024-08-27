@@ -1,9 +1,11 @@
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import './globals.css';
-import BottomNavbar from '@/components/BottomNavbar';
 import Providers from './providers';
 import Header from '@/components/Header';
+import dynamic from 'next/dynamic';
+
+const BottomNavbar = dynamic(() => import('@/components/BottomNavbar'), { ssr: false });
 
 export const metadata: Metadata = {
   title: 'Celuveat',

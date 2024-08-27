@@ -31,9 +31,7 @@ const Header = () => {
   const pathname = usePathname();
   const pathValues = pathname?.split('/');
 
-  if (pathname === '') {
-    return null;
-  }
+  if (!pathValues) return null;
 
   if (pathValues[1] === 'celebs') {
     return <HeaderType1 title={'맛집 추천 리스트'} />;
