@@ -1,4 +1,4 @@
-import { getCelebrityRestaurants } from '@/app/actions';
+import { getCelebrityRestaurants } from '@/request';
 import CelebIntroductionSection from '@/components/CelebIntroductionSection';
 import CelebRestaurantList from '@/components/CelebRestaurantList';
 

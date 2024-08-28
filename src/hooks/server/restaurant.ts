@@ -7,7 +7,7 @@ import {
   getInterestedRestaurant,
   getRecommendedRestaurantsByCelebrities,
   getCelebrityRestaurants,
-} from '@/app/actions';
+} from '@/request';
 import { useSuspenseQuery, useMutation } from '@tanstack/react-query';
 import { revalidateTag } from 'next/cache';
 

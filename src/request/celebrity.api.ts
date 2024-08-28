@@ -1,5 +1,4 @@
 import { BestCelebrities, CelebrityDetail } from '@/@types';
-import { api } from '@/utils/api';
 
 // 인기 셀럽 조회
 export const getBestCelebrities = async (): Promise<BestCelebrities[]> => {
@@ -24,10 +23,10 @@ export const getInterestedCelebrities = async (): Promise<CelebrityDetail['celeb
 
 // 관심 셀럽 추가
 export const postInterestedCelebrity = async (celebrityId: number) => {
-  await api(`/api/celebrities/interested/${celebrityId}`, { method: 'POST' });
+  await fetch(`/api/celebrities/interested/${celebrityId}`, { method: 'POST' });
 };
 
 // 관심 셀럽 삭제
 export const deleteInterestedCelebrity = async (celebrityId: number) => {
-  await api(`/api/celebrities/interested/${celebrityId}`, { method: 'DELETE' });
+  await fetch(`/api/celebrities/interested/${celebrityId}`, { method: 'DELETE' });
 };
