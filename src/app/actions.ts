@@ -3,10 +3,14 @@
 import { cookies } from 'next/headers';
 
 export const api = async (path: string, options?: RequestInit) => {
+  const headers: RequestInit['headers'] = {};
+
+  if (cookies().has('accessToken')) {
+    headers['Authorization'] = `Bearer ${cookies().get('accessToken')?.value}`;
+  }
+
   return await fetch(`${process.env.NEXT_PUBLIC_NEW_BASE_URL}${path}`, {
-    headers: {
-      Authorization: `Bearer ${cookies().get('accessToken')?.value}`,
-    },
+    ...headers,
     ...options,
   });
 };
