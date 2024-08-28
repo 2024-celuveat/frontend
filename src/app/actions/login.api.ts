@@ -15,3 +15,8 @@ export const getAccessToken = async (
 
   return await response.json();
 };
+
+export const getProfile = async () => {
+  const response = await fetch('/api/user');
+  return await response.json();
+};
