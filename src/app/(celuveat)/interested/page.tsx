@@ -39,18 +39,18 @@ const InterestedPage = () => {
       <section className="mt-24">
         {tab === '맛집' && (
           <div className="title-20-md">
-            <span className="text-main-700 title-20-bold">{interestedRestaurants.size}</span>개
+            <span className="text-main-700 title-20-bold">{interestedRestaurants?.size}</span>개
             <ul className="mt-16 flex flex-col gap-24">
-              {interestedRestaurants.contents?.map(item => <RestaurantCardRow key={item.id} {...item} />)}
+              {interestedRestaurants?.contents?.map(item => <RestaurantCardRow key={item.id} {...item} />)}
             </ul>
           </div>
         )}
 
         {tab === '셀럽' && (
           <div className="title-20-md">
-            <span className="text-main-700 title-20-bold">{interestedCelebrities.length}</span>명
+            <span className="text-main-700 title-20-bold">{interestedCelebrities?.length}</span>명
             <ul className="mt-16 flex flex-col gap-24">
-              {interestedCelebrities.map(item => (
+              {interestedCelebrities?.map(item => (
                 <li key={item.id} className="flex items-center gap-10">
                   <div className="relative">
                     <Image

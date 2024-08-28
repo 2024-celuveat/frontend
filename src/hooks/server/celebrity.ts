@@ -5,23 +5,23 @@ import {
   postInterestedCelebrity,
   deleteInterestedCelebrity,
 } from '@/request';
-import { useMutation, useSuspenseQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 
 export const useCelebrityInfoQuery = (celebrityId: number) =>
-  useSuspenseQuery({
+  useQuery({
     queryKey: ['getCelebrityInfo'],
     queryFn: () => getCelebrityInfo(celebrityId),
   });
 
 export const useBestCelebritiesQuery = () =>
-  useSuspenseQuery({
+  useQuery({
     queryKey: ['getBestCelebrities'],
     queryFn: getBestCelebrities,
     staleTime: 0,
   });
 
 export const useInterestedCelebritiesQuery = () =>
-  useSuspenseQuery({
+  useQuery({
     queryKey: ['getInterestedCelebrities'],
     queryFn: getInterestedCelebrities,
     staleTime: 0,

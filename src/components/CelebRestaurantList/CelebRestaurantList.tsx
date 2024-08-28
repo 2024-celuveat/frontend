@@ -12,7 +12,7 @@ const CelebRestaurantList = ({ celebId }: CelebRestaurantListProps) => {
 
   return (
     <ul className="mt-24 flex flex-col gap-20">
-      {data.contents?.map(props => <RestaurantCardRow key={props.id} {...props} />)}
+      {data?.contents?.map(props => <RestaurantCardRow key={props.id} {...props} />)}
     </ul>
   );
 };

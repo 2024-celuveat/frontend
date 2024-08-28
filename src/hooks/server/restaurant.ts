@@ -1,6 +1,4 @@
-import { SocialLoginType } from '@/@types/server/login.type';
 import {
-  getAccessToken,
   getOAuthUrl,
   postInterestedRestaurant,
   deleteInterestedRestaurant,
@@ -8,15 +6,8 @@ import {
   getRecommendedRestaurantsByCelebrities,
   getCelebrityRestaurants,
 } from '@/request';
-import { useSuspenseQuery, useMutation } from '@tanstack/react-query';
+import { useQuery, useMutation } from '@tanstack/react-query';
 import { revalidateTag } from 'next/cache';
-
-export const useAccessTokenQuery = (socialLoginType: SocialLoginType, authCode: string) =>
-  useSuspenseQuery({
-    queryKey: ['getAccessToken'],
-    queryFn: () => getAccessToken(socialLoginType, authCode),
-  });
-0;
 
 export const useOauthUrlMutation = () =>
   useMutation({
@@ -43,7 +34,7 @@ export const useDeleteInterestedRestaurantMutation = () => {
 };
 
 export const useInterestedRestaurantQuery = () =>
-  useSuspenseQuery({
+  useQuery({
     queryKey: ['getInterestedRestaurant'],
     queryFn: getInterestedRestaurant,
     staleTime: 0,
@@ -51,13 +42,13 @@ export const useInterestedRestaurantQuery = () =>
   });
 
 export const useRecommendedRestaurantsByCelebritiesQuery = () =>
-  useSuspenseQuery({
+  useQuery({
     queryKey: ['getRecommendedRestaurantsByCelebrities'],
     queryFn: getRecommendedRestaurantsByCelebrities,
   });
 
 export const useCelebrityRestaurantsQuery = (celebrityId: number) =>
-  useSuspenseQuery({
+  useQuery({
     queryKey: ['getCelebrityRestaurants'],
     queryFn: () => getCelebrityRestaurants(celebrityId),
   });

@@ -17,17 +17,15 @@ interface CelebIntroductionSectionProps {
 }
 
 const CelebIntroductionSection = ({ celebId }: CelebIntroductionSectionProps) => {
-  const {
-    data: { celebrity, interested },
-  } = useCelebrityInfoQuery(celebId);
-  const [isLiked, setIsLiked] = useState(interested);
+  const { data } = useCelebrityInfoQuery(celebId);
+  const [isLiked, setIsLiked] = useState(data?.interested);
 
   const { mutateAsync } = useInterestedCelebrityMutation();
   const { mutateAsync: deleteMutateAsync } = useDeleteInterestedCelebrityMutation();
 
   const handleClickLike = async () => {
     try {
-      await mutateAsync(celebrity.id);
+      if (data?.celebrity.id) await mutateAsync(data.celebrity.id);
       setIsLiked(true);
     } catch (err) {
       setIsLiked(false);
@@ -36,7 +34,10 @@ const CelebIntroductionSection = ({ celebId }: CelebIntroductionSectionProps) =>
 
   const handleClickUnlike = async () => {
     try {
-      await deleteMutateAsync(celebrity.id);
+      if (data) {
+        await mutateAsync(data.celebrity.id);
+        await deleteMutateAsync(data.celebrity.id);
+      }
       setIsLiked(false);
     } catch (err) {
       setIsLiked(true);
@@ -47,7 +48,7 @@ const CelebIntroductionSection = ({ celebId }: CelebIntroductionSectionProps) =>
     overlay.open(({ isOpen, unmount }) => {
       return (
         <BottomSheet open={isOpen} onClose={unmount} title="유튜브 채널 바로가기">
-          {celebrity.youtubeContentResults.map(({ id, channelUrl, contentsName }) => (
+          {data?.celebrity.youtubeContentResults.map(({ id, channelUrl, contentsName }) => (
             <Link
               key={id}
               href={channelUrl}
@@ -71,23 +72,25 @@ const CelebIntroductionSection = ({ celebId }: CelebIntroductionSectionProps) =>
     <>
       <div className="flex">
         <div className="flex-1">
-          <span className="title-22-md">{celebrity.name}</span>
+          <span className="title-22-md">{data?.celebrity.name}</span>
           <div className="mt-6 flex items-center">
             <span className="body-14-rg">구독자</span>
-            <span className="ml-2 body-14-md">{celebrity.youtubeContentResults[0].subscriberCount}명</span>
+            <span className="ml-2 body-14-md">{data?.celebrity.youtubeContentResults[0].subscriberCount}명</span>
             <span className="ml-12 body-14-rg">추천 매장</span>
-            <span className="ml-2 body-14-md">{celebrity.youtubeContentResults[0].restaurantCount}개</span>
+            <span className="ml-2 body-14-md">{data?.celebrity.youtubeContentResults[0].restaurantCount}개</span>
           </div>
-          <p className="mt-14 pr-16 body-13-rg">{celebrity.introduction}</p>
+          <p className="mt-14 pr-16 body-13-rg">{data?.celebrity.introduction}</p>
         </div>
 
-        <Image
-          className="h-72 w-72 rounded-full bg-gray-200"
-          src={celebrity.profileImageUrl}
-          alt={celebrity.name}
-          width={72}
-          height={72}
-        />
+        {data && (
+          <Image
+            className="h-72 w-72 rounded-full bg-gray-200"
+            src={data?.celebrity.profileImageUrl}
+            alt={data?.celebrity.name}
+            width={72}
+            height={72}
+          />
+        )}
       </div>
       <div className="mt-20 flex gap-10">
         {isLiked ? (
