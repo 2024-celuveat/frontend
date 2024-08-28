@@ -1,33 +1,33 @@
 import { BestCelebrities, CelebrityDetail } from '@/@types';
-import { apiClient } from '@/utils/api';
+import { api } from '@/utils/api';
 
 // 인기 셀럽 조회
 export const getBestCelebrities = async (): Promise<BestCelebrities[]> => {
-  const response = await apiClient(`/celebrities/best`);
+  const response = await api(`/celebrities/best`);
 
   return await response.json();
 };
 
 // 셀럽 정보 조회
 export const getCelebrityInfo = async (celebrityId: number): Promise<CelebrityDetail> => {
-  const response = await apiClient(`/celebrities/${celebrityId}`);
+  const response = await api(`/celebrities/${celebrityId}`);
 
   return await response.json();
 };
 
 // 관심 셀럽 조회
 export const getInterestedCelebrities = async (): Promise<CelebrityDetail['celebrity'][]> => {
-  const response = await apiClient('/celebrities/interested');
+  const response = await api('/celebrities/interested');
 
   return await response.json();
 };
 
 // 관심 셀럽 추가
 export const postInterestedCelebrity = async (celebrityId: number) => {
-  await apiClient(`/celebrities/interested/${celebrityId}`, { method: 'POST' });
+  await api(`/celebrities/interested/${celebrityId}`, { method: 'POST' });
 };
 
 // 관심 셀럽 삭제
 export const deleteInterestedCelebrity = async (celebrityId: number) => {
-  await apiClient(`/celebrities/interested/${celebrityId}`, { method: 'DELETE' });
+  await api(`/celebrities/interested/${celebrityId}`, { method: 'DELETE' });
 };

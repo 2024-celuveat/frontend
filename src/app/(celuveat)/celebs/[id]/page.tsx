@@ -1,9 +1,9 @@
-import { getCelebrityRestaurantsOnServer } from '@/api';
+import { getCelebrityRestaurants } from '@/api';
 import CelebIntroductionSection from '@/components/CelebIntroductionSection';
 import CelebRestaurantList from '@/components/CelebRestaurantList';
 
 const CelebPage = async ({ params: { id } }: { params: { id: string } }) => {
-  const data = await getCelebrityRestaurantsOnServer(Number(id));
+  const data = await getCelebrityRestaurants(Number(id));
 
   return (
     <main className="px-20 pt-16">
