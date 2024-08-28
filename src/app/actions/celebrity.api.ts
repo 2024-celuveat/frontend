@@ -3,9 +3,9 @@ import { api } from '@/utils/api';
 
 // 인기 셀럽 조회
 export const getBestCelebrities = async (): Promise<BestCelebrities[]> => {
-  const response = await api(`/celebrities/best`);
-
-  return await response.json();
+  const response = await fetch('/api/celebrities/best');
+  const { data } = await response.json();
+  return data;
 };
 
 // 셀럽 정보 조회
