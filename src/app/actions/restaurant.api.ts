@@ -3,9 +3,10 @@ import { api } from '@/utils/api';
 
 // 셀럽 추천 음식점 조회
 export const getRecommendedRestaurantsByCelebrities = async (): Promise<Restaurant[]> => {
-  const response = await api(`/restaurants/celebrity/recommend`);
+  const response = await fetch('/api/restaurants/celebrity/recommend');
+  const { data } = await response.json();
 
-  return await response.json();
+  return data;
 };
 
 // 셀럽이 다녀간 음식점 조회
