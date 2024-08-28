@@ -5,7 +5,6 @@ import { api } from '@/utils/api';
 export const getRecommendedRestaurantsByCelebrities = async (): Promise<Restaurant[]> => {
   const response = await fetch('/api/restaurants/celebrity/recommend');
   const { data } = await response.json();
-
   return data;
 };
 
@@ -13,9 +12,9 @@ export const getRecommendedRestaurantsByCelebrities = async (): Promise<Restaura
 export const getCelebrityRestaurants = async (
   celebrityId: number,
 ): Promise<{ contents: Restaurant[]; currentPage: number; hasNext: boolean; size: number }> => {
-  const response = await api(`/restaurants/celebrity/${celebrityId}`);
-
-  return await response.json();
+  const response = await fetch(`api/restaurants/celebrity/${celebrityId}`);
+  const { data } = await response.json();
+  return data;
 };
 
 // 관심 음식점 조회
@@ -25,17 +24,17 @@ export const getInterestedRestaurant = async (): Promise<{
   hasNext: boolean;
   size: number;
 }> => {
-  const response = await api('/restaurants/interested');
-
-  return await response.json();
+  const response = await fetch('api/restaurants/interested');
+  const { data } = await response.json();
+  return data;
 };
 
 // 관심 음식점 추가
 export const postInterestedRestaurant = async (restaurantId: number) => {
-  await api(`/restaurants/interested/${restaurantId}`, { method: 'POST' });
+  await api(`api/restaurants/interested/${restaurantId}`, { method: 'POST' });
 };
 
 // 관심 음식점 삭제
 export const deleteInterestedRestaurant = async (restaurantId: number) => {
-  await api(`/restaurants/interested/${restaurantId}`, { method: 'DELETE' });
+  await api(`api/restaurants/interested/${restaurantId}`, { method: 'DELETE' });
 };
