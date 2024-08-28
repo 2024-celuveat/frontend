@@ -9,19 +9,19 @@ import kakao from '@/assets/icons/kakao.webp';
 import naver from '@/assets/icons/naver.webp';
 import google from '@/assets/icons/google.webp';
 import { SocialLoginType } from '@/@types/server/login.type';
-import { useOauthUrlMutation } from '@/hooks/server';
-import { useEffect, useState } from 'react';
-import { usePathname } from 'next/navigation';
+import { useOauthUrlMutation, useProfileQuery } from '@/hooks/server';
+import { usePathname, useRouter } from 'next/navigation';
 
 const style = {
   logo: 'flex h-56 w-full items-center justify-center gap-8 rounded-[8px]',
 };
 
 const BottomNavbar = () => {
-  const [isLogin, setIsLogin] = useState<boolean>(false);
+  const { isSuccess } = useProfileQuery();
   const { mutate } = useOauthUrlMutation();
   const pathname = usePathname();
   const firstPath = pathname?.split('/')[1];
+  const router = useRouter();
 
   const handleClickSocialLoginButton = (socialLoginType: SocialLoginType) => {
     mutate(socialLoginType);
@@ -49,7 +49,7 @@ const BottomNavbar = () => {
   };
 
   const handleClickMyIcon = () => {
-    window.location.href = '/my';
+    router.push('/my');
   };
 
   return (
@@ -85,7 +85,7 @@ const BottomNavbar = () => {
           <span className="text-gray-400 caption-12-rg">관심</span>
         </Link>
         <div
-          onClick={isLogin ? handleClickMyIcon : handleClickLoginIcon}
+          onClick={isSuccess ? handleClickMyIcon : handleClickLoginIcon}
           className="flex cursor-pointer flex-col items-center gap-6"
         >
           <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -98,7 +98,7 @@ const BottomNavbar = () => {
               className={firstPath === 'my' ? 'fill-gray-800' : 'fill-gray-200'}
             />
           </svg>
-          <span className="text-gray-400 caption-12-rg">{isLogin ? '마이' : '로그인'}</span>
+          <span className="text-gray-400 caption-12-rg">{isSuccess ? '마이' : '로그인'}</span>
         </div>
       </nav>
     </OverlayProvider>
