@@ -52,15 +52,6 @@ const BottomNavbar = () => {
     window.location.href = '/my';
   };
 
-  useEffect(() => {
-    if (localStorage.getItem('accessToken') || sessionStorage.getItem('accessToken')) {
-      setIsLogin(true);
-      return;
-    }
-
-    setIsLogin(false);
-  }, []);
-
   return (
     <OverlayProvider>
       <div className="h-80" />

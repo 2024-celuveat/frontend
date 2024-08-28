@@ -4,7 +4,7 @@ import {
   getInterestedCelebrities,
   postInterestedCelebrity,
   deleteInterestedCelebrity,
-} from '@/api';
+} from '@/app/actions';
 import { useMutation, useSuspenseQuery } from '@tanstack/react-query';
 
 export const useCelebrityInfoQuery = (celebrityId: number) =>
