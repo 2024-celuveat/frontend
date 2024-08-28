@@ -17,7 +17,7 @@ const style = {
 };
 
 const BottomNavbar = () => {
-  const { isSuccess } = useProfileQuery();
+  const { data: isLogin } = useProfileQuery();
   const { mutate } = useOauthUrlMutation();
   const pathname = usePathname();
   const firstPath = pathname?.split('/')[1];
@@ -85,7 +85,7 @@ const BottomNavbar = () => {
           <span className="text-gray-400 caption-12-rg">관심</span>
         </Link>
         <div
-          onClick={isSuccess ? handleClickMyIcon : handleClickLoginIcon}
+          onClick={isLogin ? handleClickMyIcon : handleClickLoginIcon}
           className="flex cursor-pointer flex-col items-center gap-6"
         >
           <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -98,7 +98,7 @@ const BottomNavbar = () => {
               className={firstPath === 'my' ? 'fill-gray-800' : 'fill-gray-200'}
             />
           </svg>
-          <span className="text-gray-400 caption-12-rg">{isSuccess ? '마이' : '로그인'}</span>
+          <span className="text-gray-400 caption-12-rg">{isLogin ? '마이' : '로그인'}</span>
         </div>
       </nav>
     </OverlayProvider>

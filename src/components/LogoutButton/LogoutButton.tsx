@@ -1,11 +1,14 @@
 'use client';
 
-const LogoutButton = () => {
-  const handleClickLogout = () => {
-    localStorage.removeItem('accessToken');
+import { useLogoutMutation } from '@/hooks/server';
+import { useCallback } from 'react';
 
-    window.location.href = '/';
-  };
+const LogoutButton = () => {
+  const { mutate } = useLogoutMutation();
+
+  const handleClickLogout = useCallback(() => {
+    mutate();
+  }, []);
 
   return (
     <button

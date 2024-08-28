@@ -1,12 +1,17 @@
 import { SocialLoginType } from '@/@types/server/login.type';
 
-export const getOAuthUrl = async (socialLoginType: SocialLoginType) => {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_NEW_BASE_URL}/social-login/url/${socialLoginType}`);
-
-  return await response.text();
+export const getOAuthUrl = async (socialLoginType: SocialLoginType): Promise<string> => {
+  const response = await fetch(`/api/social-login/url/${socialLoginType}`);
+  const { data } = await response.json();
+  return data;
 };
 
-export const getProfile = async () => {
+export const getProfile = async (): Promise<boolean> => {
   const response = await fetch('/api/user');
-  return await response.json();
+  const { data } = await response.json();
+  return data;
+};
+
+export const postLogout = async () => {
+  await fetch('/api/social-login/logout', { method: 'POST' });
 };
