@@ -4,6 +4,7 @@ import './globals.css';
 import Providers from './providers';
 import Header from '@/components/Header';
 import BottomNavbar from '@/components/BottomNavbar';
+import { getIsLogin } from './(celuveat)/oauth/actions';
 
 export const metadata: Metadata = {
   title: 'Celuveat',
@@ -15,18 +16,19 @@ const myFont = localFont({
   display: 'block',
 });
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const isLogin = await getIsLogin();
   return (
     <html lang="ko" className={myFont.className}>
       <body className="relative mx-auto my-0 min-h-svh max-w-[495px] shadow-lg font-synthesis-none">
         <Providers>
           <Header />
           {children}
-          <BottomNavbar />
+          <BottomNavbar isLogin={isLogin} />
         </Providers>
       </body>
     </html>

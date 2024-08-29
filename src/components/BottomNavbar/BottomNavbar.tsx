@@ -4,42 +4,46 @@ import Link from 'next/link';
 import { overlay, OverlayProvider } from 'overlay-kit';
 import BottomSheet from '../@ui/BottomSheet';
 import Image from 'next/image';
-
 import kakao from '@/assets/icons/kakao.webp';
 import naver from '@/assets/icons/naver.webp';
 import google from '@/assets/icons/google.webp';
-import { SocialLoginType } from '@/@types/server/login.type';
-import { useOauthUrlMutation, useProfileQuery } from '@/hooks/server';
+
 import { usePathname, useRouter } from 'next/navigation';
+import { SocialLoginType } from '@/@types/server/login.type';
 
 const style = {
   logo: 'flex h-56 w-full items-center justify-center gap-8 rounded-[8px]',
 };
 
-const BottomNavbar = () => {
-  const { data: isLogin } = useProfileQuery();
-  const { mutate } = useOauthUrlMutation();
+interface BottomNavbarProps {
+  isLogin: boolean;
+}
+
+const BottomNavbar = ({ isLogin }: BottomNavbarProps) => {
   const pathname = usePathname();
   const firstPath = pathname?.split('/')[1];
   const router = useRouter();
 
-  const handleClickSocialLoginButton = (socialLoginType: SocialLoginType) => {
-    mutate(socialLoginType);
+  const handleClickLoginButton = async (socialLoginType: SocialLoginType) => {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_SERVER_BASE_URL}/social-login/url/${socialLoginType}`,
+    );
+    router.push(await response.text());
   };
 
   const handleClickLoginIcon = () => {
     overlay.open(({ isOpen, unmount }) => {
       return (
         <BottomSheet open={isOpen} onClose={unmount} title="로그인">
-          <button className={`${style.logo} bg-[#FEE502]`} onClick={() => handleClickSocialLoginButton('KAKAO')}>
+          <button className={`${style.logo} bg-[#FEE502]`} onClick={() => handleClickLoginButton('KAKAO')}>
             <Image src={kakao} width={24} height={24} alt="카카오 로고" />
             <span className="body-16-md">카카오로 로그인하기</span>
           </button>
-          <button className={`${style.logo} mt-16 bg-[#03C75A]`} onClick={() => handleClickSocialLoginButton('NAVER')}>
+          <button className={`${style.logo} mt-16 bg-[#03C75A]`} onClick={() => handleClickLoginButton('NAVER')}>
             <Image src={naver} width={24} height={24} alt="네이버 로고" />
             <span className="text-white body-16-md">네이버로 로그인하기</span>
           </button>
-          <button className={`${style.logo} mt-16 bg-gray-100`} onClick={() => handleClickSocialLoginButton('GOOGLE')}>
+          <button className={`${style.logo} mt-16 bg-gray-100`} onClick={() => handleClickLoginButton('GOOGLE')}>
             <Image src={google} width={24} height={24} alt="구글 로고" />
             <span className="body-16-md">구글로 로그인하기</span>
           </button>
