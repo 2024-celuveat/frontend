@@ -1,23 +1,10 @@
-import {
-  getCelebrityInfo,
-  getInterestedCelebrities,
-  postInterestedCelebrity,
-  deleteInterestedCelebrity,
-} from '@/request';
+import { getCelebrityInfo, postInterestedCelebrity, deleteInterestedCelebrity } from '@/request';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
 export const useCelebrityInfoQuery = (celebrityId: number) =>
   useQuery({
     queryKey: ['getCelebrityInfo'],
     queryFn: () => getCelebrityInfo(celebrityId),
-  });
-
-export const useInterestedCelebritiesQuery = () =>
-  useQuery({
-    queryKey: ['getInterestedCelebrities'],
-    queryFn: getInterestedCelebrities,
-    staleTime: 0,
-    gcTime: 0,
   });
 
 export const useInterestedCelebrityMutation = () => {

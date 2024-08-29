@@ -6,11 +6,6 @@ export const getCelebrityInfo = async (celebrityId: number): Promise<CelebrityDe
   return apiClient(`/api/celebrities/${celebrityId}`);
 };
 
-// 관심 셀럽 조회
-export const getInterestedCelebrities = async (): Promise<CelebrityDetail['celebrity'][]> => {
-  return apiClient('/api/celebrities/interested');
-};
-
 // 관심 셀럽 추가
 export const postInterestedCelebrity = async (celebrityId: number) => {
   await apiClient(`/api/celebrities/interested/${celebrityId}`, { method: 'POST' });

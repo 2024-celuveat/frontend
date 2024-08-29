@@ -1,11 +1,5 @@
-import {
-  getOAuthUrl,
-  postInterestedRestaurant,
-  deleteInterestedRestaurant,
-  getInterestedRestaurant,
-  getCelebrityRestaurants,
-} from '@/request';
-import { useQuery, useMutation, useSuspenseQuery } from '@tanstack/react-query';
+import { getOAuthUrl, postInterestedRestaurant, deleteInterestedRestaurant, getCelebrityRestaurants } from '@/request';
+import { useQuery, useMutation } from '@tanstack/react-query';
 import { revalidateTag } from 'next/cache';
 
 export const useOauthUrlMutation = () =>
@@ -31,14 +25,6 @@ export const useDeleteInterestedRestaurantMutation = () => {
     mutationFn: deleteInterestedRestaurant,
   });
 };
-
-export const useInterestedRestaurantQuery = () =>
-  useQuery({
-    queryKey: ['getInterestedRestaurant'],
-    queryFn: getInterestedRestaurant,
-    staleTime: 0,
-    gcTime: 0,
-  });
 
 export const useCelebrityRestaurantsQuery = (celebrityId: number) =>
   useQuery({
