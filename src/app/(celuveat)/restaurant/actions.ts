@@ -1,3 +1,4 @@
+import { Restaurant } from '@/@types';
 import { api } from '@/app/actions';
 
 // 셀럽이 다녀간 음식점 조회
