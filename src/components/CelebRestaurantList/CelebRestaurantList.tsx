@@ -1,18 +1,18 @@
 'use client';
 
-import { useCelebrityRestaurantsQuery } from '@/hooks/server';
 import RestaurantCardRow from '../RestaurantCardRow';
+import { Restaurant } from '@/@types';
 
 interface CelebRestaurantListProps {
-  celebId: number;
+  restaurants: PagedResponse<Restaurant>;
 }
 
-const CelebRestaurantList = ({ celebId }: CelebRestaurantListProps) => {
-  const { data } = useCelebrityRestaurantsQuery(celebId);
-
+const CelebRestaurantList = ({ restaurants }: CelebRestaurantListProps) => {
   return (
     <ul className="mt-24 flex flex-col gap-20">
-      {data?.contents?.map(props => <RestaurantCardRow key={props.id} {...props} />)}
+      {restaurants.contents.map(props => (
+        <RestaurantCardRow key={props.id} {...props} />
+      ))}
     </ul>
   );
 };

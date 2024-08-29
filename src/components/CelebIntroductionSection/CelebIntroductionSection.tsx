@@ -1,32 +1,25 @@
 'use client';
 
+import { CelebrityDetail } from '@/@types';
+import { deleteInterestedCelebrity, postInterestedCelebrity } from '@/app/(celuveat)/celebs/actions';
 import { IconHeartFilled20, IconPlus20 } from '@/assets/icons';
 import BottomSheet from '@/components/@ui/BottomSheet';
-import {
-  useCelebrityInfoQuery,
-  useDeleteInterestedCelebrityMutation,
-  useInterestedCelebrityMutation,
-} from '@/hooks/server';
 import Image from 'next/image';
 import Link from 'next/link';
 import { overlay } from 'overlay-kit';
 import { useState } from 'react';
 
 interface CelebIntroductionSectionProps {
-  celebId: number;
+  celebrityInfo: CelebrityDetail;
 }
 
-const CelebIntroductionSection = ({ celebId }: CelebIntroductionSectionProps) => {
-  const { data } = useCelebrityInfoQuery(celebId);
-  const [isLiked, setIsLiked] = useState(data?.interested);
-
-  const { mutateAsync } = useInterestedCelebrityMutation();
-  const { mutateAsync: deleteMutateAsync } = useDeleteInterestedCelebrityMutation();
+const CelebIntroductionSection = ({ celebrityInfo }: CelebIntroductionSectionProps) => {
+  const [isLiked, setIsLiked] = useState(celebrityInfo.interested);
 
   const handleClickLike = async () => {
     try {
-      if (data?.celebrity.id) await mutateAsync(data.celebrity.id);
       setIsLiked(true);
+      await postInterestedCelebrity(celebrityInfo.celebrity.id);
     } catch (err) {
       setIsLiked(false);
     }
@@ -34,11 +27,8 @@ const CelebIntroductionSection = ({ celebId }: CelebIntroductionSectionProps) =>
 
   const handleClickUnlike = async () => {
     try {
-      if (data) {
-        await mutateAsync(data.celebrity.id);
-        await deleteMutateAsync(data.celebrity.id);
-      }
       setIsLiked(false);
+      await deleteInterestedCelebrity(celebrityInfo.celebrity.id);
     } catch (err) {
       setIsLiked(true);
     }
@@ -48,7 +38,7 @@ const CelebIntroductionSection = ({ celebId }: CelebIntroductionSectionProps) =>
     overlay.open(({ isOpen, unmount }) => {
       return (
         <BottomSheet open={isOpen} onClose={unmount} title="유튜브 채널 바로가기">
-          {data?.celebrity.youtubeContentResults.map(({ id, channelUrl, contentsName }) => (
+          {celebrityInfo?.celebrity.youtubeContentResults.map(({ id, channelUrl, contentsName }) => (
             <Link
               key={id}
               href={channelUrl}
@@ -72,21 +62,25 @@ const CelebIntroductionSection = ({ celebId }: CelebIntroductionSectionProps) =>
     <>
       <div className="flex">
         <div className="flex-1">
-          <span className="title-22-md">{data?.celebrity.name}</span>
+          <span className="title-22-md">{celebrityInfo?.celebrity.name}</span>
           <div className="mt-6 flex items-center">
             <span className="body-14-rg">구독자</span>
-            <span className="ml-2 body-14-md">{data?.celebrity.youtubeContentResults[0].subscriberCount}명</span>
+            <span className="ml-2 body-14-md">
+              {celebrityInfo?.celebrity.youtubeContentResults[0].subscriberCount}명
+            </span>
             <span className="ml-12 body-14-rg">추천 매장</span>
-            <span className="ml-2 body-14-md">{data?.celebrity.youtubeContentResults[0].restaurantCount}개</span>
+            <span className="ml-2 body-14-md">
+              {celebrityInfo?.celebrity.youtubeContentResults[0].restaurantCount}개
+            </span>
           </div>
-          <p className="mt-14 pr-16 body-13-rg">{data?.celebrity.introduction}</p>
+          <p className="mt-14 pr-16 body-13-rg">{celebrityInfo?.celebrity.introduction}</p>
         </div>
 
-        {data && (
+        {celebrityInfo && (
           <Image
             className="h-72 w-72 rounded-full bg-gray-200"
-            src={data?.celebrity.profileImageUrl}
-            alt={data?.celebrity.name}
+            src={celebrityInfo?.celebrity.profileImageUrl}
+            alt={celebrityInfo?.celebrity.name}
             width={72}
             height={72}
           />

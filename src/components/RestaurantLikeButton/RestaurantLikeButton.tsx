@@ -1,7 +1,7 @@
 'use client';
 
+import { deleteInterestedRestaurant, postInterestedRestaurant } from '@/app/(celuveat)/restaurant/actions';
 import { IconHeartEmpty24, IconHeartFilled24 } from '@/assets/icons';
-import { useDeleteInterestedRestaurantMutation, useInterestedRestaurantMutation } from '@/hooks/server';
 import { useState } from 'react';
 
 interface RestaurantLikeButtonProps {
@@ -12,24 +12,22 @@ interface RestaurantLikeButtonProps {
 
 const RestaurantLikeButton = ({ liked, restaurantId, cn }: RestaurantLikeButtonProps) => {
   const [isLiked, setIsLiked] = useState(liked);
-  const { mutateAsync } = useInterestedRestaurantMutation();
-  const { mutateAsync: deleteMutateAsync } = useDeleteInterestedRestaurantMutation();
 
   const handleClickLike = async () => {
     try {
-      await mutateAsync(restaurantId);
-      setIsLiked(true);
-    } catch (err) {
       setIsLiked(false);
+      await postInterestedRestaurant(restaurantId);
+    } catch (err) {
+      setIsLiked(true);
     }
   };
 
   const handleClickUnlike = async () => {
     try {
-      await deleteMutateAsync(restaurantId);
-      setIsLiked(false);
-    } catch (err) {
       setIsLiked(true);
+      await deleteInterestedRestaurant(restaurantId);
+    } catch (err) {
+      setIsLiked(false);
     }
   };
 
