@@ -8,5 +8,5 @@ export const getInterestedCelebrities = async (): Promise<CelebrityDetail['celeb
 
 // 관심 음식점 조회
 export const getInterestedRestaurants = async (): Promise<PagedResponse<Restaurant>> => {
-  return await api('/api/restaurants/interested');
+  return await api('/restaurants/interested');
 };
