@@ -6,7 +6,7 @@ import {
   getRecommendedRestaurantsByCelebrities,
   getCelebrityRestaurants,
 } from '@/request';
-import { useQuery, useMutation } from '@tanstack/react-query';
+import { useQuery, useMutation, useSuspenseQuery } from '@tanstack/react-query';
 import { revalidateTag } from 'next/cache';
 
 export const useOauthUrlMutation = () =>
@@ -42,7 +42,7 @@ export const useInterestedRestaurantQuery = () =>
   });
 
 export const useRecommendedRestaurantsByCelebritiesQuery = () =>
-  useQuery({
+  useSuspenseQuery({
     queryKey: ['getRecommendedRestaurantsByCelebrities'],
     queryFn: getRecommendedRestaurantsByCelebrities,
   });
