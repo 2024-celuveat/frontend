@@ -1,8 +1,7 @@
 import { api } from '@/app/actions';
 
 export async function GET() {
-  const response = await api('/celebrities/interested');
-  const data = await response.json();
+  const data = await api.get('/celebrities/interested');
 
   return Response.json({ data }, { status: 200 });
 }

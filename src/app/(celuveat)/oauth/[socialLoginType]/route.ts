@@ -11,12 +11,14 @@ export async function GET(request: NextRequest, { params }: { params: { socialLo
 
   if (!authCode) return;
 
-  const response = await api(`/social-login/${socialLoginType}?authCode=${authCode}`, {
-    headers: {
-      origin: request.nextUrl.origin,
+  const { accessToken } = await api.get<{ accessToken: string }>(
+    `/social-login/${socialLoginType}?authCode=${authCode}`,
+    {
+      headers: {
+        origin: request.nextUrl.origin,
+      },
     },
-  });
-  const { accessToken } = await response.json();
+  );
 
   cookies().set({
     name: 'accessToken',
