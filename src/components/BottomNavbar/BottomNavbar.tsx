@@ -69,7 +69,7 @@ const BottomNavbar = ({ isLogin }: BottomNavbarProps) => {
           </svg>
           <span className="text-gray-400 caption-12-rg">홈</span>
         </Link>
-        <Link href="/map" className="flex flex-col items-center gap-6">
+        <Link href="/" className="flex flex-col items-center gap-6">
           <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect width="28" height="28" fill="white" />
             <path
