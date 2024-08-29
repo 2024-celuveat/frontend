@@ -1,17 +1,14 @@
 import { SocialLoginType } from '@/@types/server/login.type';
+import { apiClient } from './instance';
 
 export const getOAuthUrl = async (socialLoginType: SocialLoginType): Promise<string> => {
-  const response = await fetch(`/api/social-login/url/${socialLoginType}`);
-  const { data } = await response.json();
-  return data;
+  return await apiClient(`/api/social-login/url/${socialLoginType}`);
 };
 
 export const getProfile = async (): Promise<boolean> => {
-  const response = await fetch('/api/user');
-  const { data } = await response.json();
-  return data;
+  return await apiClient('/api/user');
 };
 
 export const postLogout = async () => {
-  await fetch('/api/social-login/logout', { method: 'POST' });
+  await apiClient('/api/social-login/logout', { method: 'POST' });
 };
