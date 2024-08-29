@@ -9,7 +9,7 @@ export const api = async (path: string, options?: RequestInit) => {
     headers['Authorization'] = `Bearer ${cookies().get('accessToken')?.value}`;
   }
 
-  return await fetch(`${process.env.NEXT_PUBLIC_NEW_BASE_URL}${path}`, {
+  return await fetch(`${process.env.NEXT_PUBLIC_BACKEND_SERVER_BASE_URL}${path}`, {
     headers,
     ...options,
   });
