@@ -1,10 +1,5 @@
-import { BestCelebrities, CelebrityDetail } from '@/@types';
+import { CelebrityDetail } from '@/@types';
 import { apiClient } from './instance';
-
-// 인기 셀럽 조회
-export const getBestCelebrities = async (): Promise<BestCelebrities[]> => {
-  return apiClient('/api/celebrities/best');
-};
 
 // 셀럽 정보 조회
 export const getCelebrityInfo = async (celebrityId: number): Promise<CelebrityDetail> => {

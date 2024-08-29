@@ -1,16 +1,13 @@
 import { IconNoticeFilled24, IconSearch24 } from '@/assets/icons';
 import CelebBestSection from '@/components/CelebBestSection';
 import RestaurantRecommendedSection from '@/components/RestaurantRecommendedSection';
-import { getBestCelebrities, getRecommendedRestaurantsByCelebrities } from '@/request';
+import { getRecommendedRestaurantsByCelebrities } from '@/request';
 import { HydrationBoundary, QueryClient, dehydrate } from '@tanstack/react-query';
+import { getCelebritiesBest } from './actions';
 
 export default async function Home() {
-  const bestCelebQueryClient = new QueryClient();
   const celebRecommendedQueryClient = new QueryClient();
-  await bestCelebQueryClient.prefetchQuery({
-    queryKey: ['getBestCelebrities'],
-    queryFn: getBestCelebrities,
-  });
+  const data = await getCelebritiesBest();
   await celebRecommendedQueryClient.prefetchQuery({
     queryKey: ['getRecommendedRestaurantsByCelebrities'],
     queryFn: getRecommendedRestaurantsByCelebrities,
@@ -24,9 +21,7 @@ export default async function Home() {
           <span className="text-gray-400 body-15-rg">원하는 식당을 검색해보세요.</span>
         </div>
       </section>
-      <HydrationBoundary state={dehydrate(bestCelebQueryClient)}>
-        <CelebBestSection />
-      </HydrationBoundary>
+      <CelebBestSection data={data} />
       <section className="mt-48">
         <div className="flex gap-2">
           <h1 className="pl-20 title-20-md">셀럽들의 추천 맛집</h1>

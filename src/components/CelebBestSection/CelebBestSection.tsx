@@ -7,11 +7,14 @@ import { useState } from 'react';
 import { IconArrowRight14 } from '@/assets/icons';
 import Image from 'next/image';
 import RestaurantLikeButton from '@/components/RestaurantLikeButton';
-import { useBestCelebritiesQuery } from '@/hooks/server';
+import { BestCelebrities } from '@/@types';
 
-const CelebBestSection = () => {
+interface CelebBestSectionProps {
+  data: BestCelebrities[];
+}
+
+const CelebBestSection = ({ data }: CelebBestSectionProps) => {
   const [sequence, setSequence] = useState<number>(0);
-  const { data } = useBestCelebritiesQuery();
 
   const handleClickCelebProfile = async (index: number) => {
     setSequence(index);
