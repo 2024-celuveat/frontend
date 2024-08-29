@@ -1,11 +1,6 @@
 import { Restaurant } from '@/@types';
 import { apiClient } from './instance';
 
-// 셀럽 추천 음식점 조회
-export const getRecommendedRestaurantsByCelebrities = async (): Promise<Restaurant[]> => {
-  return await apiClient('/api/restaurants/celebrity/recommend');
-};
-
 // 셀럽이 다녀간 음식점 조회
 export const getCelebrityRestaurants = async (
   celebrityId: number,

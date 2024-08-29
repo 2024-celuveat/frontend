@@ -1,17 +1,11 @@
 import { IconNoticeFilled24, IconSearch24 } from '@/assets/icons';
 import CelebBestSection from '@/components/CelebBestSection';
 import RestaurantRecommendedSection from '@/components/RestaurantRecommendedSection';
-import { getRecommendedRestaurantsByCelebrities } from '@/request';
-import { HydrationBoundary, QueryClient, dehydrate } from '@tanstack/react-query';
-import { getCelebritiesBest } from './actions';
+import { getCelebritiesBest, getRecommendedRestaurantsByCelebrities } from './actions';
 
 export default async function Home() {
-  const celebRecommendedQueryClient = new QueryClient();
-  const data = await getCelebritiesBest();
-  await celebRecommendedQueryClient.prefetchQuery({
-    queryKey: ['getRecommendedRestaurantsByCelebrities'],
-    queryFn: getRecommendedRestaurantsByCelebrities,
-  });
+  const bestCelebrities = await getCelebritiesBest();
+  const recommendedRestaurantsByCelebrities = await getRecommendedRestaurantsByCelebrities();
 
   return (
     <main className="">
@@ -21,7 +15,7 @@ export default async function Home() {
           <span className="text-gray-400 body-15-rg">원하는 식당을 검색해보세요.</span>
         </div>
       </section>
-      <CelebBestSection data={data} />
+      <CelebBestSection bestCelebrities={bestCelebrities} />
       <section className="mt-48">
         <div className="flex gap-2">
           <h1 className="pl-20 title-20-md">셀럽들의 추천 맛집</h1>
@@ -34,9 +28,7 @@ export default async function Home() {
             <path d="M11 10.0833V15.5833" stroke="#909097" strokeWidth="1.375" />
           </svg>
         </div>
-        <HydrationBoundary state={dehydrate(celebRecommendedQueryClient)}>
-          <RestaurantRecommendedSection />
-        </HydrationBoundary>
+        <RestaurantRecommendedSection restaurants={recommendedRestaurantsByCelebrities} />
       </section>
       <section className="mt-48 px-20">
         <div className="flex h-48 w-full items-center rounded-[8px] bg-gray-800 px-16 py-12">
@@ -101,9 +93,7 @@ export default async function Home() {
       </section>
       <section className="mt-48">
         <h1 className="px-20 title-20-md">지금 인기 있는 맛집!</h1>
-        <HydrationBoundary state={dehydrate(celebRecommendedQueryClient)}>
-          <RestaurantRecommendedSection />
-        </HydrationBoundary>
+        <RestaurantRecommendedSection restaurants={recommendedRestaurantsByCelebrities} />
       </section>
     </main>
   );

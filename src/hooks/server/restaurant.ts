@@ -3,7 +3,6 @@ import {
   postInterestedRestaurant,
   deleteInterestedRestaurant,
   getInterestedRestaurant,
-  getRecommendedRestaurantsByCelebrities,
   getCelebrityRestaurants,
 } from '@/request';
 import { useQuery, useMutation, useSuspenseQuery } from '@tanstack/react-query';
@@ -39,12 +38,6 @@ export const useInterestedRestaurantQuery = () =>
     queryFn: getInterestedRestaurant,
     staleTime: 0,
     gcTime: 0,
-  });
-
-export const useRecommendedRestaurantsByCelebritiesQuery = () =>
-  useSuspenseQuery({
-    queryKey: ['getRecommendedRestaurantsByCelebrities'],
-    queryFn: getRecommendedRestaurantsByCelebrities,
   });
 
 export const useCelebrityRestaurantsQuery = (celebrityId: number) =>
