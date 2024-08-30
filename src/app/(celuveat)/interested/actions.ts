@@ -1,5 +1,5 @@
 import { CelebrityDetail, Restaurant } from '@/@types';
-import { api } from '@/app/actions';
+import { api } from '@/utils/api';
 
 // 관심 셀럽 조회
 export const getInterestedCelebrities = async (): Promise<CelebrityDetail['celebrity'][]> => {

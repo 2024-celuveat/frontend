@@ -1,5 +1,5 @@
 import { Restaurant } from '@/@types';
-import { api } from '@/app/actions';
+import { api } from '@/utils/api';
 
 // 셀럽이 다녀간 음식점 조회
 export const getCelebrityRestaurants = async (celebrityId: number): Promise<PagedResponse<Restaurant>> => {

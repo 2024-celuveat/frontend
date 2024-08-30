@@ -1,5 +1,5 @@
 import { CelebrityDetail } from '@/@types';
-import { api } from '@/app/actions';
+import { api } from '@/utils/api';
 
 // 셀럽 정보 조회
 export const getCelebrityInfo = async (celebrityId: number): Promise<CelebrityDetail> => {

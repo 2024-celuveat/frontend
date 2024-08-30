@@ -1,5 +1,5 @@
 import { BestCelebrities, Restaurant } from '@/@types';
-import { api } from '@/app/actions';
+import { api } from '@/utils/api';
 
 export const getCelebritiesBest = async (): Promise<BestCelebrities[]> => {
   return await api('/celebrities/best');
