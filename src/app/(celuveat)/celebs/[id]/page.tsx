@@ -6,7 +6,6 @@ import { getCelebrityRestaurants } from '../../restaurant/actions';
 const CelebPage = async ({ params: { id } }: { params: { id: string } }) => {
   const restaurants = await getCelebrityRestaurants(Number(id));
   const celebrityInfo = await getCelebrityInfo(Number(id));
-  console.log(celebrityInfo);
 
   return (
     <main className="px-20 pt-16">
