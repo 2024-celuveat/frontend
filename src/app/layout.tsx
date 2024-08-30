@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import './globals.css';
-import Providers from './providers';
 import Header from '@/components/Header';
 import BottomNavbar from '@/components/BottomNavbar';
 import { getIsLogin } from './(celuveat)/oauth/actions';
@@ -25,11 +24,9 @@ export default async function RootLayout({
   return (
     <html lang="ko" className={myFont.className}>
       <body className="relative mx-auto my-0 min-h-svh max-w-[495px] shadow-lg font-synthesis-none">
-        <Providers>
-          <Header />
-          {children}
-          <BottomNavbar isLogin={isLogin} />
-        </Providers>
+        <Header />
+        {children}
+        <BottomNavbar isLogin={isLogin} />
       </body>
     </html>
   );
