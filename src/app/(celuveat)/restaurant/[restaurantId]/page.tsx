@@ -1,5 +1,6 @@
 import { getRestaurant, getRestaurantVideos } from '@/app/(actions)/restaurants/actions';
 import { IconArrowRight14, IconHeartEmpty24, IconPlus20 } from '@/assets/icons';
+import RestaurantAddInterestButton from '@/components/RestaurantAddInterestButton';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -663,10 +664,7 @@ const RestaurantDetailPage = async ({ params }: { params: { restaurantId: string
         <p className="mt-14 body-13-rg">{restaurant.introduction}</p>
 
         <div className="mt-20 flex h-[44px] gap-10">
-          <button className="flex h-full flex-1 justify-center gap-4 rounded-[8px] bg-[rgba(255,_123,_84,_0.15)] py-12">
-            <IconPlus20 />
-            <span className="text-main-700 title-15-md">관심 추가</span>
-          </button>
+          <RestaurantAddInterestButton liked={restaurant.liked} restaurantId={Number(params.restaurantId)} />
           <button className="h-full flex-1 rounded-[8px] bg-gray-100 py-12 text-gray-700 title-15-md">
             네이버 지도로 보기
           </button>
