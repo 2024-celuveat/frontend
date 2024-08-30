@@ -1,3 +1,5 @@
+import { getUserProfile } from '@/app/(actions)/members/actions';
+import Image from 'next/image';
 import Link from 'next/link';
 
 interface MenuProps {
@@ -36,14 +38,17 @@ const MENUS2 = [
   { title: '개인정보 보호 방침', href: '' },
 ];
 
-const MyPage = () => {
+const MyPage = async () => {
+  const myProfile = await getUserProfile();
   return (
     <>
       <section className="flex flex-col gap-20">
         <div className="flex items-center justify-between p-20">
           <div className="flex items-center gap-12">
-            <div className="h-[52px] w-[52px] rounded-full bg-gray-200"></div>
-            <span className="title-20-md">셀럽잇</span>
+            <div className="h-[52px] w-[52px] overflow-hidden rounded-full">
+              <Image src={myProfile.profileImageUrl} alt={'프로필 이미지'} width={52} height={52} />
+            </div>
+            <span className="title-20-md">{myProfile.nickname}</span>
           </div>
           <button className="h-36 flex-none rounded-[8px] bg-gray-100 px-12 body-13-rg">프로필 수정</button>
         </div>
@@ -62,7 +67,7 @@ const MyPage = () => {
                 </svg>
                 <h2 className="text-gray-800 body-14-rg">관심 리스트</h2>
               </div>
-              <span className="text-main-700 title-16-sb">50</span>
+              <span className="text-main-700 title-16-sb">{myProfile.interestedCount}</span>
             </div>
             <hr className="h-full w-1 rounded-[100px] bg-main-500 opacity-20"></hr>
             <div className="flex flex-col items-center gap-3">
@@ -83,7 +88,7 @@ const MyPage = () => {
                 </svg>
                 <h2 className="text-gray-800 body-14-rg">작성한 리뷰</h2>
               </div>
-              <span className="text-main-700 title-16-sb">20</span>
+              <span className="text-main-700 title-16-sb">{myProfile.reviewCount}</span>
             </div>
           </div>
         </div>

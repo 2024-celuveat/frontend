@@ -2,7 +2,7 @@
 
 import { cookies } from 'next/headers';
 
-export const api = async <T>(url: string, options?: RequestInit): Promise<T> => {
+export const api = async <T>(url: string, options?: Omit<RequestInit, 'body'> & { data?: unknown }): Promise<T> => {
   const headers: RequestInit['headers'] = {};
   if (cookies().has('accessToken')) {
     headers['Authorization'] = `Bearer ${cookies().get('accessToken')?.value}`;
@@ -10,6 +10,7 @@ export const api = async <T>(url: string, options?: RequestInit): Promise<T> => 
   const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_SERVER_BASE_URL}${url}`, {
     ...options,
     headers: { ...options?.headers, ...headers },
+    body: JSON.stringify(options?.data),
   });
   const contentType = response.headers.get('content-type');
   if (contentType === 'application/json') return await response.json();
