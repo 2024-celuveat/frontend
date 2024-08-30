@@ -1,6 +1,6 @@
+import { getInterestedRestaurants } from '@/app/(actions)/restaurants/actions';
 import RestaurantCardRow from '@/components/RestaurantCardRow';
 import Link from 'next/link';
-import { getInterestedRestaurants } from '../actions';
 
 const InterestedRestaurantPage = async () => {
   const interestedRestaurants = await getInterestedRestaurants();

@@ -1,7 +1,7 @@
 import { IconNoticeFilled24, IconSearch24 } from '@/assets/icons';
 import CelebBestSection from '@/components/CelebBestSection';
 import RestaurantRecommendedSection from '@/components/RestaurantRecommendedSection';
-import { getCelebritiesBest, getRecommendedRestaurantsByCelebrities } from './actions';
+import { getCelebritiesBest, getRecommendedRestaurantsByCelebrities } from '@/app/(actions)/restaurants/actions';
 
 export default async function Home() {
   const bestCelebrities = await getCelebritiesBest();

@@ -1,5 +1,18 @@
-import { Restaurant } from '@/@types';
+import { BestCelebrities, Restaurant } from '@/@types';
 import { api } from '@/utils/api';
+
+export const getCelebritiesBest = async (): Promise<BestCelebrities[]> => {
+  return await api('/celebrities/best');
+};
+
+export const getRecommendedRestaurantsByCelebrities = async (): Promise<Restaurant[]> => {
+  return await api('/restaurants/celebrity/recommend');
+};
+
+// 관심 음식점 조회
+export const getInterestedRestaurants = async (): Promise<PagedResponse<Restaurant>> => {
+  return await api('/restaurants/interested');
+};
 
 // 셀럽이 다녀간 음식점 조회
 export const getCelebrityRestaurants = async (celebrityId: number): Promise<PagedResponse<Restaurant>> => {

@@ -1,6 +1,6 @@
+import { getInterestedCelebrities } from '@/app/(actions)/celebs/actions';
 import Image from 'next/image';
 import Link from 'next/link';
-import { getInterestedCelebrities } from '../actions';
 
 const InterestedCelebritiesPage = async () => {
   const interestedCelebrities = await getInterestedCelebrities();

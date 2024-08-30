@@ -1,6 +1,6 @@
 'use client';
 
-import { deleteInterestedRestaurant, postInterestedRestaurant } from '@/app/(celuveat)/restaurant/actions';
+import { deleteInterestedRestaurant, postInterestedRestaurant } from '@/app/(actions)/restaurants/actions';
 import { IconHeartEmpty24, IconHeartFilled24 } from '@/assets/icons';
 import { useState } from 'react';
 

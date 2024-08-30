@@ -3,7 +3,7 @@ import localFont from 'next/font/local';
 import './globals.css';
 import Header from '@/components/Header';
 import BottomNavbar from '@/components/BottomNavbar';
-import { getIsLogin } from './(celuveat)/oauth/actions';
+import { getIsLogin } from './(actions)/social-login/actions';
 
 export const metadata: Metadata = {
   title: 'Celuveat',

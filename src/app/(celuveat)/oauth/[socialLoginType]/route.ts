@@ -1,5 +1,6 @@
 import { SocialLoginType } from '@/@types/server/login.type';
-import { api } from '@/app/actions';
+import { api } from '@/utils/api';
+
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { NextRequest } from 'next/server';

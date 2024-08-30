@@ -15,3 +15,8 @@ export const postInterestedCelebrity = async (celebrityId: number) => {
 export const deleteInterestedCelebrity = async (celebrityId: number) => {
   await api(`/celebrities/interested/${celebrityId}`, { method: 'DELETE' });
 };
+
+// 관심 셀럽 조회
+export const getInterestedCelebrities = async (): Promise<CelebrityDetail['celebrity'][]> => {
+  return await api('/celebrities/interested');
+};

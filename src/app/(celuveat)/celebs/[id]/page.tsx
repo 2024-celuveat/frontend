@@ -1,7 +1,7 @@
+import { getCelebrityInfo } from '@/app/(actions)/celebs/actions';
+import { getCelebrityRestaurants } from '@/app/(actions)/restaurants/actions';
 import CelebIntroductionSection from '@/components/CelebIntroductionSection';
 import CelebRestaurantList from '@/components/CelebRestaurantList';
-import { getCelebrityInfo } from '../actions';
-import { getCelebrityRestaurants } from '../../restaurant/actions';
 
 const CelebPage = async ({ params: { id } }: { params: { id: string } }) => {
   const restaurants = await getCelebrityRestaurants(Number(id));
