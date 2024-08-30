@@ -15,19 +15,19 @@ const RestaurantLikeButton = ({ liked, restaurantId, cn }: RestaurantLikeButtonP
 
   const handleClickLike = async () => {
     try {
-      setIsLiked(false);
+      setIsLiked(true);
       await postInterestedRestaurant(restaurantId);
     } catch (err) {
-      setIsLiked(true);
+      setIsLiked(false);
     }
   };
 
   const handleClickUnlike = async () => {
     try {
-      setIsLiked(true);
+      setIsLiked(false);
       await deleteInterestedRestaurant(restaurantId);
     } catch (err) {
-      setIsLiked(false);
+      setIsLiked(true);
     }
   };
 
