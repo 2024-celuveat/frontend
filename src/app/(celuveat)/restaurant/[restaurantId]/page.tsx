@@ -1,3 +1,4 @@
+import { getRestaurant, getRestaurantVideos } from '@/app/(actions)/restaurants/actions';
 import { IconArrowRight14, IconHeartEmpty24, IconPlus20 } from '@/assets/icons';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -615,7 +616,10 @@ const mock = [
   },
 ];
 
-const RestaurantDetailPage = () => {
+const RestaurantDetailPage = async ({ params }: { params: { restaurantId: string } }) => {
+  const restaurant = await getRestaurant(Number(params.restaurantId));
+  const videos = await getRestaurantVideos(Number(params.restaurantId));
+
   return (
     <div>
       <div className="h-[240px] w-full bg-gray-200" />
@@ -623,38 +627,40 @@ const RestaurantDetailPage = () => {
         <div className="flex justify-between">
           <div>
             <div className="flex items-center gap-4">
-              <span className="text-gray-800 body-14-md">한식</span>
+              <span className="text-gray-800 body-14-md">{restaurant.category}</span>
               <svg width="2" height="2" viewBox="0 0 2 2" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <circle cx="1" cy="1" r="1" fill="#BEBEC0" />
               </svg>
-              <span className="text-gray-600 body-14-rg">서울 성수동</span>
+              <span className="text-gray-600 body-14-rg">{restaurant.roadAddress}</span>
             </div>
-            <h1 className="mt-4 title-22-md">소문난성수감자탕</h1>
+            <h1 className="mt-4 title-22-md">{restaurant.name}</h1>
             <div className="mt-8 flex items-center gap-4">
               <Image
                 className="rounded-full"
                 width={24}
                 height={24}
-                alt="성시경"
-                src="https://yt3.googleusercontent.com/vQrdlCaT4Tx1axJtSUa1oxp2zlnRxH-oMreTwWqB-2tdNFStIOrWWw-0jwPvVCUEjm_MywltBFY=s176-c-k-c0x00ffffff-no-rj"
+                alt={restaurant.visitedCelebrities[0]?.name}
+                src={restaurant.visitedCelebrities[0]?.profileImageUrl}
               />
               <p className="body-13-rg">
-                <span className="border-b-[5px] border-b-mainDim-15 text-main-700">성시경</span>이 추천한 맛집
+                <span className="border-b-[5px] border-b-mainDim-15 text-main-700">
+                  {restaurant.visitedCelebrities[0]?.name}
+                </span>
+                이 추천한 맛집
               </p>
             </div>
           </div>
-          <Image
-            className="h-72 rounded-[8px] object-cover"
-            width={72}
-            height={72}
-            alt="소문난성수감자탕"
-            src="https://www.celuveat.com/images-data/webp/X25ld19qaW1f7IaM66y464Kc7ISx7IiY6rCQ7J6Q7YOVXzE.webp"
-          />
+          {restaurant.images.length > 0 && (
+            <Image
+              className="h-72 rounded-[8px] object-cover"
+              width={72}
+              height={72}
+              alt={restaurant.name}
+              src={restaurant.images[0]?.url}
+            />
+          )}
         </div>
-        <p className="mt-14 body-13-rg">
-          식당 소개글 가나다라마바사아자차카타파하 가나다라마바 최대 2줄 노출 후 말줄임 처리하기... 식당 소개글
-          가나다라마바사아자차카타파하 가나다라마바 최대 2줄 노출 후 말줄임 처리하기...
-        </p>
+        <p className="mt-14 body-13-rg">{restaurant.introduction}</p>
 
         <div className="mt-20 flex h-[44px] gap-10">
           <button className="flex h-full flex-1 justify-center gap-4 rounded-[8px] bg-[rgba(255,_123,_84,_0.15)] py-12">
@@ -669,29 +675,29 @@ const RestaurantDetailPage = () => {
         <hr className="height-1 mt-24 w-full bg-gray-100" />
 
         <h2 className="mt-24 title-20-md">영상으로 보기</h2>
-        <iframe className="mt-16 h-[240px] w-full rounded-[8px]" src="https://www.youtube.com/embed/MAIrp4WYAx4" />
+        <iframe className="mt-16 h-[240px] w-full rounded-[8px]" src={videos[0].videoUrl} />
         <div className="mt-16 flex justify-between">
           <div className="flex items-center gap-8">
             <Image
               className="rounded-full"
               width={32}
               height={32}
-              alt="성시경"
-              src="https://yt3.googleusercontent.com/vQrdlCaT4Tx1axJtSUa1oxp2zlnRxH-oMreTwWqB-2tdNFStIOrWWw-0jwPvVCUEjm_MywltBFY=s176-c-k-c0x00ffffff-no-rj"
+              alt={videos[0].celebrities[0].name}
+              src={videos[0].celebrities[0].profileImageUrl}
             />
-            <span className="text-gray-900 body-16-md">성시경</span>
+            <span className="text-gray-900 body-16-md">{videos[0].celebrities[0].name}</span>
           </div>
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-2">
               <span className="text-gray-400 body-14-rg">추천 맛집</span>
-              <span className="text-gray-600 body-14-md">50개</span>
+              <span className="text-gray-600 body-14-md">{videos[0].celebrities[0].restaurantCount}개</span>
             </div>
             <svg width="2" height="2" viewBox="0 0 2 2" fill="none" xmlns="http://www.w3.org/2000/svg">
               <circle cx="1" cy="1" r="1" fill="#BEBEC0" />
             </svg>
             <div className="flex items-center gap-2">
               <span className="text-gray-400 body-14-rg">구독자</span>
-              <span className="text-gray-600 body-14-md">194만명</span>
+              <span className="text-gray-600 body-14-md">{videos[0].celebrities[0].subscriberCount}명</span>
             </div>
           </div>
         </div>

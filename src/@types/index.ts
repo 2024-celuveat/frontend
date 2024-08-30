@@ -2,6 +2,8 @@ export interface Celebrity {
   id: number;
   name: string;
   profileImageUrl: string;
+  subscriberCount: number;
+  restaurantCount: number;
 }
 
 export interface RestaurantImage {
@@ -17,12 +19,14 @@ export interface Restaurant {
   category: string;
   roadAddress: string;
   phoneNumber: string;
+  businessHours: string;
+  introduction: string;
   naverMapUrl: string;
   latitude: number;
   longitude: number;
+  images: RestaurantImage[];
   liked: boolean;
   visitedCelebrities: Celebrity[];
-  images: RestaurantImage[];
 }
 
 export interface BestCelebrities {
@@ -43,4 +47,10 @@ export interface YoutubeContentResult {
 export interface CelebrityDetail {
   celebrity: Celebrity & { introduction: string; youtubeContentResults: YoutubeContentResult[] };
   interested: boolean;
+}
+
+export interface Video {
+  id: number;
+  videoUrl: string;
+  celebrities: Celebrity[];
 }
