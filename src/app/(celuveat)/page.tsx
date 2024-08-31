@@ -16,6 +16,7 @@ import {
   IconWestern,
 } from '@/assets/icons/food-category';
 import Link from 'next/link';
+import CelebritiesRecommendedRestaurantsInformation from '@/components/CelebritiesRecommendedRestaurantsInformation';
 
 const FOOD_CATEGORY = [
   { name: '한식', icon: <IconKorean /> },
@@ -51,7 +52,7 @@ export default async function Home() {
       <section className="mt-48">
         <div className="flex gap-2">
           <h1 className="pl-20 title-20-md">셀럽들의 추천 맛집</h1>
-          <IconInfo />
+          <CelebritiesRecommendedRestaurantsInformation />
         </div>
         <RestaurantRecommendedSection restaurants={recommendedRestaurantsByCelebrities} />
       </section>

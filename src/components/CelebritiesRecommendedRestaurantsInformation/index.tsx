@@ -1,0 +1,3 @@
+import CelebritiesRecommendedRestaurantsInformation from './CelebritiesRecommendedRestaurantsInformation';
+
+export default CelebritiesRecommendedRestaurantsInformation;
