@@ -9,10 +9,12 @@ const HeaderType1 = ({ title }: { title: string }) => {
   return (
     <div className="relative flex h-[58px] w-full items-center justify-center">
       <IconArrowLeft
-        className="top-18 absolute left-20 h-24 w-24"
+        className="top-18 absolute left-20"
         onClick={() => {
           router.back();
         }}
+        width={24}
+        height={24}
       />
       <h1 className="title-20-bold">{title}</h1>
     </div>

@@ -1,8 +1,8 @@
 interface IconThumbsUpFilledProps extends React.SVGProps<SVGSVGElement> {}
 
-const IconThumbsUpFilled = ({ width = 24, height = 24, fill = 'none' }: IconThumbsUpFilledProps) => {
+const IconThumbsUpFilled = ({ width = 24, height = 24, fill = 'none', ...props }: IconThumbsUpFilledProps) => {
   return (
-    <svg width={width} height={height} viewBox="0 0 24 24" fill={fill} xmlns="http://www.w3.org/2000/svg">
+    <svg width={width} height={height} viewBox="0 0 24 24" fill={fill} xmlns="http://www.w3.org/2000/svg" {...props}>
       <path
         fill-rule="evenodd"
         clip-rule="evenodd"

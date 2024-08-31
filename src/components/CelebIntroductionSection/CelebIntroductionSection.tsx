@@ -7,7 +7,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { overlay } from 'overlay-kit';
 import { useState } from 'react';
-import IconHeart from '../@icon/IconHeartFilled';
 import IconPlus from '../@icon/IconPlus';
 import { deleteInterestedCelebrity, postInterestedCelebrity } from '@/app/(actions)/celebs/actions';
 import { colors } from '@/constants/colors';
@@ -41,15 +40,14 @@ const CelebIntroductionSection = ({ celebrityInfo }: CelebIntroductionSectionPro
   const openBottomSheet = () => {
     overlay.open(({ isOpen, unmount }) => {
       return (
-        <BottomSheet open={isOpen} onClose={unmount} title="유튜브 채널 바로가기">
-          {celebrityInfo?.celebrity.youtubeContentResults.map(({ id, channelUrl, contentsName }) => (
-            <Link
-              key={id}
-              href={channelUrl}
-              className="flex h-56 w-full items-center justify-center gap-8 rounded-[8px] bg-gray-100"
-            >
-              <span className="body-16-md">{contentsName} 채널 바로가기</span>
-            </Link>
+        <BottomSheet open={isOpen} onClose={unmount}>
+          {celebrityInfo?.celebrity.youtubeContentResults.map(({ id, channelUrl, contentsName }, index) => (
+            <>
+              {index !== 0 && <hr className="h-1 w-full bg-gray-100" />}
+              <Link key={id} href={channelUrl} className="flex h-56 w-full items-center justify-center">
+                <span className="title-16-sb">채널 {contentsName} 바로가기</span>
+              </Link>
+            </>
           ))}
           <button
             className="mt-16 flex h-56 w-full items-center justify-center gap-8 rounded-[8px] bg-gray-100"

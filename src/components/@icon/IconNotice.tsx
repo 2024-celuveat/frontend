@@ -1,8 +1,8 @@
 import { colors } from '@/constants/colors';
 
-const IconNotice = ({ width = 24, height = 24, fill = colors.gray[800] }: React.SVGProps<SVGSVGElement>) => {
+const IconNotice = ({ width = 24, height = 24, fill = colors.gray[800], ...props }: React.SVGProps<SVGSVGElement>) => {
   return (
-    <svg width={width} height={height} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg width={width} height={height} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
       <path
         d="M10.5 6.00003L19.1286 2.54858C19.7855 2.28584 20.5 2.7696 20.5 3.47706V19.5905C20.5 20.2794 19.8198 20.762 19.1697 20.5344L10.5 17.5V6.00003Z"
         fill={fill}

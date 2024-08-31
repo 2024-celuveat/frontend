@@ -2,9 +2,14 @@ import { colors } from '@/constants/colors';
 
 interface IconThumbsUpOutlinedProps extends React.SVGProps<SVGSVGElement> {}
 
-const IconThumbsUpOutlined = ({ width = 24, height = 24, fill = colors.gray[700] }: IconThumbsUpOutlinedProps) => {
+const IconThumbsUpOutlined = ({
+  width = 24,
+  height = 24,
+  fill = colors.gray[700],
+  ...props
+}: IconThumbsUpOutlinedProps) => {
   return (
-    <svg width={width} height={height} viewBox="0 0 24 24" fill={fill} xmlns="http://www.w3.org/2000/svg">
+    <svg width={width} height={height} viewBox="0 0 24 24" fill={fill} xmlns="http://www.w3.org/2000/svg" {...props}>
       <rect width="24" height="24" fill="white" />
       <path
         fill-rule="evenodd"

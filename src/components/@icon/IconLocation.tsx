@@ -1,8 +1,13 @@
 import { colors } from '@/constants/colors';
 
-const IconLocation = ({ width = 24, height = 24, fill = colors.gray[800] }: React.SVGProps<SVGSVGElement>) => {
+const IconLocation = ({
+  width = 24,
+  height = 24,
+  fill = colors.gray[800],
+  ...props
+}: React.SVGProps<SVGSVGElement>) => {
   return (
-    <svg width={width} height={height} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg width={width} height={height} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
       <circle cx="12" cy="12" r="9.25" stroke={fill} stroke-width="1.5" />
       <path d="M12 17V22" stroke={fill} stroke-width="1.5" />
       <path d="M12 2V7" stroke={fill} stroke-width="1.5" />
