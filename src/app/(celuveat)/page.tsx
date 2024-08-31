@@ -17,6 +17,7 @@ import {
 } from '@/assets/icons/food-category';
 import Link from 'next/link';
 import CelebritiesRecommendedRestaurantsInformation from '@/components/CelebritiesRecommendedRestaurantsInformation';
+import IconArrowRight from '@/components/@icon/IconArrowRight';
 
 const FOOD_CATEGORY = [
   { name: '한식', icon: <IconKorean /> },
@@ -57,9 +58,12 @@ export default async function Home() {
         <RestaurantRecommendedSection restaurants={recommendedRestaurantsByCelebrities} />
       </section>
       <section className="mt-48 px-20">
-        <div className="flex h-48 w-full items-center rounded-[8px] bg-gray-800 px-16 py-12">
-          <IconNotice fill={colors.main[600]} />
-          <span className="ml-12 text-white title-15-md">이번 주 업데이트 된 맛집 확인하러 가기</span>
+        <div className="flex h-48 w-full items-center justify-between rounded-[8px] bg-gray-800 px-16 py-12">
+          <div className="flex items-center">
+            <IconNotice fill={colors.main[600]} />
+            <span className="ml-12 text-white title-15-md">이번 주 업데이트 된 맛집 확인하러 가기</span>
+          </div>
+          <IconArrowRight width={20} height={20} fill={colors.white.DEFAULT} />
         </div>
       </section>
       <section className="mt-48">

@@ -45,7 +45,7 @@ const CelebBestSection = ({ bestCelebrities }: CelebBestSectionProps) => {
             href={`/celebs/${bestCelebrities && bestCelebrities[sequence].celebrity.id}`}
           >
             <span className="text-gray-400 body-13-rg">더보기</span>
-            <IconArrowRight />
+            <IconArrowRight width={14} height={14} />
           </Link>
         </div>
         <div className="mt-16 flex w-full gap-8">
