@@ -4,6 +4,32 @@ import { getCelebritiesBest, getRecommendedRestaurantsByCelebrities } from '@/ap
 import IconInfo from '@/components/@icon/IconInfo';
 import IconSearch from '@/components/@icon/IconSearch';
 import IconNotice from '@/components/@icon/IconNotice';
+import { colors } from '@/constants/colors';
+import {
+  IconChinese,
+  IconDesserts,
+  IconFastFood,
+  IconGlobalFood,
+  IconJapanese,
+  IconKorean,
+  IconMeatDishes,
+  IconWestern,
+} from '@/assets/icons/food-category';
+
+const FOOD_CATEGORY = [
+  { name: '한식', icon: <IconKorean /> },
+  { name: '중식', icon: <IconChinese /> },
+  { name: '일식', icon: <IconJapanese /> },
+  { name: '양식', icon: <IconWestern /> },
+  { name: '패스트푸드', icon: <IconFastFood /> },
+  { name: '고기', icon: <IconMeatDishes /> },
+  // { name: '국/찌개', icon: <IconSoupAndStew /> },
+  // { name: '면', icon: <IconNoodles /> },
+  // { name: '분식', icon: <IconSnackFood /> },
+  { name: '세계음식', icon: <IconGlobalFood /> },
+  // { name: '주점', icon: <IconPubAndBar /> },
+  { name: '커피/디저트', icon: <IconDesserts /> },
+];
 
 export default async function Home() {
   const bestCelebrities = await getCelebritiesBest();
@@ -27,53 +53,21 @@ export default async function Home() {
       </section>
       <section className="mt-48 px-20">
         <div className="flex h-48 w-full items-center rounded-[8px] bg-gray-800 px-16 py-12">
-          <IconNotice className="*:fill-main-600" />
+          <IconNotice fill={colors.main[600]} />
           <span className="ml-12 text-white title-15-md">이번 주 업데이트 된 맛집 확인하러 가기</span>
         </div>
       </section>
       <section className="mt-48">
         <h1 className="px-20 title-20-md">무엇을 드시나요?</h1>
         <div className="mt-16 grid grid-cols-5 gap-y-16 px-20">
-          <div className="flex flex-col items-center">
-            <div className="h-56 w-56 rounded-[16px] bg-gray-100"></div>
-            <span className="mt-8 body-13-rg">카테고리</span>
-          </div>
-          <div className="flex flex-col items-center">
-            <div className="h-56 w-56 rounded-[16px] bg-gray-100"></div>
-            <span className="mt-8 body-13-rg">카테고리</span>
-          </div>
-          <div className="flex flex-col items-center">
-            <div className="h-56 w-56 rounded-[16px] bg-gray-100"></div>
-            <span className="mt-8 body-13-rg">카테고리</span>
-          </div>
-          <div className="flex flex-col items-center">
-            <div className="h-56 w-56 rounded-[16px] bg-gray-100"></div>
-            <span className="mt-8 body-13-rg">카테고리</span>
-          </div>
-          <div className="flex flex-col items-center">
-            <div className="h-56 w-56 rounded-[16px] bg-gray-100"></div>
-            <span className="mt-8 body-13-rg">카테고리</span>
-          </div>
-          <div className="flex flex-col items-center">
-            <div className="h-56 w-56 rounded-[16px] bg-gray-100"></div>
-            <span className="mt-8 body-13-rg">카테고리</span>
-          </div>
-          <div className="flex flex-col items-center">
-            <div className="h-56 w-56 rounded-[16px] bg-gray-100"></div>
-            <span className="mt-8 body-13-rg">카테고리</span>
-          </div>
-          <div className="flex flex-col items-center">
-            <div className="h-56 w-56 rounded-[16px] bg-gray-100"></div>
-            <span className="mt-8 body-13-rg">카테고리</span>
-          </div>
-          <div className="flex flex-col items-center">
-            <div className="h-56 w-56 rounded-[16px] bg-gray-100"></div>
-            <span className="mt-8 body-13-rg">카테고리</span>
-          </div>
-          <div className="flex flex-col items-center">
-            <div className="h-56 w-56 rounded-[16px] bg-gray-100"></div>
-            <span className="mt-8 body-13-rg">카테고리</span>
-          </div>
+          {FOOD_CATEGORY.map(({ name, icon }) => (
+            <div className="flex flex-col items-center" key={name}>
+              <div className="flex h-56 w-56 items-center justify-center rounded-[16px] bg-gray-100" key={name}>
+                {icon}
+              </div>
+              <span className="mt-8 body-13-rg">한식</span>
+            </div>
+          ))}
         </div>
       </section>
       <section className="mt-48">
