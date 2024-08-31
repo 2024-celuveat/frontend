@@ -40,3 +40,8 @@ export const getRestaurant = async (restaurantId: number): Promise<Restaurant> =
 export const getRestaurantVideos = async (restaurantId: number): Promise<Video[]> => {
   return await api(`/videos/in/restaurants/${restaurantId}`);
 };
+
+// 주변 음식점 조회
+export const getRestaurantsNearby = async (restaurantId: number): Promise<Restaurant[]> => {
+  return await api(`/restaurants/nearby/${restaurantId}`);
+};
