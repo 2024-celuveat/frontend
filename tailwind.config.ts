@@ -8,7 +8,7 @@ const config: Config = {
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
-    ...colors,
+    colors,
     extend: {
       keyframes: {
         fadeIn: {

@@ -1,5 +1,5 @@
 import type { Meta } from '@storybook/react';
-import IconThumbsUp from './IconThumbsUp';
+import IconThumbsUpFilled from './IconThumbsUpFilled';
 import { colors } from '@/constants/colors';
 import IconArrowLeft from './IconArrowLeft';
 import IconArrowRight from './IconArrowRight';
@@ -31,7 +31,7 @@ export default meta;
 export const Default = {
   render: () => (
     <>
-      <IconThumbsUp fill={colors.main[700]} />
+      <IconThumbsUpFilled fill={colors.main[700]} />
       <IconArrowLeft />
       <IconArrowRight />
       <IconCheck />

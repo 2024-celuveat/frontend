@@ -1,8 +1,9 @@
 'use client';
 
 import { deleteInterestedRestaurant, postInterestedRestaurant } from '@/app/(actions)/restaurants/actions';
-import { IconHeartEmpty24, IconHeartFilled24 } from '@/assets/icons';
 import { useState } from 'react';
+import IconHeartFilled from '../@icon/IconHeartFilled';
+import IconHeartOutlined from '../@icon/IconHeartOutlined';
 
 interface RestaurantLikeButtonProps {
   liked: boolean;
@@ -34,9 +35,9 @@ const RestaurantLikeButton = ({ liked, restaurantId, cn }: RestaurantLikeButtonP
   return (
     <div className={`z-0 ${cn}`}>
       {isLiked ? (
-        <IconHeartFilled24 className="*:fill-main-500" onClick={handleClickUnlike} />
+        <IconHeartFilled className="*:fill-main-500" onClick={handleClickUnlike} />
       ) : (
-        <IconHeartEmpty24 className="*:fill-gray-200" onClick={handleClickLike} />
+        <IconHeartOutlined className="*:fill-gray-200" onClick={handleClickLike} />
       )}
     </div>
   );

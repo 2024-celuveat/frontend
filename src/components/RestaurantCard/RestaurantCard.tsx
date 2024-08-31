@@ -1,10 +1,11 @@
 'use client';
 
-import { IconGoodFilled12 } from '@/assets/icons';
 import Image from 'next/image';
 import Link from 'next/link';
 import RestaurantLikeButton from '@/components/RestaurantLikeButton';
 import { Restaurant } from '@/@types';
+import IconThumbsUpFilled from '@/components/@icon/IconThumbsUpFilled';
+import { colors } from '@/constants/colors';
 
 const RestaurantCard = ({ id, name, category, images, roadAddress, visitedCelebrities, liked }: Restaurant) => {
   return (
@@ -19,7 +20,7 @@ const RestaurantCard = ({ id, name, category, images, roadAddress, visitedCelebr
         </div>
         <span className="mt-4 body-13-rg">{roadAddress.split(' ').slice(0, 2).join(' ')}</span>
         <div className="mt-8 flex w-fit items-center gap-2 rounded-[3px] bg-[#FFB26C38] px-6 py-4">
-          <IconGoodFilled12 />
+          <IconThumbsUpFilled width={12} height={12} fill={colors.main[500]} />
           <span className="text-main-700 caption-12-rg">
             {visitedCelebrities.length - 1 === 0
               ? `${visitedCelebrities[0]?.name} 추천 맛집`

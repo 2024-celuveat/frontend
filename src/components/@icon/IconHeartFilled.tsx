@@ -1,6 +1,6 @@
 import { colors } from '@/constants/colors';
 
-const IconHeart = ({ width = 24, height = 24, fill = colors.main[500] }: React.SVGProps<SVGSVGElement>) => {
+const IconHeartFilled = ({ width = 24, height = 24, fill = colors.main[500] }: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg width={width} height={height} viewBox="0 0 24 24" fill={fill} xmlns="http://www.w3.org/2000/svg">
       <path
@@ -11,4 +11,4 @@ const IconHeart = ({ width = 24, height = 24, fill = colors.main[500] }: React.S
   );
 };
 
-export default IconHeart;
+export default IconHeartFilled;

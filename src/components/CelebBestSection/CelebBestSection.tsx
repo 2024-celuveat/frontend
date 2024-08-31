@@ -4,10 +4,10 @@ import CelebProfile from '@/components/CelebProfile';
 import Link from 'next/link';
 import { useState } from 'react';
 
-import { IconArrowRight14 } from '@/assets/icons';
 import Image from 'next/image';
 import RestaurantLikeButton from '@/components/RestaurantLikeButton';
 import { BestCelebrities } from '@/@types';
+import IconArrowRight from '../@icon/IconArrowRight';
 
 interface CelebBestSectionProps {
   bestCelebrities: BestCelebrities[];
@@ -45,7 +45,7 @@ const CelebBestSection = ({ bestCelebrities }: CelebBestSectionProps) => {
             href={`/celebs/${bestCelebrities && bestCelebrities[sequence].celebrity.id}`}
           >
             <span className="text-gray-400 body-13-rg">더보기</span>
-            <IconArrowRight14 />
+            <IconArrowRight />
           </Link>
         </div>
         <div className="mt-16 flex w-full gap-8">
