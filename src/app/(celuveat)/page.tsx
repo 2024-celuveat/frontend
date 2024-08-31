@@ -15,6 +15,7 @@ import {
   IconMeatDishes,
   IconWestern,
 } from '@/assets/icons/food-category';
+import Link from 'next/link';
 
 const FOOD_CATEGORY = [
   { name: '한식', icon: <IconKorean /> },
@@ -38,10 +39,13 @@ export default async function Home() {
   return (
     <main className="">
       <section className="px-20 pt-20">
-        <div className="flex h-48 w-full items-center gap-10 rounded-[12px] bg-gray-100 pl-14 shadow-sm">
+        <Link
+          href={'/search'}
+          className="flex h-48 w-full items-center gap-10 rounded-[12px] bg-gray-100 pl-14 shadow-sm"
+        >
           <IconSearch />
           <span className="text-gray-400 body-15-rg">원하는 식당을 검색해보세요.</span>
-        </div>
+        </Link>
       </section>
       <CelebBestSection bestCelebrities={bestCelebrities} />
       <section className="mt-48">
@@ -65,7 +69,7 @@ export default async function Home() {
               <div className="flex h-56 w-56 items-center justify-center rounded-[16px] bg-gray-100" key={name}>
                 {icon}
               </div>
-              <span className="mt-8 body-13-rg">한식</span>
+              <span className="mt-8 body-13-rg">{name}</span>
             </div>
           ))}
         </div>
