@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import localFont from 'next/font/local';
 import './globals.css';
 import Header from '@/components/Header';
@@ -14,6 +14,10 @@ const myFont = localFont({
   src: './pretendard-variable.woff2',
   display: 'block',
 });
+
+export const viewport: Viewport = {
+  userScalable: false,
+};
 
 export default async function RootLayout({
   children,
