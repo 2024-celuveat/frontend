@@ -1,8 +1,7 @@
 import { getRestaurants } from '@/app/(actions)/restaurants/actions';
-import dynamic from 'next/dynamic';
-import Script from 'next/script';
-
-const NaverMap = dynamic(() => import('@/components/NaverMap'));
+import IconSearch from '@/components/@icon/IconSearch';
+import NaverMap from '@/components/NaverMap';
+import Link from 'next/link';
 
 const MapPage = async () => {
   const restaurants = await getRestaurants({
@@ -17,13 +16,15 @@ const MapPage = async () => {
     sort: [],
   });
   return (
-    <div>
-      <Script
-        type="text/javascript"
-        src={`https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${process.env.NEXT_PUBLIC_NAVER_MAP_API_KEY_ID}`}
-      ></Script>
+    <main className="relative">
+      <div className="absolute left-0 top-24 z-[100] w-full px-20">
+        <Link href={'/search'} className="flex w-full items-center rounded-[10px] bg-white px-12 py-14">
+          <IconSearch />
+          <p className="ml-10 text-gray-400 body-15-rg">원하는 식당을 검색해보세요</p>
+        </Link>
+      </div>
       <NaverMap restaurants={restaurants} />
-    </div>
+    </main>
   );
 };
 

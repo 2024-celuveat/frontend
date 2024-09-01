@@ -4,6 +4,7 @@ import './globals.css';
 import Header from '@/components/Header';
 import BottomNavbar from '@/components/BottomNavbar';
 import { getIsLogin } from './(actions)/social-login/actions';
+import Script from 'next/script';
 
 export const metadata: Metadata = {
   title: 'Celuveat',
@@ -28,6 +29,11 @@ export default async function RootLayout({
   return (
     <html lang="ko" className={myFont.className}>
       <body className="relative mx-auto my-0 min-h-svh max-w-[495px] shadow-lg font-synthesis-none">
+        <Script
+          type="text/javascript"
+          strategy="beforeInteractive"
+          src={`https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${process.env.NEXT_PUBLIC_NAVER_MAP_API_KEY_ID}`}
+        ></Script>
         <Header />
         {children}
         <BottomNavbar isLogin={isLogin} />
