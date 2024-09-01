@@ -13,6 +13,7 @@ import {
   IconJapanese,
   IconKorean,
   IconMeatDishes,
+  IconPubAndBar,
   IconWestern,
 } from '@/assets/icons/food-category';
 import Link from 'next/link';
@@ -30,7 +31,7 @@ const FOOD_CATEGORY = [
   // { name: '면', icon: <IconNoodles /> },
   // { name: '분식', icon: <IconSnackFood /> },
   { name: '세계음식', icon: <IconGlobalFood /> },
-  // { name: '주점', icon: <IconPubAndBar /> },
+  { name: '주점', icon: <IconPubAndBar /> },
   { name: '커피/디저트', icon: <IconDesserts /> },
 ];
 

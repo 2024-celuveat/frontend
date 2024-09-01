@@ -8,5 +8,5 @@ export { default as IconMeatDishes } from '@/assets/icons/food-category/meat_dis
 // export { default as IconNoodles } from '@/assets/icons/food-category/noodles.svg';
 // export { default as IconSnackFood } from '@/assets/icons/food-category/snack_food.svg';
 export { default as IconGlobalFood } from '@/assets/icons/food-category/global_food.svg';
-// export { default as IconPubAndBar } from '@/assets/icons/food-category/pub_and_bar.svg';
+export { default as IconPubAndBar } from '@/assets/icons/food-category/pub_and_bar.svg';
 export { default as IconDesserts } from '@/assets/icons/food-category/desserts.svg';
