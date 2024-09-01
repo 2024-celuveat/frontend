@@ -63,7 +63,7 @@ const BottomNavbar = ({ isLogin }: BottomNavbarProps) => {
 
   return (
     <OverlayProvider>
-      <div className="h-80" />
+      <div className="h-72" />
       <nav className="fixed bottom-0 right-1/2 flex h-72 w-full max-w-[495px] translate-x-1/2 items-start justify-around border-t bg-white px-24 py-8">
         <Link href="/" className="flex flex-col items-center gap-6">
           {firstPath === '' ? (
@@ -74,7 +74,7 @@ const BottomNavbar = ({ isLogin }: BottomNavbarProps) => {
           <span className="text-gray-400 caption-12-rg">홈</span>
         </Link>
 
-        <Link href="/" className="flex flex-col items-center gap-6">
+        <Link href="/map" className="flex flex-col items-center gap-6">
           {firstPath === 'map' ? (
             <IconMapFilled width={28} height={28} fill={colors.gray[800]} />
           ) : (
