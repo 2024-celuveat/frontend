@@ -15,7 +15,7 @@ const RestaurantDetailPage = async ({ params }: { params: { restaurantId: string
   const restaurant = await getRestaurant(Number(params.restaurantId));
   const videos = await getRestaurantVideos(Number(params.restaurantId));
   const restaurantsNearby = await getRestaurantsNearby(Number(params.restaurantId));
-  console.log(restaurant);
+
   return (
     <div>
       <RestaurantDetailPageMap {...restaurant} />

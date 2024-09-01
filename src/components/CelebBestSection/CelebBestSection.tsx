@@ -14,7 +14,6 @@ interface CelebBestSectionProps {
 }
 
 const CelebBestSection = ({ bestCelebrities }: CelebBestSectionProps) => {
-  console.log(bestCelebrities);
   const [sequence, setSequence] = useState<number>(0);
 
   const handleClickCelebProfile = async (index: number) => {
