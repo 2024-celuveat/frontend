@@ -29,14 +29,7 @@ const BottomNavbar = ({ isLogin }: BottomNavbarProps) => {
   const firstPath = pathname?.split('/')[1];
   const router = useRouter();
 
-  const handleClickLoginButton = async (socialLoginType: SocialLoginType) => {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BACKEND_SERVER_BASE_URL}/social-login/url/${socialLoginType}`,
-    );
-    router.push(await response.text());
-  };
-
-  const handleClickLoginIcon = () => {
+  const openLoginBottomSheet = () => {
     overlay.open(({ isOpen, unmount }) => {
       return (
         <BottomSheet open={isOpen} onClose={unmount} title="로그인">
@@ -55,6 +48,26 @@ const BottomNavbar = ({ isLogin }: BottomNavbarProps) => {
         </BottomSheet>
       );
     });
+  };
+
+  const handleClickInterestedIcon = () => {
+    if (!isLogin) {
+      openLoginBottomSheet();
+      return;
+    }
+
+    router.push('/interested');
+  };
+
+  const handleClickLoginButton = async (socialLoginType: SocialLoginType) => {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BACKEND_SERVER_BASE_URL}/social-login/url/${socialLoginType}`,
+    );
+    router.push(await response.text());
+  };
+
+  const handleClickLoginIcon = () => {
+    openLoginBottomSheet();
   };
 
   const handleClickMyIcon = () => {
@@ -83,14 +96,14 @@ const BottomNavbar = ({ isLogin }: BottomNavbarProps) => {
           <span className="text-gray-400 caption-12-rg">지도</span>
         </Link>
 
-        <Link href="/interested" className="flex flex-col items-center gap-6">
+        <button onClick={handleClickInterestedIcon} className="flex flex-col items-center gap-6">
           {firstPath === 'interested' ? (
             <IconHeartFilled width={28} height={28} fill={colors.gray[800]} />
           ) : (
             <IconHeartFilled width={28} height={28} fill={colors.gray[200]} />
           )}
           <span className="text-gray-400 caption-12-rg">관심</span>
-        </Link>
+        </button>
 
         <div
           onClick={isLogin ? handleClickMyIcon : handleClickLoginIcon}
