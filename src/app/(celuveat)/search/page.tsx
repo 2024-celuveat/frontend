@@ -5,7 +5,7 @@ import { colors } from '@/constants/colors';
 const SearchPage = () => {
   return (
     <main>
-      <div className="mt-24 flex items-center gap-12 px-20">
+      <div className="flex items-center gap-12 px-20 pt-24">
         <IconArrowLeftGoBack />
         <input
           className="border-1 h-48 flex-1 rounded-[10px] border border-main-600 px-14 body-15-rg focus:outline-none"

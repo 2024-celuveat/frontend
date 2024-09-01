@@ -14,8 +14,8 @@ const NaverMap = ({ restaurants }: NaverMapProps) => {
     if (!ref.current) return;
 
     const map = new naver.maps.Map(ref.current, {
-      center: new naver.maps.LatLng(37.5664056, 126.9778222),
-      zoom: 13,
+      center: new naver.maps.LatLng(37.5364056, 127.122222),
+      zoom: 12,
     });
 
     restaurants.contents.forEach(({ latitude, longitude, visitedCelebrities }) => {
