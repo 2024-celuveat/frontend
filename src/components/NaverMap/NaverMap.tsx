@@ -1,8 +1,13 @@
 'use client';
 
+import { Restaurant } from '@/@types';
 import { useEffect, useRef, useState } from 'react';
 
-const NaverMap = () => {
+interface NaverMapProps {
+  restaurants: PagedResponse<Restaurant>;
+}
+
+const NaverMap = ({ restaurants }: NaverMapProps) => {
   const [isReady, setIsReady] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -11,9 +16,22 @@ const NaverMap = () => {
 
     if (!ref.current) return;
     if (isReady) {
-      new naver.maps.Map(ref.current, {
-        center: new naver.maps.LatLng(37.3595704, 127.105399),
-        zoom: 14,
+      const map = new naver.maps.Map(ref.current, {
+        center: new naver.maps.LatLng(37.5664056, 126.9778222),
+        zoom: 13,
+      });
+
+      restaurants.contents.forEach(({ latitude, longitude, visitedCelebrities }) => {
+        new naver.maps.Marker({
+          position: new naver.maps.LatLng(latitude, longitude),
+          map,
+          icon: {
+            content: /* HTML */ `<img
+              src="${visitedCelebrities[0].profileImageUrl}"
+              class="h-[38px] w-[38px] rounded-full border-[3px] border-white"
+            />`,
+          },
+        });
       });
     }
   }, [isReady]);

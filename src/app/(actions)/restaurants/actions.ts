@@ -1,6 +1,27 @@
 import { BestCelebrities, Restaurant, Video } from '@/@types';
 import { api } from '@/utils/api';
 
+type LocationInfo = {
+  region: string;
+  category: string;
+  lowLongitude: number;
+  highLongitude: number;
+  lowLatitude: number;
+  highLatitude: number;
+};
+
+type PaginationInfo = {
+  page: number;
+  size: number;
+  sort: string[];
+};
+
+// 음식점 조건 조회
+export const getRestaurants = async (options: LocationInfo & PaginationInfo): Promise<PagedResponse<Restaurant>> => {
+  const params = Object.entries(options).map(([key, value]) => [key, `${value}`]);
+  return await api(`/restaurants?${new URLSearchParams(params)}`);
+};
+
 // 인기 셀럽 조회
 export const getCelebritiesBest = async (): Promise<BestCelebrities[]> => {
   return await api('/celebrities/best');
