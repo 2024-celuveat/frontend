@@ -2,8 +2,8 @@ import { BestCelebrities, Restaurant, Video } from '@/@types';
 import { api } from '@/utils/api';
 
 type LocationInfo = {
-  region: string;
-  category: string;
+  region?: string;
+  category?: string;
   lowLongitude: number;
   highLongitude: number;
   lowLatitude: number;

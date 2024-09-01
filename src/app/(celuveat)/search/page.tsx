@@ -1,15 +1,12 @@
-import IconArrowLeft from '@/components/@icon/IconArrowLeft';
 import IconSearch from '@/components/@icon/IconSearch';
+import IconArrowLeftGoBack from '@/components/IconArrowLeftGoBack';
 import { colors } from '@/constants/colors';
-import Link from 'next/link';
 
 const SearchPage = () => {
   return (
     <main>
       <div className="mt-24 flex items-center gap-12 px-20">
-        <Link href="/">
-          <IconArrowLeft width={24} height={24} fill={colors.gray[800]} />
-        </Link>
+        <IconArrowLeftGoBack />
         <input
           className="border-1 h-48 flex-1 rounded-[10px] border border-main-600 px-14 body-15-rg focus:outline-none"
           placeholder="원하는 식당를 검색해보세요"
