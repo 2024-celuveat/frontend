@@ -135,6 +135,19 @@ const config: Config = {
           left: '50%',
           transform: 'translateX(-50%)',
         },
+        '.ballon2': {
+          borderTop: '10px solid white',
+          borderLeft: '10px solid transparent',
+          borderRight: '10px solid transparent',
+          content: '',
+          position: 'absolute',
+          top: '80px',
+          left: '50%',
+          transform: 'translateX(-50%)',
+        },
+        '.ballon2-shadow': {
+          boxShadow: '0px 4px 8px 0px #0000001F',
+        },
         '.font-synthesis-none': {
           fontSynthesis: 'none',
         },

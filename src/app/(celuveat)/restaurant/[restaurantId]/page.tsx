@@ -6,6 +6,7 @@ import IconMore from '@/components/@icon/IconMore';
 import IconStarFilled from '@/components/@icon/IconStarFilled';
 import IconThumbsUpOutlined from '@/components/@icon/IconThumbsUpOutlined';
 import RestaurantAddInterestButton from '@/components/RestaurantAddInterestButton';
+import RestaurantDetailPageMap from '@/components/RestaurantDetailPageMap';
 import { colors } from '@/constants/colors';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -14,11 +15,11 @@ const RestaurantDetailPage = async ({ params }: { params: { restaurantId: string
   const restaurant = await getRestaurant(Number(params.restaurantId));
   const videos = await getRestaurantVideos(Number(params.restaurantId));
   const restaurantsNearby = await getRestaurantsNearby(Number(params.restaurantId));
-
+  console.log(restaurant);
   return (
     <div>
-      <div className="h-[240px] w-full bg-gray-200" />
-      <main className="relative bottom-16 rounded-t-[16px] bg-white p-20">
+      <RestaurantDetailPageMap {...restaurant} />
+      <main className="bg-white p-20">
         <div className="flex justify-between">
           <div>
             <div className="flex items-center gap-4">
@@ -139,30 +140,34 @@ const RestaurantDetailPage = async ({ params }: { params: { restaurantId: string
 
         <hr className="height-1 mt-24 w-full bg-gray-100" />
 
-        <section className="mt-24">
-          <h2 className="title-20-md">주변 식당 둘러보기</h2>
-          <div className="scrollbar-hide mt-[16px] flex gap-[16px] overflow-x-scroll">
-            {restaurantsNearby.map(({ id, name, category, images, roadAddress }) => (
-              <Link key={id} className="flex w-[140px] flex-none flex-col" href={`/restaurant/${name}`}>
-                <div className="relative h-[140px] w-full overflow-hidden rounded-[8px] bg-gray-200">
-                  <Image
-                    src={`${process.env.NEXT_PUBLIC_S3_BASE_URL}/${images[0].name}.webp`}
-                    fill
-                    alt={name}
-                    sizes="100%"
-                    className="object-cover"
-                  />
-                  <IconHeartOutlined className="absolute right-8 top-8 *:fill-white" />
-                </div>
-                <div className="mt-12 overflow-x-hidden text-ellipsis whitespace-nowrap">
-                  <span className="title-15-md">{name}</span>
-                  <span className="ml-4 caption-12-rg">{category}</span>
-                </div>
-                <span className="mt-4 overflow-x-hidden text-ellipsis whitespace-nowrap body-13-rg">{roadAddress}</span>
-              </Link>
-            ))}
-          </div>
-        </section>
+        {restaurantsNearby.length > 0 && (
+          <section className="mt-24">
+            <h2 className="title-20-md">주변 식당 둘러보기</h2>
+            <div className="scrollbar-hide mt-[16px] flex gap-[16px] overflow-x-scroll">
+              {restaurantsNearby.map(({ id, name, category, images, roadAddress }) => (
+                <Link key={id} className="flex w-[140px] flex-none flex-col" href={`/restaurant/${name}`}>
+                  <div className="relative h-[140px] w-full overflow-hidden rounded-[8px] bg-gray-200">
+                    <Image
+                      src={`${process.env.NEXT_PUBLIC_S3_BASE_URL}/${images[0].name}.webp`}
+                      fill
+                      alt={name}
+                      sizes="100%"
+                      className="object-cover"
+                    />
+                    <IconHeartOutlined className="absolute right-8 top-8 *:fill-white" />
+                  </div>
+                  <div className="mt-12 overflow-x-hidden text-ellipsis whitespace-nowrap">
+                    <span className="title-15-md">{name}</span>
+                    <span className="ml-4 caption-12-rg">{category}</span>
+                  </div>
+                  <span className="mt-4 overflow-x-hidden text-ellipsis whitespace-nowrap body-13-rg">
+                    {roadAddress}
+                  </span>
+                </Link>
+              ))}
+            </div>
+          </section>
+        )}
       </main>
     </div>
   );

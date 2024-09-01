@@ -12,7 +12,7 @@ const CelebProfile = ({ name, imageUrl, outlined = false, onClick }: CelebProfil
   return (
     <div onClick={onClick} className="relative flex flex-none flex-col items-center gap-[8px]">
       <Image
-        className={`h-[68px] rounded-full object-cover ${outlined && 'outline outline-[3px] outline-main-500 after:ballon'}`}
+        className={`h-[68px] rounded-full object-cover ${outlined && 'outline outline-[3px] outline-main-500'}`}
         src={imageUrl}
         alt={name}
         width={68}

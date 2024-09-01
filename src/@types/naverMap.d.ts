@@ -411,7 +411,7 @@ declare namespace naver.maps {
   /**
    * HtmlIcon
    */
-  interface HtmlIcon {
+  export interface HtmlIcon {
     content: string | HTMLElement;
     size?: Size | SizeLiteral;
     anchor?: Point | PointLiteral | Position;
