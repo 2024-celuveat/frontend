@@ -1,7 +1,7 @@
 import { getRestaurants } from '@/app/(actions)/restaurants/actions';
 import IconSearch from '@/components/@icon/IconSearch';
-import NaverMap from '@/components/NaverMap';
 import Link from 'next/link';
+import NaverMap from './_components/NaverMap';
 
 const MapPage = async () => {
   const restaurants = await getRestaurants({

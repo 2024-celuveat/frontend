@@ -1,7 +1,7 @@
 import { getCelebrityInfo } from '@/app/(actions)/celebs/actions';
 import { getCelebrityRestaurants } from '@/app/(actions)/restaurants/actions';
-import CelebIntroductionSection from '@/components/CelebIntroductionSection';
-import CelebRestaurantList from '@/components/CelebRestaurantList';
+import CelebIntroductionSection from './_components/CelebIntroductionSection';
+import RestaurantCardRow from '@/components/RestaurantCardRow';
 
 const CelebPage = async ({ params: { id } }: { params: { id: string } }) => {
   const restaurants = await getCelebrityRestaurants(Number(id));
@@ -17,7 +17,11 @@ const CelebPage = async ({ params: { id } }: { params: { id: string } }) => {
         <span className="body-13-rg">최신순</span>
       </div>
 
-      <CelebRestaurantList restaurants={restaurants} />
+      <ul className="mt-24 flex flex-col gap-20">
+        {restaurants.contents.map(props => (
+          <RestaurantCardRow key={props.id} {...props} />
+        ))}
+      </ul>
     </main>
   );
 };

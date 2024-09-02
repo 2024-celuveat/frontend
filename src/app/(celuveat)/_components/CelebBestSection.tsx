@@ -3,11 +3,10 @@
 import CelebProfile from '@/components/CelebProfile';
 import Link from 'next/link';
 import { useState } from 'react';
-
 import Image from 'next/image';
 import RestaurantLikeButton from '@/components/RestaurantLikeButton';
 import { BestCelebrities } from '@/@types';
-import IconArrowRight from '../@icon/IconArrowRight';
+import IconArrowRight from '@/components/@icon/IconArrowRight';
 
 interface CelebBestSectionProps {
   bestCelebrities: BestCelebrities[];
@@ -25,13 +24,21 @@ const CelebBestSection = ({ bestCelebrities }: CelebBestSectionProps) => {
       <h1 className="px-20 title-20-md">셀럽 BEST </h1>
       <div className="scrollbar-hide mt-[16px] flex gap-[16px] overflow-y-auto overflow-x-scroll px-20 py-11 pt-3">
         {bestCelebrities?.map(({ celebrity: { id, name, profileImageUrl } }, index) => (
-          <CelebProfile
+          <div
             key={id}
-            name={name}
-            imageUrl={profileImageUrl}
-            outlined={sequence === index}
             onClick={() => handleClickCelebProfile(index)}
-          />
+            className="relative flex flex-none flex-col items-center gap-[8px]"
+          >
+            <Image
+              className={`h-[68px] rounded-full object-cover ${sequence === index && 'outline outline-[3px] outline-main-500'}`}
+              src={profileImageUrl}
+              alt={name}
+              width={68}
+              height={68}
+              priority
+            />
+            {sequence === index && <div className="ballon"></div>}
+          </div>
         ))}
       </div>
       <div className="mt-8 overflow-hidden bg-gray-50 px-20 py-20">

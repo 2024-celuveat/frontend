@@ -5,11 +5,11 @@ import IconHeartOutlined from '@/components/@icon/IconHeartOutlined';
 import IconMore from '@/components/@icon/IconMore';
 import IconStarFilled from '@/components/@icon/IconStarFilled';
 import IconThumbsUpOutlined from '@/components/@icon/IconThumbsUpOutlined';
-import RestaurantAddInterestButton from '@/components/RestaurantAddInterestButton';
-import RestaurantDetailPageMap from '@/components/RestaurantDetailPageMap';
 import { colors } from '@/constants/colors';
 import Image from 'next/image';
 import Link from 'next/link';
+import RestaurantDetailPageMap from './_components/RestaurantDetailPageMap';
+import RestaurantAddInterestButton from './_components/RestaurantAddInterestButton';
 
 const RestaurantDetailPage = async ({ params }: { params: { restaurantId: string } }) => {
   const restaurant = await getRestaurant(Number(params.restaurantId));

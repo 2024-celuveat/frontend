@@ -1,6 +1,6 @@
 import IconSearch from '@/components/@icon/IconSearch';
-import IconArrowLeftGoBack from '@/components/IconArrowLeftGoBack';
 import { colors } from '@/constants/colors';
+import IconArrowLeftGoBack from './_components/IconArrowLeftGoBack';
 
 const SearchPage = () => {
   return (

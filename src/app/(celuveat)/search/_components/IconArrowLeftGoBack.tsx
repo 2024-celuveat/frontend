@@ -1,7 +1,7 @@
 'use client';
 
+import IconArrowLeft from '@/components/@icon/IconArrowLeft';
 import { colors } from '@/constants/colors';
-import IconArrowLeft from '../@icon/IconArrowLeft';
 import { useRouter } from 'next/navigation';
 
 const IconArrowLeftGoBack = () => {

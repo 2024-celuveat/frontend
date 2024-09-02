@@ -7,10 +7,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { overlay } from 'overlay-kit';
 import { useState } from 'react';
-import IconPlus from '../@icon/IconPlus';
 import { deleteInterestedCelebrity, postInterestedCelebrity } from '@/app/(actions)/celebs/actions';
 import { colors } from '@/constants/colors';
-import IconHeartFilled from '../@icon/IconHeartFilled';
+import IconHeartFilled from '@/components/@icon/IconHeartFilled';
+import IconPlus from '@/components/@icon/IconPlus';
 
 interface CelebIntroductionSectionProps {
   celebrityInfo: CelebrityDetail;

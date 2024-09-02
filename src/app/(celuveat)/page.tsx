@@ -1,7 +1,4 @@
-import CelebBestSection from '@/components/CelebBestSection';
-import RestaurantRecommendedSection from '@/components/RestaurantRecommendedSection';
 import { getCelebritiesBest, getRecommendedRestaurantsByCelebrities } from '@/app/(actions)/restaurants/actions';
-import IconInfo from '@/components/@icon/IconInfo';
 import IconSearch from '@/components/@icon/IconSearch';
 import IconNotice from '@/components/@icon/IconNotice';
 import { colors } from '@/constants/colors';
@@ -17,8 +14,11 @@ import {
   IconWestern,
 } from '@/assets/icons/food-category';
 import Link from 'next/link';
-import CelebritiesRecommendedRestaurantsInformation from '@/components/CelebritiesRecommendedRestaurantsInformation';
+
 import IconArrowRight from '@/components/@icon/IconArrowRight';
+import CelebritiesRecommendedRestaurantsInformation from './_components/CelebritiesRecommendedRestaurantsInformation';
+import CelebBestSection from './_components/CelebBestSection';
+import RestaurantRecommendedSection from './_components/RestaurantRecommendedSection';
 
 const FOOD_CATEGORY = [
   { name: '한식', icon: <IconKorean /> },

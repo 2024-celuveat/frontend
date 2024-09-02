@@ -1,9 +1,9 @@
 'use client';
 
 import { useState } from 'react';
-import IconInfo from '../@icon/IconInfo';
-import IconClose from '../@icon/IconClose';
 import { colors } from '@/constants/colors';
+import IconInfo from '@/components/@icon/IconInfo';
+import IconClose from '@/components/@icon/IconClose';
 
 const CelebritiesRecommendedRestaurantsInformation = () => {
   const [isClicked, setIsClicked] = useState(false);
