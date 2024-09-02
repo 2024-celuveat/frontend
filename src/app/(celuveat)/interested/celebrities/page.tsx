@@ -28,7 +28,7 @@ const InterestedCelebritiesPage = async () => {
           <ul className="mt-16 flex flex-col gap-24">
             {interestedCelebrities?.map(item => (
               <li key={item.id} className="flex items-center gap-10">
-                <div className="relative">
+                <Link href={`/celebs/${item.id}`} className="relative">
                   <Image
                     className={'h-[56px] rounded-full object-cover'}
                     src={item.profileImageUrl}
@@ -37,7 +37,7 @@ const InterestedCelebritiesPage = async () => {
                     height={56}
                     priority
                   />
-                </div>
+                </Link>
                 <div className="flex flex-1 flex-col justify-center">
                   <span className="title-16-sb">{item.name}</span>
                   <div className="">
