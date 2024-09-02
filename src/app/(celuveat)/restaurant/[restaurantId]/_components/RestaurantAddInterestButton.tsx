@@ -2,9 +2,9 @@
 
 import { deleteInterestedRestaurant, postInterestedRestaurant } from '@/app/(actions)/restaurants/actions';
 import { useState } from 'react';
-import IconHeartFilled from '../@icon/IconHeartFilled';
-import IconPlus from '../@icon/IconPlus';
 import { colors } from '@/constants/colors';
+import IconHeartFilled from '@/components/@icon/IconHeartFilled';
+import IconPlus from '@/components/@icon/IconPlus';
 
 interface RestaurantAddInterestButtonProps {
   liked: boolean;
