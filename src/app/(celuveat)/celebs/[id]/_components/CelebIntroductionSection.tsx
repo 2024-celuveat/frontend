@@ -80,7 +80,7 @@ const CelebIntroductionSection = ({ celebrityInfo }: CelebIntroductionSectionPro
 
         {celebrityInfo && (
           <Image
-            className="h-72 w-72 rounded-full bg-gray-200"
+            className="h-72 w-72 rounded-full object-cover"
             src={celebrityInfo?.celebrity.profileImageUrl}
             alt={celebrityInfo?.celebrity.name}
             width={72}
