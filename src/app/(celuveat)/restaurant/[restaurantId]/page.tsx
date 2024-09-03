@@ -67,7 +67,10 @@ const RestaurantDetailPage = async ({ params }: { params: { restaurantId: string
         <hr className="height-1 mt-24 w-full bg-gray-100" />
 
         <h2 className="mt-24 title-20-md">영상으로 보기</h2>
-        <iframe className="mt-16 h-[240px] w-full rounded-[8px]" src={videos[0].videoUrl} />
+        <iframe
+          className="mt-16 h-[240px] w-full rounded-[8px]"
+          src={`https://www.youtube.com/embed/${videos[0].videoUrl.split('=').at(-1)}`}
+        />
         <div className="mt-16 flex justify-between">
           <div className="flex items-center gap-8">
             <Image
