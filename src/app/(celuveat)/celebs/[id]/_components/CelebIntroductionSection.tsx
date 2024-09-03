@@ -11,6 +11,7 @@ import { deleteInterestedCelebrity, postInterestedCelebrity } from '@/app/(actio
 import { colors } from '@/constants/colors';
 import IconHeartFilled from '@/components/@icon/IconHeartFilled';
 import IconPlus from '@/components/@icon/IconPlus';
+import { formatToTenThousandUnits } from '@/utils/formatToTenThousandUnits';
 
 interface CelebIntroductionSectionProps {
   celebrityInfo: CelebrityDetail;
@@ -68,7 +69,7 @@ const CelebIntroductionSection = ({ celebrityInfo }: CelebIntroductionSectionPro
           <div className="mt-6 flex items-center">
             <span className="body-14-rg">구독자</span>
             <span className="ml-2 body-14-md">
-              {celebrityInfo?.celebrity.youtubeContentResults[0].subscriberCount}명
+              {formatToTenThousandUnits(celebrityInfo?.celebrity.youtubeContentResults[0].subscriberCount)}명
             </span>
             <span className="ml-12 body-14-rg">추천 매장</span>
             <span className="ml-2 body-14-md">

@@ -1,5 +1,6 @@
 import { getInterestedCelebrities } from '@/app/(actions)/celebs/actions';
 import IconHeartFilled from '@/components/@icon/IconHeartFilled';
+import { formatToTenThousandUnits } from '@/utils/formatToTenThousandUnits';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -42,7 +43,9 @@ const InterestedCelebritiesPage = async () => {
                   <span className="title-16-sb">{item.name}</span>
                   <div className="">
                     <span className="body-14-rg">구독자</span>
-                    <span className="ml-2 body-14-md">{item.youtubeContentResults[0].subscriberCount}</span>
+                    <span className="ml-2 body-14-md">
+                      {formatToTenThousandUnits(item.youtubeContentResults[0].subscriberCount)}명
+                    </span>
                     <span className="ml-12 body-14-rg">추천 매장</span>
                     <span className="ml-2 body-14-md">
                       {item.youtubeContentResults.reduce((acc, { restaurantCount }) => acc + restaurantCount, 0)}

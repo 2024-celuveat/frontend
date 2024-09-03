@@ -10,6 +10,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import RestaurantDetailPageMap from './_components/RestaurantDetailPageMap';
 import RestaurantAddInterestButton from './_components/RestaurantAddInterestButton';
+import { formatToTenThousandUnits } from '@/utils/formatToTenThousandUnits';
 
 const RestaurantDetailPage = async ({ params }: { params: { restaurantId: string } }) => {
   const restaurant = await getRestaurant(Number(params.restaurantId));
@@ -86,7 +87,9 @@ const RestaurantDetailPage = async ({ params }: { params: { restaurantId: string
             <IconBullet />
             <div className="flex items-center gap-2">
               <span className="text-gray-400 body-14-rg">구독자</span>
-              <span className="text-gray-600 body-14-md">{videos[0].celebrities[0].subscriberCount}명</span>
+              <span className="text-gray-600 body-14-md">
+                {formatToTenThousandUnits(videos[0].celebrities[0].subscriberCount)}명
+              </span>
             </div>
           </div>
         </div>
