@@ -76,47 +76,50 @@ const BottomNavbar = ({ isLogin }: BottomNavbarProps) => {
 
   return (
     <OverlayProvider>
-      <div className="h-72" />
-      <nav className="fixed bottom-0 right-1/2 flex h-72 w-full max-w-[495px] translate-x-1/2 items-start justify-around border-t bg-white px-24 py-8">
-        <Link href="/" className="flex flex-col items-center gap-6">
-          {firstPath === '' ? (
-            <IconHomeFilled width={28} height={28} fill={colors.gray[800]} />
-          ) : (
-            <IconHomeFilled width={28} height={28} fill={colors.gray[200]} />
-          )}
-          <span className="text-gray-400 caption-12-rg">홈</span>
-        </Link>
+      <div className="h-[88px]" />
+      <div className="fixed bottom-0 right-1/2 flex h-[88px] w-full max-w-[495px] translate-x-1/2 flex-col">
+        <nav className="flex h-72 w-full items-start justify-around border-t bg-white px-24 py-8">
+          <Link href="/" className="flex flex-col items-center gap-6">
+            {firstPath === '' ? (
+              <IconHomeFilled width={28} height={28} fill={colors.gray[800]} />
+            ) : (
+              <IconHomeFilled width={28} height={28} fill={colors.gray[200]} />
+            )}
+            <span className="text-gray-400 caption-12-rg">홈</span>
+          </Link>
 
-        <Link href="/map" className="flex flex-col items-center gap-6">
-          {firstPath === 'map' ? (
-            <IconMapFilled width={28} height={28} fill={colors.gray[800]} />
-          ) : (
-            <IconMapFilled width={28} height={28} fill={colors.gray[200]} />
-          )}
-          <span className="text-gray-400 caption-12-rg">지도</span>
-        </Link>
+          <Link href="/map" className="flex flex-col items-center gap-6">
+            {firstPath === 'map' ? (
+              <IconMapFilled width={28} height={28} fill={colors.gray[800]} />
+            ) : (
+              <IconMapFilled width={28} height={28} fill={colors.gray[200]} />
+            )}
+            <span className="text-gray-400 caption-12-rg">지도</span>
+          </Link>
 
-        <button onClick={handleClickInterestedIcon} className="flex flex-col items-center gap-6">
-          {firstPath === 'interested' ? (
-            <IconHeartFilled width={28} height={28} fill={colors.gray[800]} />
-          ) : (
-            <IconHeartFilled width={28} height={28} fill={colors.gray[200]} />
-          )}
-          <span className="text-gray-400 caption-12-rg">관심</span>
-        </button>
+          <button onClick={handleClickInterestedIcon} className="flex flex-col items-center gap-6">
+            {firstPath === 'interested' ? (
+              <IconHeartFilled width={28} height={28} fill={colors.gray[800]} />
+            ) : (
+              <IconHeartFilled width={28} height={28} fill={colors.gray[200]} />
+            )}
+            <span className="text-gray-400 caption-12-rg">관심</span>
+          </button>
 
-        <div
-          onClick={isLogin ? handleClickMyIcon : handleClickLoginIcon}
-          className="flex cursor-pointer flex-col items-center gap-6"
-        >
-          {firstPath === 'my' ? (
-            <IconPersonFilled width={28} height={28} fill={colors.gray[800]} />
-          ) : (
-            <IconPersonFilled width={28} height={28} fill={colors.gray[200]} />
-          )}
-          <span className="text-gray-400 caption-12-rg">{isLogin ? '마이' : '로그인'}</span>
-        </div>
-      </nav>
+          <div
+            onClick={isLogin ? handleClickMyIcon : handleClickLoginIcon}
+            className="flex cursor-pointer flex-col items-center gap-6"
+          >
+            {firstPath === 'my' ? (
+              <IconPersonFilled width={28} height={28} fill={colors.gray[800]} />
+            ) : (
+              <IconPersonFilled width={28} height={28} fill={colors.gray[200]} />
+            )}
+            <span className="text-gray-400 caption-12-rg">{isLogin ? '마이' : '로그인'}</span>
+          </div>
+        </nav>
+        <div className="h-[16px] bg-white"></div>
+      </div>
     </OverlayProvider>
   );
 };

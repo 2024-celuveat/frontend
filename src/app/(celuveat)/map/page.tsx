@@ -24,6 +24,19 @@ const MapPage = async () => {
         </Link>
       </div>
       <NaverMap restaurants={restaurants} />
+      <div className="absolute bottom-0 z-[100] w-full">
+        <div className="flex h-[20px] items-center justify-center rounded-t-[16px] bg-white">
+          <hr className="h-4 w-48 rounded-[8px] bg-gray-200" />
+        </div>
+        <div className="h-[20px] bg-white"></div>
+        <div className="h-[40px] bg-white">
+          <p className="flex justify-center body-16-md">
+            <span className="mr-4 text-main-700">성수</span>
+            주변에
+            <span className="ml-4 text-main-700">50</span> 개 맛집이 있어요!
+          </p>
+        </div>
+      </div>
     </main>
   );
 };

@@ -32,7 +32,7 @@ const NaverMap = ({ restaurants }: NaverMapProps) => {
     });
   }, []);
 
-  return <div ref={ref} className="h-[calc(100vh_-_72px)] w-full"></div>;
+  return <div ref={ref} className="h-[calc(100vh_-_88px)] w-full"></div>;
 };
 
 export default NaverMap;
