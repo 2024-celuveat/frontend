@@ -68,7 +68,7 @@ const RestaurantDetailPage = async ({ params }: { params: { restaurantId: string
 
         <h2 className="mt-24 title-20-md">영상으로 보기</h2>
         <iframe
-          className="mt-16 h-[240px] w-full rounded-[8px]"
+          className="mt-16 aspect-[16/9] w-full rounded-[8px]"
           src={`https://www.youtube.com/embed/${videos[0].videoUrl.split('=').at(-1)}`}
         />
         <div className="mt-16 flex justify-between">
@@ -104,7 +104,7 @@ const RestaurantDetailPage = async ({ params }: { params: { restaurantId: string
             <h2 className="title-20-md">리뷰 00개</h2>
             <button className="flex items-center">
               <span className="text-gray-400 body-13-rg">더보기</span>
-              <IconArrowRight />
+              <IconArrowRight width={14} height={14} />
             </button>
           </div>
 
