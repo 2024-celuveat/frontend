@@ -51,7 +51,7 @@ const Header = () => {
   if (pathValues[1] === 'restaurants') {
     if (pathValues[2] === 'restaurant') return <HeaderType1 title={'맛집 정보'} />;
     if (pathValues[2] === 'category') return <HeaderType1 title={decodeURIComponent(pathValues[3])} />;
-    if (pathValues[2] === 'new') return <HeaderType1 title={'이번 주 업데이트 된 맛집'} />;
+    if (pathValues[2] === 'weekly') return <HeaderType1 title={'이번 주 업데이트 된 맛집'} />;
   }
 };
 

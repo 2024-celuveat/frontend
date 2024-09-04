@@ -59,13 +59,16 @@ export default async function Home() {
         <RestaurantRecommendedSection restaurants={recommendedRestaurantsByCelebrities} />
       </section>
       <section className="mt-48 px-20">
-        <div className="flex h-48 w-full items-center justify-between rounded-[8px] bg-gray-800 px-16 py-12">
+        <Link
+          href={'/restaurants/weekly'}
+          className="flex h-48 w-full items-center justify-between rounded-[8px] bg-gray-800 px-16 py-12"
+        >
           <div className="flex items-center">
             <IconNotice fill={colors.main[600]} />
             <span className="ml-12 text-white title-15-md">이번 주 업데이트 된 맛집 확인하러 가기</span>
           </div>
           <IconArrowRight width={20} height={20} fill={colors.white.DEFAULT} />
-        </div>
+        </Link>
       </section>
       <section className="mt-48">
         <h1 className="px-20 title-20-md">무엇을 드시나요?</h1>

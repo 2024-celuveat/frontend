@@ -1,13 +1,16 @@
 import { BestCelebrities, Restaurant, Video } from '@/@types';
 import { api } from '@/utils/api';
 
-type LocationInfo = {
-  region?: string;
-  category?: string;
+type Coordinate = {
   lowLongitude: number;
   highLongitude: number;
   lowLatitude: number;
   highLatitude: number;
+};
+
+type FilterOption = {
+  region?: string;
+  category?: string;
 };
 
 type PaginationInfo = {
@@ -17,7 +20,9 @@ type PaginationInfo = {
 };
 
 // 음식점 조건 조회
-export const getRestaurants = async (options: LocationInfo & PaginationInfo): Promise<PagedResponse<Restaurant>> => {
+export const getRestaurants = async (
+  options: (FilterOption & PaginationInfo) | (FilterOption & PaginationInfo & Coordinate),
+): Promise<PagedResponse<Restaurant>> => {
   const params = Object.entries(options).map(([key, value]) => [key, `${value}`]);
   return await api(`/restaurants?${new URLSearchParams(params)}`);
 };
@@ -65,4 +70,9 @@ export const getRestaurantVideos = async (restaurantId: number): Promise<Video[]
 // 주변 음식점 조회
 export const getRestaurantsNearby = async (restaurantId: number): Promise<Restaurant[]> => {
   return await api(`/restaurants/nearby/${restaurantId}`);
+};
+
+// 주변 음식점 조회
+export const getWeeklyRestaurants = async (): Promise<PagedResponse<Restaurant>> => {
+  return await api('/restaurants/weekly');
 };
