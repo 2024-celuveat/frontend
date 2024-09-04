@@ -71,12 +71,12 @@ export default async function Home() {
         <h1 className="px-20 title-20-md">무엇을 드시나요?</h1>
         <div className="mt-16 grid grid-cols-5 gap-y-16 px-20">
           {FOOD_CATEGORY.map(({ name, icon }) => (
-            <div className="flex flex-col items-center" key={name}>
+            <Link href={`/restaurants/category/${name}`} className="flex flex-col items-center" key={name}>
               <div className="flex h-56 w-56 items-center justify-center rounded-[16px] bg-gray-100" key={name}>
                 {icon}
               </div>
               <span className="mt-8 body-13-rg">{name}</span>
-            </div>
+            </Link>
           ))}
         </div>
       </section>

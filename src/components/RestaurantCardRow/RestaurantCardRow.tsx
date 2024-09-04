@@ -6,7 +6,7 @@ import RestaurantLikeButton from '../RestaurantLikeButton';
 const RestaurantCardRow = ({ id, name, images, category, roadAddress, liked }: Restaurant) => {
   return (
     <div className="relative">
-      <Link href={`/restaurant/${id}`} className="flex gap-12">
+      <Link href={`/restaurants/restaurant/${id}`} className="flex gap-12">
         <div className="relative h-[112px] w-[112px] overflow-hidden rounded-[8px] bg-gray-200">
           <Image src={images[0].url} fill alt={name} sizes="100%" className="object-cover" />
         </div>

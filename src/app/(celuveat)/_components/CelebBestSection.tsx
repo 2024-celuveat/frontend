@@ -59,7 +59,7 @@ const CelebBestSection = ({ bestCelebrities }: CelebBestSectionProps) => {
             bestCelebrities[sequence].restaurants.map(({ id, name, images, category, roadAddress, liked }) => (
               <div className="relative flex w-[calc((100%-20px)/3)] flex-col" key={id}>
                 <Link
-                  href={`/restaurant/${id}`}
+                  href={`/restaurants/restaurant/${id}`}
                   className="relative aspect-square overflow-hidden rounded-[8px] bg-gray-200"
                 >
                   <Image fill alt={name} src={images[0].url} sizes="100%" className="object-cover" />

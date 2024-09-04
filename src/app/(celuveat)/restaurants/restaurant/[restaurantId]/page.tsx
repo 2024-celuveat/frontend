@@ -151,7 +151,7 @@ const RestaurantDetailPage = async ({ params }: { params: { restaurantId: string
             <h2 className="title-20-md">주변 식당 둘러보기</h2>
             <div className="scrollbar-hide mt-[16px] flex gap-[16px] overflow-x-scroll">
               {restaurantsNearby.map(({ id, name, category, images, roadAddress }) => (
-                <Link key={id} className="flex w-[140px] flex-none flex-col" href={`/restaurant/${name}`}>
+                <Link key={id} className="flex w-[140px] flex-none flex-col" href={`/restaurants/restaurant/${name}`}>
                   <div className="relative h-[140px] w-full overflow-hidden rounded-[8px] bg-gray-200">
                     <Image
                       src={`${process.env.NEXT_PUBLIC_S3_BASE_URL}/${images[0].name}.webp`}

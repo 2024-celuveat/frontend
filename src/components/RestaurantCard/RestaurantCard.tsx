@@ -10,7 +10,7 @@ import { colors } from '@/constants/colors';
 const RestaurantCard = ({ id, name, category, images, roadAddress, visitedCelebrities, liked }: Restaurant) => {
   return (
     <div className="relative flex w-[140px] flex-none flex-col">
-      <Link href={`/restaurant/${name}`}>
+      <Link href={`/restaurants/restaurant/${name}`}>
         <div className="relative h-[140px] w-full overflow-hidden rounded-[8px] bg-gray-200">
           {<Image src={images[0].url} fill alt={name} sizes="100%" className="object-cover" />}
         </div>

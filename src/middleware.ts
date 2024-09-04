@@ -7,7 +7,6 @@ export async function middleware(request: NextRequest) {
         Authorization: `Bearer ${request.cookies.get('accessToken')?.value}`,
       },
     });
-    console.log(await response.json());
 
     if (response.status === 401) {
       const nextResponse = NextResponse.next();
