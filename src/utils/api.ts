@@ -12,6 +12,9 @@ export const api = async <T>(url: string, options?: Omit<RequestInit, 'body'> & 
     headers: { ...options?.headers, ...headers },
     body: JSON.stringify(options?.data),
   });
+
+  if (!response.ok) throw response;
+
   const contentType = response.headers.get('content-type');
   if (contentType === 'application/json') return await response.json();
   if (contentType === 'text') return (await response.text()) as T;

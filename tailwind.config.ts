@@ -24,11 +24,16 @@ const config: Config = {
           '50%': { padding: '20px' },
           '100%': { maxHeight: '100vh' },
         },
+        toast: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
       },
       animation: {
         'fade-in': 'fadeIn 0.3s ease-in-out',
         'slide-up': 'slideUp 0.3s ease-in-out',
         'slide-down': 'slideDown 0.5s ease-in-out',
+        toast: 'toast 0.2s ease-in-out',
       },
     },
   },
