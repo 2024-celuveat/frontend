@@ -32,7 +32,6 @@ const HeaderType2 = ({ title }: { title: string }) => {
 const Header = () => {
   const pathname = usePathname();
   const pathValues = pathname?.split('/');
-  console.log(pathValues);
 
   if (!pathValues) return null;
 

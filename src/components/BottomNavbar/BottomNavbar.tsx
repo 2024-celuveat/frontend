@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { overlay, OverlayProvider } from 'overlay-kit';
+import { overlay } from 'overlay-kit';
 import BottomSheet from '../@ui/BottomSheet';
 import Image from 'next/image';
 import kakao from '@/assets/icons/kakao.webp';
@@ -75,7 +75,7 @@ const BottomNavbar = ({ isLogin }: BottomNavbarProps) => {
   };
 
   return (
-    <OverlayProvider>
+    <>
       <div className="h-[88px]" />
       <div className="fixed bottom-0 right-1/2 flex h-[88px] w-full max-w-[495px] translate-x-1/2 flex-col">
         <nav className="flex h-72 w-full items-start justify-around border-t bg-white px-24 py-8">
@@ -120,7 +120,7 @@ const BottomNavbar = ({ isLogin }: BottomNavbarProps) => {
         </nav>
         <div className="h-[16px] bg-white"></div>
       </div>
-    </OverlayProvider>
+    </>
   );
 };
 

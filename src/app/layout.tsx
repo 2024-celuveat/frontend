@@ -5,6 +5,7 @@ import Header from '@/components/Header';
 import BottomNavbar from '@/components/BottomNavbar';
 import { getIsLogin } from './(actions)/social-login/actions';
 import Script from 'next/script';
+import Provider from './provider';
 
 export const metadata: Metadata = {
   title: 'Celuveat',
@@ -34,9 +35,11 @@ export default async function RootLayout({
           strategy="beforeInteractive"
           src={`https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${process.env.NEXT_PUBLIC_NAVER_MAP_API_KEY_ID}`}
         ></Script>
-        <Header />
-        {children}
-        <BottomNavbar isLogin={isLogin} />
+        <Provider>
+          <Header />
+          {children}
+          <BottomNavbar isLogin={isLogin} />
+        </Provider>
       </body>
     </html>
   );
