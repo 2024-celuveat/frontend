@@ -1,5 +1,5 @@
-import { deleteInterestedRestaurant, postInterestedRestaurant } from '@/app/(actions)/restaurants/actions';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
+import useToast from './useToast';
 
 interface Props {
   liked: boolean;
@@ -9,24 +9,26 @@ interface Props {
 
 const useOptimisticLike = ({ liked, onClickLike, onClickCancelLike }: Props) => {
   const [isLiked, setIsLiked] = useState(liked);
+  const showToast = useToast();
 
-  const handleClickLike = async () => {
+  const handleClickLike = useCallback(async () => {
     try {
       setIsLiked(true);
       await onClickLike();
     } catch (err) {
       setIsLiked(false);
+      showToast('로그인이 필요한 서비스입니다.');
     }
-  };
+  }, []);
 
-  const handleClickCancelLike = async () => {
+  const handleClickCancelLike = useCallback(async () => {
     try {
       setIsLiked(false);
       await onClickCancelLike();
     } catch (err) {
       setIsLiked(true);
     }
-  };
+  }, []);
 
   return { isLiked, handleClickLike, handleClickCancelLike };
 };
