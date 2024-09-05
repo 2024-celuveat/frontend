@@ -3,6 +3,7 @@ import IconHeartFilled from '@/components/@icon/IconHeartFilled';
 import { formatToTenThousandUnits } from '@/utils/formatToTenThousandUnits';
 import Image from 'next/image';
 import Link from 'next/link';
+import CelebrityLikeButton from './_components/CelebrityLikeButton';
 
 const InterestedCelebritiesPage = async () => {
   const interestedCelebrities = await getInterestedCelebrities();
@@ -52,7 +53,7 @@ const InterestedCelebritiesPage = async () => {
                     </span>
                   </div>
                 </div>
-                <IconHeartFilled />
+                <CelebrityLikeButton celebrityId={item.id} />
               </li>
             ))}
           </ul>

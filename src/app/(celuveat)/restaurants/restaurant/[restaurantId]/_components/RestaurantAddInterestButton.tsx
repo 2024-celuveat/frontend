@@ -1,10 +1,10 @@
 'use client';
 
 import { deleteInterestedRestaurant, postInterestedRestaurant } from '@/app/(actions)/restaurants/actions';
-import { useState } from 'react';
 import { colors } from '@/constants/colors';
 import IconHeartFilled from '@/components/@icon/IconHeartFilled';
 import IconPlus from '@/components/@icon/IconPlus';
+import useOptimisticLike from '@/hooks/useOptimisticLike';
 
 interface RestaurantAddInterestButtonProps {
   liked: boolean;
@@ -12,30 +12,16 @@ interface RestaurantAddInterestButtonProps {
 }
 
 const RestaurantAddInterestButton = ({ liked, restaurantId }: RestaurantAddInterestButtonProps) => {
-  const [isLiked, setIsLiked] = useState(liked);
-
-  const handleClickLike = async () => {
-    try {
-      setIsLiked(true);
-      await postInterestedRestaurant(restaurantId);
-    } catch (err) {
-      setIsLiked(false);
-    }
-  };
-
-  const handleClickUnlike = async () => {
-    try {
-      setIsLiked(false);
-      await deleteInterestedRestaurant(restaurantId);
-    } catch (err) {
-      setIsLiked(true);
-    }
-  };
+  const { isLiked, handleClickLike, handleClickCancelLike } = useOptimisticLike({
+    liked,
+    onClickLike: () => postInterestedRestaurant(restaurantId),
+    onClickCancelLike: () => deleteInterestedRestaurant(restaurantId),
+  });
 
   return isLiked ? (
     <button className="flex h-full flex-1 justify-center gap-4 rounded-[8px] bg-main-600 py-12">
       <IconHeartFilled width={20} height={20} fill={colors.white.DEFAULT} />
-      <span className="text-white title-15-md" onClick={handleClickUnlike}>
+      <span className="text-white title-15-md" onClick={handleClickCancelLike}>
         관심
       </span>
     </button>

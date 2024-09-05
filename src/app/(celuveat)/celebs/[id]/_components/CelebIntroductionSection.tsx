@@ -6,37 +6,23 @@ import BottomSheet from '@/components/@ui/BottomSheet';
 import Image from 'next/image';
 import Link from 'next/link';
 import { overlay } from 'overlay-kit';
-import { useState } from 'react';
 import { deleteInterestedCelebrity, postInterestedCelebrity } from '@/app/(actions)/celebs/actions';
 import { colors } from '@/constants/colors';
 import IconHeartFilled from '@/components/@icon/IconHeartFilled';
 import IconPlus from '@/components/@icon/IconPlus';
 import { formatToTenThousandUnits } from '@/utils/formatToTenThousandUnits';
+import useOptimisticLike from '@/hooks/useOptimisticLike';
 
 interface CelebIntroductionSectionProps {
   celebrityInfo: CelebrityDetail;
 }
 
 const CelebIntroductionSection = ({ celebrityInfo }: CelebIntroductionSectionProps) => {
-  const [isLiked, setIsLiked] = useState(celebrityInfo.interested);
-
-  const handleClickLike = async () => {
-    try {
-      setIsLiked(true);
-      await postInterestedCelebrity(celebrityInfo.celebrity.id);
-    } catch (err) {
-      setIsLiked(false);
-    }
-  };
-
-  const handleClickUnlike = async () => {
-    try {
-      setIsLiked(false);
-      await deleteInterestedCelebrity(celebrityInfo.celebrity.id);
-    } catch (err) {
-      setIsLiked(true);
-    }
-  };
+  const { isLiked, handleClickLike, handleClickCancelLike } = useOptimisticLike({
+    liked: celebrityInfo.interested,
+    onClickLike: () => postInterestedCelebrity(celebrityInfo.celebrity.id),
+    onClickCancelLike: () => deleteInterestedCelebrity(celebrityInfo.celebrity.id),
+  });
 
   const openBottomSheet = () => {
     overlay.open(({ isOpen, unmount }) => {
@@ -93,7 +79,7 @@ const CelebIntroductionSection = ({ celebrityInfo }: CelebIntroductionSectionPro
         {isLiked ? (
           <button
             className="flex flex-1 justify-center gap-4 rounded-[8px] bg-main-600 py-12 title-15-md"
-            onClick={handleClickUnlike}
+            onClick={handleClickCancelLike}
           >
             <IconHeartFilled width={20} height={20} fill={colors.white.DEFAULT} />
             <span className="text-white">관심</span>
