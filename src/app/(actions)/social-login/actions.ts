@@ -1,5 +1,7 @@
 'use server';
 
+import { SocialLoginType } from '@/@types/server/login.type';
+import { api } from '@/utils/api';
 import { cookies } from 'next/headers';
 
 export const getIsLogin = async () => {
@@ -8,4 +10,8 @@ export const getIsLogin = async () => {
     return true;
   }
   return false;
+};
+
+export const deleteAccount = async (socialLoginType: SocialLoginType): Promise<void> => {
+  return await api(`/social-login/withdraw/${socialLoginType}`, { method: 'DELETE' });
 };
