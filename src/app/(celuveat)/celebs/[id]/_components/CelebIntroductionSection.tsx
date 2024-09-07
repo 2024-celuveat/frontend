@@ -12,6 +12,7 @@ import IconPlus from '@/components/@icon/IconPlus';
 import { formatToTenThousandUnits } from '@/utils/formatToTenThousandUnits';
 import useOptimisticLike from '@/hooks/useOptimisticLike';
 import Avatar from '@/components/Avatar';
+import IconBullet from '@/components/@icon/IconBullet';
 
 interface CelebIntroductionSectionProps {
   celebrityInfo: CelebrityDetail;
@@ -49,22 +50,29 @@ const CelebIntroductionSection = ({ celebrityInfo }: CelebIntroductionSectionPro
 
   return (
     <>
-      <div className="flex h-72">
+      <div className="flex">
         <div className="flex-1">
           <span className="title-22-md">{celebrityInfo?.celebrity.name}</span>
-          <div className="mt-6 flex items-center">
-            <span className="body-14-rg">구독자</span>
-            <span className="ml-2 body-14-md">
-              {formatToTenThousandUnits(celebrityInfo?.celebrity.youtubeContentResults[0].subscriberCount)}명
-            </span>
-            <span className="ml-12 body-14-rg">추천 매장</span>
-            <span className="ml-2 body-14-md">
-              {celebrityInfo?.celebrity.youtubeContentResults[0].restaurantCount}개
-            </span>
+          <div className="mt-6 flex items-center gap-5">
+            <div>
+              <label className="body-14-rg">추천 맛집</label>
+              <span className="ml-2 body-14-md">
+                {celebrityInfo?.celebrity.youtubeContentResults[0].restaurantCount}개
+              </span>
+            </div>
+            <IconBullet />
+            <div>
+              <span className="body-14-rg">구독자</span>
+              <span className="ml-2 body-14-md">
+                {formatToTenThousandUnits(celebrityInfo?.celebrity.youtubeContentResults[0].subscriberCount)}명
+              </span>
+            </div>
           </div>
           <p className="mt-14 pr-16 body-13-rg">{celebrityInfo?.celebrity.introduction}</p>
         </div>
-        <Avatar imageUrl={celebrityInfo?.celebrity.profileImageUrl} size={72} alt={celebrityInfo?.celebrity.name} />
+        <div>
+          <Avatar imageUrl={celebrityInfo?.celebrity.profileImageUrl} size={72} alt={celebrityInfo?.celebrity.name} />
+        </div>
       </div>
       <div className="mt-20 flex gap-10">
         {isLiked ? (
