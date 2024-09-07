@@ -27,7 +27,7 @@ const RestaurantReviewLikeButton = ({ reviewId, helps, clickedHelpful }: Restaur
   ) : (
     <button
       onClick={handleClickLike}
-      className="mt-14 flex items-center gap-4 rounded-[6px] border border-gray-200 p-8"
+      className="mt-14 flex items-center gap-4 rounded-[6px] p-8 outline outline-gray-200"
     >
       <IconThumbsUpOutlined width={16} height={16} fill={colors.gray[300]} />
       <span className="text-gray-600 caption-12-rg">{clickedHelpful ? helps - 1 : helps}</span>
