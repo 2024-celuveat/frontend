@@ -50,7 +50,7 @@ export const getRestaurantReviews = async (restaurantId: number): Promise<PagedR
         writer: {
           id: 1,
           nickname: 'Alice',
-          profileImageUrl: 'https://example.com/profileImageUrl1.jpg',
+          profileImageUrl: 'https://avatars.githubusercontent.com/u/124599?v=4',
         },
         content: 'Great food and wonderful atmosphere! Will definitely come back.',
         star: 5,
@@ -67,7 +67,7 @@ export const getRestaurantReviews = async (restaurantId: number): Promise<PagedR
         writer: {
           id: 2,
           nickname: 'Bob',
-          profileImageUrl: 'https://example.com/profileImageUrl2.jpg',
+          profileImageUrl: 'https://avatars.githubusercontent.com/u/124599?v=4',
         },
         content: 'The service was a bit slow, but the food was good.',
         star: 3,

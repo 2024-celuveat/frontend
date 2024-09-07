@@ -3,7 +3,6 @@
 import { CelebrityDetail } from '@/@types';
 
 import BottomSheet from '@/components/@ui/BottomSheet';
-import Image from 'next/image';
 import Link from 'next/link';
 import { overlay } from 'overlay-kit';
 import { deleteInterestedCelebrity, postInterestedCelebrity } from '@/app/(actions)/celebs/actions';
@@ -12,6 +11,7 @@ import IconHeartFilled from '@/components/@icon/IconHeartFilled';
 import IconPlus from '@/components/@icon/IconPlus';
 import { formatToTenThousandUnits } from '@/utils/formatToTenThousandUnits';
 import useOptimisticLike from '@/hooks/useOptimisticLike';
+import Avatar from '@/components/Avatar';
 
 interface CelebIntroductionSectionProps {
   celebrityInfo: CelebrityDetail;
@@ -49,7 +49,7 @@ const CelebIntroductionSection = ({ celebrityInfo }: CelebIntroductionSectionPro
 
   return (
     <>
-      <div className="flex">
+      <div className="flex h-72">
         <div className="flex-1">
           <span className="title-22-md">{celebrityInfo?.celebrity.name}</span>
           <div className="mt-6 flex items-center">
@@ -64,16 +64,7 @@ const CelebIntroductionSection = ({ celebrityInfo }: CelebIntroductionSectionPro
           </div>
           <p className="mt-14 pr-16 body-13-rg">{celebrityInfo?.celebrity.introduction}</p>
         </div>
-
-        {celebrityInfo && (
-          <Image
-            className="h-72 w-72 rounded-full object-cover"
-            src={celebrityInfo?.celebrity.profileImageUrl}
-            alt={celebrityInfo?.celebrity.name}
-            width={72}
-            height={72}
-          />
-        )}
+        <Avatar imageUrl={celebrityInfo?.celebrity.profileImageUrl} size={72} alt={celebrityInfo?.celebrity.name} />
       </div>
       <div className="mt-20 flex gap-10">
         {isLiked ? (

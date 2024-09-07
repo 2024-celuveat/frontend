@@ -3,8 +3,10 @@ import IconArrowRight from '@/components/@icon/IconArrowRight';
 import IconHeartFilled from '@/components/@icon/IconHeartFilled';
 import IconReviewFilled from '@/components/@icon/IconReviewFilled';
 import { colors } from '@/constants/colors';
-import Image from 'next/image';
 import Link from 'next/link';
+import WithDrawButton from './_components/WithDrawButton';
+import { deleteAccount } from '@/app/(actions)/social-login/actions';
+import Avatar from '@/components/Avatar';
 
 interface MenuProps {
   label: string;
@@ -47,9 +49,7 @@ const MyPage = async () => {
       <section className="flex flex-col gap-20">
         <div className="flex items-center justify-between p-20">
           <div className="flex items-center gap-12">
-            <div className="h-[52px] w-[52px] overflow-hidden rounded-full">
-              <Image src={myProfile.profileImageUrl} alt={'프로필 이미지'} width={52} height={52} />
-            </div>
+            <Avatar imageUrl={myProfile.profileImageUrl} size={52} alt="프로필 이미지" />
             <span className="title-20-md">{myProfile.nickname}</span>
           </div>
           <button className="h-36 flex-none rounded-[8px] bg-gray-100 px-12 body-13-rg">프로필 수정</button>
@@ -87,7 +87,7 @@ const MyPage = async () => {
         >
           로그아웃
         </a>
-        <button className="h-[50px] w-full items-center justify-center text-gray-400 body-14-md">회원탈퇴</button>
+        {/* <WithDrawButton action={deleteAccount} /> */}
       </section>
     </>
   );

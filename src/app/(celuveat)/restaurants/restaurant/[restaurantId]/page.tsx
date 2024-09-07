@@ -2,20 +2,20 @@ import { getRestaurant, getRestaurantsNearby, getRestaurantVideos } from '@/app/
 import IconArrowRight from '@/components/@icon/IconArrowRight';
 import IconBullet from '@/components/@icon/IconBullet';
 import IconHeartOutlined from '@/components/@icon/IconHeartOutlined';
-import IconMore from '@/components/@icon/IconMore';
-import IconStarFilled from '@/components/@icon/IconStarFilled';
-import IconThumbsUpOutlined from '@/components/@icon/IconThumbsUpOutlined';
-import { colors } from '@/constants/colors';
 import Image from 'next/image';
 import Link from 'next/link';
 import RestaurantDetailPageMap from './_components/RestaurantDetailPageMap';
 import RestaurantAddInterestButton from './_components/RestaurantAddInterestButton';
 import { formatToTenThousandUnits } from '@/utils/formatToTenThousandUnits';
+import ReviewSummaryCard from './_components/ReviewSummaryCard';
+import { getRestaurantReviews } from '@/app/(actions)/reviews/actions';
+import Avatar from '@/components/Avatar';
 
 const RestaurantDetailPage = async ({ params }: { params: { restaurantId: string } }) => {
   const restaurant = await getRestaurant(Number(params.restaurantId));
   const videos = await getRestaurantVideos(Number(params.restaurantId));
   const restaurantsNearby = await getRestaurantsNearby(Number(params.restaurantId));
+  const reviews = await getRestaurantReviews(Number(params.restaurantId));
 
   return (
     <div>
@@ -30,12 +30,10 @@ const RestaurantDetailPage = async ({ params }: { params: { restaurantId: string
             </div>
             <h1 className="mt-4 title-22-md">{restaurant.name}</h1>
             <div className="mt-8 flex items-center gap-4">
-              <Image
-                className="rounded-full"
-                width={24}
-                height={24}
+              <Avatar
+                size={24}
                 alt={restaurant.visitedCelebrities[0]?.name}
-                src={restaurant.visitedCelebrities[0]?.profileImageUrl}
+                imageUrl={restaurant.visitedCelebrities[0]?.profileImageUrl}
               />
               <p className="body-13-rg">
                 <span className="border-b-[5px] border-b-mainDim-15 text-main-700">
@@ -73,13 +71,7 @@ const RestaurantDetailPage = async ({ params }: { params: { restaurantId: string
         />
         <div className="mt-16 flex justify-between">
           <div className="flex items-center gap-8">
-            <Image
-              className="rounded-full"
-              width={32}
-              height={32}
-              alt={videos[0].celebrities[0].name}
-              src={videos[0].celebrities[0].profileImageUrl}
-            />
+            <Avatar size={32} alt={videos[0].celebrities[0].name} imageUrl={videos[0].celebrities[0].profileImageUrl} />
             <span className="text-gray-900 body-16-md">{videos[0].celebrities[0].name}</span>
           </div>
           <div className="flex items-center gap-4">
@@ -97,11 +89,11 @@ const RestaurantDetailPage = async ({ params }: { params: { restaurantId: string
           </div>
         </div>
 
-        <hr className="height-1 mt-24 w-full bg-gray-100" />
+        <div className="relative right-[20px] mt-24 h-8 w-[calc(100%_+_40px)] bg-gray-100" />
 
         <section>
           <div className="mt-24 flex items-center justify-between">
-            <h2 className="title-20-md">리뷰 00개</h2>
+            <h2 className="title-20-md">리뷰 {reviews.size}개</h2>
             <button className="flex items-center">
               <span className="text-gray-400 body-13-rg">더보기</span>
               <IconArrowRight width={14} height={14} />
@@ -109,35 +101,12 @@ const RestaurantDetailPage = async ({ params }: { params: { restaurantId: string
           </div>
 
           <ul className="mt-16 flex flex-col">
-            <li>
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-6">
-                  <div className="h-[25px] w-[25px] rounded-full bg-gray-100" />
-                  <span className="text-gray-900 title-16-sb">셀럽잇</span>
-                  <span className="text-gray-400 caption-12-rg">2022.05.18</span>
-                </div>
-                <IconMore />
-              </div>
-
-              <div className="mt-10 flex gap-1">
-                <IconStarFilled />
-                <IconStarFilled />
-                <IconStarFilled />
-                <IconStarFilled />
-                <IconStarFilled fill={colors.gray[200]} />
-              </div>
-
-              <p className="mt-12 text-gray-900 body-13-rg">
-                유저 리뷰 내용 최대 3줄 노출 후 말줄임 처리 가나다라마바사아자차카타파하 유저 리뷰 내용 최대 3줄 노출 후
-                말줄임 처리 가나다라마바사아자차카타파하 유저 리뷰 내용 최대 3줄 노출 후 말줄임 처리
-                가나다라마바사아자차카타파하
-              </p>
-
-              <button className="mt-14 flex items-center gap-2 rounded-[6px] border border-gray-200 p-8">
-                <IconThumbsUpOutlined fill={colors.gray[300]} />
-                <span className="text-gray-600 caption-12-rg">100</span>
-              </button>
-            </li>
+            {reviews?.contents.map(review => (
+              <>
+                <ReviewSummaryCard key={review.id} review={review} />
+                <hr className="my-16 h-1 w-full bg-gray-100" />
+              </>
+            ))}
           </ul>
           <button className="mt-24 h-[50px] w-full rounded-[8px] bg-mainDim-15 text-main-700 title-16-sb">
             방문 리뷰 남기기
