@@ -1,3 +1,44 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": ["next/core-web-vitals", "airbnb", "airbnb-typescript", "plugin:prettier/recommended", "prettier"],
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "rules": {
+    "react/react-in-jsx-scope": "off",
+    "@typescript-eslint/lines-between-class-members": "off",
+    "@typescript-eslint/no-throw-literal": "off",
+    "@typescript-eslint/return-await": "off",
+    "react/jsx-props-no-spreading": "off",
+    "jsx-a11y/no-static-element-interactions": "off",
+    "jsx-a11y/click-events-have-key-events": "off",
+    "import/prefer-default-export": "off",
+    "react/prop-types": "off",
+    "react/require-default-props": "off",
+    "jsx-a11y/no-autofocus": "off",
+    "import/order": [
+      "error",
+      {
+        "groups": [
+          "builtin", // Node.js 기본 모듈
+          "external", // 외부 라이브러리
+          "internal", // 절대 경로를 사용한 import (src 내부)
+          ["sibling", "parent"], // 상대 경로로 import (./, ../)
+          "index", // index 파일을 import
+          "object" // 객체 import (TypeScript에서 enum과 같은 경우)
+        ],
+        "pathGroups": [
+          {
+            "pattern": "@/**", // src 내부 절대 경로
+            "group": "internal"
+          }
+        ],
+        "pathGroupsExcludedImportTypes": ["builtin"],
+        "newlines-between": "always", // 그룹 간 공백 라인 추가
+        "alphabetize": {
+          "order": "asc", // 알파벳 순서로 정렬
+          "caseInsensitive": true
+        }
+      }
+    ]
+  }
 }
