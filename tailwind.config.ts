@@ -1,5 +1,6 @@
-import { colors } from './src/constants/colors';
 import type { Config } from 'tailwindcss';
+
+import { colors } from './src/constants/colors';
 
 const config: Config = {
   content: [
@@ -34,6 +35,9 @@ const config: Config = {
         'slide-up': 'slideUp 0.3s ease-in-out',
         'slide-down': 'slideDown 0.5s ease-in-out',
         toast: 'toast 0.2s ease-in-out',
+      },
+      gridTemplateColumns: {
+        'auto-fill-64': 'repeat(auto-fill, minmax(64px, auto))',
       },
     },
   },
