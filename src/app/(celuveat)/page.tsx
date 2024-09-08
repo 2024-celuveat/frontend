@@ -1,17 +1,7 @@
 import Link from 'next/link';
 
 import { getCelebritiesBest, getRecommendedRestaurantsByCelebrities } from '@/app/(actions)/restaurants/actions';
-import {
-  IconChinese,
-  IconDesserts,
-  IconFastFood,
-  IconGlobalFood,
-  IconJapanese,
-  IconKorean,
-  IconMeatDishes,
-  IconPubAndBar,
-  IconWestern,
-} from '@/assets/icons/food-category';
+import * as Icon from '@/assets/icons/food-category';
 import IconArrowRight from '@/components/@icon/IconArrowRight';
 import IconNotice from '@/components/@icon/IconNotice';
 import IconSearch from '@/components/@icon/IconSearch';
@@ -22,18 +12,18 @@ import CelebritiesRecommendedRestaurantsInformation from './_components/Celebrit
 import RestaurantRecommendedSection from './_components/RestaurantRecommendedSection';
 
 const FOOD_CATEGORY = [
-  { name: '한식', icon: <IconKorean /> },
-  { name: '중식', icon: <IconChinese /> },
-  { name: '일식', icon: <IconJapanese /> },
-  { name: '양식', icon: <IconWestern /> },
-  { name: '패스트푸드', icon: <IconFastFood /> },
-  { name: '고기', icon: <IconMeatDishes /> },
-  // { name: '국/찌개', icon: <IconSoupAndStew /> },
-  // { name: '면', icon: <IconNoodles /> },
-  // { name: '분식', icon: <IconSnackFood /> },
-  { name: '세계음식', icon: <IconGlobalFood /> },
-  { name: '주점', icon: <IconPubAndBar /> },
-  { name: '커피/디저트', icon: <IconDesserts /> },
+  { name: '한식', icon: <Icon.Korean /> },
+  { name: '중식', icon: <Icon.Chinese /> },
+  { name: '일식', icon: <Icon.Japanese /> },
+  { name: '양식', icon: <Icon.Western /> },
+  { name: '패스트푸드', icon: <Icon.FastFood /> },
+  { name: '고기', icon: <Icon.MeatDishes /> },
+  { name: '국/찌개', icon: <Icon.SoupAndStew /> },
+  // { name: '면', icon: <Icon.Noodles /> },
+  { name: '분식', icon: <Icon.SnackFood /> },
+  { name: '세계음식', icon: <Icon.GlobalFood /> },
+  { name: '주점', icon: <Icon.PubAndBar /> },
+  { name: '커피/디저트', icon: <Icon.Desserts /> },
 ];
 
 export default async function Home() {
