@@ -59,6 +59,12 @@ const config: Config = {
           fontWeight: 500,
           letterSpacing: '-0.3px',
         },
+        '.title-18-bold': {
+          fontSize: '18px',
+          lineHeight: '21.6px',
+          fontWeight: 700,
+          letterSpacing: '-0.3px',
+        },
         '.body-18-bold': {
           fontSize: '18px',
           lineHeight: '22px',
