@@ -36,9 +36,6 @@ const config: Config = {
         'slide-down': 'slideDown 0.5s ease-in-out',
         toast: 'toast 0.2s ease-in-out',
       },
-      gridTemplateColumns: {
-        'auto-fill-64': 'repeat(auto-fill, minmax(64px, auto))',
-      },
     },
   },
   plugins: [
@@ -159,6 +156,10 @@ const config: Config = {
         },
         '.font-synthesis-none': {
           fontSynthesis: 'none',
+        },
+        '.food-category': {
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(64px, auto))',
         },
       };
 
