@@ -1,8 +1,9 @@
 import IconSearch from '@/components/@icon/IconSearch';
 import { colors } from '@/constants/colors';
+
 import IconArrowLeftGoBack from './_components/IconArrowLeftGoBack';
 
-const SearchPage = () => {
+function SearchPage() {
   return (
     <main>
       <div className="flex items-center gap-12 px-20 pt-24">
@@ -27,6 +28,6 @@ const SearchPage = () => {
       </ul>
     </main>
   );
-};
+}
 
 export default SearchPage;

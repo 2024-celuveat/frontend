@@ -1,11 +1,11 @@
 import { colors } from '@/constants/colors';
 
-const IconStarFilled = ({
+function IconStarFilled({
   width = 16,
   height = 16,
   fill = colors.sub.orange,
   ...props
-}: React.SVGProps<SVGSVGElement>) => {
+}: React.SVGProps<SVGSVGElement>) {
   return (
     <svg width={width} height={height} viewBox="0 0 16 15" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
       <path
@@ -14,6 +14,6 @@ const IconStarFilled = ({
       />
     </svg>
   );
-};
+}
 
 export default IconStarFilled;

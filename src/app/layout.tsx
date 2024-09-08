@@ -1,11 +1,12 @@
 import type { Metadata, Viewport } from 'next';
 import localFont from 'next/font/local';
-import './globals.css';
-import Header from '@/components/Header';
-import BottomNavbar from '@/components/BottomNavbar';
-import { getIsLogin } from './(actions)/social-login/actions';
 import Script from 'next/script';
-import Provider from './provider';
+
+import { getIsLogin } from '@/app/(actions)/social-login/actions';
+import '@/app/globals.css';
+import Provider from '@/app/provider';
+import BottomNavbar from '@/components/BottomNavbar';
+import Header from '@/components/Header';
 
 export const metadata: Metadata = {
   title: 'Celuveat',
@@ -34,7 +35,7 @@ export default async function RootLayout({
           type="text/javascript"
           strategy="beforeInteractive"
           src={`https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${process.env.NEXT_PUBLIC_NAVER_MAP_API_KEY_ID}`}
-        ></Script>
+        />
         <Provider>
           <Header />
           {children}

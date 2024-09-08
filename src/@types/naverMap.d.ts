@@ -1,9 +1,11 @@
+/* eslint-disable @typescript-eslint/no-shadow */
+/* eslint-disable max-classes-per-file */
 // NAVER Maps JavaScript API Version: 3.7
 
 /// <reference types="geojson" />
 
 declare namespace naver.maps {
-  /***** static members *****/
+  /** *** static members **** */
   let VERSION: string;
   let jsContentLoaded: boolean;
   function onJSContentLoaded(...args: any): void;
@@ -28,7 +30,7 @@ declare namespace naver.maps {
   type ArrayOfCoords = Point[] | LatLng[];
   type ArrayOfBounds = PointBounds[] | LatLngBounds[];
   type ArrayOfBoundsLiteral = PointBoundsLiteral[] | LatLngBoundsLiteral[];
-  type forEachOverlayCallback = (overlay: Marker | Polyline | Polygon, index: number) => void;
+  type ForEachOverlayCallback = (overlay: Marker | Polyline | Polygon, index: number) => void;
   type GeoJSON = GeoJSON.Feature<GeoJSON.Geometry> | GeoJSON.FeatureCollection<GeoJSON.Geometry>;
   // See https://www.topografix.com/gpx.asp
   type GPX = any;
@@ -36,7 +38,7 @@ declare namespace naver.maps {
   type KML = any;
   type KVOArrayOfCoords = KVOArray<Point> | KVOArray<LatLng>;
   type ArrayOfCoordsLiteral = PointLiteral[] | LatLngLiteral[];
-  type padding = Margin;
+  type Padding = Margin;
   type StrokeStyleType =
     | 'solid'
     | 'shortdash'
@@ -132,7 +134,7 @@ declare namespace naver.maps {
     maxBounds?: Bounds | BoundsLiteral;
     maxZoom?: number;
     minZoom?: number;
-    padding?: padding;
+    padding?: Padding;
     pinchZoom?: boolean;
     resizeOrigin?: Position;
     scaleControl?: boolean;
@@ -644,17 +646,29 @@ declare namespace naver.maps {
    */
   class KVO {
     constructor();
+
     set(key: string, value: any, silently?: boolean): void;
+
     get(key: string): any;
+
     bindTo(key: string | string[], target: KVO, targetKey?: string): void;
+
     unbind(key: string): void;
+
     unbindAll(): void;
+
     setValues(properties: { [key: string]: any }): void;
+
     addListener(eventName: string, listener: (event: any) => any): MapEventListener;
+
     addListenerOnce(eventName: string, listener: (event: any) => any): MapEventListener;
+
     hasListener(eventName: string): boolean;
+
     removeListener(listeners: MapEventListener | MapEventListener[]): void;
+
     clearListeners(eventName: string): void;
+
     trigger(eventName: string, eventObject?: any): void;
   }
 
@@ -663,18 +677,31 @@ declare namespace naver.maps {
    */
   class KVOArray<T> extends KVO {
     constructor(array: T[]);
+
     clear(): void;
+
     forEach(callback: (element: T, index: number) => void): void;
+
     getArray(): T[];
+
     getAt(index: number): T;
+
     getIndexOfElement(element: T): number;
+
     getLength(): number;
+
     insertAt(index: number, element: T): void;
+
     pop(): T;
+
     push(element: T): number;
+
     removeAt(index: number): T;
+
     removeElement(element: T): void;
+
     setAt(index: number, element: T): void;
+
     splice(startIndex: number, deleteCount: number, ...newElement: T[]): T[];
   }
 
@@ -683,22 +710,39 @@ declare namespace naver.maps {
    */
   class Point {
     x: number;
+
     y: number;
+
     constructor(x: number, y: number);
+
     constructor(literal: PointLiteral);
+
     add(x: number, y: number): Point;
+
     add(point: Coord | PointLiteral): Point;
+
     ceil(): Point;
+
     clone(): Point;
+
     div(point: Coord | PointLiteral): void;
+
     div(x: number, y: number): Point;
+
     equals(point: Coord | PointLiteral): boolean;
+
     floor(): Point;
+
     mul(x: number, y: number): Point;
+
     mul(point: Coord | PointLiteral): Point;
+
     round(): Point;
+
     sub(point: Coord | PointLiteral): Point;
+
     sub(x: number, y: number): Point;
+
     toString(): string;
   }
 
@@ -707,22 +751,39 @@ declare namespace naver.maps {
    */
   class Size {
     width: number;
+
     height: number;
+
     constructor(width: number, height: number);
+
     constructor(literal: SizeLiteral);
+
     add(width: number, height: number): Size;
+
     add(size: Size | SizeLiteral): Size;
+
     ceil(): Size;
+
     clone(): Size;
+
     div(width: number, height: number): Size;
+
     div(size: Size | SizeLiteral): Size;
+
     equals(size: Size | SizeLiteral): boolean;
+
     floor(): Size;
+
     mul(size: Size | SizeLiteral): Size;
+
     mul(width: number, height: number): Size;
+
     round(): Size;
+
     sub(size: Size | SizeLiteral): Size;
+
     sub(width: number, height: number): Size;
+
     toString(): string;
   }
 
@@ -731,23 +792,41 @@ declare namespace naver.maps {
    */
   class PointBounds {
     constructor(minPoint: Point, maxPoint: Point);
+
     constructor(literal: PointBoundsLiteral);
+
     static bounds(point: Coord | PointLiteral, pointN: Coord | PointLiteral): PointBounds;
+
     clone(): PointBounds;
+
     equals(bounds: Bounds | PointBoundsLiteral): boolean;
+
     extend(point: Coord | PointLiteral): PointBounds;
+
     getCenter(): Point;
+
     getMax(): Point;
+
     getMin(): Point;
+
     hasBounds(bounds: Bounds | PointBoundsLiteral): boolean;
+
     hasPoint(point: Coord | PointLiteral): boolean;
+
     intersects(bounds: Bounds | PointBoundsLiteral): boolean;
+
     maxX(): number;
+
     maxY(): number;
+
     minX(): number;
+
     minY(): number;
+
     toString(): string;
+
     toArray(): PointBoundsArrayLiteral;
+
     union(bounds: Bounds | PointBoundsLiteral): PointBounds;
   }
 
@@ -756,14 +835,23 @@ declare namespace naver.maps {
    */
   class LatLng extends Point {
     constructor(lat: number, lng: number);
+
     constructor(literal: LatLngLiteral);
+
     clone(): LatLng;
+
     destinationPoint(angle: number, meter: number): LatLng;
+
     equals(point: Coord | LatLngLiteral): boolean;
+
     lat(): number;
+
     lng(): number;
+
     toPoint(): Point;
+
     toString(): string;
+
     isEmpty(): boolean;
   }
 
@@ -772,21 +860,37 @@ declare namespace naver.maps {
    */
   class LatLngBounds extends PointBounds {
     constructor(sw: LatLng, ne: LatLng);
+
     constructor(literal: LatLngBoundsLiteral);
+
     static bounds(latlng: Coord | LatLngLiteral, latlngN: Coord | LatLngLiteral): LatLngBounds;
+
     clone(): LatLngBounds;
+
     east(): number;
+
     equals(bounds: Bounds | LatLngBoundsLiteral): boolean;
+
     extend(latlng: Coord | LatLngLiteral): LatLngBounds;
+
     getCenter(): LatLng;
+
     getNE(): LatLng;
+
     getSW(): LatLng;
+
     hasLatLng(latlng: Coord | LatLngLiteral): boolean;
+
     intersects(bounds: Bounds | LatLngBoundsLiteral): boolean;
+
     north(): number;
+
     south(): number;
+
     toPointBounds(): PointBounds;
+
     union(bounds: Bounds | LatLngBoundsLiteral): LatLngBounds;
+
     west(): number;
   }
 
@@ -795,45 +899,80 @@ declare namespace naver.maps {
    */
   class Map extends KVO {
     controls: KVOArray<Position>;
+
     data: Data;
+
     layers: LayerRegistry;
+
     mapTypes: MapTypeRegistry;
+
     mapSystemProjection: MapSystemProjection;
 
     constructor(mapDiv: string | HTMLElement, mapOptions?: MapOptions);
+
     addPane(name: string, elementOrIndex: HTMLElement | number): void;
+
     autoResize(): void;
+
     destroy(): void;
+
     fitBounds(
       bounds: Bounds | BoundsLiteral | ArrayOfCoords | ArrayOfCoordsLiteral,
       fitBoundsOptions?: FitBoundsOptions,
     ): void;
+
     getBounds(): Bounds;
+
     getCenter(): Coord;
+
     getCenterPoint(): Coord;
+
     getElement(): HTMLElement;
+
     getMapTypeId(): string;
+
     getMaxZoom(): number;
+
     getMinZoom(): number;
+
     getOptions(key?: string): any;
+
     getPanes(): MapPanes;
+
     getPrimitiveProjection(): Projection;
+
     getProjection(): MapSystemProjection;
+
     getSize(): Size;
+
     getZoom(): number;
+
     morph(coord: Coord | CoordLiteral, zoom?: number, transitionOptions?: TransitionOptions): void;
+
     panBy(offset: Point | PointLiteral): void;
+
     panTo(coord: Coord | CoordLiteral, transitionOptions?: TransitionOptions): void;
+
     panToBounds(bounds: Bounds | BoundsLiteral, transitionOptions?: TransitionOptions, margin?: Margin): void;
+
     refresh(noEffect?: boolean): void;
+
     removePane(name: string): void;
+
     setCenter(center: Coord | CoordLiteral): void;
+
     setCenterPoint(point: Point | PointLiteral): void;
+
     setMapTypeId(mapTypeId: string): void;
+
     setOptions(newOptionsOrKey: { [key: string]: any } | string, value?: any): void;
+
     setSize(size: Size | SizeLiteral): void;
+
     setZoom(zoom: number, effect?: boolean): void;
+
     updateBy(coord: Coord | CoordLiteral, zoom: number): void;
+
     zoomBy(deltaZoom: number, zoomOrigin?: Coord | CoordLiteral, effect?: boolean): void;
   }
 
@@ -842,28 +981,51 @@ declare namespace naver.maps {
    */
   class Tile extends KVO {
     constructor(element: HTMLElement, tileOptions?: TileOptions);
+
     appendTo(parentNode: HTMLElement): void;
+
     cancelFadeIn(): void;
+
     destroy(): void;
+
     fadeIn(callback: () => void, startOpacity?: number): void;
+
     getDuration(): number;
+
     getElement(): HTMLElement;
+
     getOffset(): Point;
+
     getOpacity(): number;
+
     getSize(): Size;
+
     getTileIndex(): TileIndex;
+
     getZIndex(): number;
+
     hide(): void;
+
     load(tileOptions?: TileOptions, loaded?: () => void): void;
+
     remove(): void;
+
     reset(mapType: MapType, zoom: number, tileOptions?: TileOptions): void;
+
     setBlank(): void;
+
     setOffset(offset: Point): void;
+
     setOffset(x: number, y: number): void;
+
     setOpacity(opacity: number): void;
+
     setSize(size: Size): void;
+
     setTileIndex(tileIndex: TileIndex): void;
+
     setZIndex(zIndex: number): void;
+
     show(): void;
   }
 
@@ -872,6 +1034,7 @@ declare namespace naver.maps {
    */
   class CanvasTile extends Tile {
     constructor(canvasTileOptions: CanvasTileOptions);
+
     getElements(): [HTMLElement, HTMLCanvasElement];
   }
 
@@ -880,8 +1043,11 @@ declare namespace naver.maps {
    */
   class ImageTile extends Tile {
     constructor(imageTileOptions: ImageTileOptions);
+
     getImageElements(): HTMLElement[];
+
     getUrls(): string[];
+
     setUrls(urls: string[]): void;
   }
 
@@ -890,17 +1056,29 @@ declare namespace naver.maps {
    */
   class CanvasMapType implements MapType {
     minZoom: number;
+
     maxZoom: number;
+
     name: string;
+
     projection: Projection;
+
     tileSize: Size;
+
     constructor(canvasMapTypeOptions: CanvasMapTypeOptions);
+
     getMapTypeOptions(): CanvasMapTypeOptions;
+
     getMaxZoom(): number;
+
     getMinZoom(): number;
+
     getName(): string;
+
     getTile(x: number, y: number, z: number): CanvasTile;
+
     getTileData(x: number, y: number, z: number): ImageData;
+
     setMapTypeOptions(canvasMapTypeOptions: CanvasMapTypeOptions): void;
   }
 
@@ -909,19 +1087,33 @@ declare namespace naver.maps {
    */
   class ImageMapType implements MapType {
     maxZoom: number;
+
     minZoom: number;
+
     name: string;
+
     projection: Projection;
+
     tileSize: Size;
+
     repeatX: boolean;
+
     vendor: string;
+
     constructor(imageMapTypeOptions: ImageMapTypeOptions);
+
     getMapTypeOptions(): ImageMapTypeOptions;
+
     getMaxZoom(): number;
+
     getMinZoom(): number;
+
     getName(): string;
+
     getTile(x: number, y: number, z: number): ImageTile;
+
     getTileUrls(x: number, y: number, z: number): string[];
+
     setMapTypeOptions(imageMapTypeOptions: ImageMapTypeOptions): void;
   }
 
@@ -930,13 +1122,21 @@ declare namespace naver.maps {
    */
   class MapTypeRegistry extends KVO {
     uid?: string;
+
     VENDOR?: string;
+
     constructor(mapTypeInfo?: { [mapTypeId: string]: MapType }, defaultMapTypeId?: string);
+
     getPreviousTypeId(): string;
+
     getSelectedType(): MapType;
+
     getSelectedTypeId(): string;
+
     getTypeIds(): string[];
+
     set(mapTypeId: string, mapType: MapType): void;
+
     setSelectedTypeId(mapTypeId: string): void;
   }
 
@@ -945,6 +1145,7 @@ declare namespace naver.maps {
    */
   class LayerRegistry extends KVO {
     set(key: string, value: Layer): void;
+
     getLayerNames(): string[];
   }
 
@@ -953,19 +1154,33 @@ declare namespace naver.maps {
    */
   class NaverStyleMapTypeOptions {
     constructor(options?: StyleMapTypeOptions);
+
     static getBicycleLayer(opts?: ImageMapTypeOptions): ImageMapType;
+
     static getBlankMap(opts?: ImageMapTypeOptions): ImageMapType;
+
     static getCadastralLayer(opts?: ImageMapTypeOptions): ImageMapType;
+
     static getHybridMap(opts?: ImageMapTypeOptions): ImageMapType;
+
     static getMapTypes(opts?: ImageMapTypeOptions): ImageMapType;
+
     static getNormalLabelLayer(opts?: ImageMapTypeOptions): ImageMapType;
+
     static getNormalMap(opts?: ImageMapTypeOptions): ImageMapType;
+
     static getSatelliteLabelLayer(opts?: ImageMapTypeOptions): ImageMapType;
+
     static getSatelliteMap(opts?: ImageMapTypeOptions): ImageMapType;
+
     static getStreetLayer(opts?: ImageMapTypeOptions): ImageMapType;
+
     static getTerrainMap(opts?: ImageMapTypeOptions): ImageMapType;
+
     static getTrafficLayer(opts?: ImageMapTypeOptions): ImageMapType;
+
     static getVectorMap(opts?: ImageMapTypeOptions): ImageMapType;
+
     static getWorldMap(opts?: ImageMapTypeOptions): ImageMapType;
   }
 
@@ -993,12 +1208,19 @@ declare namespace naver.maps {
    */
   class CustomControl extends KVO {
     constructor(html: string, ControlOptions: ControlOptions);
+
     getElement(): HTMLElement;
+
     getMap(): Map | null;
+
     getOptions(key?: string): any;
+
     html(html?: string): string;
+
     setMap(map?: Map | null): void;
+
     setOptions(newOptions: ControlOptions): void;
+
     setPosition(position: Position): void;
   }
 
@@ -1042,15 +1264,26 @@ declare namespace naver.maps {
    */
   class Layer extends KVO {
     name: string;
+
+    // eslint-disable-next-line @typescript-eslint/no-shadow
     constructor(name: string, MapTypeRegistry: MapTypeRegistry, options?: LayerOptions);
+
     getLayerType(): MapType;
+
     getLayerTypeId(): string;
+
     getMap(): Map | null;
+
     getOpacity(): number;
+
     getPaneElement(): HTMLElement;
+
     refresh(noEffect?: boolean): void;
+
     setLayerTypeId(typeId: string): void;
+
     setMap(map: Map | null): void;
+
     setOpacity(opacity: number): void;
   }
 
@@ -1080,9 +1313,13 @@ declare namespace naver.maps {
    */
   class TrafficLayer extends LabelLayer {
     constructor(option?: TrafficLayerOptions);
+
     endAutoRefresh(): void;
+
     getRTSVersion(): number;
+
     startAutoRefresh(): void;
+
     refreshRTSVersion(): void;
   }
 
@@ -1091,21 +1328,37 @@ declare namespace naver.maps {
    */
   class Data extends KVO {
     constructor();
+
     addFeature(feature: Feature, autoStyle: boolean): void;
+
     addGeoJson(geojson: GeoJSON, autoStyle: boolean): void;
+
     addGpx(xmlDoc: GPX, autoStyle: boolean): void;
+
     addKml(xmlDoc: KML, autoStyle: boolean): void;
+
     forEach(callback: (feature: Feature, index: number) => void): void;
+
     getAllFeature(): Feature[];
+
     getFeatureById(id: string | number): Feature;
+
     getMap(): Map | null;
+
     getStyle(): StyleOptions | StylingFunction;
+
     overrideStyle(feature: Feature, style: StyleOptions): void;
+
     removeFeature(feature: Feature): void;
+
     removeGeoJson(geojson: GeoJSON): void;
+
     revertStyle(feature: Feature): void;
+
     setMap(map: Map | null): void;
+
     setStyle(style: StyleOptions | StylingFunction): void;
+
     toGeoJson(): GeoJSON;
   }
 
@@ -1114,14 +1367,23 @@ declare namespace naver.maps {
    */
   class Feature extends KVO {
     constructor(rawFeature: GeoJSON);
-    forEachOverlay(callback: forEachOverlayCallback): void;
+
+    forEachOverlay(callback: ForEachOverlayCallback): void;
+
     getBounds(): Bounds;
+
     getGeometries(): Geometry[];
+
     getId(): string;
+
     getOverlays(): Marker[] | Polyline[] | Polygon[];
+
     getProperty(name: string): any;
+
     getRaw(): GeoJSON;
+
     setProperty(name: string, value: any): void;
+
     setStyle(styleOptions: StyleOptions): void;
   }
 
@@ -1130,7 +1392,9 @@ declare namespace naver.maps {
    */
   class Geometry extends KVO {
     constructor(rawGeometry: GeoJSON.Geometry);
+
     getCoords(): ArrayOfCoords;
+
     getType(): string;
   }
 
@@ -1139,13 +1403,21 @@ declare namespace naver.maps {
    */
   class OverlayView extends KVO {
     constructor();
+
     draw(): void;
+
     getContainerTopLeft(): Point;
+
     getMap(): Map | null;
+
     getPanes(): MapPanes;
+
     getProjection(): MapSystemProjection;
+
     onAdd(): void;
+
     onRemove(): void;
+
     setMap(map: Map | null): void;
   }
 
@@ -1154,17 +1426,29 @@ declare namespace naver.maps {
    */
   class AbstractShapeOverlay extends OverlayView {
     setOptions(key: string, value: any): void;
+
     setOptions(options: { [key: string]: any }): void;
+
     getOptions(key?: string): any;
+
     setStyles(key: string, value: any): void;
+
     setStyles(styles: { [key: string]: any }): void;
+
     getStyles(key?: string): any;
+
     setVisible(visible: boolean): void;
+
     getVisible(): boolean;
+
     setZIndex(zIndex: number): void;
+
     getZIndex(): number;
+
     setClickable(clickable: boolean): void;
+
     getClickable(): boolean;
+
     getElement(): HTMLElement;
   }
 
@@ -1173,16 +1457,27 @@ declare namespace naver.maps {
    */
   class Circle extends AbstractShapeOverlay {
     constructor(options?: CircleOptions);
+
     getAreaSize(): number;
+
     getBounds(): Bounds;
+
     getCenter(): Coord;
+
     getDrawingRect(): Bounds;
+
     getRadius(): number;
+
     setCenter(center: Coord | CoordLiteral): void;
+
     setOptions(key: string, value: any): void;
+
     setOptions(options: CircleOptions): void;
+
     setRadius(radius: number): void;
+
     setStyles(key: string, value: any): void;
+
     setStyles(options: CircleOptions): void;
   }
 
@@ -1191,13 +1486,21 @@ declare namespace naver.maps {
    */
   class Ellipse extends AbstractShapeOverlay {
     constructor(options?: EllipseOptions);
+
     getAreaSize(): number;
+
     getBounds(): Bounds;
+
     getDrawingRect(): Bounds;
+
     setBounds(bounds: Bounds | BoundsLiteral): void;
+
     setOptions(options: EllipseOptions): void;
+
     setOptions(key: string, value: any): void;
+
     setStyles(options: EllipseOptions): void;
+
     setStyles(key: string, value: any): void;
   }
 
@@ -1206,9 +1509,13 @@ declare namespace naver.maps {
    */
   class GroundOverlay extends OverlayView {
     constructor(url: string, bounds: Bounds | BoundsLiteral, options?: GroundOverlayOptions);
+
     getBounds(): Bounds;
+
     getOpacity(): number;
+
     getUrl(): string;
+
     setOpacity(opacity: number): void;
   }
 
@@ -1217,16 +1524,27 @@ declare namespace naver.maps {
    */
   class InfoWindow extends OverlayView {
     constructor(options: InfoWindowOptions);
+
     close(): void;
+
     getContent(): string | HTMLElement;
+
     getContentElement(): HTMLElement;
+
     getOptions(key?: string): any; // if key is undefined, return InfoWindowOptions
+
     getPosition(): Coord;
+
     getZIndex(): number;
+
     open(map: Map, anchor?: Coord | CoordLiteral | Marker): void;
+
     setContent(content: string | HTMLElement): void;
+
     setOptions(options: InfoWindowOptions): void;
+
     setPosition(position: Coord | CoordLiteral): void;
+
     setZIndex(zIndex: number): void;
   }
 
@@ -1235,30 +1553,55 @@ declare namespace naver.maps {
    */
   class Marker extends OverlayView {
     constructor(options: MarkerOptions);
+
     getAnimation(): Animation | null;
+
     getClickable(): boolean;
+
     getCursor(): string;
+
     getDraggable(): boolean;
+
     getDrawingRect(): Bounds;
+
     getElement(): HTMLElement;
+
     getIcon(): ImageIcon | SymbolIcon | HtmlIcon;
+
     getOptions(key?: string): any; // if key is undefined, return MarkerOptions
+
     getPosition(): Coord;
+
     getShape(): MarkerShape;
+
     getTitle(): string;
+
     getVisible(): boolean;
+
     getZIndex(): number;
+
     setAnimation(animation: Animation | null): void;
+
     setClickable(clickable: boolean): void;
+
     setCursor(cursor: string): void;
+
     setDraggable(draggable: boolean): void;
+
     setIcon(icon: string | ImageIcon | SymbolIcon | HtmlIcon): void;
+
     setOptions(options: MarkerOptions): void;
+
     setOptions(key: string, value: unknown): void;
+
     setPosition(position: Coord | CoordLiteral): void;
+
     setShape(shape: MarkerShape): void;
+
     setTitle(title: string): void;
+
     setVisible(visible: boolean): void;
+
     setZIndex(zIndex: number): void;
   }
 
@@ -1267,18 +1610,31 @@ declare namespace naver.maps {
    */
   class Polygon extends AbstractShapeOverlay {
     constructor(options?: PolygonOptions);
+
     getAreaSize(): number;
+
     getBounds(): Bounds;
+
     getDrawingRect(): Bounds;
+
     getPath(): ArrayOfCoords | KVOArrayOfCoords;
+
     getPaths(): ArrayOfCoords[] | KVOArray<KVOArrayOfCoords>;
+
     getOptions<K extends keyof PolygonOptions>(key: K): PolygonOptions[K];
+
     getOptions(): PolygonOptions;
+
     setOptions<K extends keyof PolygonOptions>(key: K, value: PolygonOptions[K]): void;
+
     setOptions(options: PolygonOptions): void;
+
     setPath(path: ArrayOfCoords | KVOArrayOfCoords | ArrayOfCoordsLiteral): void;
+
     setPaths(paths: ArrayOfCoords[] | KVOArray<KVOArrayOfCoords> | ArrayOfCoordsLiteral[]): void;
+
     setStyles(key: string, value: any): void;
+
     setStyles(options: PolygonOptions): void;
   }
 
@@ -1287,14 +1643,23 @@ declare namespace naver.maps {
    */
   class Polyline extends AbstractShapeOverlay {
     constructor(options?: PolylineOptions);
+
     getBounds(): Bounds;
+
     getDistance(): number;
+
     getDrawingRect(): Bounds;
+
     getPath(): ArrayOfCoords | KVOArrayOfCoords;
+
     setOptions(key: string, value: any): void;
+
     setOptions(options: PolylineOptions): void;
+
     setPath(path: ArrayOfCoords | KVOArrayOfCoords | ArrayOfCoordsLiteral): void;
+
     setStyles(key: string, value: any): void;
+
     setStyles(options: PolylineOptions): void;
   }
 
@@ -1303,13 +1668,21 @@ declare namespace naver.maps {
    */
   class Rectangle extends AbstractShapeOverlay {
     constructor(options?: RectangleOptions);
+
     getAreaSize(): number;
+
     getBounds(): Bounds;
+
     getDrawingRect(): Bounds;
+
     setBounds(bounds: Bounds | BoundsLiteral): void;
+
     setOptions(options: RectangleOptions): void;
+
     setOptions(key: string, value: any): void;
+
     setStyles(key: string, value: any): void;
+
     setStyles(options: RectangleOptions): void;
   }
 
@@ -1461,45 +1834,77 @@ declare namespace naver.maps {
 
   class PanoramaProjection extends KVO {
     fromCoordToPov(coord: LatLng): PanoramaPov;
+
     fromScrollToPov(dx: number, dy: number): PanoramaPov;
+
     fromCoordToOffset(coord: LatLng): Point;
+
     fromOffsetToCoord(offset: Point): LatLng;
   }
 
   class Panorama extends KVO {
     constructor(panoramaDiv: string | HTMLElement, panoramaOptions: PanoramaOptions);
+
     getElement(): HTMLElement;
+
     getLocation(): PanoramaLocation;
+
     getMaxScale(): number;
+
     getMaxZoom(): number;
+
     getMinScale(): number;
+
     getMinZoom(): number;
+
     getOptions(key?: string): any;
+
     getPanoId(): string;
+
     getPosition(): LatLng;
+
     getPov(): PanoramaPov;
+
     getProjection(): PanoramaProjection;
+
     getScale(): number;
+
     getSize(): Size;
+
     getVisible(): boolean;
+
     getZoom(): number;
+
     setOptions(key: string, value: any): void;
+
     setOptions(newOptions: PanoramaOptions): void;
+
     setPanoId(panoId: string): void;
+
     setPanoIdWithPov(panoId: string, pov: PanoramaPov): void;
+
     setPosition(position: LatLng | LatLngLiteral): void;
+
     setPov(pov: PanoramaPov): void;
+
     setScale(scale: number): void;
+
     setSize(size: Size | SizeLiteral): void;
+
     setVisible(visible: boolean): void;
+
     setZoom(zoom: number): void;
+
     zoomIn(): void;
+
     zoomOut(): void;
   }
 
   class FlightSpot extends KVO {
     constructor();
+
     getMap(): Map | null;
+
     setMap(map: Map | null): void;
   }
 
@@ -1566,16 +1971,27 @@ declare namespace naver.maps {
 
     class DrawingManager extends KVO {
       constructor(options?: DrawingOptions);
+
       addDrawing(overlay: DrawingOverlay, drawingMode: DrawingMode, id?: string): void;
+
       addListener(eventName: DrawingEvents, listener: (overlay: DrawingOverlay) => void): MapEventListener;
+
       destroy(): void;
+
       getDrawing(id: string): DrawingOverlay;
+
       getDrawings(): { [key: string]: DrawingOverlay };
+
       getMap(): Map | null;
+
       setMap(map: Map | null): void;
+
       toGeoJson(): GeoJSON;
+
       getOptions<K extends keyof DrawingOptions>(key: K): DrawingOptions[K];
+
       setOptions<K extends keyof DrawingOptions>(key: K, value: DrawingOptions[K]): void;
+
       setOptions(options: DrawingOptions): void;
     }
   }
@@ -1621,38 +2037,63 @@ declare namespace naver.maps {
 
     class DotMap extends KVO {
       constructor(dotMapOptions?: DotMapOptions);
+
       getData(): LatLng[] | PointArrayLiteral[];
+
       getMap(): Map | null;
+
       getOptions(key?: string): any; // if key is undefiend, return DotMapOptions
+
       addDrawing(overlay: drawing.DrawingOverlay, drawingMode: drawing.DrawingMode, id?: string): void;
+
       redraw(): void;
+
       setData(data: LatLng[] | PointArrayLiteral[]): void;
+
       setMap(map: Map | null): void;
+
       setOptions(key: string, value: any): void;
+
       setOptions(options: DotMapOptions): void;
     }
 
     class HeatMap extends KVO {
       constructor(heatMapOptions?: HeatMapOptions);
+
       getColorMap(): SpectrumStyle;
+
       getData(): LatLng[] | PointArrayLiteral[];
+
       getMap(): Map | null;
+
       getOptions(key?: string): any; // if key is undefiend, return HeatMapOptions
+
       redraw(): void;
+
       setColorMap(colormap: SpectrumStyle, inReverse: boolean): void;
+
       setData(data: LatLng[] | PointArrayLiteral[]): void;
+
       setMap(map: Map | null): void;
+
       setOptions(key: string, value: any): void;
+
       setOptions(options: HeatMapOptions): void;
     }
 
     class WeightedLocation {
       constructor(lat: number, lng: number, weight?: number);
+
       clone(): WeightedLocation;
+
       getLocation(): LatLng;
+
       getWeight(): number;
+
       lat(): number;
+
       lng(): number;
+
       toString(): string;
     }
   }

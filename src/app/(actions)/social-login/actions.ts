@@ -1,8 +1,9 @@
 'use server';
 
+import { cookies } from 'next/headers';
+
 import { SocialLoginType } from '@/@types/server/login.type';
 import { api } from '@/utils/api';
-import { cookies } from 'next/headers';
 
 export const getIsLogin = async () => {
   const cookieStore = cookies();

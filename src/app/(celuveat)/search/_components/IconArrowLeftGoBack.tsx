@@ -1,10 +1,11 @@
 'use client';
 
-import IconArrowLeft from '@/components/@icon/IconArrowLeft';
-import { colors } from '@/constants/colors';
 import { useRouter } from 'next/navigation';
 
-const IconArrowLeftGoBack = () => {
+import IconArrowLeft from '@/components/@icon/IconArrowLeft';
+import { colors } from '@/constants/colors';
+
+function IconArrowLeftGoBack() {
   const router = useRouter();
 
   return (
@@ -17,6 +18,6 @@ const IconArrowLeftGoBack = () => {
       }}
     />
   );
-};
+}
 
 export default IconArrowLeftGoBack;

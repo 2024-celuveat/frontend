@@ -1,26 +1,28 @@
 import type { Meta } from '@storybook/react';
-import IconThumbsUpFilled from './IconThumbsUpFilled';
+
 import { colors } from '@/constants/colors';
+
 import IconArrowLeft from './IconArrowLeft';
 import IconArrowRight from './IconArrowRight';
 import IconCheck from './IconCheck';
 import IconClose from './IconClose';
 import IconHeartFilled from './IconHeartFilled';
 import IconHeartOutlined from './IconHeartOutlined';
-import IconHomeOutlined from './IconHomeOutlined';
 import IconHomeFilled from './IconHomeFilled';
+import IconHomeOutlined from './IconHomeOutlined';
 import IconInfo from './IconInfo';
 import IconLocation from './IconLocation';
-import IconMapOutlined from './IconMapOutlined';
 import IconMapFilled from './IconMapFilled';
-import IconPersonOutlined from './IconPersonOutlined';
-import IconPersonFilled from './IconPersonFilled';
-import IconNotice from './IconNotice';
-import IconPlus from './IconPlus';
+import IconMapOutlined from './IconMapOutlined';
 import IconMore from './IconMore';
+import IconNotice from './IconNotice';
+import IconPersonFilled from './IconPersonFilled';
+import IconPersonOutlined from './IconPersonOutlined';
+import IconPlus from './IconPlus';
 import IconReviewFilled from './IconReviewFilled';
 import IconReviewOutlined from './IconReviewOutlined';
 import IconSearch from './IconSearch';
+import IconThumbsUpFilled from './IconThumbsUpFilled';
 
 const meta: Meta = {
   title: '@icon/index',

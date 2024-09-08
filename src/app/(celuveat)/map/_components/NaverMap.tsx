@@ -1,13 +1,16 @@
+/* eslint-disable no-new */
+
 'use client';
 
-import { Restaurant } from '@/@types';
 import { useEffect, useRef } from 'react';
+
+import { Restaurant } from '@/@types';
 
 interface NaverMapProps {
   restaurants: PagedResponse<Restaurant>;
 }
 
-const NaverMap = ({ restaurants }: NaverMapProps) => {
+function NaverMap({ restaurants }: NaverMapProps) {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -32,7 +35,7 @@ const NaverMap = ({ restaurants }: NaverMapProps) => {
     });
   }, []);
 
-  return <div ref={ref} className="h-[calc(100vh_-_88px)] w-full"></div>;
-};
+  return <div ref={ref} className="h-[calc(100vh_-_88px)] w-full" />;
+}
 
 export default NaverMap;

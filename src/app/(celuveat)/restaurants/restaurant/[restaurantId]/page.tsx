@@ -1,17 +1,19 @@
+import Image from 'next/image';
+import Link from 'next/link';
+
 import { getRestaurant, getRestaurantsNearby, getRestaurantVideos } from '@/app/(actions)/restaurants/actions';
+import { getRestaurantReviews } from '@/app/(actions)/reviews/actions';
 import IconArrowRight from '@/components/@icon/IconArrowRight';
 import IconBullet from '@/components/@icon/IconBullet';
 import IconHeartOutlined from '@/components/@icon/IconHeartOutlined';
-import Image from 'next/image';
-import Link from 'next/link';
-import RestaurantDetailPageMap from './_components/RestaurantDetailPageMap';
-import RestaurantAddInterestButton from './_components/RestaurantAddInterestButton';
-import { formatToTenThousandUnits } from '@/utils/formatToTenThousandUnits';
-import ReviewSummaryCard from './_components/ReviewSummaryCard';
-import { getRestaurantReviews } from '@/app/(actions)/reviews/actions';
 import Avatar from '@/components/Avatar';
+import { formatToTenThousandUnits } from '@/utils/formatToTenThousandUnits';
 
-const RestaurantDetailPage = async ({ params }: { params: { restaurantId: string } }) => {
+import RestaurantAddInterestButton from './_components/RestaurantAddInterestButton';
+import RestaurantDetailPageMap from './_components/RestaurantDetailPageMap';
+import ReviewSummaryCard from './_components/ReviewSummaryCard';
+
+async function RestaurantDetailPage({ params }: { params: { restaurantId: string } }) {
   const restaurant = await getRestaurant(Number(params.restaurantId));
   const videos = await getRestaurantVideos(Number(params.restaurantId));
   const restaurantsNearby = await getRestaurantsNearby(Number(params.restaurantId));
@@ -57,7 +59,7 @@ const RestaurantDetailPage = async ({ params }: { params: { restaurantId: string
 
         <div className="mt-20 flex h-[44px] gap-10">
           <RestaurantAddInterestButton liked={restaurant.liked} restaurantId={Number(params.restaurantId)} />
-          <button className="h-full flex-1 rounded-[8px] bg-gray-100 py-12 text-gray-700 title-15-md">
+          <button type="button" className="h-full flex-1 rounded-[8px] bg-gray-100 py-12 text-gray-700 title-15-md">
             네이버 지도로 보기
           </button>
         </div>
@@ -66,6 +68,7 @@ const RestaurantDetailPage = async ({ params }: { params: { restaurantId: string
 
         <h2 className="mt-24 title-20-md">영상으로 보기</h2>
         <iframe
+          title="음식점 영상"
           className="mt-16 aspect-[16/9] w-full rounded-[8px]"
           src={`https://www.youtube.com/embed/${videos[0].videoUrl.split('=').at(-1)}`}
         />
@@ -94,7 +97,7 @@ const RestaurantDetailPage = async ({ params }: { params: { restaurantId: string
         <section>
           <div className="mt-24 flex items-center justify-between">
             <h2 className="title-20-md">리뷰 {reviews.size}개</h2>
-            <button className="flex items-center">
+            <button type="button" className="flex items-center">
               <span className="text-gray-400 body-13-rg">더보기</span>
               <IconArrowRight width={14} height={14} />
             </button>
@@ -108,7 +111,7 @@ const RestaurantDetailPage = async ({ params }: { params: { restaurantId: string
               </>
             ))}
           </ul>
-          <button className="mt-24 h-[50px] w-full rounded-[8px] bg-mainDim-15 text-main-700 title-16-sb">
+          <button type="button" className="mt-24 h-[50px] w-full rounded-[8px] bg-mainDim-15 text-main-700 title-16-sb">
             방문 리뷰 남기기
           </button>
         </section>
@@ -146,6 +149,6 @@ const RestaurantDetailPage = async ({ params }: { params: { restaurantId: string
       </main>
     </div>
   );
-};
+}
 
 export default RestaurantDetailPage;

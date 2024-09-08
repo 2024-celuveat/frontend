@@ -1,17 +1,18 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
-import Image from 'next/image';
-import RestaurantLikeButton from '@/components/RestaurantLikeButton';
+
 import { BestCelebrities } from '@/@types';
 import IconArrowRight from '@/components/@icon/IconArrowRight';
+import RestaurantLikeButton from '@/components/RestaurantLikeButton';
 
 interface CelebBestSectionProps {
   bestCelebrities: BestCelebrities[];
 }
 
-const CelebBestSection = ({ bestCelebrities }: CelebBestSectionProps) => {
+function CelebBestSection({ bestCelebrities }: CelebBestSectionProps) {
   const [sequence, setSequence] = useState<number>(0);
 
   const handleClickCelebProfile = async (index: number) => {
@@ -36,7 +37,7 @@ const CelebBestSection = ({ bestCelebrities }: CelebBestSectionProps) => {
               height={68}
               priority
             />
-            {sequence === index && <div className="ballon"></div>}
+            {sequence === index && <div className="ballon" />}
           </div>
         ))}
       </div>
@@ -78,6 +79,6 @@ const CelebBestSection = ({ bestCelebrities }: CelebBestSectionProps) => {
       </div>
     </section>
   );
-};
+}
 
 export default CelebBestSection;

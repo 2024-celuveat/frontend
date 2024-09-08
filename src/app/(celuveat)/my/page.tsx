@@ -1,12 +1,11 @@
+import Link from 'next/link';
+
 import { getUserProfile } from '@/app/(actions)/members/actions';
 import IconArrowRight from '@/components/@icon/IconArrowRight';
 import IconHeartFilled from '@/components/@icon/IconHeartFilled';
 import IconReviewFilled from '@/components/@icon/IconReviewFilled';
-import { colors } from '@/constants/colors';
-import Link from 'next/link';
-import WithDrawButton from './_components/WithDrawButton';
-import { deleteAccount } from '@/app/(actions)/social-login/actions';
 import Avatar from '@/components/Avatar';
+import { colors } from '@/constants/colors';
 
 interface MenuProps {
   label: string;
@@ -16,7 +15,7 @@ interface MenuProps {
   }[];
 }
 
-const Menu = ({ label, menus }: MenuProps) => {
+function Menu({ label, menus }: MenuProps) {
   return (
     <section className="pb-9 pt-20">
       <div className="px-20 py-8 text-gray-400 body-14-md">{label}</div>
@@ -28,7 +27,7 @@ const Menu = ({ label, menus }: MenuProps) => {
       ))}
     </section>
   );
-};
+}
 
 const MENUS1 = [
   { title: '알림 설정', href: '' },
@@ -42,7 +41,7 @@ const MENUS2 = [
   { title: '개인정보 보호 방침', href: '' },
 ];
 
-const MyPage = async () => {
+async function MyPage() {
   const myProfile = await getUserProfile();
   return (
     <>
@@ -52,7 +51,9 @@ const MyPage = async () => {
             <Avatar imageUrl={myProfile.profileImageUrl} size={52} alt="프로필 이미지" />
             <span className="title-20-md">{myProfile.nickname}</span>
           </div>
-          <button className="h-36 flex-none rounded-[8px] bg-gray-100 px-12 body-13-rg">프로필 수정</button>
+          <button type="button" className="h-36 flex-none rounded-[8px] bg-gray-100 px-12 body-13-rg">
+            프로필 수정
+          </button>
         </div>
 
         <div className="px-20">
@@ -64,7 +65,7 @@ const MyPage = async () => {
               </div>
               <span className="text-main-700 title-16-sb">{myProfile.interestedCount}</span>
             </div>
-            <hr className="h-full w-1 rounded-[100px] bg-main-500 opacity-20"></hr>
+            <hr className="h-full w-1 rounded-[100px] bg-main-500 opacity-20" />
             <div className="flex flex-col items-center gap-3">
               <div className="flex gap-4">
                 <IconReviewFilled width={19} height={18} fill={colors.main[500]} />
@@ -82,7 +83,7 @@ const MyPage = async () => {
       <Menu label="기타" menus={MENUS2} />
       <section className="px-20 py-16">
         <a
-          href={'/oauth/logout'}
+          href="/oauth/logout"
           className="flex h-[50px] w-full items-center justify-center rounded-[8px] bg-gray-100 text-gray-700 body-16-md"
         >
           로그아웃
@@ -91,6 +92,6 @@ const MyPage = async () => {
       </section>
     </>
   );
-};
+}
 
 export default MyPage;

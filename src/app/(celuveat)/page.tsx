@@ -1,7 +1,6 @@
+import Link from 'next/link';
+
 import { getCelebritiesBest, getRecommendedRestaurantsByCelebrities } from '@/app/(actions)/restaurants/actions';
-import IconSearch from '@/components/@icon/IconSearch';
-import IconNotice from '@/components/@icon/IconNotice';
-import { colors } from '@/constants/colors';
 import {
   IconChinese,
   IconDesserts,
@@ -13,11 +12,13 @@ import {
   IconPubAndBar,
   IconWestern,
 } from '@/assets/icons/food-category';
-import Link from 'next/link';
-
 import IconArrowRight from '@/components/@icon/IconArrowRight';
-import CelebritiesRecommendedRestaurantsInformation from './_components/CelebritiesRecommendedRestaurantsInformation';
+import IconNotice from '@/components/@icon/IconNotice';
+import IconSearch from '@/components/@icon/IconSearch';
+import { colors } from '@/constants/colors';
+
 import CelebBestSection from './_components/CelebBestSection';
+import CelebritiesRecommendedRestaurantsInformation from './_components/CelebritiesRecommendedRestaurantsInformation';
 import RestaurantRecommendedSection from './_components/RestaurantRecommendedSection';
 
 const FOOD_CATEGORY = [
@@ -43,7 +44,7 @@ export default async function Home() {
     <main className="">
       <section className="px-20 pt-20">
         <Link
-          href={'/search'}
+          href="/search"
           className="flex h-48 w-full items-center gap-10 rounded-[12px] bg-gray-100 pl-14 shadow-sm"
         >
           <IconSearch />
@@ -60,7 +61,7 @@ export default async function Home() {
       </section>
       <section className="mt-48 px-20">
         <Link
-          href={'/restaurants/weekly'}
+          href="/restaurants/weekly"
           className="flex h-48 w-full items-center justify-between rounded-[8px] bg-gray-800 px-16 py-12"
         >
           <div className="flex items-center">

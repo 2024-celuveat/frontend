@@ -8,5 +8,5 @@ export const GET = () => {
     redirect('/interested/restaurants');
   }
 
-  redirect('/'); //로그인 페이지 나오면 이동시켜주기
+  redirect('/'); // 로그인 페이지 나오면 이동시켜주기
 };

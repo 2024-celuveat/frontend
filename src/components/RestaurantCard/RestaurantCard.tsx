@@ -2,17 +2,18 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import RestaurantLikeButton from '@/components/RestaurantLikeButton';
+
 import { Restaurant } from '@/@types';
 import IconThumbsUpFilled from '@/components/@icon/IconThumbsUpFilled';
+import RestaurantLikeButton from '@/components/RestaurantLikeButton';
 import { colors } from '@/constants/colors';
 
-const RestaurantCard = ({ id, name, category, images, roadAddress, visitedCelebrities, liked }: Restaurant) => {
+function RestaurantCard({ id, name, category, images, roadAddress, visitedCelebrities, liked }: Restaurant) {
   return (
     <div className="relative flex w-[140px] flex-none flex-col">
       <Link href={`/restaurants/restaurant/${name}`}>
         <div className="relative h-[140px] w-full overflow-hidden rounded-[8px] bg-gray-200">
-          {<Image src={images[0].url} fill alt={name} sizes="100%" className="object-cover" />}
+          <Image src={images[0].url} fill alt={name} sizes="100%" className="object-cover" />
         </div>
         <div className="mt-12 overflow-x-hidden text-ellipsis whitespace-nowrap">
           <span className="title-15-md">{name}</span>
@@ -31,6 +32,6 @@ const RestaurantCard = ({ id, name, category, images, roadAddress, visitedCelebr
       <RestaurantLikeButton restaurantId={id} liked={liked} cn="absolute top-8 right-8" />
     </div>
   );
-};
+}
 
 export default RestaurantCard;

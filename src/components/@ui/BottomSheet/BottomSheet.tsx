@@ -9,7 +9,7 @@ export interface BottomSheetProps {
   children: React.ReactNode;
 }
 
-const BottomSheet = ({ title, open, onClose, children }: BottomSheetProps) => {
+function BottomSheet({ title, open, onClose, children }: BottomSheetProps) {
   useEffect(() => {
     if (open) {
       document.body.style.overflow = 'hidden';
@@ -41,6 +41,6 @@ const BottomSheet = ({ title, open, onClose, children }: BottomSheetProps) => {
       </>
     )
   );
-};
+}
 
 export default BottomSheet;

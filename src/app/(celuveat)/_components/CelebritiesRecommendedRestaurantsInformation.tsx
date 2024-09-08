@@ -1,11 +1,12 @@
 'use client';
 
 import { useState } from 'react';
-import { colors } from '@/constants/colors';
-import IconInfo from '@/components/@icon/IconInfo';
-import IconClose from '@/components/@icon/IconClose';
 
-const CelebritiesRecommendedRestaurantsInformation = () => {
+import IconClose from '@/components/@icon/IconClose';
+import IconInfo from '@/components/@icon/IconInfo';
+import { colors } from '@/constants/colors';
+
+function CelebritiesRecommendedRestaurantsInformation() {
   const [isClicked, setIsClicked] = useState(false);
 
   return (
@@ -34,6 +35,6 @@ const CelebritiesRecommendedRestaurantsInformation = () => {
       )}
     </div>
   );
-};
+}
 
 export default CelebritiesRecommendedRestaurantsInformation;

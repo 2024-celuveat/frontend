@@ -1,4 +1,5 @@
 import { useCallback, useState } from 'react';
+
 import useToast from './useToast';
 
 interface Props {
@@ -16,6 +17,7 @@ const useOptimisticLike = ({ liked, onClickLike, onClickCancelLike }: Props) => 
       setIsLiked(true);
       await onClickLike();
     } catch (err) {
+      console.error(err);
       setIsLiked(false);
       showToast('로그인이 필요한 서비스입니다.');
     }
@@ -26,6 +28,7 @@ const useOptimisticLike = ({ liked, onClickLike, onClickCancelLike }: Props) => 
       setIsLiked(false);
       await onClickCancelLike();
     } catch (err) {
+      console.error(err);
       setIsLiked(true);
     }
   }, []);

@@ -40,6 +40,7 @@ export const deleteReviewHelpful = async (reviewId: number): Promise<void> => {
   return await api(`/reviews/helpful/${reviewId}`, { method: 'DELETE' });
 };
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const getRestaurantReviews = async (restaurantId: number): Promise<PagedResponse<Review>> => {
   // return await api(`/reviews/restaurants/${restaurantId}`);
   return {

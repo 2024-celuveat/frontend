@@ -11,7 +11,7 @@ interface ReviewSummaryCardProps {
   review: Review;
 }
 
-const ReviewSummaryCard = ({ review }: ReviewSummaryCardProps) => {
+function ReviewSummaryCard({ review }: ReviewSummaryCardProps) {
   return (
     <li>
       <div className="flex items-center justify-between">
@@ -30,6 +30,6 @@ const ReviewSummaryCard = ({ review }: ReviewSummaryCardProps) => {
       <RestaurantReviewLikeButton reviewId={review.id} helps={review.helps} clickedHelpful={review.clickedHelpful} />
     </li>
   );
-};
+}
 
 export default ReviewSummaryCard;

@@ -3,7 +3,6 @@ export const formatToTenThousandUnits = (number: number): string => {
 
   if (formattedNumber < 10) {
     return `${formattedNumber.toFixed(1)}만`;
-  } else {
-    return `${Math.round(formattedNumber)}만`;
   }
+  return `${Math.round(formattedNumber)}만`;
 };

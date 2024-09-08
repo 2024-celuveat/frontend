@@ -1,7 +1,7 @@
 import { getRestaurants } from '@/app/(actions)/restaurants/actions';
 import RestaurantCardRow from '@/components/RestaurantCardRow';
 
-const CategorizedRestaurantListPage = async ({ params }: { params: { category: string } }) => {
+async function CategorizedRestaurantListPage({ params }: { params: { category: string } }) {
   const restaurants = await getRestaurants({ category: params.category, page: 0, size: 10, sort: [] });
 
   return (
@@ -17,6 +17,6 @@ const CategorizedRestaurantListPage = async ({ params }: { params: { category: s
       </ul>
     </main>
   );
-};
+}
 
 export default CategorizedRestaurantListPage;

@@ -1,9 +1,10 @@
 import { getCelebrityInfo } from '@/app/(actions)/celebs/actions';
 import { getCelebrityRestaurants } from '@/app/(actions)/restaurants/actions';
-import CelebIntroductionSection from './_components/CelebIntroductionSection';
 import RestaurantCardRow from '@/components/RestaurantCardRow';
 
-const CelebPage = async ({ params: { id } }: { params: { id: string } }) => {
+import CelebIntroductionSection from './_components/CelebIntroductionSection';
+
+async function CelebPage({ params: { id } }: { params: { id: string } }) {
   const restaurants = await getCelebrityRestaurants(Number(id));
   const celebrityInfo = await getCelebrityInfo(Number(id));
 
@@ -24,6 +25,6 @@ const CelebPage = async ({ params: { id } }: { params: { id: string } }) => {
       </ul>
     </main>
   );
-};
+}
 
 export default CelebPage;

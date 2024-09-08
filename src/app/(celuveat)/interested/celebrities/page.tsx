@@ -1,25 +1,26 @@
-import { getInterestedCelebrities } from '@/app/(actions)/celebs/actions';
-import IconHeartFilled from '@/components/@icon/IconHeartFilled';
-import { formatToTenThousandUnits } from '@/utils/formatToTenThousandUnits';
 import Image from 'next/image';
 import Link from 'next/link';
+
+import { getInterestedCelebrities } from '@/app/(actions)/celebs/actions';
+import { formatToTenThousandUnits } from '@/utils/formatToTenThousandUnits';
+
 import CelebrityLikeButton from './_components/CelebrityLikeButton';
 
-const InterestedCelebritiesPage = async () => {
+async function InterestedCelebritiesPage() {
   const interestedCelebrities = await getInterestedCelebrities();
 
   return (
     <main className="p-20">
       <div className="flex h-52 rounded-[8px] bg-gray-100 p-4">
         <Link
-          href={'/interested/restaurants'}
-          className={'flex w-1/2 items-center justify-center rounded-[8px] title-16-sb'}
+          href="/interested/restaurants"
+          className="flex w-1/2 items-center justify-center rounded-[8px] title-16-sb"
         >
           맛집
         </Link>
         <Link
-          href={'/interested/celebrities'}
-          className={'flex w-1/2 items-center justify-center rounded-[8px] bg-white title-16-sb'}
+          href="/interested/celebrities"
+          className="flex w-1/2 items-center justify-center rounded-[8px] bg-white title-16-sb"
         >
           셀럽
         </Link>
@@ -32,7 +33,7 @@ const InterestedCelebritiesPage = async () => {
               <li key={item.id} className="flex items-center gap-10">
                 <Link href={`/celebs/${item.id}`} className="relative">
                   <Image
-                    className={'h-[56px] rounded-full object-cover'}
+                    className="h-[56px] rounded-full object-cover"
                     src={item.profileImageUrl}
                     alt={item.name}
                     width={56}
@@ -61,6 +62,6 @@ const InterestedCelebritiesPage = async () => {
       </section>
     </main>
   );
-};
+}
 
 export default InterestedCelebritiesPage;

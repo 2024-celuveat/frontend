@@ -1,7 +1,7 @@
 import { getWeeklyRestaurants } from '@/app/(actions)/restaurants/actions';
 import RestaurantCardRow from '@/components/RestaurantCardRow';
 
-const NewRestaurantListPage = async () => {
+async function NewRestaurantListPage() {
   const restaurants = await getWeeklyRestaurants();
 
   return (
@@ -17,6 +17,6 @@ const NewRestaurantListPage = async () => {
       </ul>
     </main>
   );
-};
+}
 
 export default NewRestaurantListPage;

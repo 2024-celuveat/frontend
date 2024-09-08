@@ -1,9 +1,11 @@
+import Link from 'next/link';
+
 import { getRestaurants } from '@/app/(actions)/restaurants/actions';
 import IconSearch from '@/components/@icon/IconSearch';
-import Link from 'next/link';
+
 import NaverMap from './_components/NaverMap';
 
-const MapPage = async () => {
+async function MapPage() {
   const restaurants = await getRestaurants({
     region: '서울',
     category: '한식',
@@ -18,7 +20,7 @@ const MapPage = async () => {
   return (
     <main className="relative">
       <div className="absolute left-0 top-24 z-[1] w-full px-20">
-        <Link href={'/search'} className="flex w-full items-center rounded-[10px] bg-white px-12 py-14">
+        <Link href="/search" className="flex w-full items-center rounded-[10px] bg-white px-12 py-14">
           <IconSearch />
           <p className="ml-10 text-gray-400 body-15-rg">원하는 식당을 검색해보세요</p>
         </Link>
@@ -28,7 +30,7 @@ const MapPage = async () => {
         <div className="flex h-[20px] items-center justify-center rounded-t-[16px] bg-white">
           <hr className="h-4 w-48 rounded-[8px] bg-gray-200" />
         </div>
-        <div className="h-[20px] bg-white"></div>
+        <div className="h-[20px] bg-white" />
         <div className="h-[40px] bg-white">
           <p className="flex justify-center body-16-md">
             <span className="mr-4 text-main-700">성수</span>
@@ -39,6 +41,6 @@ const MapPage = async () => {
       </div>
     </main>
   );
-};
+}
 
 export default MapPage;

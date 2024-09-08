@@ -1,9 +1,11 @@
-import { Restaurant } from '@/@types';
 import Image from 'next/image';
 import Link from 'next/link';
+
+import { Restaurant } from '@/@types';
+
 import RestaurantLikeButton from '../RestaurantLikeButton';
 
-const RestaurantCardRow = ({ id, name, images, category, roadAddress, liked }: Restaurant) => {
+function RestaurantCardRow({ id, name, images, category, roadAddress, liked }: Restaurant) {
   return (
     <div className="relative">
       <Link href={`/restaurants/restaurant/${id}`} className="flex gap-12">
@@ -18,9 +20,9 @@ const RestaurantCardRow = ({ id, name, images, category, roadAddress, liked }: R
           <p className="absolute bottom-0 left-0 text-gray-600 body-13-rg">식당 소개글 가나다라마바사아자차타파...</p>
         </div>
       </Link>
-      <RestaurantLikeButton liked={liked} restaurantId={id} cn={'absolute top-0 right-0'} />
+      <RestaurantLikeButton liked={liked} restaurantId={id} cn="absolute top-0 right-0" />
     </div>
   );
-};
+}
 
 export default RestaurantCardRow;

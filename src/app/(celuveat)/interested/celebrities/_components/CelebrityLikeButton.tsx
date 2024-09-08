@@ -9,7 +9,7 @@ interface CelebrityLikeButtonProps {
   celebrityId: number;
 }
 
-const CelebrityLikeButton = ({ celebrityId }: CelebrityLikeButtonProps) => {
+function CelebrityLikeButton({ celebrityId }: CelebrityLikeButtonProps) {
   const { isLiked, handleClickLike, handleClickCancelLike } = useOptimisticLike({
     liked: true,
     onClickLike: () => postInterestedCelebrity(celebrityId),
@@ -21,6 +21,6 @@ const CelebrityLikeButton = ({ celebrityId }: CelebrityLikeButtonProps) => {
   ) : (
     <IconHeartOutlined className="*:fill-gray-200" onClick={handleClickLike} />
   );
-};
+}
 
 export default CelebrityLikeButton;

@@ -1,6 +1,6 @@
 import { colors } from '@/constants/colors';
 
-const IconNotice = ({ width = 24, height = 24, fill = colors.gray[800], ...props }: React.SVGProps<SVGSVGElement>) => {
+function IconNotice({ width = 24, height = 24, fill = colors.gray[800], ...props }: React.SVGProps<SVGSVGElement>) {
   return (
     <svg width={width} height={height} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
       <path
@@ -13,6 +13,6 @@ const IconNotice = ({ width = 24, height = 24, fill = colors.gray[800], ...props
       />
     </svg>
   );
-};
+}
 
 export default IconNotice;
