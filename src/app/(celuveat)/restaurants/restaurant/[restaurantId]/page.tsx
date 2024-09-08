@@ -98,7 +98,7 @@ async function RestaurantDetailPage({ params }: { params: { restaurantId: string
           <div className="mt-24 flex items-center justify-between">
             <h2 className="title-20-md">리뷰 {reviews.size}개</h2>
             <button type="button" className="flex items-center">
-              <Link href={`${params.restaurantId}/reviews`} className="text-gray-400 body-13-rg">
+              <Link href={`/reviews?restaurantId=${params.restaurantId}`} className="text-gray-400 body-13-rg">
                 더보기
               </Link>
               <IconArrowRight width={14} height={14} />
@@ -113,9 +113,11 @@ async function RestaurantDetailPage({ params }: { params: { restaurantId: string
               </>
             ))}
           </ul>
-          <button type="button" className="mt-24 h-[50px] w-full rounded-[8px] bg-mainDim-15 text-main-700 title-16-sb">
-            방문 리뷰 남기기
-          </button>
+          <Link href={`/reviews/review?restaurantId=${params.restaurantId}`}>
+            <div className="mt-24 flex h-[50px] w-full items-center justify-center rounded-[8px] bg-mainDim-15 text-main-700 title-16-sb">
+              방문 리뷰 남기기
+            </div>
+          </Link>
         </section>
 
         <hr className="height-1 mt-24 w-full bg-gray-100" />

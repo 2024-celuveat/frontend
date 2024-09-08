@@ -1,8 +1,8 @@
 import { getRestaurantReviews } from '@/app/(actions)/reviews/actions';
 import ReviewSummaryCard from '@/components/ReviewSummaryCard';
 
-async function RestaurantReviewPage({ params }: { params: { restaurantId: string } }) {
-  const reviews = await getRestaurantReviews(Number(params.restaurantId));
+async function RestaurantReviewPage({ searchParams }: { searchParams: { restaurantId: string } }) {
+  const reviews = await getRestaurantReviews(Number(searchParams.restaurantId));
 
   return (
     <ul className="mt-16 flex flex-col px-20">
