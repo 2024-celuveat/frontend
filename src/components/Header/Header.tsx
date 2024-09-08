@@ -49,7 +49,10 @@ function Header() {
   }
 
   if (pathValues[1] === 'restaurants') {
-    if (pathValues[2] === 'restaurant') return <HeaderType1 title="맛집 정보" />;
+    if (pathValues[2] === 'restaurant') {
+      if (pathValues[4] === 'reviews') return <HeaderType1 title="리뷰 더보기" />;
+      return <HeaderType1 title="맛집 정보" />;
+    }
     if (pathValues[2] === 'category') return <HeaderType1 title={decodeURIComponent(pathValues[3])} />;
     if (pathValues[2] === 'weekly') return <HeaderType1 title="이번 주 업데이트 된 맛집" />;
   }

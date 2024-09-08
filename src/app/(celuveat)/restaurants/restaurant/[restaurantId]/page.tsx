@@ -7,11 +7,11 @@ import IconArrowRight from '@/components/@icon/IconArrowRight';
 import IconBullet from '@/components/@icon/IconBullet';
 import IconHeartOutlined from '@/components/@icon/IconHeartOutlined';
 import Avatar from '@/components/Avatar';
+import ReviewSummaryCard from '@/components/ReviewSummaryCard';
 import { formatToTenThousandUnits } from '@/utils/formatToTenThousandUnits';
 
 import RestaurantAddInterestButton from './_components/RestaurantAddInterestButton';
 import RestaurantDetailPageMap from './_components/RestaurantDetailPageMap';
-import ReviewSummaryCard from './_components/ReviewSummaryCard';
 
 async function RestaurantDetailPage({ params }: { params: { restaurantId: string } }) {
   const restaurant = await getRestaurant(Number(params.restaurantId));
@@ -98,7 +98,9 @@ async function RestaurantDetailPage({ params }: { params: { restaurantId: string
           <div className="mt-24 flex items-center justify-between">
             <h2 className="title-20-md">리뷰 {reviews.size}개</h2>
             <button type="button" className="flex items-center">
-              <span className="text-gray-400 body-13-rg">더보기</span>
+              <Link href={`${params.restaurantId}/reviews`} className="text-gray-400 body-13-rg">
+                더보기
+              </Link>
               <IconArrowRight width={14} height={14} />
             </button>
           </div>
