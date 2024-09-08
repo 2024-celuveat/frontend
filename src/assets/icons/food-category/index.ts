@@ -5,7 +5,7 @@ export { default as Western } from '@/assets/icons/food-category/western.svg';
 export { default as FastFood } from '@/assets/icons/food-category/fast_food.svg';
 export { default as MeatDishes } from '@/assets/icons/food-category/meat_dishes.svg';
 export { default as SoupAndStew } from '@/assets/icons/food-category/soup_and_stew.svg';
-// export { default as Noodles } from '@/assets/icons/food-category/noodles.svg';
+export { default as Noodles } from '@/assets/icons/food-category/noodles.svg';
 export { default as SnackFood } from '@/assets/icons/food-category/snack_food.svg';
 export { default as GlobalFood } from '@/assets/icons/food-category/global_food.svg';
 export { default as PubAndBar } from '@/assets/icons/food-category/pub_and_bar.svg';

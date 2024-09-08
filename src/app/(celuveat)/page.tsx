@@ -19,7 +19,7 @@ const FOOD_CATEGORY = [
   { name: '패스트푸드', icon: <Icon.FastFood /> },
   { name: '고기', icon: <Icon.MeatDishes /> },
   { name: '국/찌개', icon: <Icon.SoupAndStew /> },
-  // { name: '면', icon: <Icon.Noodles /> },
+  { name: '면', icon: <Icon.Noodles /> },
   { name: '분식', icon: <Icon.SnackFood /> },
   { name: '세계음식', icon: <Icon.GlobalFood /> },
   { name: '주점', icon: <Icon.PubAndBar /> },
