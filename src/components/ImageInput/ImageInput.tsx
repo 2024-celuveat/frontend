@@ -10,7 +10,7 @@ import { colors } from '@/constants/colors';
 import IconPlus from '../@icon/IconPlus';
 
 function ImageInput() {
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [, setSelectedFile] = useState<File | null>(null);
   const [imgInputBuffer, setImgInputBuffer] = useState<string | ArrayBuffer | null>(null);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {

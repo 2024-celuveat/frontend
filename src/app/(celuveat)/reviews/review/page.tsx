@@ -27,7 +27,7 @@ function ReviewFormPage() {
       </section>
       <hr className="border-gray-100" />
       <section className="flex flex-col items-center gap-[18px]">
-        <h2 className="title-18-bold text-gray-900">별점을 등록해 주세요</h2>
+        <h2 className="text-gray-900 title-18-bold">별점을 등록해 주세요</h2>
         <div className="flex">
           <IconStarFilled width={32} height={32} />
           <IconStarFilled width={32} height={32} />
@@ -38,7 +38,7 @@ function ReviewFormPage() {
       </section>
       <hr className="border-gray-100" />
       <section className="flex flex-col items-center gap-[18px]">
-        <h2 className="title-18-bold text-gray-900">리뷰를 작성해 주세요</h2>
+        <h2 className="text-gray-900 title-18-bold">리뷰를 작성해 주세요</h2>
         <textarea
           className="h-[132px] w-full rounded-[8px] bg-gray-50 px-20 py-16 body-14-rg"
           placeholder="리뷰를 보는 사람에게 상처가 되는 욕설, 비방 등의 표현은 삼가해주세요!"
@@ -47,7 +47,7 @@ function ReviewFormPage() {
       <hr className="border-gray-100" />
       <section className="flex flex-col items-center gap-[18px]">
         <div>
-          <h2 className="title-18-bold text-gray-900">사진을 추가해 주세요</h2>
+          <h2 className="text-gray-900 title-18-bold">사진을 추가해 주세요</h2>
           <h4 className="text-gray-600 body-14-rg">최대 3장까지 등록할 수 있어요.</h4>
         </div>
         <div className="flex gap-8">
