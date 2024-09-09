@@ -1,3 +1,5 @@
+'use server';
+
 import { api } from '@/utils/api';
 
 interface Writer {
@@ -23,14 +25,30 @@ export interface Review {
 export const getReview = async (reviewId: number): Promise<Review> => {
   return await api(`/reviews/${reviewId}`);
 };
-export const updateReview = async (reviewId: number): Promise<void> => {
-  return await api(`/reviews/${reviewId}`, { method: 'PUT' });
+export const updateReview = async (formData: FormData): Promise<void> => {
+  await api(`/reviews`, {
+    method: 'PUT',
+    data: {
+      restaurantId: formData.get('restaurantId'),
+      content: formData.get('content'),
+      star: formData.get('star'),
+      images: formData.getAll('images'),
+    },
+  });
 };
 export const deleteReview = async (reviewId: number): Promise<void> => {
   return await api(`/reviews/${reviewId}`, { method: 'DELETE' });
 };
-export const postReview = async (): Promise<void> => {
-  return await api(`/reviews`, { method: 'POST' });
+export const postReview = async (formData: FormData): Promise<void> => {
+  await api(`/reviews`, {
+    method: 'POST',
+    data: {
+      restaurantId: formData.get('restaurantId'),
+      content: formData.get('content'),
+      star: formData.get('star'),
+      images: formData.getAll('images'),
+    },
+  });
 };
 
 export const postReviewHelpful = async (reviewId: number): Promise<void> => {
