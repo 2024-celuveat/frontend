@@ -1,11 +1,11 @@
 import { getRestaurants } from '@/app/(actions)/restaurants/actions';
 import RestaurantCardRow from '@/components/RestaurantCardRow';
 
-async function CategorizedRestaurantListPage({ params }: { params: { category: string } }) {
-  const restaurants = await getRestaurants({ category: params.category, page: 0, size: 10, sort: [] });
+async function RestaurantListPage({ searchParams }: { searchParams: { category: string } }) {
+  const restaurants = await getRestaurants({ category: searchParams.category, page: 0, size: 10, sort: [] });
 
   return (
-    <main className="px-20 pt-16">
+    <main className="px-20">
       <div className="mt-28 flex justify-between">
         <h2 className="title-20-md">{restaurants.contents?.length}개 매장</h2>
         <span className="body-13-rg">최신순</span>
@@ -19,4 +19,4 @@ async function CategorizedRestaurantListPage({ params }: { params: { category: s
   );
 }
 
-export default CategorizedRestaurantListPage;
+export default RestaurantListPage;

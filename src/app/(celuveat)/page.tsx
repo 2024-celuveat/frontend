@@ -31,7 +31,7 @@ export default async function Home() {
   const recommendedRestaurantsByCelebrities = await getRecommendedRestaurantsByCelebrities();
 
   return (
-    <main className="">
+    <main>
       <section className="px-20 pt-20">
         <Link
           href="/search"
@@ -65,7 +65,7 @@ export default async function Home() {
         <h1 className="px-20 title-20-md">무엇을 드시나요?</h1>
         <div className="mt-16 gap-y-16 px-20 food-category">
           {FOOD_CATEGORY.map(({ name, icon }) => (
-            <Link href={`/restaurants/category/${name}`} className="flex flex-col items-center" key={name}>
+            <Link href={`/restaurants?category=${name}`} className="flex flex-col items-center" key={name}>
               <div className="flex h-56 w-56 items-center justify-center rounded-[16px] bg-gray-100" key={name}>
                 {icon}
               </div>

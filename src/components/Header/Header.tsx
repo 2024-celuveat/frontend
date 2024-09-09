@@ -1,6 +1,6 @@
 'use client';
 
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 import IconArrowLeft from '../@icon/IconArrowLeft';
 
@@ -33,6 +33,7 @@ function HeaderType2({ title }: { title: string }) {
 function Header() {
   const pathname = usePathname();
   const pathValues = pathname?.split('/');
+  const searchParams = useSearchParams();
 
   if (!pathValues) return null;
 
@@ -55,8 +56,8 @@ function Header() {
 
   if (pathValues[1] === 'restaurants') {
     if (pathValues[2] === 'restaurant') return <HeaderType1 title="맛집 정보" />;
-    if (pathValues[2] === 'category') return <HeaderType1 title={decodeURIComponent(pathValues[3])} />;
     if (pathValues[2] === 'weekly') return <HeaderType1 title="이번 주 업데이트 된 맛집" />;
+    return <HeaderType1 title={searchParams.get('category') ?? ''} />;
   }
 }
 
