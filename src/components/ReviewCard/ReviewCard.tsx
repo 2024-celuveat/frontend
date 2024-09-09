@@ -7,14 +7,16 @@ import IconMore from '@/components/@icon/IconMore';
 import BottomSheet from '@/components/@ui/BottomSheet';
 import Avatar from '@/components/Avatar';
 import RestaurantReviewLikeButton from '@/components/RestaurantReviewLikeButton';
-import StarRating from '@/components/StarRating';
+import { colors } from '@/constants/colors';
 import { formatDate } from '@/utils/formatDate';
 
-interface ReviewSummaryCardProps {
+import IconStarFilled from '../@icon/IconStarFilled';
+
+interface ReviewCardProps {
   review: Review;
 }
 
-function ReviewSummaryCard({ review }: ReviewSummaryCardProps) {
+function ReviewCard({ review }: ReviewCardProps) {
   const openBottomSheet = () => {
     overlay.open(({ isOpen, unmount }) => {
       return (
@@ -50,7 +52,11 @@ function ReviewSummaryCard({ review }: ReviewSummaryCardProps) {
         </button>
       </div>
 
-      <StarRating rating={review.star} />
+      <div className="mt-10 flex gap-1">
+        {Array.from({ length: 5 }, (_, index) => (
+          <IconStarFilled key={index} fill={index < 5 - review.star ? colors.sub.orange : colors.gray[200]} />
+        ))}
+      </div>
 
       <p className="mt-12 text-gray-900 body-13-rg">{review.content}</p>
 
@@ -59,4 +65,4 @@ function ReviewSummaryCard({ review }: ReviewSummaryCardProps) {
   );
 }
 
-export default ReviewSummaryCard;
+export default ReviewCard;

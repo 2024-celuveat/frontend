@@ -7,7 +7,7 @@ import IconArrowRight from '@/components/@icon/IconArrowRight';
 import IconBullet from '@/components/@icon/IconBullet';
 import IconHeartOutlined from '@/components/@icon/IconHeartOutlined';
 import Avatar from '@/components/Avatar';
-import ReviewSummaryCard from '@/components/ReviewSummaryCard';
+import ReviewCard from '@/components/ReviewCard';
 import { formatToTenThousandUnits } from '@/utils/formatToTenThousandUnits';
 
 import RestaurantAddInterestButton from './_components/RestaurantAddInterestButton';
@@ -108,7 +108,7 @@ async function RestaurantDetailPage({ params }: { params: { restaurantId: string
           <ul className="mt-16 flex flex-col">
             {reviews?.contents.map(review => (
               <>
-                <ReviewSummaryCard key={review.id} review={review} />
+                <ReviewCard key={review.id} review={review} />
                 <hr className="my-16 h-1 w-full bg-gray-100" />
               </>
             ))}
