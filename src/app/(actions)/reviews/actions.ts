@@ -1,5 +1,7 @@
 'use server';
 
+import { redirect } from 'next/navigation';
+
 import { api } from '@/utils/api';
 
 interface Writer {
@@ -26,29 +28,41 @@ export const getReview = async (reviewId: number): Promise<Review> => {
   return await api(`/reviews/${reviewId}`);
 };
 export const updateReview = async (formData: FormData): Promise<void> => {
-  await api(`/reviews`, {
-    method: 'PUT',
-    data: {
-      restaurantId: formData.get('restaurantId'),
-      content: formData.get('content'),
-      star: formData.get('star'),
-      images: formData.getAll('images'),
-    },
-  });
+  try {
+    await api(`/reviews`, {
+      method: 'PUT',
+      data: {
+        restaurantId: formData.get('restaurantId'),
+        content: formData.get('content'),
+        star: formData.get('star'),
+        images: formData.get('images'),
+      },
+    });
+
+    redirect(`/restaurants/restaurant/${formData.get('restaurantId')}`);
+  } catch (e) {
+    console.log(e);
+  }
 };
 export const deleteReview = async (reviewId: number): Promise<void> => {
   return await api(`/reviews/${reviewId}`, { method: 'DELETE' });
 };
 export const postReview = async (formData: FormData): Promise<void> => {
-  await api(`/reviews`, {
-    method: 'POST',
-    data: {
-      restaurantId: formData.get('restaurantId'),
-      content: formData.get('content'),
-      star: formData.get('star'),
-      images: formData.getAll('images'),
-    },
-  });
+  try {
+    await api(`/reviews`, {
+      method: 'POST',
+      data: {
+        restaurantId: formData.get('restaurantId'),
+        content: formData.get('content'),
+        star: formData.get('star'),
+        images: formData.get('images'),
+      },
+    });
+
+    redirect(`/restaurants/restaurant/${formData.get('restaurantId')}`);
+  } catch (e) {
+    console.log(e);
+  }
 };
 
 export const postReviewHelpful = async (reviewId: number): Promise<void> => {
