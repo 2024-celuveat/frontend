@@ -9,7 +9,11 @@ export const api = async <T>(url: string, options?: Omit<RequestInit, 'body'> & 
   }
   const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_SERVER_BASE_URL}${url}`, {
     ...options,
-    headers: { ...options?.headers, ...headers },
+    headers: {
+      'Content-Type': 'application/json',
+      ...options?.headers,
+      ...headers,
+    },
     body: JSON.stringify(options?.data),
   });
 

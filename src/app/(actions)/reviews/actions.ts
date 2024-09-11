@@ -35,14 +35,13 @@ export const updateReview = async (formData: FormData): Promise<void> => {
         restaurantId: formData.get('restaurantId'),
         content: formData.get('content'),
         star: formData.get('star'),
-        images: formData.get('images'),
+        images: formData.getAll('images'),
       },
     });
-
-    redirect(`/restaurants/restaurant/${formData.get('restaurantId')}`);
   } catch (e) {
     console.log(e);
   }
+  redirect(`/restaurants/restaurant/${formData.get('restaurantId')}`);
 };
 export const deleteReview = async (reviewId: number): Promise<void> => {
   return await api(`/reviews/${reviewId}`, { method: 'DELETE' });
@@ -55,14 +54,13 @@ export const postReview = async (formData: FormData): Promise<void> => {
         restaurantId: formData.get('restaurantId'),
         content: formData.get('content'),
         star: formData.get('star'),
-        images: formData.get('images'),
+        images: formData.getAll('images'),
       },
     });
-
-    redirect(`/restaurants/restaurant/${formData.get('restaurantId')}`);
   } catch (e) {
     console.log(e);
   }
+  redirect(`/restaurants/restaurant/${formData.get('restaurantId')}`);
 };
 
 export const postReviewHelpful = async (reviewId: number): Promise<void> => {
@@ -74,47 +72,5 @@ export const deleteReviewHelpful = async (reviewId: number): Promise<void> => {
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const getRestaurantReviews = async (restaurantId: number): Promise<PagedResponse<Review>> => {
-  // return await api(`/reviews/restaurants/${restaurantId}`);
-  return {
-    contents: [
-      {
-        id: 1,
-        restaurantId: 101,
-        writer: {
-          id: 1,
-          nickname: 'Alice',
-          profileImageUrl: 'https://avatars.githubusercontent.com/u/124599?v=4',
-        },
-        content: 'Great food and wonderful atmosphere! Will definitely come back.',
-        star: 5,
-        views: 150,
-        helps: 10,
-        clickedHelpful: true,
-        images: ['https://example.com/image1.jpg', 'https://example.com/image2.jpg'],
-        createdAt: '2024-09-01T12:00:00Z',
-        updatedAt: '2024-09-02T15:00:00Z',
-      },
-      {
-        id: 2,
-        restaurantId: 102,
-        writer: {
-          id: 2,
-          nickname: 'Bob',
-          profileImageUrl: 'https://avatars.githubusercontent.com/u/124599?v=4',
-        },
-        content: 'The service was a bit slow, but the food was good.',
-        star: 3,
-        views: 75,
-        helps: 5,
-        clickedHelpful: false,
-        images: ['https://example.com/image3.jpg'],
-        createdAt: '2024-09-02T14:30:00Z',
-        updatedAt: '2024-09-03T09:00:00Z',
-      },
-      // Add more reviews as needed
-    ],
-    currentPage: 1,
-    hasNext: true,
-    size: 10,
-  };
+  return await api(`/reviews/restaurants/${restaurantId}`);
 };
