@@ -13,8 +13,13 @@ import CelebrityLikeButton from './_components/CelebrityLikeButton';
 const TABS = ['맛집', '셀럽'] as const;
 
 async function InterestedPage({ searchParams: { tab = '맛집' } }: { searchParams: { tab: string } }) {
-  const interestedRestaurants = await getInterestedRestaurants();
-  const interestedCelebrities = await getInterestedCelebrities();
+  const interestedRestaurantsData = getInterestedRestaurants();
+  const interestedCelebritiesData = getInterestedCelebrities();
+
+  const [interestedRestaurants, interestedCelebrities] = await Promise.all([
+    interestedRestaurantsData,
+    interestedCelebritiesData,
+  ]);
 
   return (
     <main className="p-20">

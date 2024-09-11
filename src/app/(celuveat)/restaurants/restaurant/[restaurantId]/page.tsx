@@ -17,10 +17,17 @@ import RestaurantAddInterestButton from './_components/RestaurantAddInterestButt
 import RestaurantDetailPageMap from './_components/RestaurantDetailPageMap';
 
 async function RestaurantDetailPage({ params }: { params: { restaurantId: string } }) {
-  const restaurant = await getRestaurant(Number(params.restaurantId));
-  const videos = await getRestaurantVideos(Number(params.restaurantId));
-  const restaurantsNearby = await getRestaurantsNearby(Number(params.restaurantId));
-  const reviews = await getRestaurantReviews(Number(params.restaurantId), { size: 3 });
+  const restaurantData = getRestaurant(Number(params.restaurantId));
+  const videosData = getRestaurantVideos(Number(params.restaurantId));
+  const restaurantsNearbyData = getRestaurantsNearby(Number(params.restaurantId));
+  const reviewsData = getRestaurantReviews(Number(params.restaurantId), { size: 3 });
+
+  const [restaurant, videos, restaurantsNearby, reviews] = await Promise.all([
+    restaurantData,
+    videosData,
+    restaurantsNearbyData,
+    reviewsData,
+  ]);
 
   return (
     <div>

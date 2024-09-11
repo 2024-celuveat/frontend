@@ -72,7 +72,7 @@ function ReviewCard({ review }: ReviewCardProps) {
 
       <div className="mt-[14px] flex gap-8">
         {review.images.map(img => (
-          <div className="relative aspect-square w-1/3">
+          <div key={img} className="relative aspect-square w-1/3">
             <Image key={img} src={img} fill sizes="33%" alt="이미지 업로드" className="rounded-[8px] object-cover" />
           </div>
         ))}

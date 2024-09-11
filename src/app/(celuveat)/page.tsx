@@ -27,8 +27,13 @@ const FOOD_CATEGORY = [
 ];
 
 export default async function Home() {
-  const bestCelebrities = await getCelebritiesBest();
-  const recommendedRestaurantsByCelebrities = await getRecommendedRestaurantsByCelebrities();
+  const bestCelebritiesData = getCelebritiesBest();
+  const recommendedRestaurantsByCelebritiesData = getRecommendedRestaurantsByCelebrities();
+
+  const [bestCelebrities, recommendedRestaurantsByCelebrities] = await Promise.all([
+    bestCelebritiesData,
+    recommendedRestaurantsByCelebritiesData,
+  ]);
 
   return (
     <main>

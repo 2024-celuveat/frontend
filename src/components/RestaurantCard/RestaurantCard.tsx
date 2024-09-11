@@ -1,5 +1,3 @@
-'use client';
-
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -12,9 +10,13 @@ function RestaurantCard({ id, name, category, images, roadAddress, visitedCelebr
   return (
     <div className="relative flex w-[140px] flex-none flex-col">
       <Link href={`/restaurants/restaurant/${id}`}>
-        <div className="relative h-[140px] w-full overflow-hidden rounded-[8px] bg-gray-200">
-          <Image src={images[0].url} fill alt={name} sizes="100%" className="object-cover" />
-        </div>
+        <Image
+          src={images[0].url}
+          width={140}
+          height={140}
+          alt={name}
+          className="aspect-square rounded-[8px] bg-gray-200 object-cover"
+        />
         <div className="mt-12 overflow-x-hidden text-ellipsis whitespace-nowrap">
           <span className="title-15-md">{name}</span>
           <span className="ml-4 caption-12-rg">{category}</span>
