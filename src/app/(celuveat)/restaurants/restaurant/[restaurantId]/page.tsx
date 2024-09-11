@@ -17,7 +17,7 @@ async function RestaurantDetailPage({ params }: { params: { restaurantId: string
   const restaurant = await getRestaurant(Number(params.restaurantId));
   const videos = await getRestaurantVideos(Number(params.restaurantId));
   const restaurantsNearby = await getRestaurantsNearby(Number(params.restaurantId));
-  const reviews = await getRestaurantReviews(Number(params.restaurantId));
+  const reviews = await getRestaurantReviews(Number(params.restaurantId), { size: 3 });
 
   return (
     <div>

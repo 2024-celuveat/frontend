@@ -3,6 +3,7 @@
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 
+import { PagedResponse, PageOptions } from '@/@types/server/util.type';
 import { api } from '@/utils/api';
 
 interface Writer {
@@ -81,7 +82,12 @@ export const deleteReviewHelpful = async (reviewId: number): Promise<void> => {
   return await api(`/reviews/helpful/${reviewId}`, { method: 'DELETE' });
 };
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const getRestaurantReviews = async (restaurantId: number): Promise<PagedResponse<Review>> => {
-  return await api(`/reviews/restaurants/${restaurantId}`);
+export const getRestaurantReviews = async (
+  restaurantId: number,
+  options: PageOptions = {},
+): Promise<PagedResponse<Review>> => {
+  const params = Object.entries(options).map(([key, value]) => [key, `${value}`]);
+  const queryString = new URLSearchParams(params);
+
+  return await api(`/reviews/restaurants/${restaurantId}?${queryString}`);
 };

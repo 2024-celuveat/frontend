@@ -1,7 +1,12 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-type PagedResponse<T> = {
+export type PagedResponse<T> = {
   contents: T[];
   currentPage: number;
   hasNext: boolean;
   size: number;
+};
+
+export type PageOptions = {
+  page?: number;
+  size?: number;
+  sort?: string[];
 };

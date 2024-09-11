@@ -1,4 +1,5 @@
 import { BestCelebrities, Restaurant, Video } from '@/@types';
+import { PagedResponse } from '@/@types/server/util.type';
 import { api } from '@/utils/api';
 
 type Coordinate = {
