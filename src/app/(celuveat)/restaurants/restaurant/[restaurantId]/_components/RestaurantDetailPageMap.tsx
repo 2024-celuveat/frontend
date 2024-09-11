@@ -34,6 +34,7 @@ function RestaurantDetailPageMap({ latitude, longitude, images }: Restaurant) {
           size: new naver.maps.Size(80, 80),
         },
       });
+      return;
     }
 
     new naver.maps.Marker({

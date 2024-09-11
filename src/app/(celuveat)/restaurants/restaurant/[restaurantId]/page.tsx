@@ -8,7 +8,6 @@ import IconBullet from '@/components/@icon/IconBullet';
 import IconCall from '@/components/@icon/IconCall';
 import IconClock from '@/components/@icon/IconClock';
 import IconHere from '@/components/@icon/IconHere';
-import IconLocation from '@/components/@icon/IconLocation';
 import Avatar from '@/components/Avatar';
 import RestaurantCard from '@/components/RestaurantCard';
 import ReviewCard from '@/components/ReviewCard';
