@@ -29,6 +29,10 @@ export const getReview = async (reviewId: number): Promise<Review> => {
   return await api(`/reviews/${reviewId}`);
 };
 export const updateReview = async (formData: FormData): Promise<void> => {
+  const images = formData
+    .getAll('images')
+    .map(imgUrl => `https://${process.env.NEXT_PUBLIC_S3_BUCKET_NAME}.s3.amazonaws.com/${imgUrl}`);
+
   try {
     await api(`/reviews`, {
       method: 'PUT',
@@ -36,7 +40,7 @@ export const updateReview = async (formData: FormData): Promise<void> => {
         restaurantId: formData.get('restaurantId'),
         content: formData.get('content'),
         star: formData.get('star'),
-        images: formData.getAll('images'),
+        images,
       },
     });
   } catch (e) {
@@ -50,6 +54,10 @@ export const deleteReview = async (reviewId: number): Promise<void> => {
   revalidatePath(`/restaurants/restaurant/${reviewId}`);
 };
 export const postReview = async (formData: FormData): Promise<void> => {
+  const images = formData
+    .getAll('images')
+    .map(imgUrl => `https://${process.env.NEXT_PUBLIC_S3_BUCKET_NAME}.s3.amazonaws.com/${imgUrl}`);
+
   try {
     await api(`/reviews`, {
       method: 'POST',
@@ -57,7 +65,7 @@ export const postReview = async (formData: FormData): Promise<void> => {
         restaurantId: formData.get('restaurantId'),
         content: formData.get('content'),
         star: formData.get('star'),
-        images: formData.getAll('images'),
+        images,
       },
     });
   } catch (e) {
