@@ -1,5 +1,6 @@
 'use client';
 
+import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
 import { ChangeEvent, useCallback, useState } from 'react';
 
@@ -18,6 +19,7 @@ function ReviewForm({ action, restaurantId }: ReviewFormProps) {
   const [star, setStar] = useState(0);
   const [content, setContent] = useState<string>('');
   const [images, setImages] = useState<string[]>([]);
+  const [isPending, setIsPending] = useState(false);
   const submitDisabled = star === 0 || content.length < 1;
 
   const handleRating = useCallback((value: number) => {
@@ -50,8 +52,14 @@ function ReviewForm({ action, restaurantId }: ReviewFormProps) {
     setImages(arr);
   };
 
+  const handleClickSubmit = (data: FormData) => {
+    if (isPending) return;
+    setIsPending(true);
+    action(data);
+  };
+
   return (
-    <form action={action}>
+    <form action={handleClickSubmit}>
       <input type="hidden" name="restaurantId" value={restaurantId} />
       <section className="mt-20 flex flex-col items-center gap-[18px]">
         <input type="hidden" name="star" value={star} required />
@@ -116,13 +124,28 @@ function ReviewForm({ action, restaurantId }: ReviewFormProps) {
           )}
         </div>
       </section>
-      <button
-        disabled={submitDisabled}
-        type="submit"
-        className="mt-20 h-[50px] w-full rounded-[8px] bg-main-600 text-white title-16-sb disabled:bg-gray-200"
-      >
-        등록하기
-      </button>
+      <AnimatePresence>
+        <button
+          disabled={submitDisabled}
+          type="submit"
+          className="mt-20 h-[50px] w-full rounded-[8px] bg-main-600 text-white title-16-sb disabled:bg-gray-200"
+        >
+          {!isPending ? (
+            <motion.div key={1} animate={{ x: 0 }} exit={{ x: +300 }}>
+              등록하기
+            </motion.div>
+          ) : (
+            <motion.div
+              key={2}
+              animate={{ x: 0, opacity: 1 }}
+              initial={{ x: -300, opacity: 0 }}
+              exit={{ x: -300, opacity: 0 }}
+            >
+              등록중이에요! 잠시만 기다려주세요.
+            </motion.div>
+          )}
+        </button>
+      </AnimatePresence>
     </form>
   );
 }

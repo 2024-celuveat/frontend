@@ -22,7 +22,7 @@ function RestaurantLikeButton({ liked, restaurantId, cn }: RestaurantLikeButtonP
   });
 
   return (
-    <motion.button whileTap={{ scaleY: 0.8 }} className={`z-0 ${cn}`}>
+    <motion.button whileTap={{ scaleY: 0.7 }} className={`z-0 ${cn}`}>
       {isLiked ? (
         <IconHeartFilled className="*:fill-main-500" onClick={handleClickCancelLike} />
       ) : (
