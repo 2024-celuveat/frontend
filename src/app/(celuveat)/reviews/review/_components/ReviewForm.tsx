@@ -3,6 +3,7 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
 import { ChangeEvent, useCallback, useState } from 'react';
+import { useFormStatus } from 'react-dom';
 
 import IconPlus from '@/components/@icon/IconPlus';
 import IconStarFilled from '@/components/@icon/IconStarFilled';
@@ -11,15 +12,14 @@ import { colors } from '@/constants/colors';
 const RATING = [1, 2, 3, 4, 5] as const;
 
 interface ReviewFormProps {
-  action: (data: FormData) => void;
   restaurantId: string;
 }
 
-function ReviewForm({ action, restaurantId }: ReviewFormProps) {
+function ReviewForm({ restaurantId }: ReviewFormProps) {
   const [star, setStar] = useState(0);
   const [content, setContent] = useState<string>('');
   const [images, setImages] = useState<string[]>([]);
-  const [isPending, setIsPending] = useState(false);
+  const { pending } = useFormStatus();
   const submitDisabled = star === 0 || content.length < 1;
 
   const handleRating = useCallback((value: number) => {
@@ -52,14 +52,8 @@ function ReviewForm({ action, restaurantId }: ReviewFormProps) {
     setImages(arr);
   };
 
-  const handleClickSubmit = (data: FormData) => {
-    if (isPending) return;
-    setIsPending(true);
-    action(data);
-  };
-
   return (
-    <form action={handleClickSubmit}>
+    <>
       <input type="hidden" name="restaurantId" value={restaurantId} />
       <section className="mt-20 flex flex-col items-center gap-[18px]">
         <input type="hidden" name="star" value={star} required />
@@ -126,11 +120,11 @@ function ReviewForm({ action, restaurantId }: ReviewFormProps) {
       </section>
       <AnimatePresence>
         <button
-          disabled={submitDisabled}
+          disabled={submitDisabled || pending}
           type="submit"
           className="mt-20 h-[50px] w-full rounded-[8px] bg-main-600 text-white title-16-sb disabled:bg-gray-200"
         >
-          {!isPending ? (
+          {!pending ? (
             <motion.div key={1} animate={{ x: 0 }} exit={{ x: +300 }}>
               등록하기
             </motion.div>
@@ -146,7 +140,7 @@ function ReviewForm({ action, restaurantId }: ReviewFormProps) {
           )}
         </button>
       </AnimatePresence>
-    </form>
+    </>
   );
 }
 

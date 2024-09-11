@@ -32,7 +32,9 @@ async function ReviewFormPage({ searchParams }: { searchParams: { restaurantId: 
         )}
       </section>
       <hr className="mt-20 border-gray-100" />
-      <ReviewForm action={postReview} restaurantId={searchParams.restaurantId} />
+      <form action={postReview}>
+        <ReviewForm restaurantId={searchParams.restaurantId} />
+      </form>
     </main>
   );
 }
