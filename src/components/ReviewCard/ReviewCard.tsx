@@ -1,7 +1,7 @@
 'use client';
 
+import Image from 'next/image';
 import { overlay } from 'overlay-kit';
-import { useCallback } from 'react';
 
 import { deleteReview, Review } from '@/app/(actions)/reviews/actions';
 import IconMore from '@/components/@icon/IconMore';
@@ -70,6 +70,13 @@ function ReviewCard({ review }: ReviewCardProps) {
 
       <p className="mt-12 text-gray-900 body-13-rg">{review.content}</p>
 
+      <div className="mt-[14px] flex gap-8">
+        <div className="relative aspect-square w-1/3">
+          {review.images.map(img => (
+            <Image key={img} src={img} fill sizes="33%" alt="이미지 업로드" className="rounded-[8px] object-cover" />
+          ))}
+        </div>
+      </div>
       <RestaurantReviewLikeButton reviewId={review.id} helps={review.helps} clickedHelpful={review.clickedHelpful} />
     </li>
   );
