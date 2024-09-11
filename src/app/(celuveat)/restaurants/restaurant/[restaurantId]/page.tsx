@@ -5,6 +5,10 @@ import { getRestaurant, getRestaurantsNearby, getRestaurantVideos } from '@/app/
 import { getRestaurantReviews } from '@/app/(actions)/reviews/actions';
 import IconArrowRight from '@/components/@icon/IconArrowRight';
 import IconBullet from '@/components/@icon/IconBullet';
+import IconCall from '@/components/@icon/IconCall';
+import IconClock from '@/components/@icon/IconClock';
+import IconHere from '@/components/@icon/IconHere';
+import IconLocation from '@/components/@icon/IconLocation';
 import Avatar from '@/components/Avatar';
 import RestaurantCard from '@/components/RestaurantCard';
 import ReviewCard from '@/components/ReviewCard';
@@ -28,7 +32,9 @@ async function RestaurantDetailPage({ params }: { params: { restaurantId: string
             <div className="flex items-center gap-4">
               <span className="text-gray-800 body-14-md">{restaurant.category}</span>
               <IconBullet />
-              <span className="text-gray-600 body-14-rg">{restaurant.roadAddress}</span>
+              <span className="text-gray-600 body-14-rg">
+                {restaurant.roadAddress.split(' ').slice(0, 2).join(' ')}
+              </span>
             </div>
             <h1 className="mt-4 title-22-md">{restaurant.name}</h1>
             <div className="mt-8 flex items-center gap-4">
@@ -65,6 +71,23 @@ async function RestaurantDetailPage({ params }: { params: { restaurantId: string
         </div>
 
         <hr className="height-1 mt-24 w-full bg-gray-100" />
+
+        <ul className="flex flex-col gap-6 py-20 text-gray-900 body-14-rg">
+          <li className="flex items-center gap-4">
+            <IconHere width={18} height={18} />
+            <span>{restaurant.roadAddress}</span>
+          </li>
+          <li className="flex items-center gap-4">
+            <IconClock width={18} height={18} />
+            <span>{restaurant.businessHours}</span>
+          </li>
+          <li className="flex items-center gap-4">
+            <IconCall width={18} height={18} />
+            <span>{restaurant.phoneNumber}</span>
+          </li>
+        </ul>
+
+        <div className="relative right-[20px] h-8 w-[calc(100%_+_40px)] bg-gray-100" />
 
         <h2 className="mt-24 title-20-md">영상으로 보기</h2>
         <iframe
