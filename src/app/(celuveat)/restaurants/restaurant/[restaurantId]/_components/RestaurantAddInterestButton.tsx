@@ -19,21 +19,22 @@ function RestaurantAddInterestButton({ liked, restaurantId }: RestaurantAddInter
   });
 
   return isLiked ? (
-    <button type="button" className="flex h-full flex-1 justify-center gap-4 rounded-[8px] bg-main-600 py-12">
+    <button
+      type="button"
+      onClick={handleClickCancelLike}
+      className="flex h-full flex-1 justify-center gap-4 rounded-[8px] bg-main-600 py-12"
+    >
       <IconHeartFilled width={20} height={20} fill={colors.white.DEFAULT} />
-      <span className="text-white title-15-md" onClick={handleClickCancelLike}>
-        관심
-      </span>
+      <span className="text-white title-15-md">관심</span>
     </button>
   ) : (
     <button
       type="button"
+      onClick={handleClickLike}
       className="flex h-full flex-1 justify-center gap-4 rounded-[8px] bg-[rgba(255,_123,_84,_0.15)] py-12"
     >
       <IconPlus width={20} height={20} fill={colors.main[700]} />
-      <span className="text-main-700 title-15-md" onClick={handleClickLike}>
-        관심 추가
-      </span>
+      <span className="text-main-700 title-15-md">관심 추가</span>
     </button>
   );
 }
