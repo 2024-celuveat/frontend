@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { ChangeEvent, useCallback, useState } from 'react';
 import { useFormStatus } from 'react-dom';
 
+import { Review } from '@/app/(actions)/reviews/actions';
 import IconPlus from '@/components/@icon/IconPlus';
 import IconStarFilled from '@/components/@icon/IconStarFilled';
 import { colors } from '@/constants/colors';
@@ -13,16 +14,17 @@ const RATING = [1, 2, 3, 4, 5] as const;
 
 interface ReviewFormProps {
   restaurantId: string;
+  review: Review | null;
 }
 
-function ReviewForm({ restaurantId }: ReviewFormProps) {
-  const [star, setStar] = useState(0);
-  const [content, setContent] = useState<string>('');
-  const [images, setImages] = useState<string[]>([]);
+function ReviewForm({ restaurantId, review }: ReviewFormProps) {
+  const [star, setStar] = useState<Review['star']>(review?.star || 0);
+  const [content, setContent] = useState<Review['content']>(review?.content || '');
+  const [images, setImages] = useState<Review['images']>(review?.images || []);
   const { pending } = useFormStatus();
   const submitDisabled = star === 0 || content.length < 1;
 
-  const handleRating = useCallback((value: number) => {
+  const handleRating = useCallback((value: Review['star']) => {
     setStar(value);
   }, []);
 
@@ -41,7 +43,7 @@ function ReviewForm({ restaurantId }: ReviewFormProps) {
         const { ok } = await fetch(presignedUrl, { body: file, method: 'PUT' });
 
         if (!ok) throw new Error('Failed to upload image');
-        return file.name;
+        return `https://${process.env.NEXT_PUBLIC_S3_BUCKET_NAME}.s3.amazonaws.com/${file.name}`;
       };
 
       return getUploadedFileName();
@@ -74,6 +76,7 @@ function ReviewForm({ restaurantId }: ReviewFormProps) {
         <h2 className="text-gray-900 title-18-bold">리뷰를 작성해 주세요</h2>
         <textarea
           name="content"
+          value={content}
           onChange={handleChangeComment}
           className="h-[132px] w-full rounded-[8px] bg-gray-50 px-20 py-16 body-14-rg"
           placeholder="리뷰를 보는 사람에게 상처가 되는 욕설, 비방 등의 표현은 삼가해주세요! "
@@ -91,14 +94,7 @@ function ReviewForm({ restaurantId }: ReviewFormProps) {
               htmlFor="file"
               className="flex h-[100px] w-[100px] cursor-pointer items-center justify-center overflow-hidden rounded-[8px] bg-gray-50"
             >
-              <Image
-                key={img as string}
-                src={`https://${process.env.NEXT_PUBLIC_S3_BUCKET_NAME}.s3.amazonaws.com/${img}`}
-                width={100}
-                height={100}
-                alt="이미지 업로드"
-                className="object-cover"
-              />
+              <Image key={img} src={img} width={100} height={100} alt="이미지 업로드" className="object-cover" />
               <input type="hidden" name="images" value={img} required />
               <input type="file" id="file" className="hidden" onChange={handleFileChange} multiple />
             </label>

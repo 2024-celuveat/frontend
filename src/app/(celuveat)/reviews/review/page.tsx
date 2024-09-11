@@ -1,13 +1,15 @@
 import Image from 'next/image';
 
 import { getRestaurant } from '@/app/(actions)/restaurants/actions';
-import { postReview } from '@/app/(actions)/reviews/actions';
+import { getReview, postReview, updateReview } from '@/app/(actions)/reviews/actions';
 import IconBullet from '@/components/@icon/IconBullet';
 
-import ReviewForm from './_components/ReviewForm';
+import ReviewForm from '../_components/ReviewForm';
 
-async function ReviewFormPage({ searchParams }: { searchParams: { restaurantId: string } }) {
+async function ReviewFormPage({ searchParams }: { searchParams: { restaurantId: string; reviewId: string } }) {
   const restaurant = await getRestaurant(Number(searchParams.restaurantId));
+  const review = searchParams.reviewId ? await getReview(Number(searchParams.reviewId)) : null;
+  const action = searchParams.reviewId ? updateReview : postReview;
 
   return (
     <main className="px-20">
@@ -32,8 +34,9 @@ async function ReviewFormPage({ searchParams }: { searchParams: { restaurantId: 
         )}
       </section>
       <hr className="mt-20 border-gray-100" />
-      <form action={postReview}>
-        <ReviewForm restaurantId={searchParams.restaurantId} />
+      <form action={action}>
+        <input type="hidden" name="reviewId" value={searchParams.reviewId} />
+        <ReviewForm restaurantId={searchParams.restaurantId} review={review} />
       </form>
     </main>
   );

@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import { overlay } from 'overlay-kit';
 
 import { deleteReview, Review } from '@/app/(actions)/reviews/actions';
@@ -20,9 +21,15 @@ interface ReviewCardProps {
 
 function ReviewCard({ review }: ReviewCardProps) {
   const showToast = useToast();
+  const router = useRouter();
 
   const openBottomSheet = () => {
     overlay.open(({ isOpen, close }) => {
+      const handleModifyReview = () => {
+        close();
+        router.push(`/reviews/review?restaurantId=${review.restaurantId}&reviewId=${review.id}`);
+      };
+
       const handleDeleteReview = async () => {
         await deleteReview(review.id);
         close();
@@ -31,7 +38,7 @@ function ReviewCard({ review }: ReviewCardProps) {
 
       return (
         <BottomSheet open={isOpen} onClose={close}>
-          <button type="button" className="flex h-56 w-full items-center justify-center">
+          <button type="button" onClick={handleModifyReview} className="flex h-56 w-full items-center justify-center">
             <span className="title-16-sb">수정하기</span>
           </button>
           <button type="button" onClick={handleDeleteReview} className="flex h-56 w-full items-center justify-center">
