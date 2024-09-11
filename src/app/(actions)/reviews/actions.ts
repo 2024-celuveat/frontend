@@ -1,5 +1,6 @@
 'use server';
 
+import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 
 import { api } from '@/utils/api';
@@ -44,7 +45,9 @@ export const updateReview = async (formData: FormData): Promise<void> => {
   redirect(`/restaurants/restaurant/${formData.get('restaurantId')}`);
 };
 export const deleteReview = async (reviewId: number): Promise<void> => {
-  return await api(`/reviews/${reviewId}`, { method: 'DELETE' });
+  await api(`/reviews/${reviewId}`, { method: 'DELETE' });
+
+  revalidatePath(`/restaurants/restaurant/${reviewId}`);
 };
 export const postReview = async (formData: FormData): Promise<void> => {
   try {

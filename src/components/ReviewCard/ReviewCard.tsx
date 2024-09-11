@@ -1,13 +1,15 @@
 'use client';
 
 import { overlay } from 'overlay-kit';
+import { useCallback } from 'react';
 
-import { Review } from '@/app/(actions)/reviews/actions';
+import { deleteReview, Review } from '@/app/(actions)/reviews/actions';
 import IconMore from '@/components/@icon/IconMore';
 import BottomSheet from '@/components/@ui/BottomSheet';
 import Avatar from '@/components/Avatar';
 import RestaurantReviewLikeButton from '@/components/RestaurantReviewLikeButton';
 import { colors } from '@/constants/colors';
+import useToast from '@/hooks/useToast';
 import { formatDate } from '@/utils/formatDate';
 
 import IconStarFilled from '../@icon/IconStarFilled';
@@ -17,20 +19,28 @@ interface ReviewCardProps {
 }
 
 function ReviewCard({ review }: ReviewCardProps) {
+  const showToast = useToast();
+
   const openBottomSheet = () => {
-    overlay.open(({ isOpen, unmount }) => {
+    overlay.open(({ isOpen, close }) => {
+      const handleDeleteReview = async () => {
+        await deleteReview(review.id);
+        close();
+        showToast('리뷰가 삭제되었습니다.');
+      };
+
       return (
-        <BottomSheet open={isOpen} onClose={unmount}>
+        <BottomSheet open={isOpen} onClose={close}>
           <button type="button" className="flex h-56 w-full items-center justify-center">
             <span className="title-16-sb">수정하기</span>
           </button>
-          <button type="button" className="flex h-56 w-full items-center justify-center">
+          <button type="button" onClick={handleDeleteReview} className="flex h-56 w-full items-center justify-center">
             <span className="title-16-sb">삭제하기</span>
           </button>
           <button
             type="button"
             className="mt-16 flex h-56 w-full items-center justify-center gap-8 rounded-[8px] bg-gray-100"
-            onClick={unmount}
+            onClick={close}
           >
             <span className="body-16-md">닫기</span>
           </button>
