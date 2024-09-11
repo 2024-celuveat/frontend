@@ -5,8 +5,8 @@ import { getRestaurant, getRestaurantsNearby, getRestaurantVideos } from '@/app/
 import { getRestaurantReviews } from '@/app/(actions)/reviews/actions';
 import IconArrowRight from '@/components/@icon/IconArrowRight';
 import IconBullet from '@/components/@icon/IconBullet';
-import IconHeartOutlined from '@/components/@icon/IconHeartOutlined';
 import Avatar from '@/components/Avatar';
+import RestaurantCard from '@/components/RestaurantCard';
 import ReviewCard from '@/components/ReviewCard';
 import { formatToTenThousandUnits } from '@/utils/formatToTenThousandUnits';
 
@@ -126,26 +126,8 @@ async function RestaurantDetailPage({ params }: { params: { restaurantId: string
           <section className="mt-24">
             <h2 className="title-20-md">주변 식당 둘러보기</h2>
             <div className="scrollbar-hide mt-[16px] flex gap-[16px] overflow-x-scroll">
-              {restaurantsNearby.map(({ id, name, category, images, roadAddress }) => (
-                <Link key={id} className="flex w-[140px] flex-none flex-col" href={`/restaurants/restaurant/${name}`}>
-                  <div className="relative h-[140px] w-full overflow-hidden rounded-[8px] bg-gray-200">
-                    <Image
-                      src={`${process.env.NEXT_PUBLIC_S3_BASE_URL}/${images[0].name}.webp`}
-                      fill
-                      alt={name}
-                      sizes="100%"
-                      className="object-cover"
-                    />
-                    <IconHeartOutlined className="absolute right-8 top-8 *:fill-white" />
-                  </div>
-                  <div className="mt-12 overflow-x-hidden text-ellipsis whitespace-nowrap">
-                    <span className="title-15-md">{name}</span>
-                    <span className="ml-4 caption-12-rg">{category}</span>
-                  </div>
-                  <span className="mt-4 overflow-x-hidden text-ellipsis whitespace-nowrap body-13-rg">
-                    {roadAddress}
-                  </span>
-                </Link>
+              {restaurantsNearby.map(props => (
+                <RestaurantCard {...props} />
               ))}
             </div>
           </section>
