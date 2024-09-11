@@ -5,6 +5,7 @@
 import { useEffect, useRef } from 'react';
 
 import { Restaurant } from '@/@types';
+import { PagedResponse } from '@/@types/server/util.type';
 
 interface NaverMapProps {
   restaurants: PagedResponse<Restaurant>;
