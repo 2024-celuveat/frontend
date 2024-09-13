@@ -126,12 +126,12 @@ async function RestaurantDetailPage({ params }: { params: { restaurantId: string
         <section>
           <div className="mt-24 flex items-center justify-between">
             <h2 className="title-20-md">리뷰 {reviews.size}개</h2>
-            <button type="button" className="flex items-center">
-              <Link href={`/reviews?restaurantId=${params.restaurantId}`} className="text-gray-400 body-13-rg">
-                더보기
+            {reviews.size > 3 && (
+              <Link href={`/reviews?restaurantId=${params.restaurantId}`} type="button" className="flex items-center">
+                <span className="text-gray-400 body-13-rg">더보기</span>
+                <IconArrowRight width={14} height={14} />
               </Link>
-              <IconArrowRight width={14} height={14} />
-            </button>
+            )}
           </div>
 
           <ul className="mt-16 flex flex-col">
