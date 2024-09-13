@@ -33,6 +33,7 @@ async function InterestedPage({ searchParams: { tab = '맛집' } }: { searchPara
             style={{
               WebkitTapHighlightColor: 'transparent',
             }}
+            replace
           >
             {tab === value && (
               <motion.span
