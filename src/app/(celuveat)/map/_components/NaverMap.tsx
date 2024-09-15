@@ -6,21 +6,21 @@ import { useEffect, useRef } from 'react';
 
 import { Restaurant } from '@/@types';
 import { PagedResponse } from '@/@types/server/util.type';
+import useQueryParams from '@/hooks/useQueryParams';
 
 interface NaverMapProps {
+  mapOptions: naver.maps.MapOptions;
   restaurants: PagedResponse<Restaurant>;
 }
 
-function NaverMap({ restaurants }: NaverMapProps) {
+function NaverMap({ restaurants, mapOptions }: NaverMapProps) {
   const ref = useRef<HTMLDivElement>(null);
+  const { overrideQueryParams } = useQueryParams();
 
   useEffect(() => {
     if (!ref.current) return;
 
-    const map = new naver.maps.Map(ref.current, {
-      center: new naver.maps.LatLng(37.5364056, 127.122222),
-      zoom: 12,
-    });
+    const map = new naver.maps.Map(ref.current, mapOptions);
 
     restaurants.contents.forEach(({ latitude, longitude, visitedCelebrities }) => {
       new naver.maps.Marker({
@@ -29,10 +29,20 @@ function NaverMap({ restaurants }: NaverMapProps) {
         icon: {
           content: /* HTML */ `<img
             src="${visitedCelebrities[0].profileImageUrl}"
-            class="h-[38px] w-[38px] rounded-full border-[3px] border-white"
+            class="h-[38px] w-[38px] flex-none rounded-full border-[3px] border-white"
           />`,
         },
       });
+    });
+
+    naver.maps.Event.addListener(map, 'idle', () => {
+      const bounds = map.getBounds();
+      overrideQueryParams([
+        ['lowLatitude', bounds.getMin().y.toString()],
+        ['lowLongitude', bounds.getMin().x.toString()],
+        ['highLatitude', bounds.getMax().y.toString()],
+        ['highLongitude', bounds.getMax().x.toString()],
+      ]);
     });
   }, []);
 
