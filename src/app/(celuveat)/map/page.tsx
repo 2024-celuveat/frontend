@@ -86,7 +86,7 @@ async function MapPage({
           <Link
             href={`/map?tab=map&lowLatitude=${lowLatitude}&lowLongitude=${lowLongitude}&highLatitude=${highLatitude}&highLongitude=${highLongitude}`}
             type="button"
-            className="fixed bottom-[104px] left-[50%] z-[120] -translate-x-[50%] rounded-[100px] bg-gray-900 px-24 py-16 text-white body-15-rg"
+            className="fixed bottom-[104px] left-[50%] z-[100] -translate-x-[50%] rounded-[100px] bg-gray-900 px-24 py-16 text-white body-15-rg"
           >
             지도로 보기
           </Link>
