@@ -13,6 +13,9 @@ async function MapPage({
     lowLongitude = '124.19130906495111',
     highLatitude = '40.580676585499354',
     highLongitude = '131.56313523682613',
+    zoom,
+    centerX,
+    centerY,
   },
 }: {
   searchParams: {
@@ -21,6 +24,9 @@ async function MapPage({
     lowLongitude: string;
     highLatitude: string;
     highLongitude: string;
+    zoom: string;
+    centerX: string;
+    centerY: string;
   };
 }) {
   const restaurants = await getRestaurants({
@@ -48,19 +54,9 @@ async function MapPage({
       </div>
       {tab === 'map' ? (
         <>
-          <NaverMap
-            restaurants={restaurants}
-            mapOptions={{
-              bounds: {
-                north: Number(highLatitude),
-                east: Number(highLongitude),
-                south: Number(lowLatitude),
-                west: Number(lowLongitude),
-              },
-            }}
-          />
+          <NaverMap restaurants={restaurants} />
           <Link
-            href={`/map?tab=list&lowLatitude=${lowLatitude}&lowLongitude=${lowLongitude}&highLatitude=${highLatitude}&highLongitude=${highLongitude}`}
+            href={`/map?tab=list&lowLatitude=${lowLatitude}&lowLongitude=${lowLongitude}&highLatitude=${highLatitude}&highLongitude=${highLongitude}&zoom=${zoom}&centerX=${centerX}&centerY=${centerY}`}
             className="absolute bottom-0 z-[100] block w-full"
           >
             <div className="flex h-[20px] items-center justify-center rounded-t-[16px] bg-white">
@@ -84,7 +80,7 @@ async function MapPage({
             ))}
           </ul>
           <Link
-            href={`/map?tab=map&lowLatitude=${lowLatitude}&lowLongitude=${lowLongitude}&highLatitude=${highLatitude}&highLongitude=${highLongitude}`}
+            href={`/map?tab=map&lowLatitude=${lowLatitude}&lowLongitude=${lowLongitude}&highLatitude=${highLatitude}&highLongitude=${highLongitude}&zoom=${zoom}&centerX=${centerX}&centerY=${centerY}`}
             type="button"
             className="fixed bottom-[104px] left-[50%] z-[100] -translate-x-[50%] rounded-[100px] bg-gray-900 px-24 py-16 text-white body-15-rg"
           >
