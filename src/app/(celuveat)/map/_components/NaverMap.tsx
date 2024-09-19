@@ -23,16 +23,32 @@ function NaverMap({ restaurants }: NaverMapProps) {
     if (!ref.current) return;
 
     const newMap = new naver.maps.Map(ref.current, {
-      zoom: 15,
+      zoom: searchParams.get('zoom') ? Number(searchParams.get('zoom')) : 16,
+      center: new naver.maps.LatLng(
+        searchParams.get('centerX') ? Number(searchParams.get('centerX')) : 37.5248599,
+        searchParams.get('centerY') ? Number(searchParams.get('centerY')) : 127.0399848,
+      ),
     });
 
-    if (searchParams.get('zoom')) {
-      newMap.setZoom(Number(searchParams.get('zoom')));
-    }
+    const handleDrag = () => {
+      const bounds = newMap.getBounds();
+      const zoom = newMap.getZoom();
+      const center = newMap.getCenter();
 
-    if (searchParams.get('centerX') && searchParams.get('centerY')) {
-      newMap.setCenter(new naver.maps.LatLng(Number(searchParams.get('centerY')), Number(searchParams.get('centerX'))));
-    }
+      if (!bounds) return;
+
+      overrideQueryParams([
+        ['lowLatitude', bounds.getMin().y.toString()],
+        ['lowLongitude', bounds.getMin().x.toString()],
+        ['highLatitude', bounds.getMax().y.toString()],
+        ['highLongitude', bounds.getMax().x.toString()],
+        ['zoom', zoom.toString()],
+        ['centerX', center.x.toString()],
+        ['centerY', center.y.toString()],
+      ]);
+    };
+
+    naver.maps.Event.addListener(newMap, 'idle', handleDrag);
 
     setMap(newMap);
   }, []);
@@ -52,31 +68,7 @@ function NaverMap({ restaurants }: NaverMapProps) {
         },
       });
     });
-  }, [map]);
-
-  useEffect(() => {
-    if (!map) return;
-
-    const handleDrag = () => {
-      const bounds = map.getBounds();
-      const zoom = map.getZoom();
-      const center = map.getCenter();
-
-      if (!bounds) return;
-
-      overrideQueryParams([
-        ['lowLatitude', bounds.getMin().y.toString()],
-        ['lowLongitude', bounds.getMin().x.toString()],
-        ['highLatitude', bounds.getMax().y.toString()],
-        ['highLongitude', bounds.getMax().x.toString()],
-        ['zoom', zoom.toString()],
-        ['centerX', center.x.toString()],
-        ['centerY', center.y.toString()],
-      ]);
-    };
-
-    naver.maps.Event.addListener(map, 'idle', handleDrag);
-  }, [map]);
+  }, [restaurants, map]);
 
   return <div ref={ref} className="h-[calc(100vh_-_88px)] w-full" />;
 }
