@@ -25,8 +25,8 @@ function NaverMap({ restaurants }: NaverMapProps) {
     const newMap = new naver.maps.Map(ref.current, {
       zoom: searchParams.get('zoom') ? Number(searchParams.get('zoom')) : 16,
       center: new naver.maps.LatLng(
-        searchParams.get('centerX') ? Number(searchParams.get('centerX')) : 37.5248599,
-        searchParams.get('centerY') ? Number(searchParams.get('centerY')) : 127.0399848,
+        searchParams.get('centerY') ? Number(searchParams.get('centerY')) : 37.5248599,
+        searchParams.get('centerX') ? Number(searchParams.get('centerX')) : 127.0399848,
       ),
     });
 
