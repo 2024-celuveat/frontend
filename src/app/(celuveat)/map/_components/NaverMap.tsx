@@ -48,7 +48,9 @@ function NaverMap({ restaurants }: NaverMapProps) {
       ]);
     };
 
-    naver.maps.Event.addListener(newMap, 'idle', handleDrag);
+    const mapElement = newMap.getElement();
+    naver.maps.Event.addListener(mapElement, 'touchend', handleDrag);
+    naver.maps.Event.addListener(mapElement, 'dragend ', handleDrag);
 
     setMap(newMap);
   }, []);
@@ -63,7 +65,7 @@ function NaverMap({ restaurants }: NaverMapProps) {
         icon: {
           content: /* HTML */ `<img
             src="${visitedCelebrities[0].profileImageUrl}"
-            class="h-[38px] w-[38px] flex-none rounded-full border-[3px] border-white"
+            class="relative bottom-[19px] right-[19px] h-[38px] w-[38px] flex-none rounded-full border-[3px] border-white"
           />`,
         },
       });
