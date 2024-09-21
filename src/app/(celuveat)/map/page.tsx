@@ -7,16 +7,7 @@ import RestaurantCardRow from '@/components/RestaurantCardRow';
 import NaverMap from './_components/NaverMap';
 
 async function MapPage({
-  searchParams: {
-    tab = 'map',
-    lowLatitude = '29.085082344179696',
-    lowLongitude = '124.19130906495111',
-    highLatitude = '40.580676585499354',
-    highLongitude = '131.56313523682613',
-    zoom,
-    centerX,
-    centerY,
-  },
+  searchParams: { tab = 'map', lowLatitude, lowLongitude, highLatitude, highLongitude, zoom, centerX, centerY },
 }: {
   searchParams: {
     tab: 'map' | 'list';
@@ -29,17 +20,25 @@ async function MapPage({
     centerY: string;
   };
 }) {
-  const restaurants = await getRestaurants({
-    region: '서울',
-    category: '한식',
-    lowLatitude: Number(lowLatitude),
-    lowLongitude: Number(lowLongitude),
-    highLatitude: Number(highLatitude),
-    highLongitude: Number(highLongitude),
-    page: 0,
-    size: 100,
-    sort: [],
-  });
+  const restaurants =
+    lowLatitude && lowLongitude && highLatitude && highLongitude
+      ? await getRestaurants({
+          region: '서울',
+          category: '한식',
+          lowLatitude: Number(lowLatitude),
+          lowLongitude: Number(lowLongitude),
+          highLatitude: Number(highLatitude),
+          highLongitude: Number(highLongitude),
+          page: 0,
+          size: 100,
+          sort: [],
+        })
+      : {
+          contents: [],
+          currentPage: 0,
+          hasNext: false,
+          size: 0,
+        };
 
   return (
     <main className="relative">
