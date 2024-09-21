@@ -6,7 +6,7 @@ import { useSearchParams } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 
 import { Restaurant } from '@/@types';
-import { PagedResponse } from '@/@types/server/util.type';
+import { PagedResponse } from '@/@types/util.type';
 import useQueryParams from '@/hooks/useQueryParams';
 
 interface NaverMapProps {

@@ -2,7 +2,7 @@
 
 import { cookies } from 'next/headers';
 
-import { SocialLoginType } from '@/@types/server/login.type';
+import { SocialLoginType } from '@/@types/login.type';
 import { api } from '@/utils/api';
 
 export const getIsLogin = async () => {
