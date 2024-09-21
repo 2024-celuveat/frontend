@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 /* eslint-disable no-new */
 
 'use client';
@@ -50,9 +51,13 @@ function NaverMap({ restaurants }: NaverMapProps) {
     };
 
     handleDrag();
-    naver.maps.Event.addListener(newMap, 'idle', handleDrag);
+    const moveEventListener = naver.maps.Event.addListener(newMap, 'idle', handleDrag);
 
     setMap(newMap);
+
+    return () => {
+      naver.maps.Event.removeListener(moveEventListener);
+    };
   }, []);
 
   useEffect(() => {
