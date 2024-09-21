@@ -6,13 +6,6 @@ export interface Celebrity {
   restaurantCount: number;
 }
 
-export interface RestaurantImage {
-  name: string;
-  author: string;
-  url: string;
-  isThumbnail: boolean;
-}
-
 export interface Restaurant {
   id: number;
   name: string;
@@ -24,33 +17,64 @@ export interface Restaurant {
   naverMapUrl: string;
   latitude: number;
   longitude: number;
-  images: RestaurantImage[];
+  images: {
+    name: string;
+    author: string;
+    url: string;
+    isThumbnail: boolean;
+  }[];
   liked: boolean;
   visitedCelebrities: Celebrity[];
 }
 
-export interface BestCelebrities {
-  celebrity: Celebrity;
-  restaurants: Restaurant[];
-}
-
-export interface YoutubeContentResult {
-  id: number;
-  contentsName: string;
-  channelId: string;
-  channelUrl: string;
-  channelName: string;
-  restaurantCount: number;
-  subscriberCount: number;
-}
-
 export interface CelebrityDetail {
-  celebrity: Celebrity & { introduction: string; youtubeContentResults: YoutubeContentResult[] };
+  celebrity: Celebrity & {
+    introduction: string;
+    youtubeContentResults: {
+      id: number;
+      contentsName: string;
+      channelId: string;
+      channelUrl: string;
+      channelName: string;
+      restaurantCount: number;
+      subscriberCount: number;
+    }[];
+  };
   interested: boolean;
 }
 
-export interface Video {
+export type SocialLoginType = 'KAKAO' | 'NAVER' | 'GOOGLE';
+
+export interface UserProfile {
   id: number;
-  videoUrl: string;
-  celebrities: Celebrity[];
+  nickname: string;
+  profileImageUrl: string;
+  email: string;
+  serverType: SocialLoginType;
+  socialId: string;
+  interestedCount: number;
+  reviewCount: number;
 }
+
+export type SearchResult = {
+  regionResults: [
+    {
+      id: number;
+      name: string;
+      latitude: number;
+      longitude: number;
+    },
+  ];
+  restaurantResults: [
+    {
+      id: number;
+      name: string;
+    },
+  ];
+  celebrityResults: [
+    {
+      id: number;
+      name: string;
+    },
+  ];
+};

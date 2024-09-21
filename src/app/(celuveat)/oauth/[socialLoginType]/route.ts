@@ -2,7 +2,7 @@ import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { NextRequest } from 'next/server';
 
-import { SocialLoginType } from '@/@types/login.type';
+import { SocialLoginType } from '@/@types';
 import { api } from '@/utils/api';
 
 export async function GET(request: NextRequest, { params }: { params: { socialLoginType: SocialLoginType } }) {

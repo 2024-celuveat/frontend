@@ -1,4 +1,4 @@
-import { UserProfile } from '@/@types/user.type';
+import { UserProfile } from '@/@types';
 import { api } from '@/utils/api';
 
 export const getUserProfile = async (): Promise<UserProfile> => {

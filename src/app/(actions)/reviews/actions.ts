@@ -3,7 +3,7 @@
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 
-import { PagedResponse, PageOptions } from '@/@types/util.type';
+import { PagedResponse, PageOptions } from '@/@types/util';
 import { api } from '@/utils/api';
 
 interface Writer {

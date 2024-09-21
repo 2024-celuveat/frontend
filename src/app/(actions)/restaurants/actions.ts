@@ -1,5 +1,5 @@
-import { BestCelebrities, Restaurant, Video } from '@/@types';
-import { PagedResponse } from '@/@types/util.type';
+import { Celebrity, Restaurant } from '@/@types';
+import { PagedResponse } from '@/@types/util';
 import { api } from '@/utils/api';
 
 type Coordinate = {
@@ -29,7 +29,12 @@ export const getRestaurants = async (
 };
 
 // 인기 셀럽 조회
-export const getCelebritiesBest = async (): Promise<BestCelebrities[]> => {
+export const getCelebritiesBest = async (): Promise<
+  {
+    celebrity: Celebrity;
+    restaurants: Restaurant[];
+  }[]
+> => {
   return await api('/celebrities/best');
 };
 
@@ -64,7 +69,15 @@ export const getRestaurant = async (restaurantId: number): Promise<Restaurant> =
 };
 
 // 음식점이 나온 영상 조회
-export const getRestaurantVideos = async (restaurantId: number): Promise<Video[]> => {
+export const getRestaurantVideos = async (
+  restaurantId: number,
+): Promise<
+  {
+    id: number;
+    videoUrl: string;
+    celebrities: Celebrity[];
+  }[]
+> => {
   return await api(`/videos/in/restaurants/${restaurantId}`);
 };
 

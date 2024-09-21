@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { overlay } from 'overlay-kit';
 
-import { SocialLoginType } from '@/@types/login.type';
+import { SocialLoginType } from '@/@types';
 import google from '@/assets/icons/google.webp';
 import kakao from '@/assets/icons/kakao.webp';
 import naver from '@/assets/icons/naver.webp';

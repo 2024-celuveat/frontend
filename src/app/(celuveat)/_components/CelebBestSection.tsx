@@ -4,12 +4,12 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 
-import { BestCelebrities } from '@/@types';
+import { getCelebritiesBest } from '@/app/(actions)/restaurants/actions';
 import IconArrowRight from '@/components/@icon/IconArrowRight';
 import RestaurantLikeButton from '@/components/RestaurantLikeButton';
 
 interface CelebBestSectionProps {
-  bestCelebrities: BestCelebrities[];
+  bestCelebrities: Awaited<ReturnType<typeof getCelebritiesBest>>;
 }
 
 function CelebBestSection({ bestCelebrities }: CelebBestSectionProps) {
