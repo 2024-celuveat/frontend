@@ -16,6 +16,7 @@ interface NaverMapProps {
 function NaverMap({ restaurants }: NaverMapProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [map, setMap] = useState<naver.maps.Map | null>(null);
+  const [markers, setMarkers] = useState(new Map());
   const searchParams = useSearchParams();
   const { overrideQueryParams } = useQueryParams();
 
@@ -57,8 +58,11 @@ function NaverMap({ restaurants }: NaverMapProps) {
   useEffect(() => {
     if (!map) return;
 
-    restaurants.contents.forEach(({ latitude, longitude, visitedCelebrities }) => {
-      new naver.maps.Marker({
+    // 마커 등록
+    restaurants.contents.forEach(({ id, latitude, longitude, visitedCelebrities }) => {
+      if (markers.has(id)) return;
+
+      const newMarker = new naver.maps.Marker({
         position: new naver.maps.LatLng(latitude, longitude),
         map,
         icon: {
@@ -68,6 +72,7 @@ function NaverMap({ restaurants }: NaverMapProps) {
           />`,
         },
       });
+      setMarkers(prev => prev.set(id, newMarker));
     });
   }, [restaurants, map]);
 
