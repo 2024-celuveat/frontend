@@ -1,12 +1,11 @@
 'use client';
 
-import { useEffect } from 'react';
+import { PropsWithChildren, useEffect } from 'react';
 
-export interface BottomSheetProps {
+export interface BottomSheetProps extends PropsWithChildren {
   title?: string;
   open: boolean;
   onClose: () => void;
-  children: React.ReactNode;
 }
 
 function BottomSheet({ title, open, onClose, children }: BottomSheetProps) {
