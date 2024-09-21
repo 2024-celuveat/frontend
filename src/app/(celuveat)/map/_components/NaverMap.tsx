@@ -48,9 +48,7 @@ function NaverMap({ restaurants }: NaverMapProps) {
       ]);
     };
 
-    const mapElement = newMap.getElement();
-    naver.maps.Event.addListener(mapElement, 'touchend', handleDrag);
-    naver.maps.Event.addListener(mapElement, 'dragend ', handleDrag);
+    naver.maps.Event.addListener(newMap, 'idle', handleDrag);
 
     setMap(newMap);
   }, []);
