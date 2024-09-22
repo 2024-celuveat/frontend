@@ -1,5 +1,10 @@
+'use server';
+
+import { revalidateTag } from 'next/cache';
+
 import { Celebrity, Restaurant } from '@/@types';
 import { PagedResponse } from '@/@types/util';
+import { TAGS } from '@/constants/tags';
 import { api } from '@/utils/api';
 
 type Coordinate = {
@@ -25,7 +30,9 @@ export const getRestaurants = async (
   options: (FilterOption & PaginationInfo) | (FilterOption & PaginationInfo & Coordinate),
 ): Promise<PagedResponse<Restaurant>> => {
   const params = Object.entries(options).map(([key, value]) => [key, `${value}`]);
-  return await api(`/restaurants?${new URLSearchParams(params)}`);
+  return await api(`/restaurants?${new URLSearchParams(params)}`, {
+    next: { tags: [TAGS.TYPE.RESTAURANT] },
+  });
 };
 
 // 인기 셀럽 조회
@@ -35,37 +42,45 @@ export const getCelebritiesBest = async (): Promise<
     restaurants: Restaurant[];
   }[]
 > => {
-  return await api('/celebrities/best');
+  return await api('/celebrities/best', {
+    next: { tags: [TAGS.TYPE.RESTAURANT] },
+  });
 };
 
 // 셀럽 추천 음식점 조회
 export const getRecommendedRestaurantsByCelebrities = async (): Promise<Restaurant[]> => {
-  return await api('/restaurants/celebrity/recommend');
+  return await api('/restaurants/celebrity/recommend', { next: { tags: [TAGS.TYPE.RESTAURANT] } });
 };
 
 // 관심 음식점 조회
 export const getInterestedRestaurants = async (): Promise<PagedResponse<Restaurant>> => {
-  return await api('/restaurants/interested');
+  return await api('/restaurants/interested', { next: { tags: [TAGS.TYPE.RESTAURANT] } });
 };
 
 // 셀럽이 다녀간 음식점 조회
 export const getCelebrityRestaurants = async (celebrityId: number): Promise<PagedResponse<Restaurant>> => {
-  return await api(`/restaurants/celebrity/${celebrityId}`);
+  return await api(`/restaurants/celebrity/${celebrityId}`, {
+    next: { tags: [TAGS.TYPE.RESTAURANT] },
+  });
 };
 
 // 관심 음식점 추가
 export const postInterestedRestaurant = async (restaurantId: number) => {
   await api(`/restaurants/interested/${restaurantId}`, { method: 'POST' });
+
+  revalidateTag(TAGS.TYPE.RESTAURANT);
 };
 
 // 관심 음식점 삭제
 export const deleteInterestedRestaurant = async (restaurantId: number) => {
   await api(`/restaurants/interested/${restaurantId}`, { method: 'DELETE' });
+
+  revalidateTag(TAGS.TYPE.RESTAURANT);
 };
 
 // 음식점 조회
 export const getRestaurant = async (restaurantId: number): Promise<Restaurant> => {
-  return await api(`/restaurants/${restaurantId}`);
+  return await api(`/restaurants/${restaurantId}`, { next: { tags: [TAGS.TYPE.RESTAURANT] } });
 };
 
 // 음식점이 나온 영상 조회
@@ -83,10 +98,12 @@ export const getRestaurantVideos = async (
 
 // 주변 음식점 조회
 export const getRestaurantsNearby = async (restaurantId: number): Promise<Restaurant[]> => {
-  return await api(`/restaurants/nearby/${restaurantId}`);
+  return await api(`/restaurants/nearby/${restaurantId}`, {
+    next: { tags: [TAGS.TYPE.RESTAURANT] },
+  });
 };
 
-// 주변 음식점 조회
+// 주간 업데이트된 음식점 조회
 export const getWeeklyRestaurants = async (): Promise<PagedResponse<Restaurant>> => {
-  return await api('/restaurants/weekly');
+  return await api('/restaurants/weekly', { next: { tags: [TAGS.TYPE.RESTAURANT] } });
 };
