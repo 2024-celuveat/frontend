@@ -23,6 +23,8 @@ function ReviewCard({ review }: ReviewCardProps) {
   const showToast = useToast();
   const router = useRouter();
 
+  console.log(review.star);
+
   const openBottomSheet = () => {
     overlay.open(({ isOpen, close }) => {
       const handleModifyReview = () => {
@@ -71,7 +73,7 @@ function ReviewCard({ review }: ReviewCardProps) {
 
       <div className="mt-10 flex gap-1">
         {Array.from({ length: 5 }, (_, index) => (
-          <IconStarFilled key={index} fill={index < 5 - review.star ? colors.sub.orange : colors.gray[200]} />
+          <IconStarFilled key={index} fill={index < review.star ? colors.sub.orange : colors.gray[200]} />
         ))}
       </div>
 
