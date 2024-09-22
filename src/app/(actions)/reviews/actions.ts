@@ -1,9 +1,10 @@
 'use server';
 
-import { revalidatePath } from 'next/cache';
+import { revalidatePath, revalidateTag } from 'next/cache';
 import { redirect } from 'next/navigation';
 
 import { PagedResponse, PageOptions } from '@/@types/util';
+import { TAGS } from '@/constants/tags';
 import { api } from '@/utils/api';
 
 interface Writer {
@@ -27,7 +28,9 @@ export interface Review {
 }
 
 export const getReview = async (reviewId: number): Promise<Review> => {
-  return await api(`/reviews/${reviewId}`);
+  return await api(`/reviews/${reviewId}`, {
+    next: { tags: [TAGS.TYPE.REVIEW] },
+  });
 };
 export const updateReview = async (formData: FormData): Promise<void> => {
   try {
@@ -69,10 +72,14 @@ export const deleteReview = async (reviewId: number): Promise<void> => {
 };
 
 export const postReviewHelpful = async (reviewId: number): Promise<void> => {
-  return await api(`/reviews/helpful/${reviewId}`, { method: 'POST' });
+  await api(`/reviews/helpful/${reviewId}`, { method: 'POST' });
+
+  revalidateTag(TAGS.TYPE.REVIEW);
 };
 export const deleteReviewHelpful = async (reviewId: number): Promise<void> => {
-  return await api(`/reviews/helpful/${reviewId}`, { method: 'DELETE' });
+  await api(`/reviews/helpful/${reviewId}`, { method: 'DELETE' });
+
+  revalidateTag(TAGS.TYPE.REVIEW);
 };
 
 export const getRestaurantReviews = async (
@@ -82,5 +89,7 @@ export const getRestaurantReviews = async (
   const params = Object.entries(options).map(([key, value]) => [key, `${value}`]);
   const queryString = new URLSearchParams(params);
 
-  return await api(`/reviews/restaurants/${restaurantId}?${queryString}`);
+  return await api(`/reviews/restaurants/${restaurantId}?${queryString}`, {
+    next: { tags: [TAGS.TYPE.REVIEW] },
+  });
 };
