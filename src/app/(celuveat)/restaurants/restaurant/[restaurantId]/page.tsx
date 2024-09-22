@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { Fragment } from 'react';
 
 import { getRestaurant, getRestaurantsNearby, getRestaurantVideos } from '@/app/(actions)/restaurants/actions';
 import { getRestaurantReviews } from '@/app/(actions)/reviews/actions';
@@ -136,10 +137,10 @@ async function RestaurantDetailPage({ params }: { params: { restaurantId: string
 
           <ul className="mt-16 flex flex-col">
             {reviews?.contents.map(review => (
-              <>
-                <ReviewCard key={review.id} review={review} />
+              <Fragment key={review.id}>
+                <ReviewCard review={review} />
                 <hr className="my-16 h-1 w-full bg-gray-100" />
-              </>
+              </Fragment>
             ))}
           </ul>
           <Link href={`/reviews/review?restaurantId=${params.restaurantId}`}>
