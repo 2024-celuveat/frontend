@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Fragment } from 'react';
 
+import { getUserProfile } from '@/app/(actions)/members/actions';
 import { getRestaurant, getRestaurantsNearby, getRestaurantVideos } from '@/app/(actions)/restaurants/actions';
 import { getRestaurantReviews } from '@/app/(actions)/reviews/actions';
 import IconArrowRight from '@/components/@icon/IconArrowRight';
@@ -22,12 +23,14 @@ async function RestaurantDetailPage({ params }: { params: { restaurantId: string
   const videosData = getRestaurantVideos(Number(params.restaurantId));
   const restaurantsNearbyData = getRestaurantsNearby(Number(params.restaurantId));
   const reviewsData = getRestaurantReviews(Number(params.restaurantId), { size: 3 });
+  const myProfileData = getUserProfile();
 
-  const [restaurant, videos, restaurantsNearby, reviews] = await Promise.all([
+  const [restaurant, videos, restaurantsNearby, reviews, myProfile] = await Promise.all([
     restaurantData,
     videosData,
     restaurantsNearbyData,
     reviewsData,
+    myProfileData,
   ]);
 
   return (
@@ -138,7 +141,7 @@ async function RestaurantDetailPage({ params }: { params: { restaurantId: string
           <ul className="mt-16 flex flex-col">
             {reviews?.contents.map(review => (
               <Fragment key={review.id}>
-                <ReviewCard review={review} />
+                <ReviewCard review={review} isMyReview={myProfile.id === review.writer.id} />
                 <hr className="my-16 h-1 w-full bg-gray-100" />
               </Fragment>
             ))}

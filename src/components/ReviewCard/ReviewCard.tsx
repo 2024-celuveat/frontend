@@ -17,13 +17,12 @@ import IconStarFilled from '../@icon/IconStarFilled';
 
 interface ReviewCardProps {
   review: Review;
+  isMyReview: boolean;
 }
 
-function ReviewCard({ review }: ReviewCardProps) {
+function ReviewCard({ review, isMyReview }: ReviewCardProps) {
   const showToast = useToast();
   const router = useRouter();
-
-  console.log(review.star);
 
   const openBottomSheet = () => {
     overlay.open(({ isOpen, close }) => {
@@ -40,12 +39,29 @@ function ReviewCard({ review }: ReviewCardProps) {
 
       return (
         <BottomSheet open={isOpen} onClose={close}>
-          <button type="button" onClick={handleModifyReview} className="flex h-56 w-full items-center justify-center">
-            <span className="title-16-sb">수정하기</span>
-          </button>
-          <button type="button" onClick={handleDeleteReview} className="flex h-56 w-full items-center justify-center">
-            <span className="title-16-sb">삭제하기</span>
-          </button>
+          {isMyReview && (
+            <>
+              <button
+                type="button"
+                onClick={handleModifyReview}
+                className="flex h-56 w-full items-center justify-center"
+              >
+                <span className="title-16-sb">수정하기</span>
+              </button>
+              <button
+                type="button"
+                onClick={handleDeleteReview}
+                className="flex h-56 w-full items-center justify-center"
+              >
+                <span className="title-16-sb">삭제하기</span>
+              </button>
+            </>
+          )}
+          {!isMyReview && (
+            <button type="button" className="flex h-56 w-full items-center justify-center">
+              <span className="title-16-sb">신고하기</span>
+            </button>
+          )}
           <button
             type="button"
             className="mt-16 flex h-56 w-full items-center justify-center gap-8 rounded-[8px] bg-gray-100"
