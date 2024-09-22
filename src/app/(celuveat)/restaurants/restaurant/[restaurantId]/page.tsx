@@ -5,6 +5,7 @@ import { Fragment } from 'react';
 import { getUserProfile } from '@/app/(actions)/members/actions';
 import { getRestaurant, getRestaurantsNearby, getRestaurantVideos } from '@/app/(actions)/restaurants/actions';
 import { getRestaurantReviews } from '@/app/(actions)/reviews/actions';
+import { getIsLogin } from '@/app/(actions)/social-login/actions';
 import IconArrowRight from '@/components/@icon/IconArrowRight';
 import IconBullet from '@/components/@icon/IconBullet';
 import IconCall from '@/components/@icon/IconCall';
@@ -17,21 +18,24 @@ import { formatToTenThousandUnits } from '@/utils/formatToTenThousandUnits';
 
 import RestaurantAddInterestButton from './_components/RestaurantAddInterestButton';
 import RestaurantDetailPageMap from './_components/RestaurantDetailPageMap';
+import ReviewAddButton from './_components/ReviewAddButton';
 
 async function RestaurantDetailPage({ params }: { params: { restaurantId: string } }) {
   const restaurantData = getRestaurant(Number(params.restaurantId));
   const videosData = getRestaurantVideos(Number(params.restaurantId));
   const restaurantsNearbyData = getRestaurantsNearby(Number(params.restaurantId));
   const reviewsData = getRestaurantReviews(Number(params.restaurantId), { size: 3 });
-  const myProfileData = getUserProfile();
+  const isLoginData = getIsLogin();
 
-  const [restaurant, videos, restaurantsNearby, reviews, myProfile] = await Promise.all([
+  const [restaurant, videos, restaurantsNearby, reviews, isLogin] = await Promise.all([
     restaurantData,
     videosData,
     restaurantsNearbyData,
     reviewsData,
-    myProfileData,
+    isLoginData,
   ]);
+
+  const myProfile = isLogin ? await getUserProfile() : null;
 
   return (
     <div>
@@ -141,16 +145,12 @@ async function RestaurantDetailPage({ params }: { params: { restaurantId: string
           <ul className="mt-16 flex flex-col">
             {reviews?.contents.map(review => (
               <Fragment key={review.id}>
-                <ReviewCard review={review} isMyReview={myProfile.id === review.writer.id} />
+                <ReviewCard review={review} isMyReview={myProfile?.id === review.writer.id} />
                 <hr className="my-16 h-1 w-full bg-gray-100" />
               </Fragment>
             ))}
           </ul>
-          <Link href={`/reviews/review?restaurantId=${params.restaurantId}`}>
-            <div className="mt-24 flex h-[50px] w-full items-center justify-center rounded-[8px] bg-mainDim-15 text-main-700 title-16-sb">
-              방문 리뷰 남기기
-            </div>
-          </Link>
+          <ReviewAddButton restaurantId={Number(params.restaurantId)} isLogin={isLogin} />
         </section>
 
         <hr className="height-1 mt-24 w-full bg-gray-100" />

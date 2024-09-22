@@ -1,3 +1,5 @@
+'use server';
+
 import { UserProfile } from '@/@types';
 import { api } from '@/utils/api';
 
