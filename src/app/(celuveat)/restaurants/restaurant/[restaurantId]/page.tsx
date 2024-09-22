@@ -9,6 +9,7 @@ import { getIsLogin } from '@/app/(actions)/social-login/actions';
 import IconArrowRight from '@/components/@icon/IconArrowRight';
 import IconBullet from '@/components/@icon/IconBullet';
 import IconCall from '@/components/@icon/IconCall';
+import IconCaution from '@/components/@icon/iconCaution';
 import IconClock from '@/components/@icon/IconClock';
 import IconHere from '@/components/@icon/IconHere';
 import Avatar from '@/components/Avatar';
@@ -141,16 +142,28 @@ async function RestaurantDetailPage({ params }: { params: { restaurantId: string
               </Link>
             )}
           </div>
+          {reviews.size === 0 && (
+            <div className="flex h-[186px] flex-col items-center justify-center gap-20">
+              <IconCaution width={64} height={64} className="rotate-180" />
+              <span className="text-gray-900 title-18-bold">아직 등록된 리뷰가 없습니다</span>
+            </div>
+          )}
+          {reviews.size > 0 && (
+            <ul className="mt-16 flex flex-col">
+              {reviews?.contents.map(review => (
+                <Fragment key={review.id}>
+                  <ReviewCard review={review} isMyReview={myProfile?.id === review.writer.id} />
+                  <hr className="my-16 h-1 w-full bg-gray-100" />
+                </Fragment>
+              ))}
+            </ul>
+          )}
 
-          <ul className="mt-16 flex flex-col">
-            {reviews?.contents.map(review => (
-              <Fragment key={review.id}>
-                <ReviewCard review={review} isMyReview={myProfile?.id === review.writer.id} />
-                <hr className="my-16 h-1 w-full bg-gray-100" />
-              </Fragment>
-            ))}
-          </ul>
-          <ReviewAddButton restaurantId={Number(params.restaurantId)} isLogin={isLogin} />
+          <ReviewAddButton
+            restaurantId={Number(params.restaurantId)}
+            isLogin={isLogin}
+            innerText={reviews.size === 0 ? '첫 방문 리뷰 남기기' : '방문 리뷰 남기기'}
+          />
         </section>
 
         <hr className="height-1 mt-24 w-full bg-gray-100" />

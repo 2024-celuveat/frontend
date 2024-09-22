@@ -8,9 +8,10 @@ import useToast from '@/hooks/useToast';
 interface ReviewAddButtonProps {
   restaurantId: Restaurant['id'];
   isLogin: boolean;
+  innerText: string;
 }
 
-function ReviewAddButton({ restaurantId, isLogin }: ReviewAddButtonProps) {
+function ReviewAddButton({ restaurantId, isLogin, innerText }: ReviewAddButtonProps) {
   const router = useRouter();
   const showToast = useToast();
 
@@ -28,7 +29,7 @@ function ReviewAddButton({ restaurantId, isLogin }: ReviewAddButtonProps) {
       onClick={handleClick}
       className="mt-24 flex h-[50px] w-full items-center justify-center rounded-[8px] bg-mainDim-15 text-main-700 title-16-sb"
     >
-      방문 리뷰 남기기
+      {innerText}
     </button>
   );
 }
