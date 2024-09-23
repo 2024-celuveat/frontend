@@ -7,14 +7,34 @@ import { ChangeEvent, useState } from 'react';
 import { getSearchResult } from '@/app/(actions)/search/actions';
 import { SearchResult } from '@/@types';
 
+function highlightMatch(text: string, query: string) {
+  if (!query) return text;
+  const parts = text.split(new RegExp(`(${query})`, 'gi')); // 검색어와 일치하는 부분을 찾음
+  return (
+    <>
+      {parts.map((part, index) =>
+        part.toLowerCase() === query.toLowerCase() ? (
+          <span key={index} className="text-main-700">
+            {part}
+          </span> // 일치하는 부분에 스타일 적용
+        ) : (
+          part
+        ),
+      )}
+    </>
+  );
+}
+
 function Search() {
   const [data, setData] = useState<SearchResult>();
+  const [searchValue, setSearchValue] = useState<string>(' ');
 
   const handleChange = async (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.value.match(/[^가-힣\s]/)) {
       return;
     }
 
+    setSearchValue(e.target.value);
     const newData = await getSearchResult(e.target.value);
     setData(newData);
   };
@@ -38,7 +58,7 @@ function Search() {
           <li className="flex items-center px-20 py-[15px]">
             <IconSearch width={20} height={20} fill={colors.gray[600]} />
             <div>
-              <span className="ml-8 text-gray-900 body-16-md">{region.name}</span>
+              <span className="ml-8 text-gray-900 body-16-md">{highlightMatch(region.name, searchValue)}</span>
               <span className="ml-4 text-gray-600 caption-12-rg">지역</span>
             </div>
           </li>
@@ -47,7 +67,7 @@ function Search() {
           <li className="flex items-center px-20 py-[15px]">
             <IconSearch width={20} height={20} fill={colors.gray[600]} />
             <div>
-              <span className="ml-8 text-gray-900 body-16-md">{celeb.name}</span>
+              <span className="ml-8 text-gray-900 body-16-md">{highlightMatch(celeb.name, searchValue)}</span>
               <span className="ml-4 text-gray-600 caption-12-rg">셀럽</span>
             </div>
           </li>
@@ -56,7 +76,7 @@ function Search() {
           <li className="flex items-center px-20 py-[15px]" key={restaurant.id}>
             <IconSearch width={20} height={20} fill={colors.gray[600]} />
             <div>
-              <span className="ml-8 text-gray-900 body-16-md">{restaurant.name}</span>
+              <span className="ml-8 text-gray-900 body-16-md">{highlightMatch(restaurant.name, searchValue)}</span>
               <span className="ml-4 text-gray-600 caption-12-rg">맛집</span>
             </div>
           </li>
