@@ -6,6 +6,7 @@ import IconArrowLeftGoBack from './IconArrowLeftGoBack';
 import { ChangeEvent, useState } from 'react';
 import { getSearchResult } from '@/app/(actions)/search/actions';
 import { SearchResult } from '@/@types';
+import Link from 'next/link';
 
 function highlightMatch(text: string, query: string) {
   if (!query) return text;
@@ -55,31 +56,35 @@ function Search() {
 
       <ul>
         {data?.regionResults.map(region => (
-          <li className="flex items-center px-20 py-[15px]">
+          <Link href={`/region/${region.id}`} className="flex items-center px-20 py-[15px]" key={region.id}>
             <IconSearch width={20} height={20} fill={colors.gray[600]} />
             <div>
               <span className="ml-8 text-gray-900 body-16-md">{highlightMatch(region.name, searchValue)}</span>
               <span className="ml-4 text-gray-600 caption-12-rg">지역</span>
             </div>
-          </li>
+          </Link>
         ))}
         {data?.celebrityResults.map(celeb => (
-          <li className="flex items-center px-20 py-[15px]">
+          <Link href={`/celebs/${celeb.id}`} className="flex items-center px-20 py-[15px]" key={celeb.id}>
             <IconSearch width={20} height={20} fill={colors.gray[600]} />
             <div>
               <span className="ml-8 text-gray-900 body-16-md">{highlightMatch(celeb.name, searchValue)}</span>
               <span className="ml-4 text-gray-600 caption-12-rg">셀럽</span>
             </div>
-          </li>
+          </Link>
         ))}
         {data?.restaurantResults.map(restaurant => (
-          <li className="flex items-center px-20 py-[15px]" key={restaurant.id}>
+          <Link
+            href={`/restaurants/restaurant/${restaurant.id}`}
+            className="flex items-center px-20 py-[15px]"
+            key={restaurant.id}
+          >
             <IconSearch width={20} height={20} fill={colors.gray[600]} />
             <div>
               <span className="ml-8 text-gray-900 body-16-md">{highlightMatch(restaurant.name, searchValue)}</span>
               <span className="ml-4 text-gray-600 caption-12-rg">맛집</span>
             </div>
-          </li>
+          </Link>
         ))}
       </ul>
     </main>
