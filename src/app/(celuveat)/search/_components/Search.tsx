@@ -1,12 +1,14 @@
 'use client';
 
+import Link from 'next/link';
+import { ChangeEvent, useState } from 'react';
+
+import { SearchResult } from '@/@types';
+import { getSearchResult } from '@/app/(actions)/search/actions';
 import IconSearch from '@/components/@icon/IconSearch';
 import { colors } from '@/constants/colors';
+
 import IconArrowLeftGoBack from './IconArrowLeftGoBack';
-import { ChangeEvent, useState } from 'react';
-import { getSearchResult } from '@/app/(actions)/search/actions';
-import { SearchResult } from '@/@types';
-import Link from 'next/link';
 
 function highlightMatch(text: string, query: string) {
   if (!query) return text;
