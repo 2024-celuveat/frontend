@@ -20,7 +20,7 @@ function RestaurantCardRow({ id, name, images, category, roadAddress, liked }: R
           <p className="absolute bottom-0 left-0 text-gray-600 body-13-rg">식당 소개글 가나다라마바사아자차타파...</p>
         </div>
       </Link>
-      <RestaurantLikeButton liked={liked} restaurantId={id} cn="absolute top-0 right-0" />
+      <RestaurantLikeButton liked={liked} restaurantId={id} isRow />
     </div>
   );
 }

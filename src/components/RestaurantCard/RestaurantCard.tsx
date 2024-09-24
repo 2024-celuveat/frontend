@@ -31,7 +31,7 @@ function RestaurantCard({ id, name, category, images, roadAddress, visitedCelebr
           </span>
         </div>
       </Link>
-      <RestaurantLikeButton restaurantId={id} liked={liked} cn="absolute top-8 right-8" />
+      <RestaurantLikeButton restaurantId={id} liked={liked} />
     </div>
   );
 }

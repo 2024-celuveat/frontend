@@ -72,7 +72,7 @@ function CelebBestSection({ bestCelebrities }: CelebBestSectionProps) {
                 <div className="mt-6">
                   <span className="caption-12-rg">{roadAddress.split(' ').slice(0, 2).join(' ')}</span>
                 </div>
-                <RestaurantLikeButton restaurantId={id} liked={liked} cn="absolute top-8 right-8" />
+                <RestaurantLikeButton restaurantId={id} liked={liked} />
               </div>
             ))}
         </div>
