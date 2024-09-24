@@ -12,17 +12,11 @@ import IconArrowLeftGoBack from './IconArrowLeftGoBack';
 
 function highlightMatch(text: string, query: string) {
   if (!query) return text;
-  const parts = text.split(new RegExp(`(${query})`, 'gi')); // 검색어와 일치하는 부분을 찾음
+  const parts = text.split(new RegExp(`(${query})`, 'gi'));
   return (
     <>
-      {parts.map((part, index) =>
-        part.toLowerCase() === query.toLowerCase() ? (
-          <span key={index} className="text-main-700">
-            {part}
-          </span> // 일치하는 부분에 스타일 적용
-        ) : (
-          part
-        ),
+      {parts.map(part =>
+        part.toLowerCase() === query.toLowerCase() ? <span className="text-main-700">{part}</span> : part,
       )}
     </>
   );
