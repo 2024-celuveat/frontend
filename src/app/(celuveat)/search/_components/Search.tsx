@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useCallback, useState } from 'react';
 
 import { SearchResult } from '@/@types';
 import { getSearchResult } from '@/app/(actions)/search/actions';
@@ -9,6 +9,7 @@ import IconSearch from '@/components/@icon/IconSearch';
 import { colors } from '@/constants/colors';
 
 import IconArrowLeftGoBack from './IconArrowLeftGoBack';
+import { throttle } from 'lodash';
 
 function highlightMatch(text: string, query: string) {
   if (!query) return text;
@@ -26,14 +27,20 @@ function Search() {
   const [data, setData] = useState<SearchResult>();
   const [searchValue, setSearchValue] = useState<string>(' ');
 
-  const handleChange = async (e: ChangeEvent<HTMLInputElement>) => {
+  const fetchSearchResults = async (value: string) => {
+    const newData = await getSearchResult(value);
+    setData(newData);
+  };
+
+  const throttledFetchSearchResults = useCallback(throttle(fetchSearchResults, 1000), []);
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.value.match(/[^가-힣\s]/)) {
       return;
     }
 
     setSearchValue(e.target.value);
-    const newData = await getSearchResult(e.target.value);
-    setData(newData);
+    throttledFetchSearchResults(e.target.value); // 스로틀링 적용된 함수 호출
   };
 
   return (
