@@ -8,12 +8,12 @@ import { colors } from '@/constants/colors';
 
 function RestaurantCard({ id, name, category, images, roadAddress, visitedCelebrities, liked }: Restaurant) {
   return (
-    <div className="relative flex w-[140px] flex-none flex-col">
+    <div className="relative flex w-[150px] flex-none flex-col">
       <Link href={`/restaurants/restaurant/${id}`}>
         <Image
           src={images[0].url}
-          width={140}
-          height={140}
+          width={150}
+          height={150}
           alt={name}
           className="aspect-square rounded-[8px] bg-gray-200 object-cover"
         />
