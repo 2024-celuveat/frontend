@@ -4,7 +4,7 @@ import { Fragment } from 'react';
 
 import { getUserProfile } from '@/app/(actions)/members/actions';
 import { getRestaurant, getRestaurantsNearby, getRestaurantVideos } from '@/app/(actions)/restaurants/actions';
-import { getRestaurantReviews } from '@/app/(actions)/reviews/actions';
+import { getRestaurantReviews, getReviewCount } from '@/app/(actions)/reviews/actions';
 import { getIsLogin } from '@/app/(actions)/social-login/actions';
 import IconArrowRight from '@/components/@icon/IconArrowRight';
 import IconBullet from '@/components/@icon/IconBullet';
@@ -26,13 +26,15 @@ async function RestaurantDetailPage({ params }: { params: { restaurantId: string
   const videosData = getRestaurantVideos(Number(params.restaurantId));
   const restaurantsNearbyData = getRestaurantsNearby(Number(params.restaurantId));
   const reviewsData = getRestaurantReviews(Number(params.restaurantId), { size: 3 });
+  const reviewCountData = getReviewCount(Number(params.restaurantId));
   const isLoginData = getIsLogin();
 
-  const [restaurant, videos, restaurantsNearby, reviews, isLogin] = await Promise.all([
+  const [restaurant, videos, restaurantsNearby, reviews, reviewCount, isLogin] = await Promise.all([
     restaurantData,
     videosData,
     restaurantsNearbyData,
     reviewsData,
+    reviewCountData,
     isLoginData,
   ]);
 
@@ -134,7 +136,7 @@ async function RestaurantDetailPage({ params }: { params: { restaurantId: string
 
         <section>
           <div className="mt-24 flex items-center justify-between">
-            <h2 className="title-20-md">리뷰 {reviews.size}개</h2>
+            <h2 className="title-20-md">리뷰 {reviewCount}개</h2>
             {reviews.size > 3 && (
               <Link href={`/reviews?restaurantId=${params.restaurantId}`} type="button" className="flex items-center">
                 <span className="text-gray-400 body-13-rg">더보기</span>

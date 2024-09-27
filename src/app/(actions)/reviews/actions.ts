@@ -32,6 +32,7 @@ export const getReview = async (reviewId: number): Promise<Review> => {
     next: { tags: [TAGS.TYPE.REVIEW] },
   });
 };
+
 export const updateReview = async (formData: FormData): Promise<void> => {
   try {
     await api(`/reviews/${formData.get('reviewId')}`, {
@@ -90,6 +91,12 @@ export const getRestaurantReviews = async (
   const queryString = new URLSearchParams(params);
 
   return await api(`/reviews/restaurants/${restaurantId}?${queryString}`, {
+    next: { tags: [TAGS.TYPE.REVIEW] },
+  });
+};
+
+export const getReviewCount = async (restaurantId: number): Promise<number> => {
+  return await api(`/reviews/restaurants/${restaurantId}/count`, {
     next: { tags: [TAGS.TYPE.REVIEW] },
   });
 };
