@@ -18,7 +18,7 @@ function EmptyCaseUI({ tab }: { tab: '맛집' | '셀럽' }) {
     <div className="flex flex-col items-center justify-center">
       <IconCaution width={64} height={64} />
       <span className="mt-20 text-gray-900 title-18-bold">관심을 설정한 {tab}이 없습니다</span>
-      <span className="mt-8 text-gray-600 body-13-rg">좋아하는 맛집을 관심 설정 해보세요.</span>
+      <span className="mt-8 text-gray-600 body-13-rg">좋아하는 {tab}을 관심 설정 해보세요.</span>
       <Link href="/" type="button" className="mt-20 rounded-[8px] bg-gray-100 px-20 py-[15px] title-15-md">
         홈으로 가기
       </Link>
