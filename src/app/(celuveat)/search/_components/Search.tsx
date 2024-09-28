@@ -1,5 +1,6 @@
 'use client';
 
+import { throttle } from 'lodash';
 import Link from 'next/link';
 import { ChangeEvent, useCallback, useState } from 'react';
 
@@ -9,7 +10,6 @@ import IconSearch from '@/components/@icon/IconSearch';
 import { colors } from '@/constants/colors';
 
 import IconArrowLeftGoBack from './IconArrowLeftGoBack';
-import { throttle } from 'lodash';
 
 function highlightMatch(text: string, query: string) {
   if (!query) return text;

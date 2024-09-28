@@ -146,7 +146,7 @@ async function RestaurantDetailPage({ params }: { params: { restaurantId: string
           </div>
           {reviews.size === 0 && (
             <div className="flex h-[186px] flex-col items-center justify-center gap-20">
-              <IconCaution width={64} height={64} className="rotate-180" />
+              <IconCaution width={64} height={64} />
               <span className="text-gray-900 title-18-bold">아직 등록된 리뷰가 없습니다</span>
             </div>
           )}
