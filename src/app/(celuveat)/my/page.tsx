@@ -58,21 +58,21 @@ async function MyPage() {
 
         <div className="px-20">
           <div className="flex h-[70px] justify-evenly rounded-[8px] bg-[#FFB26C1A] px-20 py-14">
-            <div className="flex flex-col items-center gap-3">
+            <Link href="/interested" className="flex flex-col items-center gap-3">
               <div className="flex gap-4">
                 <IconHeartFilled width={19} height={18} fill={colors.main[500]} />
                 <h2 className="text-gray-800 body-14-rg">관심 리스트</h2>
               </div>
               <span className="text-main-700 title-16-sb">{myProfile.interestedCount}</span>
-            </div>
+            </Link>
             <hr className="h-full w-1 rounded-[100px] bg-main-500 opacity-20" />
-            <div className="flex flex-col items-center gap-3">
+            <Link href="/reviews/my" className="flex flex-col items-center gap-3">
               <div className="flex gap-4">
                 <IconReviewFilled width={19} height={18} fill={colors.main[500]} />
                 <h2 className="text-gray-800 body-14-rg">작성한 리뷰</h2>
               </div>
               <span className="text-main-700 title-16-sb">{myProfile.reviewCount}</span>
-            </div>
+            </Link>
           </div>
         </div>
       </section>

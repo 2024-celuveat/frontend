@@ -52,6 +52,7 @@ function Header() {
   if (pathValues[1] === 'reviews') {
     if (pathValues[2] === 'review')
       return <HeaderType1 title={searchParams.get('reviewId') ? '리뷰 수정하기' : '리뷰 작성하기'} />;
+    if (pathValues[2] === 'my') return <HeaderType1 title="작성한 리뷰" />;
     return <HeaderType1 title="리뷰 더보기" />;
   }
 
