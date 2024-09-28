@@ -7,13 +7,13 @@ import { useState } from 'react';
 
 import { getInterestedCelebrities } from '@/app/(actions)/celebs/actions';
 import { getInterestedRestaurants } from '@/app/(actions)/restaurants/actions';
+import IconCaution from '@/components/@icon/iconCaution';
 import RestaurantCardRow from '@/components/RestaurantCardRow';
 import { formatToTenThousandUnits } from '@/utils/formatToTenThousandUnits';
 
 import CelebrityLikeButton from './CelebrityLikeButton';
-import IconCaution from '@/components/@icon/iconCaution';
 
-const EmptyCaseUI = ({ tab }: { tab: '맛집' | '셀럽' }) => {
+function EmptyCaseUI({ tab }: { tab: '맛집' | '셀럽' }) {
   return (
     <div className="flex flex-col items-center justify-center">
       <IconCaution width={64} height={64} />
@@ -24,7 +24,7 @@ const EmptyCaseUI = ({ tab }: { tab: '맛집' | '셀럽' }) => {
       </Link>
     </div>
   );
-};
+}
 interface InterestedProps {
   interestedRestaurants: Awaited<ReturnType<typeof getInterestedRestaurants>>;
   interestedCelebrities: Awaited<ReturnType<typeof getInterestedCelebrities>>;
