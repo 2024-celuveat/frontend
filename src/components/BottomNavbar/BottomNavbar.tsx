@@ -6,9 +6,9 @@ import { usePathname, useRouter } from 'next/navigation';
 import { overlay } from 'overlay-kit';
 
 import { SocialLoginType } from '@/@types';
-import google from '@/assets/icons/google.webp';
-import kakao from '@/assets/icons/kakao.webp';
-import naver from '@/assets/icons/naver.webp';
+import google from '@/assets/icons/social-login/google_symbol.webp';
+import kakao from '@/assets/icons/social-login/kakao_symbol.webp';
+import naver from '@/assets/icons/social-login/naver_symbol.webp';
 import { colors } from '@/constants/colors';
 
 import IconHeartFilled from '../@icon/IconHeartFilled';
