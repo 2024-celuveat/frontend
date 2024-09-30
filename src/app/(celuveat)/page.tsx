@@ -10,6 +10,7 @@ import { colors } from '@/constants/colors';
 import CelebBestSection from './_components/CelebBestSection';
 import CelebritiesRecommendedRestaurantsInformation from './_components/CelebritiesRecommendedRestaurantsInformation';
 import RestaurantRecommendedSection from './_components/RestaurantRecommendedSection';
+import IconLocation from '@/components/@icon/IconLocation';
 
 const FOOD_CATEGORY = [
   { name: '한식', icon: <Icon.Korean /> },
@@ -25,6 +26,8 @@ const FOOD_CATEGORY = [
   { name: '주점', icon: <Icon.PubAndBar /> },
   { name: '커피/디저트', icon: <Icon.Desserts /> },
 ];
+
+const REGIONS = ['잠실', '성수', '홍대', '을지로', '압구정', '여의도', '이태원'];
 
 export default async function Home() {
   const bestCelebritiesData = getCelebritiesBest();
@@ -82,11 +85,18 @@ export default async function Home() {
       <section className="mt-48">
         <h1 className="px-20 title-20-md">어디로 가시나요?</h1>
         <div className="scrollbar-hide mt-[16px] flex gap-[16px] overflow-x-scroll px-20">
-          <div className="h-[68px] w-[68px] flex-none rounded-full bg-gray-200" />
-          <div className="h-[68px] w-[68px] flex-none rounded-full bg-gray-200" />
-          <div className="h-[68px] w-[68px] flex-none rounded-full bg-gray-200" />
-          <div className="h-[68px] w-[68px] flex-none rounded-full bg-gray-200" />
-          <div className="h-[68px] w-[68px] flex-none rounded-full bg-gray-200" />
+          <div className="flex h-[64px] w-[64px] flex-none flex-col items-center justify-center gap-[3px] rounded-full bg-mainDim-15">
+            <IconLocation fill={colors.main[700]} />
+            <span className="text-main-700 body-13-rg">내 주변</span>
+          </div>
+          {REGIONS.map(region => (
+            <div
+              key={region}
+              className="flex h-[64px] w-[64px] flex-none items-center justify-center rounded-full bg-gray-200"
+            >
+              <span className="text-white body-13-rg">{region}</span>
+            </div>
+          ))}
         </div>
       </section>
       <section className="mt-48">
