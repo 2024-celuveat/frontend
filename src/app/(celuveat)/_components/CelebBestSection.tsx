@@ -30,11 +30,11 @@ function CelebBestSection({ bestCelebrities }: CelebBestSectionProps) {
             className="relative flex flex-none flex-col items-center gap-[8px]"
           >
             <Image
-              className={`h-[68px] rounded-full object-cover ${sequence === index && 'outline outline-[3px] outline-main-500'}`}
+              className={`h-[64px] rounded-full object-cover ${sequence === index && 'outline outline-[3px] outline-main-500'}`}
               src={profileImageUrl}
               alt={name}
-              width={68}
-              height={68}
+              width={64}
+              height={64}
               priority
             />
             {sequence === index && <div className="ballon" />}
