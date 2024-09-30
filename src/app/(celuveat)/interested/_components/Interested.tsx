@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 
 import { getInterestedCelebrities } from '@/app/(actions)/celebs/actions';
-import { getInterestedRestaurants } from '@/app/(actions)/restaurants/actions';
+import { getInterestedRestaurants, getInterestedRestaurantsCount } from '@/app/(actions)/restaurants/actions';
 import IconCaution from '@/components/@icon/iconCaution';
 import RestaurantCardRow from '@/components/RestaurantCardRow';
 import { formatToTenThousandUnits } from '@/utils/formatToTenThousandUnits';
@@ -27,10 +27,11 @@ function EmptyCaseUI({ tab }: { tab: '맛집' | '셀럽' }) {
 }
 interface InterestedProps {
   interestedRestaurants: Awaited<ReturnType<typeof getInterestedRestaurants>>;
+  interestedRestaurantsCount: Awaited<ReturnType<typeof getInterestedRestaurantsCount>>;
   interestedCelebrities: Awaited<ReturnType<typeof getInterestedCelebrities>>;
 }
 
-function Interested({ interestedRestaurants, interestedCelebrities }: InterestedProps) {
+function Interested({ interestedRestaurants, interestedRestaurantsCount, interestedCelebrities }: InterestedProps) {
   const [tab, setTab] = useState<'맛집' | '셀럽'>('맛집');
 
   return (
@@ -83,7 +84,7 @@ function Interested({ interestedRestaurants, interestedCelebrities }: Interested
             <EmptyCaseUI tab="맛집" />
           ) : (
             <div className="title-20-md">
-              <span className="text-main-700 title-20-bold">{interestedRestaurants?.size}</span>개
+              <span className="text-main-700 title-20-bold">{interestedRestaurantsCount}</span>개
               <ul className="mt-16 flex flex-col gap-24">
                 {interestedRestaurants?.contents?.map(item => <RestaurantCardRow key={item.id} {...item} />)}
               </ul>
