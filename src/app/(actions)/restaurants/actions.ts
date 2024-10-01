@@ -112,3 +112,8 @@ export const getRestaurantsNearby = async (restaurantId: number): Promise<Restau
 export const getWeeklyRestaurants = async (): Promise<PagedResponse<Restaurant>> => {
   return await api('/restaurants/weekly', { next: { tags: [TAGS.TYPE.RESTAURANT] } });
 };
+
+// 주간 음식점 갯수 조회
+export const getWeeklyRestaurantsCount = async (): Promise<number> => {
+  return await api('/restaurants/weekly/count', { next: { tags: [TAGS.TYPE.RESTAURANT] } });
+};
