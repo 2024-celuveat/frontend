@@ -58,7 +58,7 @@ function CelebBestSection({ bestCelebrities }: CelebBestSectionProps) {
         <div className="mt-16 flex w-full gap-8">
           {bestCelebrities &&
             bestCelebrities[sequence].restaurants.map(({ id, name, images, category, roadAddress, liked }) => (
-              <div className="relative flex w-[calc((100%-20px)/3)] flex-col" key={id}>
+              <div className="relative flex w-[106px] flex-col" key={id}>
                 <Link
                   href={`/restaurants/restaurant/${id}`}
                   className="relative aspect-square overflow-hidden rounded-[8px] bg-gray-200"
