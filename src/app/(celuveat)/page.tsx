@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { getCelebritiesBest, getRecommendedRestaurantsByCelebrities } from '@/app/(actions)/restaurants/actions';
 import * as Icon from '@/assets/icons/food-category';
 import IconArrowRight from '@/components/@icon/IconArrowRight';
+import IconLocation from '@/components/@icon/IconLocation';
 import IconNotice from '@/components/@icon/IconNotice';
 import IconSearch from '@/components/@icon/IconSearch';
 import { colors } from '@/constants/colors';
@@ -10,7 +11,6 @@ import { colors } from '@/constants/colors';
 import CelebBestSection from './_components/CelebBestSection';
 import CelebritiesRecommendedRestaurantsInformation from './_components/CelebritiesRecommendedRestaurantsInformation';
 import RestaurantRecommendedSection from './_components/RestaurantRecommendedSection';
-import IconLocation from '@/components/@icon/IconLocation';
 
 const FOOD_CATEGORY = [
   { name: '한식', icon: <Icon.Korean /> },
