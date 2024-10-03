@@ -90,18 +90,24 @@ async function RestaurantDetailPage({ params }: { params: { restaurantId: string
         <hr className="height-1 mt-24 w-full bg-gray-100" />
 
         <ul className="flex flex-col gap-6 py-20 text-gray-900 body-14-rg">
-          <li className="flex items-center gap-4">
-            <IconHere width={18} height={18} />
-            <span>{restaurant.roadAddress}</span>
-          </li>
-          <li className="flex items-center gap-4">
-            <IconClock width={18} height={18} />
-            <span>{restaurant.businessHours}</span>
-          </li>
-          <li className="flex items-center gap-4">
-            <IconCall width={18} height={18} />
-            <span>{restaurant.phoneNumber}</span>
-          </li>
+          {restaurant.roadAddress && (
+            <li className="flex items-center gap-4">
+              <IconHere width={18} height={18} />
+              <span>{restaurant.roadAddress}</span>
+            </li>
+          )}
+          {restaurant.businessHours && (
+            <li className="flex items-center gap-4">
+              <IconClock width={18} height={18} />
+              <span>{restaurant.businessHours}</span>
+            </li>
+          )}
+          {restaurant.phoneNumber && (
+            <li className="flex items-center gap-4">
+              <IconCall width={18} height={18} />
+              <span>{restaurant.phoneNumber}</span>
+            </li>
+          )}
         </ul>
 
         <div className="relative right-[20px] h-8 w-[calc(100%_+_40px)] bg-gray-100" />
