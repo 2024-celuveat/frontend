@@ -137,20 +137,20 @@ async function RestaurantDetailPage({ params }: { params: { restaurantId: string
         <section>
           <div className="mt-24 flex items-center justify-between">
             <h2 className="title-20-md">리뷰 {reviewCount}개</h2>
-            {reviews.size > 3 && (
+            {reviewCount > 3 && (
               <Link href={`/reviews?restaurantId=${params.restaurantId}`} type="button" className="flex items-center">
                 <span className="text-gray-400 body-13-rg">더보기</span>
                 <IconArrowRight width={14} height={14} />
               </Link>
             )}
           </div>
-          {reviews.size === 0 && (
+          {reviewCount === 0 && (
             <div className="flex h-[186px] flex-col items-center justify-center gap-20">
               <IconCaution width={64} height={64} />
               <span className="text-gray-900 title-18-bold">아직 등록된 리뷰가 없습니다</span>
             </div>
           )}
-          {reviews.size > 0 && (
+          {reviewCount > 0 && (
             <ul className="mt-16 flex flex-col">
               {reviews?.contents.map(review => (
                 <Fragment key={review.id}>
@@ -164,7 +164,7 @@ async function RestaurantDetailPage({ params }: { params: { restaurantId: string
           <ReviewAddButton
             restaurantId={Number(params.restaurantId)}
             isLogin={isLogin}
-            innerText={reviews.size === 0 ? '첫 방문 리뷰 남기기' : '방문 리뷰 남기기'}
+            innerText={reviewCount === 0 ? '첫 방문 리뷰 남기기' : '방문 리뷰 남기기'}
           />
         </section>
 
