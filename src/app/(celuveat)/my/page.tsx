@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { Fragment } from 'react';
 
 import { getUserProfile } from '@/app/(actions)/members/actions';
 import IconArrowRight from '@/components/@icon/IconArrowRight';
@@ -6,7 +7,6 @@ import IconHeartFilled from '@/components/@icon/IconHeartFilled';
 import IconReviewFilled from '@/components/@icon/IconReviewFilled';
 import Avatar from '@/components/Avatar';
 import { colors } from '@/constants/colors';
-import { Fragment } from 'react';
 
 interface MenuProps {
   label: string;
@@ -45,7 +45,7 @@ const MENUS2 = [
 async function MyPage() {
   const myProfile = await getUserProfile();
   return (
-    <Fragment>
+    <>
       <section className="flex flex-col gap-20">
         <div className="flex items-center justify-between p-20">
           <div className="flex items-center gap-12">
@@ -91,7 +91,7 @@ async function MyPage() {
         </a>
         {/* <WithDrawButton action={deleteAccount} /> */}
       </section>
-    </Fragment>
+    </>
   );
 }
 
