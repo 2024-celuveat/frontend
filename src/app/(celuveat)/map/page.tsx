@@ -5,6 +5,7 @@ import IconSearch from '@/components/@icon/IconSearch';
 import RestaurantCardRow from '@/components/RestaurantCardRow';
 
 import NaverMap from './_components/NaverMap';
+import { Fragment } from 'react';
 
 async function MapPage({
   searchParams: { tab = 'map', lowLatitude, lowLongitude, highLatitude, highLongitude, zoom, centerX, centerY },
@@ -52,7 +53,7 @@ async function MapPage({
         </Link>
       </div>
       {tab === 'map' ? (
-        <>
+        <Fragment>
           <NaverMap restaurants={restaurants} />
           <Link
             href={`/map?tab=list&lowLatitude=${lowLatitude}&lowLongitude=${lowLongitude}&highLatitude=${highLatitude}&highLongitude=${highLongitude}&zoom=${zoom}&centerX=${centerX}&centerY=${centerY}`}
@@ -69,7 +70,7 @@ async function MapPage({
               </p>
             </div>
           </Link>
-        </>
+        </Fragment>
       ) : (
         <div>
           <div className="h-72" />
