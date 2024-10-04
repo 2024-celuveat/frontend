@@ -2,6 +2,7 @@ import type { Meta } from '@storybook/react';
 
 import { colors } from '@/constants/colors';
 
+import IconAlarm from './IconAlarm';
 import IconArrowLeft from './IconArrowLeft';
 import IconArrowRight from './IconArrowRight';
 import IconCheck from './IconCheck';
@@ -33,6 +34,7 @@ export default meta;
 export const Default = {
   render: () => (
     <>
+      <IconAlarm />
       <IconThumbsUpFilled fill={colors.main[700]} />
       <IconArrowLeft />
       <IconArrowRight />
