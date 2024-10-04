@@ -2,6 +2,7 @@ import Link from 'next/link';
 
 import { getCelebritiesBest, getRecommendedRestaurantsByCelebrities } from '@/app/(actions)/restaurants/actions';
 import * as Icon from '@/assets/icons/food-category';
+import IconAlarm from '@/components/@icon/IconAlarm';
 import IconArrowRight from '@/components/@icon/IconArrowRight';
 import IconLocation from '@/components/@icon/IconLocation';
 import IconNotice from '@/components/@icon/IconNotice';
@@ -40,7 +41,7 @@ export default async function Home() {
 
   return (
     <main>
-      <section className="px-20 pt-20">
+      <section className="flex items-center gap-16 px-20 pt-20">
         <Link
           href="/search"
           className="flex h-48 w-full items-center gap-10 rounded-[12px] bg-gray-100 pl-14 shadow-sm"
@@ -48,6 +49,7 @@ export default async function Home() {
           <IconSearch />
           <span className="text-gray-400 body-15-rg">원하는 식당을 검색해보세요.</span>
         </Link>
+        <IconAlarm fill={colors.gray[800]} width={24} height={24} />
       </section>
       <CelebBestSection bestCelebrities={bestCelebrities} />
       <section className="mt-48">
