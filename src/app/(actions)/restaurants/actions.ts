@@ -35,6 +35,16 @@ export const getRestaurants = async (
   });
 };
 
+// 음식점 갯수 조회
+export const getRestaurantsCount = async (
+  options: (FilterOption & PaginationInfo) | (FilterOption & PaginationInfo & Coordinate),
+): Promise<number> => {
+  const params = Object.entries(options).map(([key, value]) => [key, `${value}`]);
+  return await api(`/restaurants/count?${new URLSearchParams(params)}`, {
+    next: { tags: [TAGS.TYPE.RESTAURANT] },
+  });
+};
+
 // 인기 셀럽 조회
 export const getCelebritiesBest = async (): Promise<
   {
