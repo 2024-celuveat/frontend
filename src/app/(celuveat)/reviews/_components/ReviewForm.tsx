@@ -38,12 +38,12 @@ function ReviewForm({ restaurantId, review }: ReviewFormProps) {
 
     const map = Array.from(files).map(file => {
       const getUploadedFileName = async () => {
-        const response = await fetch(`/api/presigned-url?file=${file.name}`);
+        const response = await fetch(`/api/presigned-url?file=reviews/${file.name}`);
         const { presignedUrl } = await response.json();
         const { ok } = await fetch(presignedUrl, { body: file, method: 'PUT' });
 
         if (!ok) throw new Error('Failed to upload image');
-        return `https://${process.env.NEXT_PUBLIC_S3_BUCKET_NAME}.s3.amazonaws.com/${file.name}`;
+        return `${process.env.NEXT_PUBLIC_CLOUDFRONT_DOMAIN}/${file.name}`;
       };
 
       return getUploadedFileName();
