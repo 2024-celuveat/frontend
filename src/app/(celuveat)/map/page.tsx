@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { Fragment } from 'react';
 
 import { getRestaurants } from '@/app/(actions)/restaurants/actions';
 import IconSearch from '@/components/@icon/IconSearch';
@@ -30,9 +29,6 @@ async function MapPage({
           lowLongitude: Number(lowLongitude),
           highLatitude: Number(highLatitude),
           highLongitude: Number(highLongitude),
-          page: 0,
-          size: 100,
-          sort: [],
         })
       : {
           contents: [],

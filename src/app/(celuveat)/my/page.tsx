@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { Fragment } from 'react';
 
 import { getUserProfile } from '@/app/(actions)/members/actions';
 import IconArrowRight from '@/components/@icon/IconArrowRight';
