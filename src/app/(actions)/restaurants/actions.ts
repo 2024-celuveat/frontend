@@ -7,7 +7,7 @@ import { PagedResponse } from '@/@types/util';
 import { TAGS } from '@/constants/tags';
 import { api } from '@/utils/api';
 
-type Coordinate = {
+type CoordinateOption = {
   lowLongitude: number;
   highLongitude: number;
   lowLatitude: number;
@@ -19,15 +19,15 @@ type FilterOption = {
   category?: string;
 };
 
-type PaginationInfo = {
-  page: number;
-  size: number;
-  sort: string[];
+type PaginationOption = {
+  page?: number;
+  size?: number;
+  sort?: string[];
 };
 
 // 음식점 조건 조회
 export const getRestaurants = async (
-  options: (FilterOption & PaginationInfo) | (FilterOption & PaginationInfo & Coordinate),
+  options: FilterOption & PaginationOption & (CoordinateOption | {}),
 ): Promise<PagedResponse<Restaurant>> => {
   const params = Object.entries(options).map(([key, value]) => [key, `${value}`]);
   return await api(`/restaurants?${new URLSearchParams(params)}`, {
@@ -37,7 +37,7 @@ export const getRestaurants = async (
 
 // 음식점 갯수 조회
 export const getRestaurantsCount = async (
-  options: (FilterOption & PaginationInfo) | (FilterOption & PaginationInfo & Coordinate),
+  options: FilterOption & PaginationOption & (CoordinateOption | {}),
 ): Promise<number> => {
   const params = Object.entries(options).map(([key, value]) => [key, `${value}`]);
   return await api(`/restaurants/count?${new URLSearchParams(params)}`, {
