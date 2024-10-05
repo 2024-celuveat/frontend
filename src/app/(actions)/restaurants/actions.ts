@@ -79,6 +79,13 @@ export const getCelebrityRestaurants = async (celebrityId: number): Promise<Page
   });
 };
 
+// 셀럽이 다녀간 음식점 갯수 조회
+export const getCelebrityRestaurantsCount = async (celebrityId: number): Promise<number> => {
+  return await api(`/restaurants/celebrity/${celebrityId}/count`, {
+    next: { tags: [TAGS.TYPE.RESTAURANT] },
+  });
+};
+
 // 관심 음식점 추가
 export const postInterestedRestaurant = async (restaurantId: number) => {
   await api(`/restaurants/interested/${restaurantId}`, { method: 'POST' });
