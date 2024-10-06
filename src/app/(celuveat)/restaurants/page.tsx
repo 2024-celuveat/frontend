@@ -1,13 +1,11 @@
-import { getRestaurants, getRestaurantsCount } from '@/app/(actions)/restaurants/actions';
-import RestaurantCardRow from '@/components/RestaurantCardRow';
+import { getRestaurantsCount } from '@/app/(actions)/restaurants/actions';
+
+import RestaurantSection from './_components/RestaurantSection';
 
 async function RestaurantListPage({ searchParams }: { searchParams: { category: string } }) {
-  const restaurantsData = await getRestaurants({ category: searchParams.category, page: 0, size: 10, sort: [] });
-  const restaurantsCountData = await getRestaurantsCount({
+  const restaurantsCount = await getRestaurantsCount({
     category: searchParams.category,
   });
-
-  const [restaurants, restaurantsCount] = await Promise.all([restaurantsData, restaurantsCountData]);
 
   return (
     <main className="px-20">
@@ -15,11 +13,7 @@ async function RestaurantListPage({ searchParams }: { searchParams: { category: 
         <h2 className="title-20-md">{restaurantsCount}개 매장</h2>
         <span className="body-13-rg">최신순</span>
       </div>
-      <ul className="mt-24 flex flex-col gap-20">
-        {restaurants.contents.map(props => (
-          <RestaurantCardRow key={props.id} {...props} />
-        ))}
-      </ul>
+      <RestaurantSection category={searchParams.category} />
     </main>
   );
 }
