@@ -20,7 +20,7 @@ const useInfiniteScroll = ({ eventHandler, observerOptions }: UseInfiniteScrollP
     if (ref.current) {
       observer.observe(ref.current);
     }
-  }, [ref]);
+  }, [ref, eventHandler]);
 
   return ref;
 };
