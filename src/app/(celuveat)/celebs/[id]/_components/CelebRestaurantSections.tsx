@@ -14,7 +14,7 @@ interface CelebRestaurantSectionsProps {
 }
 
 function CelebRestaurantSections({ celebrityId }: CelebRestaurantSectionsProps) {
-  const { data, setSize, isLoading } = useSWRInfinite<PagedResponse<Restaurant>>(
+  const { data, setSize, isValidating } = useSWRInfinite<PagedResponse<Restaurant>>(
     (pageIndex, prevData: PagedResponse<Restaurant>) => {
       if (prevData && !prevData.hasNext) return null;
       return `/restaurants/celebrity/${celebrityId}?page=${pageIndex}&size=10`;
@@ -30,7 +30,7 @@ function CelebRestaurantSections({ celebrityId }: CelebRestaurantSectionsProps) 
   return (
     <ul className="mt-24 flex flex-col gap-20">
       {data?.map(({ contents }) => contents.map(props => <RestaurantCardRow key={props.id} {...props} />))}
-      {isLoading && (
+      {isValidating && (
         <>
           <RestaurantCardRowSkeleton />
           <RestaurantCardRowSkeleton />
