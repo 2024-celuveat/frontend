@@ -8,7 +8,7 @@ import { colors } from '@/constants/colors';
 
 function RestaurantCard({ id, name, category, images, roadAddress, visitedCelebrities, liked }: Restaurant) {
   return (
-    <div className="relative flex w-[150px] flex-none flex-col">
+    <div className="relative flex w-[128px] flex-none flex-col">
       <Link href={`/restaurants/restaurant/${id}`}>
         <Image
           src={images[0].url}
@@ -27,7 +27,7 @@ function RestaurantCard({ id, name, category, images, roadAddress, visitedCelebr
           <span className="text-main-700 caption-12-rg">
             {visitedCelebrities.length - 1 === 0
               ? `${visitedCelebrities[0]?.name} 추천 맛집`
-              : `${visitedCelebrities[0]?.name}외 ${visitedCelebrities.length - 1}명 추천 맛집`}
+              : `${visitedCelebrities[0]?.name}외 ${visitedCelebrities.length - 1}명 추천`}
           </span>
         </div>
       </Link>
