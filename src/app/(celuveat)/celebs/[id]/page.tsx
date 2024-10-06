@@ -1,16 +1,14 @@
 import { getCelebrityInfo } from '@/app/(actions)/celebs/actions';
-import { getCelebrityRestaurants, getCelebrityRestaurantsCount } from '@/app/(actions)/restaurants/actions';
-import RestaurantCardRow from '@/components/RestaurantCardRow';
+import { getCelebrityRestaurantsCount } from '@/app/(actions)/restaurants/actions';
 
 import CelebIntroductionSection from './_components/CelebIntroductionSection';
+import CelebRestaurantSections from './_components/CelebRestaurantSections';
 
 async function CelebPage({ params: { id } }: { params: { id: string } }) {
-  const restaurantsData = await getCelebrityRestaurants(Number(id));
   const celebrityInfoData = await getCelebrityInfo(Number(id));
   const getCelebrityRestaurantsCountData = await getCelebrityRestaurantsCount(Number(id));
 
-  const [restaurants, celebrityInfo, celebrityRestaurantsCount] = await Promise.all([
-    restaurantsData,
+  const [celebrityInfo, celebrityRestaurantsCount] = await Promise.all([
     celebrityInfoData,
     getCelebrityRestaurantsCountData,
   ]);
@@ -24,12 +22,7 @@ async function CelebPage({ params: { id } }: { params: { id: string } }) {
         <h2 className="title-20-md">{celebrityRestaurantsCount}개 매장</h2>
         <span className="body-13-rg">최신순</span>
       </div>
-
-      <ul className="mt-24 flex flex-col gap-20">
-        {restaurants.contents.map(props => (
-          <RestaurantCardRow key={props.id} {...props} />
-        ))}
-      </ul>
+      <CelebRestaurantSections celebrityId={Number(id)} />
     </main>
   );
 }

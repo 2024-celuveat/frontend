@@ -72,13 +72,6 @@ export const getInterestedRestaurantsCount = async (): Promise<number> => {
   return await api('/restaurants/interested/count', { next: { tags: [TAGS.TYPE.RESTAURANT] } });
 };
 
-// 셀럽이 다녀간 음식점 조회
-export const getCelebrityRestaurants = async (celebrityId: number): Promise<PagedResponse<Restaurant>> => {
-  return await api(`/restaurants/celebrity/${celebrityId}`, {
-    next: { tags: [TAGS.TYPE.RESTAURANT] },
-  });
-};
-
 // 셀럽이 다녀간 음식점 갯수 조회
 export const getCelebrityRestaurantsCount = async (celebrityId: number): Promise<number> => {
   return await api(`/restaurants/celebrity/${celebrityId}/count`, {
