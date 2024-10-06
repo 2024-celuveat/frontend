@@ -73,7 +73,7 @@ function NaverMap({ restaurants }: NaverMapProps) {
         icon: {
           content: /* HTML */ `<img
             src="${visitedCelebrities[0].profileImageUrl}"
-            class="relative bottom-[19px] right-[19px] h-[38px] min-h-[38px] w-[38px] min-w-[38px] flex-none rounded-full border-[3px] border-white"
+            class="relative bottom-[19px] right-[19px] h-[38px] min-h-[38px] w-[38px] min-w-[38px] flex-none rounded-full border-[3px] border-white object-cover"
           />`,
         },
       });

@@ -26,7 +26,7 @@ function RestaurantDetailPageMap({ latitude, longitude, images }: Restaurant) {
             <div class="relative">
               <img
                 src="${images[0].url}"
-                class="h-[80px] w-[80px] rounded-full outline outline-[4px] outline-white ballon2-shadow after:ballon2"
+                class="h-[80px] w-[80px] rounded-full object-cover outline outline-[4px] outline-white ballon2-shadow after:ballon2"
               />
               <div class="ballon2 ballon2-shadow"></div>
             </div>
