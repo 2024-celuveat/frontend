@@ -13,7 +13,7 @@ function RestaurantCardRow({ id, name, images, category, roadAddress, liked }: R
           <Image src={images[0].url} fill alt={name} sizes="100%" className="object-cover" />
         </div>
         <div className="relative flex flex-1 flex-col">
-          <h3 className="mt-2 title-16-sb">{name}</h3>
+          <h3 className="mt-2 w-4/5 title-16-sb">{name}</h3>
           <span className="mt-4 text-gray-400 caption-12-rg">{category}</span>
           <span className="text-gray-800 body-13-rg">{roadAddress}</span>
 
