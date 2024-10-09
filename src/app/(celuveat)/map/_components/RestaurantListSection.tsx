@@ -7,7 +7,6 @@ import { Restaurant } from '@/@types';
 import { PagedResponse } from '@/@types/util';
 import RestaurantCardRow from '@/components/RestaurantCardRow';
 import RestaurantCardRowSkeleton from '@/components/RestaurantCardRow/RestaurantCardRowSkeleton';
-import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 import { api } from '@/utils/api';
 
 function RestaurantListSection({
@@ -20,11 +19,14 @@ function RestaurantListSection({
     lowLongitude: string;
     highLatitude: string;
     highLongitude: string;
+    zoom: string;
+    centerX: string;
+    centerY: string;
   };
   restaurantsCount: number;
 }) {
   const [isList, setIsList] = useState(false);
-  const { data, setSize, isValidating } = useSWRInfinite<PagedResponse<Restaurant>>(
+  const { data, isValidating } = useSWRInfinite<PagedResponse<Restaurant>>(
     (pageIndex, prevData: PagedResponse<Restaurant>) => {
       if (prevData && !prevData.hasNext) return null;
       return `/restaurants?page=${pageIndex}&size=10&lowLatitude=${searchParams.lowLatitude}&lowLongitude=${searchParams.lowLongitude}&highLatitude=${searchParams.highLatitude}&highLongitude=${searchParams.highLongitude}&zoom=${searchParams.zoom}&centerX=${searchParams.centerX}&centerY=${searchParams.centerY}`;
@@ -32,10 +34,10 @@ function RestaurantListSection({
     api,
   );
 
-  const ref = useInfiniteScroll({
-    eventHandler: () => setSize(size => size + 1),
-    observerOptions: { threshold: 1 },
-  });
+  // const ref = useInfiniteScroll({
+  //   eventHandler: () => setSize(size => size + 1),
+  //   observerOptions: { threshold: 1 },
+  // });
 
   return (
     <div

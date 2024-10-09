@@ -15,6 +15,9 @@ async function MapPage({
     lowLongitude: string;
     highLatitude: string;
     highLongitude: string;
+    zoom: string;
+    centerX: string;
+    centerY: string;
   };
 }) {
   const { tab = 'map', lowLatitude, lowLongitude, highLatitude, highLongitude } = searchParams;
