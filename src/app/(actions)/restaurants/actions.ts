@@ -8,10 +8,10 @@ import { TAGS } from '@/constants/tags';
 import { api } from '@/utils/api';
 
 type CoordinateOption = {
-  lowLongitude: number;
-  highLongitude: number;
-  lowLatitude: number;
-  highLatitude: number;
+  lowLongitude: string;
+  highLongitude: string;
+  lowLatitude: string;
+  highLatitude: string;
 };
 
 type FilterOption = {

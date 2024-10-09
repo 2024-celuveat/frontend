@@ -24,10 +24,10 @@ async function MapPage({
   const restaurantsData =
     lowLatitude && lowLongitude && highLatitude && highLongitude
       ? await getRestaurants({
-          lowLatitude: Number(lowLatitude),
-          lowLongitude: Number(lowLongitude),
-          highLatitude: Number(highLatitude),
-          highLongitude: Number(highLongitude),
+          lowLatitude,
+          lowLongitude,
+          highLatitude,
+          highLongitude,
         })
       : {
           contents: [],
@@ -35,12 +35,15 @@ async function MapPage({
           hasNext: false,
           size: 0,
         };
-  const restaurantsCountData = await getRestaurantsCount({
-    lowLatitude: Number(lowLatitude),
-    lowLongitude: Number(lowLongitude),
-    highLatitude: Number(highLatitude),
-    highLongitude: Number(highLongitude),
-  });
+  const restaurantsCountData =
+    lowLatitude && lowLongitude && highLatitude && highLongitude
+      ? await getRestaurantsCount({
+          lowLatitude,
+          lowLongitude,
+          highLatitude,
+          highLongitude,
+        })
+      : 0;
 
   const [restaurants, restaurantsCount] = await Promise.all([restaurantsData, restaurantsCountData]);
 
@@ -75,9 +78,7 @@ async function MapPage({
           </Link>
         </>
       ) : (
-        <div>
-          <RestaurantListSection searchParams={searchParams} />
-        </div>
+        <RestaurantListSection searchParams={searchParams} />
       )}
     </main>
   );
