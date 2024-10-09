@@ -15,12 +15,9 @@ async function MapPage({
     lowLongitude: string;
     highLatitude: string;
     highLongitude: string;
-    zoom: string;
-    centerX: string;
-    centerY: string;
   };
 }) {
-  const { tab = 'map', lowLatitude, lowLongitude, highLatitude, highLongitude, zoom, centerX, centerY } = searchParams;
+  const { tab = 'map', lowLatitude, lowLongitude, highLatitude, highLongitude } = searchParams;
   const restaurantsData =
     lowLatitude && lowLongitude && highLatitude && highLongitude
       ? await getRestaurants({
@@ -58,28 +55,10 @@ async function MapPage({
           <p className="ml-10 text-gray-400 body-15-rg">원하는 식당을 검색해보세요</p>
         </Link>
       </div>
-      {tab === 'map' ? (
-        <>
-          <NaverMap restaurants={restaurants} />
-          <Link
-            href={`/map?tab=list&lowLatitude=${lowLatitude}&lowLongitude=${lowLongitude}&highLatitude=${highLatitude}&highLongitude=${highLongitude}&zoom=${zoom}&centerX=${centerX}&centerY=${centerY}`}
-            className="absolute bottom-0 z-[100] block w-full"
-          >
-            <div className="flex h-[20px] items-center justify-center rounded-t-[16px] bg-white">
-              <hr className="h-4 w-48 rounded-[8px] bg-gray-200" />
-            </div>
-            <div className="h-[20px] bg-white" />
-            <div className="h-[40px] bg-white">
-              <p className="flex justify-center body-16-md">
-                주변에
-                <span className="ml-4 text-main-700">{restaurantsCount}</span> 개 맛집이 있어요!
-              </p>
-            </div>
-          </Link>
-        </>
-      ) : (
-        <RestaurantListSection searchParams={searchParams} />
-      )}
+
+      <NaverMap restaurants={restaurants} />
+
+      <RestaurantListSection searchParams={searchParams} restaurantsCount={restaurantsCount} />
     </main>
   );
 }

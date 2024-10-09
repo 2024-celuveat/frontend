@@ -1,6 +1,6 @@
 'use client';
 
-import Link from 'next/link';
+import { useState } from 'react';
 import useSWRInfinite from 'swr/infinite';
 
 import { Restaurant } from '@/@types';
@@ -12,6 +12,7 @@ import { api } from '@/utils/api';
 
 function RestaurantListSection({
   searchParams,
+  restaurantsCount,
 }: {
   searchParams: {
     tab: 'map' | 'list';
@@ -19,11 +20,10 @@ function RestaurantListSection({
     lowLongitude: string;
     highLatitude: string;
     highLongitude: string;
-    zoom: string;
-    centerX: string;
-    centerY: string;
   };
+  restaurantsCount: number;
 }) {
+  const [isList, setIsList] = useState(false);
   const { data, setSize, isValidating } = useSWRInfinite<PagedResponse<Restaurant>>(
     (pageIndex, prevData: PagedResponse<Restaurant>) => {
       if (prevData && !prevData.hasNext) return null;
@@ -38,33 +38,54 @@ function RestaurantListSection({
   });
 
   return (
-    <div>
-      <div className="h-72" />
-      <ul className="mt-20 flex flex-col gap-24 px-20">
-        {data?.map(({ contents }) => contents.map(props => <RestaurantCardRow key={props.id} {...props} />))}
-        {isValidating && (
-          <>
-            <RestaurantCardRowSkeleton />
-            <RestaurantCardRowSkeleton />
-            <RestaurantCardRowSkeleton />
-            <RestaurantCardRowSkeleton />
-            <RestaurantCardRowSkeleton />
-            <RestaurantCardRowSkeleton />
-            <RestaurantCardRowSkeleton />
-            <RestaurantCardRowSkeleton />
-            <RestaurantCardRowSkeleton />
-            <RestaurantCardRowSkeleton />
-          </>
-        )}
-        <div ref={ref} />
-      </ul>
-      <Link
-        href={`/map?tab=map&lowLatitude=${searchParams.lowLatitude}&lowLongitude=${searchParams.lowLongitude}&highLatitude=${searchParams.highLatitude}&highLongitude=${searchParams.highLongitude}&zoom=${searchParams.zoom}&centerX=${searchParams.centerX}&centerY=${searchParams.centerY}`}
-        type="button"
-        className="fixed bottom-[104px] left-[50%] z-[100] -translate-x-[50%] rounded-[100px] bg-gray-900 px-24 py-16 text-white body-15-rg"
-      >
-        지도로 보기
-      </Link>
+    <div
+      className={`absolute bottom-0 z-[100] block w-full ${isList && 'h-[calc(100vh-88px)]'} overflow-scroll`}
+      onClick={() => {
+        setIsList(true);
+      }}
+    >
+      <div className="flex h-[20px] items-center justify-center rounded-t-[16px] bg-white">
+        <hr className="h-4 w-48 rounded-[8px] bg-gray-200" />
+      </div>
+      <div className="h-[20px] bg-white" />
+      <div className="h-[40px] bg-white">
+        <p className="flex justify-center body-16-md">
+          주변에
+          <span className="ml-4 text-main-700">{restaurantsCount}</span> 개 맛집이 있어요!
+        </p>
+      </div>
+      {isList && (
+        <div className="bg-white">
+          <ul className="flex w-full flex-col gap-24 px-20">
+            {data?.map(({ contents }) => contents.map(props => <RestaurantCardRow key={props.id} {...props} />))}
+            {isValidating && (
+              <>
+                <RestaurantCardRowSkeleton />
+                <RestaurantCardRowSkeleton />
+                <RestaurantCardRowSkeleton />
+                <RestaurantCardRowSkeleton />
+                <RestaurantCardRowSkeleton />
+                <RestaurantCardRowSkeleton />
+                <RestaurantCardRowSkeleton />
+                <RestaurantCardRowSkeleton />
+                <RestaurantCardRowSkeleton />
+                <RestaurantCardRowSkeleton />
+              </>
+            )}
+            {/* <div ref={ref} /> */}
+          </ul>
+          <button
+            type="button"
+            className="fixed bottom-[104px] left-[50%] z-[100] -translate-x-[50%] rounded-[100px] bg-gray-900 px-24 py-16 text-white body-15-rg"
+            onClick={e => {
+              e.stopPropagation();
+              setIsList(false);
+            }}
+          >
+            지도로 보기
+          </button>
+        </div>
+      )}
     </div>
   );
 }
