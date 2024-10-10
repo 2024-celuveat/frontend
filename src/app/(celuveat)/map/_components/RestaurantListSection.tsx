@@ -41,7 +41,7 @@ function RestaurantListSection({
 
   return (
     <div
-      className={`absolute bottom-0 z-[100] block w-full ${isList && 'h-[calc(100vh-88px)]'} overflow-scroll`}
+      className={`absolute bottom-0 z-[100] block w-full ${isList && 'h-[calc(100vh-88px)]'} overflow-hidden`}
       onClick={() => {
         setIsList(true);
       }}
@@ -57,7 +57,7 @@ function RestaurantListSection({
         </p>
       </div>
       {isList && (
-        <div className="bg-white">
+        <div className="h-[calc(100vh-168px)] overflow-y-scroll bg-white pb-8">
           <ul className="flex w-full flex-col gap-24 px-20">
             {data?.map(({ contents }) => contents.map(props => <RestaurantCardRow key={props.id} {...props} />))}
             {isValidating && (
