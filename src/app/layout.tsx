@@ -11,6 +11,9 @@ import Header from '@/components/Header';
 export const metadata: Metadata = {
   title: 'Celuveat',
   description: '셀럽 추천 맛집 소개 서비스, 셀럽잇',
+  icons: {
+    icon: '/celuveat.svg',
+  },
 };
 
 const myFont = localFont({
