@@ -9,6 +9,7 @@ import IconCheck from './IconCheck';
 import IconClose from './IconClose';
 import IconHeartFilled from './IconHeartFilled';
 import IconHeartOutlined from './IconHeartOutlined';
+import IconHere from './IconHere';
 import IconHomeFilled from './IconHomeFilled';
 import IconHomeOutlined from './IconHomeOutlined';
 import IconInfo from './IconInfo';
@@ -24,7 +25,6 @@ import IconReviewFilled from './IconReviewFilled';
 import IconReviewOutlined from './IconReviewOutlined';
 import IconSearch from './IconSearch';
 import IconThumbsUpFilled from './IconThumbsUpFilled';
-import IconHere from './IconHere';
 
 const meta: Meta = {
   title: '@icon/index',
