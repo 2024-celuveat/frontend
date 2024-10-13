@@ -24,6 +24,7 @@ import IconReviewFilled from './IconReviewFilled';
 import IconReviewOutlined from './IconReviewOutlined';
 import IconSearch from './IconSearch';
 import IconThumbsUpFilled from './IconThumbsUpFilled';
+import IconHere from './IconHere';
 
 const meta: Meta = {
   title: '@icon/index',
@@ -34,28 +35,98 @@ export default meta;
 export const Default = {
   render: () => (
     <>
-      <IconAlarm />
-      <IconThumbsUpFilled fill={colors.main[700]} />
-      <IconArrowLeft />
-      <IconArrowRight />
-      <IconCheck />
-      <IconClose />
-      <IconHeartFilled />
-      <IconHeartOutlined />
-      <IconHomeFilled />
-      <IconHomeOutlined />
-      <IconInfo />
-      <IconLocation />
-      <IconMapFilled />
-      <IconMapOutlined />
-      <IconPersonFilled />
-      <IconPersonOutlined />
-      <IconPlus />
-      <IconNotice />
-      <IconMore />
-      <IconReviewFilled />
-      <IconReviewOutlined />
-      <IconSearch />
+      <div>
+        <IconAlarm />
+        IconAlarm
+      </div>
+      <div>
+        <IconThumbsUpFilled fill={colors.main[700]} />
+        IconThumbsUpFilled
+      </div>
+      <div>
+        <IconArrowLeft />
+        IconArrowLeft
+      </div>
+      <div>
+        <IconArrowRight />
+        IconArrowRight
+      </div>
+      <div>
+        <IconCheck />
+        IconCheck
+      </div>
+      <div>
+        <IconClose />
+        IconClose
+      </div>
+      <div>
+        <IconHere />
+        IconHere
+      </div>
+      <div>
+        <IconHeartFilled />
+        IconHeartFilled
+      </div>
+      <div>
+        <IconHeartOutlined />
+        IconHeartOutlined
+      </div>
+      <div>
+        <IconHomeFilled />
+        IconHomeFilled
+      </div>
+      <div>
+        <IconHomeOutlined />
+        IconHomeOutlined
+      </div>
+      <div>
+        <IconInfo />
+        IconInfo
+      </div>
+      <div>
+        <IconLocation />
+        IconLocation
+      </div>
+      <div>
+        <IconMapFilled />
+        IconMapFilled
+      </div>
+      <div>
+        <IconMapOutlined />
+        IconMapOutlined
+      </div>
+      <div>
+        <IconPersonFilled />
+        IconPersonFilled
+      </div>
+      <div>
+        <IconPersonOutlined />
+        IconPersonOutlined
+      </div>
+      <div>
+        <IconPlus />
+        IconPlus
+      </div>
+      <div>
+        <IconNotice />
+        IconNotice
+      </div>
+      <div>
+        <IconMore />
+        IconMore
+      </div>
+      <div>
+        <IconReviewFilled />
+        IconReviewFilled
+      </div>
+      <div>
+        <IconReviewOutlined />
+        IconReviewOutlined
+      </div>
+      <div>
+        <IconSearch />
+        IconSearch
+      </div>
     </>
   ),
 };
