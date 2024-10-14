@@ -7,7 +7,7 @@ import { PagedResponse } from '@/@types/util';
 import RestaurantCardRow from '@/components/RestaurantCardRow';
 import RestaurantCardRowSkeleton from '@/components/RestaurantCardRow/RestaurantCardRowSkeleton';
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
-import { api } from '@/utils/api';
+import { clientApi } from '@/utils/clientApi';
 
 interface CelebRestaurantSectionsProps {
   celebrityId: number;
@@ -19,7 +19,7 @@ function CelebRestaurantSections({ celebrityId }: CelebRestaurantSectionsProps) 
       if (prevData && !prevData.hasNext) return null;
       return `/restaurants/celebrity/${celebrityId}?page=${pageIndex}&size=10`;
     },
-    api,
+    clientApi,
   );
 
   const eventHandler = () => {
