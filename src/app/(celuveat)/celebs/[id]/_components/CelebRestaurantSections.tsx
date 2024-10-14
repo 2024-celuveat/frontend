@@ -22,8 +22,13 @@ function CelebRestaurantSections({ celebrityId }: CelebRestaurantSectionsProps) 
     api,
   );
 
+  const eventHandler = () => {
+    if (isValidating) return;
+    setSize(size => size + 1);
+  };
+
   const ref = useInfiniteScroll({
-    eventHandler: () => setSize(size => size + 1),
+    eventHandler,
     observerOptions: { threshold: 1 },
   });
 
@@ -44,7 +49,7 @@ function CelebRestaurantSections({ celebrityId }: CelebRestaurantSectionsProps) 
           <RestaurantCardRowSkeleton />
         </>
       )}
-      <div ref={ref} />
+      {data?.at(-1)?.hasNext && <div className="h-8" ref={ref} />}
     </ul>
   );
 }
