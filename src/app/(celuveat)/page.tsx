@@ -105,6 +105,7 @@ export default async function Home() {
         <h1 className="px-20 title-20-md">지금 인기 있는 맛집!</h1>
         <RestaurantRecommendedSection restaurants={recommendedRestaurantsByCelebrities} />
       </section>
+      <div className="h-16" />
     </main>
   );
 }
