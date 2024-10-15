@@ -7,6 +7,7 @@ import { Restaurant } from '@/@types';
 import { PagedResponse } from '@/@types/util';
 import RestaurantCardRow from '@/components/RestaurantCardRow';
 import RestaurantCardRowSkeleton from '@/components/RestaurantCardRow/RestaurantCardRowSkeleton';
+import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 import { api } from '@/utils/api';
 
 function RestaurantListSection({
@@ -26,7 +27,7 @@ function RestaurantListSection({
   restaurantsCount: number;
 }) {
   const [isList, setIsList] = useState(false);
-  const { data, isValidating } = useSWRInfinite<PagedResponse<Restaurant>>(
+  const { data, setSize, isValidating } = useSWRInfinite<PagedResponse<Restaurant>>(
     (pageIndex, prevData: PagedResponse<Restaurant>) => {
       if (prevData && !prevData.hasNext) return null;
       return `/restaurants?page=${pageIndex}&size=10&lowLatitude=${searchParams.lowLatitude}&lowLongitude=${searchParams.lowLongitude}&highLatitude=${searchParams.highLatitude}&highLongitude=${searchParams.highLongitude}&zoom=${searchParams.zoom}&centerX=${searchParams.centerX}&centerY=${searchParams.centerY}`;
@@ -34,30 +35,35 @@ function RestaurantListSection({
     api,
   );
 
-  // const ref = useInfiniteScroll({
-  //   eventHandler: () => setSize(size => size + 1),
-  //   observerOptions: { threshold: 1 },
-  // });
+  const eventHandler = () => {
+    if (isValidating) return;
+    setSize(size => size + 1);
+  };
+
+  const ref = useInfiniteScroll({
+    eventHandler,
+    observerOptions: { threshold: 1 },
+  });
 
   return (
     <div
-      className={`absolute bottom-0 z-[100] block w-full ${isList && 'h-[calc(100vh-88px)]'} overflow-hidden`}
+      className={`absolute bottom-0 z-[100] block w-full ${isList && 'h-[calc(100vh-88px)]'} overflow-hidden rounded-t-[16px] bg-white`}
       onClick={() => {
         setIsList(true);
       }}
     >
-      <div className="flex h-[20px] items-center justify-center rounded-t-[16px] bg-white">
+      <div className="flex h-[20px] items-center justify-center">
         <hr className="h-4 w-48 rounded-[8px] bg-gray-200" />
       </div>
-      <div className="h-[20px] bg-white" />
-      <div className="h-[40px] bg-white">
+      <div className="h-[20px]" />
+      <div className="h-[40px]">
         <p className="flex justify-center body-16-md">
           주변에
           <span className="ml-4 text-main-700">{restaurantsCount}</span> 개 맛집이 있어요!
         </p>
       </div>
       {isList && (
-        <div className="h-[calc(100vh-168px)] overflow-y-scroll bg-white pb-8">
+        <div className="h-[calc(100vh-168px)] overflow-y-scroll pb-8">
           <ul className="flex w-full flex-col gap-24 px-20">
             {data?.map(({ contents }) => contents.map(props => <RestaurantCardRow key={props.id} {...props} />))}
             {isValidating && (
@@ -74,7 +80,7 @@ function RestaurantListSection({
                 <RestaurantCardRowSkeleton />
               </>
             )}
-            {/* <div ref={ref} /> */}
+            {!isValidating && data && <div className="h-8" ref={ref} />}
           </ul>
           <button
             type="button"
