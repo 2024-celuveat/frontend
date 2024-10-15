@@ -90,7 +90,7 @@ function BottomNavbar({ isLogin }: BottomNavbarProps) {
   return (
     <>
       <div className="h-[88px]" />
-      <div className="fixed bottom-0 right-1/2 flex h-[88px] w-full max-w-[495px] translate-x-1/2 flex-col">
+      <div className="fixed bottom-0 right-1/2 z-[101] flex h-[88px] w-full max-w-[495px] translate-x-1/2 flex-col">
         <nav className="flex h-72 w-full items-start justify-around border-t bg-white px-24 py-8">
           <Link href="/" className="flex flex-col items-center gap-6">
             {firstPath === '' ? (
