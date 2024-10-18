@@ -14,6 +14,9 @@ export const metadata: Metadata = {
   icons: {
     icon: '/celuveat.svg',
   },
+  openGraph: {
+    images: '/open-graph/open_graph_1.png',
+  },
 };
 
 const myFont = localFont({
