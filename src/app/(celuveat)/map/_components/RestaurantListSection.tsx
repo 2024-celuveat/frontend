@@ -5,9 +5,7 @@ import useSWRInfinite from 'swr/infinite';
 
 import { Restaurant } from '@/@types';
 import { PagedResponse } from '@/@types/util';
-import RestaurantCardRow from '@/components/RestaurantCardRow';
-import RestaurantCardRowSkeleton from '@/components/RestaurantCardRow/RestaurantCardRowSkeleton';
-import useInfiniteScroll from '@/hooks/useInfiniteScroll';
+import RestaurantCardRowInfiniteList from '@/components/RestaurantCardRowInfiniteList';
 import { api } from '@/utils/api';
 
 function RestaurantListSection({
@@ -40,11 +38,6 @@ function RestaurantListSection({
     setSize(size => size + 1);
   };
 
-  const ref = useInfiniteScroll({
-    eventHandler,
-    observerOptions: { threshold: 1 },
-  });
-
   return (
     <div
       className={`absolute bottom-0 z-[100] block w-full ${isList && 'h-[calc(100vh-88px)]'} overflow-hidden rounded-t-[16px] bg-white`}
@@ -64,24 +57,7 @@ function RestaurantListSection({
       </div>
       {isList && (
         <div className="h-[calc(100vh-168px)] overflow-y-scroll pb-8">
-          <ul className="flex w-full flex-col gap-24 px-20">
-            {data?.map(({ contents }) => contents.map(props => <RestaurantCardRow key={props.id} {...props} />))}
-            {isValidating && (
-              <>
-                <RestaurantCardRowSkeleton />
-                <RestaurantCardRowSkeleton />
-                <RestaurantCardRowSkeleton />
-                <RestaurantCardRowSkeleton />
-                <RestaurantCardRowSkeleton />
-                <RestaurantCardRowSkeleton />
-                <RestaurantCardRowSkeleton />
-                <RestaurantCardRowSkeleton />
-                <RestaurantCardRowSkeleton />
-                <RestaurantCardRowSkeleton />
-              </>
-            )}
-            {!isValidating && data && <div className="h-8" ref={ref} />}
-          </ul>
+          <RestaurantCardRowInfiniteList data={data ?? []} isValidating={isValidating} onIntersect={eventHandler} />
           <button
             type="button"
             className="fixed bottom-[104px] left-[50%] z-[100] -translate-x-[50%] rounded-[100px] bg-gray-900 px-24 py-16 text-white body-15-rg"
