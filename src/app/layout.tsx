@@ -15,7 +15,9 @@ export const metadata: Metadata = {
     icon: '/celuveat.svg',
   },
   openGraph: {
-    images: '/open-graph/open_graph_1.png',
+    title: '셀럽잇',
+    description: '셀럽 추천 맛집 소개 서비스',
+    images: 'https://jeremy-targaryen.vercel.app/open-graph/open_graph_1.png',
   },
 };
 
