@@ -10,17 +10,23 @@ import RestaurantCardRowSkeleton from '../RestaurantCardRow/RestaurantCardRowSke
 interface RestaurantCardRowInfiniteListProps {
   data: PagedResponse<Restaurant>[];
   isValidating: boolean;
+  className: string;
   onIntersect: () => void;
 }
 
-function RestaurantCardRowInfiniteList({ data, isValidating, onIntersect }: RestaurantCardRowInfiniteListProps) {
+function RestaurantCardRowInfiniteList({
+  data,
+  isValidating,
+  className,
+  onIntersect,
+}: RestaurantCardRowInfiniteListProps) {
   const ref = useInfiniteScroll({
     eventHandler: onIntersect,
     observerOptions: { threshold: 1 },
   });
 
   return (
-    <ul className="flex w-full flex-col gap-24 px-20">
+    <ul className={className}>
       {data?.map(({ contents }) => contents.map(props => <RestaurantCardRow key={props.id} {...props} />))}
       {isValidating && (
         <>

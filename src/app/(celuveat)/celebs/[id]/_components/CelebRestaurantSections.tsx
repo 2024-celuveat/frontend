@@ -25,7 +25,14 @@ function CelebRestaurantSections({ celebrityId }: CelebRestaurantSectionsProps) 
     setSize(size => size + 1);
   };
 
-  return <RestaurantCardRowInfiniteList data={data ?? []} isValidating={isValidating} onIntersect={eventHandler} />;
+  return (
+    <RestaurantCardRowInfiniteList
+      data={data ?? []}
+      isValidating={isValidating}
+      onIntersect={eventHandler}
+      className="mt-24 flex flex-col gap-20"
+    />
+  );
 }
 
 export default CelebRestaurantSections;

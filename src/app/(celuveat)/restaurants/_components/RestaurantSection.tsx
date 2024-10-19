@@ -25,7 +25,14 @@ function RestaurantSection({ category }: RestaurantSectionProps) {
     setSize(size => size + 1);
   };
 
-  return <RestaurantCardRowInfiniteList data={data ?? []} isValidating={isValidating} onIntersect={eventHandler} />;
+  return (
+    <RestaurantCardRowInfiniteList
+      data={data ?? []}
+      isValidating={isValidating}
+      onIntersect={eventHandler}
+      className="flex w-full flex-col gap-24 px-20"
+    />
+  );
 }
 
 export default RestaurantSection;

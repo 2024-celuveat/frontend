@@ -57,7 +57,12 @@ function RestaurantListSection({
       </div>
       {isList && (
         <div className="h-[calc(100vh-168px)] overflow-y-scroll pb-8">
-          <RestaurantCardRowInfiniteList data={data ?? []} isValidating={isValidating} onIntersect={eventHandler} />
+          <RestaurantCardRowInfiniteList
+            data={data ?? []}
+            isValidating={isValidating}
+            onIntersect={eventHandler}
+            className="flex w-full flex-col gap-24 px-20"
+          />
           <button
             type="button"
             className="fixed bottom-[104px] left-[50%] z-[100] -translate-x-[50%] rounded-[100px] bg-gray-900 px-24 py-16 text-white body-15-rg"
