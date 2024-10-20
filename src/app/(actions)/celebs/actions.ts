@@ -2,7 +2,7 @@
 
 import { revalidateTag } from 'next/cache';
 
-import { CelebrityDetail } from '@/@types';
+import { Celebrity, CelebrityDetail } from '@/@types';
 import { TAGS } from '@/constants/tags';
 import { api } from '@/utils/api';
 
@@ -28,4 +28,9 @@ export const deleteInterestedCelebrity = async (celebrityId: number) => {
 // 관심 셀럽 조회
 export const getInterestedCelebrities = async (): Promise<CelebrityDetail['celebrity'][]> => {
   return await api('/celebrities/interested', { next: { tags: [TAGS.TYPE.CELEBRITY] } });
+};
+
+// 필터용 셀럽 조회
+export const getCelebritiesInRestaurants = async (): Promise<Pick<Celebrity, 'id' | 'name' | 'profileImageUrl'>[]> => {
+  return await api('/celebrities/in/restaurants/condition', { next: { tags: [] } });
 };
