@@ -27,7 +27,7 @@ type PaginationOption = {
 
 // 음식점 조건 조회
 export const getRestaurants = async (
-  options: FilterOption & PaginationOption & (CoordinateOption | {}),
+  options: FilterOption & PaginationOption & (CoordinateOption | {}) & { celebrityId?: number },
 ): Promise<PagedResponse<Restaurant>> => {
   const params = Object.entries(options).map(([key, value]) => [key, `${value}`]);
   return await api(`/restaurants?${new URLSearchParams(params)}`, {
@@ -37,7 +37,7 @@ export const getRestaurants = async (
 
 // 음식점 갯수 조회
 export const getRestaurantsCount = async (
-  options: FilterOption & PaginationOption & (CoordinateOption | {}),
+  options: FilterOption & PaginationOption & (CoordinateOption | {}) & { celebrityId?: number },
 ): Promise<number> => {
   const params = Object.entries(options).map(([key, value]) => [key, `${value}`]);
   return await api(`/restaurants/count?${new URLSearchParams(params)}`, {
