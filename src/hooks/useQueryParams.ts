@@ -13,11 +13,15 @@ const useQueryParams = () => {
     router.push(`${pathname}?${newSearchParams.toString()}`);
   };
 
-  const overrideQueryParams = (params: [string, string][]) => {
+  const overrideQueryParams = (params: [string, string][], { replace = false }: { replace?: boolean } = {}) => {
     const newSearchParams = new URLSearchParams(searchParams.toString());
     params.forEach(([key, value]) => {
       newSearchParams.set(key, value);
     });
+    if (replace) {
+      router.replace(`${pathname}?${newSearchParams.toString()}`);
+      return;
+    }
     router.push(`${pathname}?${newSearchParams.toString()}`);
   };
 
