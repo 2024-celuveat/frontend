@@ -27,6 +27,12 @@ const useQueryParams = () => {
     router.push(`${pathname}?${newSearchParams.toString()}`);
   };
 
+  const deleteQueryParams = (key: string) => {
+    const newSearchParams = new URLSearchParams(searchParams.toString());
+    newSearchParams.delete(key);
+    router.push(`${pathname}?${newSearchParams.toString()}`);
+  };
+
   const clearQueryParams = () => {
     router.push(pathname);
   };
@@ -36,6 +42,7 @@ const useQueryParams = () => {
     initializeQueryParams,
     overrideQueryParams,
     pushQueryParams,
+    deleteQueryParams,
     clearQueryParams,
   };
 };
