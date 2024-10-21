@@ -5,6 +5,7 @@ import useSWRInfinite from 'swr/infinite';
 import { Restaurant } from '@/@types';
 import { PagedResponse } from '@/@types/util';
 import RestaurantCardRowInfiniteList from '@/components/RestaurantCardRowInfiniteList';
+import useQueryParams from '@/hooks/useQueryParams';
 import { api } from '@/utils/api';
 
 interface RestaurantSectionProps {
@@ -12,10 +13,13 @@ interface RestaurantSectionProps {
 }
 
 function RestaurantSection({ category }: RestaurantSectionProps) {
+  const { searchParams } = useQueryParams();
   const { data, setSize, isValidating } = useSWRInfinite<PagedResponse<Restaurant>>(
     (pageIndex, prevData: PagedResponse<Restaurant>) => {
       if (prevData && !prevData.hasNext) return null;
-      return `/restaurants?category=${category}&page=${pageIndex}&size=10`;
+
+      const id = searchParams.get('celebrityId') ?? '';
+      return `/restaurants?category=${category}&page=${pageIndex}&size=10&celebrityId=${id}`;
     },
     api,
   );
@@ -30,7 +34,7 @@ function RestaurantSection({ category }: RestaurantSectionProps) {
       data={data ?? []}
       isValidating={isValidating}
       onIntersect={eventHandler}
-      className="flex w-full flex-col gap-24 px-20"
+      className="mt-24 flex flex-col gap-20"
     />
   );
 }

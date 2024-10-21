@@ -9,7 +9,7 @@ function CelebrityFilter({ celebrities }: { celebrities: Awaited<ReturnType<type
   const { searchParams, overrideQueryParams, deleteQueryParams } = useQueryParams();
 
   const onClickTab = (id: number | '전체') => {
-    overrideQueryParams([['celebrityId', id.toString()]]);
+    overrideQueryParams([['celebrityId', id.toString()]], { replace: true });
   };
 
   return (

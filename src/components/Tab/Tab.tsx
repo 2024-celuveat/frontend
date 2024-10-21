@@ -1,19 +1,21 @@
 'use client';
 
 import Image from 'next/image';
+import { ComponentProps } from 'react';
 
-interface TabProps {
+interface TabProps extends ComponentProps<'div'> {
   label: string;
   imageUrl?: string;
   isActive?: boolean;
 }
 
-function Tab({ label, imageUrl, isActive = false }: TabProps) {
+function Tab({ label, imageUrl, isActive = false, ...props }: TabProps) {
   return (
     <div
-      className={`flex h-40 w-fit items-center justify-center rounded-[100px] border px-[14px] ${isActive && 'border-[1.5px] border-main-500'}`}
+      {...props}
+      className={`flex h-40 w-fit flex-none items-center justify-center gap-[5px] rounded-[100px] border ${imageUrl ? 'pl-6 pr-12' : 'px-14'} ${isActive && 'border-[1.5px] border-main-500'}`}
     >
-      {imageUrl && <Image src={imageUrl} alt={label} width={24} height={24} />}
+      {imageUrl && <Image className="rounded-full" src={imageUrl} alt={label} width={24} height={24} />}
       <span className={`text-gray-800 body-15-rg ${isActive && 'font-[700_!important] text-main-500'}`}> {label}</span>
     </div>
   );
