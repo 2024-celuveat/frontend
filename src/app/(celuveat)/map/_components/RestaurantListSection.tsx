@@ -1,12 +1,15 @@
 'use client';
 
 import { useState } from 'react';
+import useSWR from 'swr';
 import useSWRInfinite from 'swr/infinite';
 
 import { Restaurant } from '@/@types';
 import { PagedResponse } from '@/@types/util';
+import { getCelebritiesInRestaurants } from '@/app/(actions)/celebs/actions';
+import CelebrityFilter from '@/components/CelebrityFilter';
 import RestaurantCardRowInfiniteList from '@/components/RestaurantCardRowInfiniteList';
-import { api } from '@/utils/api';
+import { clientApi } from '@/utils/clientApi';
 
 function RestaurantListSection({
   searchParams,
@@ -21,6 +24,7 @@ function RestaurantListSection({
     zoom: string;
     centerX: string;
     centerY: string;
+    celebrityId: string;
   };
   restaurantsCount: number;
 }) {
@@ -28,9 +32,28 @@ function RestaurantListSection({
   const { data, setSize, isValidating } = useSWRInfinite<PagedResponse<Restaurant>>(
     (pageIndex, prevData: PagedResponse<Restaurant>) => {
       if (prevData && !prevData.hasNext) return null;
-      return `/restaurants?page=${pageIndex}&size=10&lowLatitude=${searchParams.lowLatitude}&lowLongitude=${searchParams.lowLongitude}&highLatitude=${searchParams.highLatitude}&highLongitude=${searchParams.highLongitude}&zoom=${searchParams.zoom}&centerX=${searchParams.centerX}&centerY=${searchParams.centerY}`;
+
+      const urlSearchParams = new URLSearchParams();
+      urlSearchParams.set('page', pageIndex.toString());
+      urlSearchParams.set('size', '10');
+      urlSearchParams.set('lowLatitude', searchParams.lowLatitude);
+      urlSearchParams.set('lowLongitude', searchParams.lowLongitude);
+      urlSearchParams.set('highLatitude', searchParams.highLatitude);
+      urlSearchParams.set('highLongitude', searchParams.highLongitude);
+      urlSearchParams.set('zoom', searchParams.zoom);
+      urlSearchParams.set('centerX', searchParams.centerX);
+      urlSearchParams.set('centerY', searchParams.centerY);
+      if (searchParams.celebrityId) {
+        urlSearchParams.set('celebrityId', searchParams.celebrityId);
+      }
+
+      return `/restaurants?${urlSearchParams.toString()}`;
     },
-    api,
+    clientApi,
+  );
+  const { data: celebrities } = useSWR<Awaited<ReturnType<typeof getCelebritiesInRestaurants>>>(
+    '/celebrities/in/restaurants/condition',
+    clientApi,
   );
 
   const eventHandler = () => {
@@ -40,7 +63,7 @@ function RestaurantListSection({
 
   return (
     <div
-      className={`absolute bottom-0 z-[100] block w-full ${isList && 'h-[calc(100vh-88px)]'} overflow-hidden rounded-t-[16px] bg-white`}
+      className={`absolute bottom-0 z-[100] block w-full ${isList ? 'h-[calc(100vh-88px)]' : 'rounded-t-[16px]'} overflow-hidden bg-white`}
       onClick={() => {
         setIsList(true);
       }}
@@ -55,8 +78,13 @@ function RestaurantListSection({
           <span className="ml-4 text-main-700">{restaurantsCount}</span> 개 맛집이 있어요!
         </p>
       </div>
+      {isList && celebrities && (
+        <div className="px-20">
+          <CelebrityFilter celebrities={celebrities} />
+        </div>
+      )}
       {isList && (
-        <div className="h-[calc(100vh-168px)] overflow-y-scroll pb-8">
+        <div className="mt-16 h-[calc(100vh-224px)] overflow-y-scroll pb-8">
           <RestaurantCardRowInfiniteList
             data={data ?? []}
             isValidating={isValidating}

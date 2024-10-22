@@ -18,6 +18,7 @@ async function MapPage({
     zoom: string;
     centerX: string;
     centerY: string;
+    celebrityId: string;
   };
 }) {
   const { tab = 'map', lowLatitude, lowLongitude, highLatitude, highLongitude } = searchParams;
