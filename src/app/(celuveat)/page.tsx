@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 
 import { getCelebritiesBest, getRecommendedRestaurantsByCelebrities } from '@/app/(actions)/restaurants/actions';
@@ -12,6 +13,7 @@ import { colors } from '@/constants/colors';
 import CelebBestSection from './_components/CelebBestSection';
 import CelebritiesRecommendedRestaurantsInformation from './_components/CelebritiesRecommendedRestaurantsInformation';
 import RestaurantRecommendedSection from './_components/RestaurantRecommendedSection';
+import { getRepresentativeRegions } from '../(actions)/regions/actions';
 
 const FOOD_CATEGORY = [
   { name: '한식', icon: <Icon.Korean /> },
@@ -28,15 +30,15 @@ const FOOD_CATEGORY = [
   { name: '커피/디저트', icon: <Icon.Desserts /> },
 ];
 
-const REGIONS = ['잠실', '성수', '홍대', '을지로', '압구정', '여의도', '이태원'];
-
 export default async function Home() {
   const bestCelebritiesData = getCelebritiesBest();
   const recommendedRestaurantsByCelebritiesData = getRecommendedRestaurantsByCelebrities();
+  const representativeRegionsData = getRepresentativeRegions();
 
-  const [bestCelebrities, recommendedRestaurantsByCelebrities] = await Promise.all([
+  const [bestCelebrities, recommendedRestaurantsByCelebrities, representativeRegions] = await Promise.all([
     bestCelebritiesData,
     recommendedRestaurantsByCelebritiesData,
+    representativeRegionsData,
   ]);
 
   return (
@@ -91,12 +93,14 @@ export default async function Home() {
             <IconLocation fill={colors.main[700]} />
             <span className="text-main-700 body-13-rg">내 주변</span>
           </div>
-          {REGIONS.map(region => (
+          {representativeRegions.map(region => (
             <div
-              key={region}
-              className="flex h-[64px] w-[64px] flex-none items-center justify-center rounded-full bg-gray-200"
+              key={region.name}
+              className="relative flex h-[64px] w-[64px] flex-none items-center justify-center overflow-hidden rounded-full bg-gray-200"
             >
-              <span className="text-white body-13-rg">{region}</span>
+              <Image src={region.imageUrl} alt={region.name} fill sizes="100%" className="object-cover" />
+              <div className="absolute h-full w-full bg-gray-900 opacity-50" />
+              <span className="z-10 text-white body-13-rg">{region.name}</span>
             </div>
           ))}
         </div>
