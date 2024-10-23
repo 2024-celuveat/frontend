@@ -3,6 +3,7 @@
 import { revalidateTag } from 'next/cache';
 
 import { Celebrity, CelebrityDetail } from '@/@types';
+import { CoordinateOption, FilterOption } from '@/@types/util';
 import { TAGS } from '@/constants/tags';
 import { api } from '@/utils/api';
 
@@ -31,6 +32,9 @@ export const getInterestedCelebrities = async (): Promise<CelebrityDetail['celeb
 };
 
 // 필터용 셀럽 조회
-export const getCelebritiesInRestaurants = async (): Promise<Pick<Celebrity, 'id' | 'name' | 'profileImageUrl'>[]> => {
-  return await api('/celebrities/in/restaurants/condition', { next: { tags: [] } });
+export const getCelebritiesInRestaurants = async (
+  options: FilterOption & (CoordinateOption | {}),
+): Promise<Pick<Celebrity, 'id' | 'name' | 'profileImageUrl'>[]> => {
+  const params = Object.entries(options).map(([key, value]) => [key, `${value}`]);
+  return await api(`/celebrities/in/restaurants/condition${new URLSearchParams(params)}`, { next: { tags: [] } });
 };

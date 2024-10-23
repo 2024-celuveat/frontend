@@ -10,3 +10,21 @@ export type PageOptions = {
   size?: number;
   sort?: string[];
 };
+
+export type CoordinateOption = {
+  lowLongitude: string;
+  highLongitude: string;
+  lowLatitude: string;
+  highLatitude: string;
+};
+
+export type FilterOption = {
+  region?: string;
+  category?: string;
+};
+
+export type PaginationOption = {
+  page?: number;
+  size?: number;
+  sort?: string[];
+};

@@ -3,27 +3,9 @@
 import { revalidateTag } from 'next/cache';
 
 import { Celebrity, Restaurant } from '@/@types';
-import { PagedResponse } from '@/@types/util';
+import { CoordinateOption, FilterOption, PagedResponse, PaginationOption } from '@/@types/util';
 import { TAGS } from '@/constants/tags';
 import { api } from '@/utils/api';
-
-type CoordinateOption = {
-  lowLongitude: string;
-  highLongitude: string;
-  lowLatitude: string;
-  highLatitude: string;
-};
-
-type FilterOption = {
-  region?: string;
-  category?: string;
-};
-
-type PaginationOption = {
-  page?: number;
-  size?: number;
-  sort?: string[];
-};
 
 // 음식점 조건 조회
 export const getRestaurants = async (
