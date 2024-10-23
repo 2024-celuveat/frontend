@@ -36,5 +36,5 @@ export const getCelebritiesInRestaurants = async (
   options: FilterOption & (CoordinateOption | {}),
 ): Promise<Pick<Celebrity, 'id' | 'name' | 'profileImageUrl'>[]> => {
   const params = Object.entries(options).map(([key, value]) => [key, `${value}`]);
-  return await api(`/celebrities/in/restaurants/condition${new URLSearchParams(params)}`, { next: { tags: [] } });
+  return await api(`/celebrities/in/restaurants/condition?${new URLSearchParams(params)}`, { next: { tags: [] } });
 };

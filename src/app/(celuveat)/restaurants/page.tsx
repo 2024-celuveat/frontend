@@ -15,7 +15,9 @@ async function RestaurantListPage({ searchParams }: { searchParams: { category: 
           category: searchParams.category,
         },
   );
-  const celebritiesData = await getCelebritiesInRestaurants();
+  const celebritiesData = getCelebritiesInRestaurants({
+    category: searchParams.category,
+  });
   const [restaurantsCount, celebrities] = await Promise.all([restaurantsCountData, celebritiesData]);
 
   return (

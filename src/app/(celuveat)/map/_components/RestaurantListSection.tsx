@@ -51,10 +51,15 @@ function RestaurantListSection({
     },
     clientApi,
   );
-  const { data: celebrities } = useSWR<Awaited<ReturnType<typeof getCelebritiesInRestaurants>>>(
-    '/celebrities/in/restaurants/condition',
-    clientApi,
-  );
+  const { data: celebrities } = useSWR<Awaited<ReturnType<typeof getCelebritiesInRestaurants>>>(() => {
+    const urlSearchParams = new URLSearchParams();
+    urlSearchParams.set('lowLatitude', searchParams.lowLatitude);
+    urlSearchParams.set('lowLongitude', searchParams.lowLongitude);
+    urlSearchParams.set('highLatitude', searchParams.highLatitude);
+    urlSearchParams.set('highLongitude', searchParams.highLongitude);
+
+    return `/celebrities/in/restaurants/condition?${urlSearchParams.toString()}`;
+  }, clientApi);
 
   const eventHandler = () => {
     if (isValidating) return;
