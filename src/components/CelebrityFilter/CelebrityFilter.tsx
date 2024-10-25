@@ -17,7 +17,7 @@ function CelebrityFilter({ celebrities }: { celebrities: Awaited<ReturnType<type
       <Tab
         label="전체"
         onClick={() => {
-          deleteQueryParams('celebrityId');
+          deleteQueryParams('celebrityId', { replace: true });
         }}
         isActive={!searchParams.get('celebrityId')}
       />
