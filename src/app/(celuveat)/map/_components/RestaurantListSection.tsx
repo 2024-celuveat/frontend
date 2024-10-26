@@ -87,7 +87,7 @@ function RestaurantListSection({
             <span className="ml-4 text-main-700">{restaurantsCount}</span> 개 맛집이 있어요!
           </p>
         ) : (
-          <p className="body-16-md">주변에 추천할 맛집이 없습니다.</p>
+          <p className="flex justify-center body-16-md">주변에 추천할 맛집이 없습니다.</p>
         )}
       </div>
       {isList && celebrities && (
