@@ -66,22 +66,29 @@ function RestaurantListSection({
     setSize(size => size + 1);
   };
 
+  const handleClickDrawer = () => {
+    if (!restaurantsCount) return;
+    setIsList(true);
+  };
+
   return (
     <div
       className={`absolute bottom-0 z-[100] block w-full ${isList ? 'h-[calc(100vh-88px)]' : 'rounded-t-[16px]'} overflow-hidden bg-white`}
-      onClick={() => {
-        setIsList(true);
-      }}
+      onClick={handleClickDrawer}
     >
       <div className="flex h-[20px] items-center justify-center">
         <hr className="h-4 w-48 rounded-[8px] bg-gray-200" />
       </div>
       <div className="h-[20px]" />
       <div className="h-[40px]">
-        <p className="flex justify-center body-16-md">
-          주변에
-          <span className="ml-4 text-main-700">{restaurantsCount}</span> 개 맛집이 있어요!
-        </p>
+        {restaurantsCount > 0 ? (
+          <p className="flex justify-center body-16-md">
+            주변에
+            <span className="ml-4 text-main-700">{restaurantsCount}</span> 개 맛집이 있어요!
+          </p>
+        ) : (
+          <p className="body-16-md">주변에 추천할 맛집이 없습니다.</p>
+        )}
       </div>
       {isList && celebrities && (
         <div className="px-20">
