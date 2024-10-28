@@ -17,12 +17,7 @@ async function CelebPage({ params: { id } }: { params: { id: string } }) {
     <main className="px-20 pt-16">
       <CelebIntroductionSection celebrityInfo={celebrityInfo} />
       <hr className="mt-28 h-1 w-full bg-gray-200" />
-
-      <div className="mt-28 flex justify-between">
-        <h2 className="title-20-md">{celebrityRestaurantsCount}개 매장</h2>
-        <span className="body-13-rg">최신순</span>
-      </div>
-      <CelebRestaurantSections celebrityId={Number(id)} />
+      <CelebRestaurantSections celebrityRestaurantsCount={celebrityRestaurantsCount} celebrityId={Number(id)} />
     </main>
   );
 }
