@@ -23,13 +23,7 @@ async function RestaurantListPage({ searchParams }: { searchParams: { category: 
   return (
     <main className="px-20 py-20">
       <CelebrityFilter celebrities={celebrities} />
-      <div className="mt-20 flex justify-between">
-        <h2 className="title-20-md">
-          <span className="text-main-700 title-20-bold">{restaurantsCount}</span>개 맛집
-        </h2>
-        <span className="body-13-rg">최신순</span>
-      </div>
-      <RestaurantSection category={searchParams.category} />
+      <RestaurantSection category={searchParams.category} restaurantsCount={restaurantsCount} />
     </main>
   );
 }
