@@ -12,9 +12,10 @@ import useQueryParams from '@/hooks/useQueryParams';
 
 interface NaverMapProps {
   restaurants: PagedResponse<Restaurant>;
+  cn: string;
 }
 
-function NaverMap({ restaurants }: NaverMapProps) {
+function NaverMap({ restaurants, cn }: NaverMapProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [map, setMap] = useState<naver.maps.Map | null>(null);
   const [markers, setMarkers] = useState(new Map());
@@ -81,7 +82,7 @@ function NaverMap({ restaurants }: NaverMapProps) {
     });
   }, [restaurants, map]);
 
-  return <div ref={ref} className="h-[calc(100vh_-_88px)] w-full" />;
+  return <div ref={ref} className={cn} />;
 }
 
 export default NaverMap;
