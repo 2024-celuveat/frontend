@@ -1,25 +1,21 @@
 import Link from 'next/link';
 
+import { CenterOption, CoordinateOption, ZoomOption } from '@/@types/util';
 import { getRestaurants, getRestaurantsCount } from '@/app/(actions)/restaurants/actions';
 import IconSearch from '@/components/@icon/IconSearch';
+import NaverMap from '@/components/NaverMap';
 
-import NaverMap from './_components/NaverMap';
 import RestaurantListSection from './_components/RestaurantListSection';
 
 async function MapPage({
   searchParams,
 }: {
-  searchParams: {
-    tab: 'map' | 'list';
-    lowLatitude: string;
-    lowLongitude: string;
-    highLatitude: string;
-    highLongitude: string;
-    zoom: string;
-    centerX: string;
-    centerY: string;
-    celebrityId: string;
-  };
+  searchParams: CenterOption &
+    CoordinateOption &
+    ZoomOption & {
+      tab: 'map' | 'list';
+      celebrityId: string;
+    };
 }) {
   const { tab = 'map', lowLatitude, lowLongitude, highLatitude, highLongitude } = searchParams;
   const restaurantsData =
@@ -59,9 +55,7 @@ async function MapPage({
           <p className="ml-10 text-gray-400 body-15-rg">원하는 식당을 검색해보세요</p>
         </Link>
       </div>
-
-      <NaverMap restaurants={restaurants} />
-
+      <NaverMap restaurants={restaurants} cn="h-[calc(100vh_-_88px)] w-full" />
       <RestaurantListSection searchParams={searchParams} restaurantsCount={restaurantsCount} />
     </main>
   );

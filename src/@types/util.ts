@@ -28,3 +28,12 @@ export type PaginationOption = {
   size?: number;
   sort?: string[];
 };
+
+export type CenterOption = {
+  centerX: string;
+  centerY: string;
+};
+
+export type ZoomOption = {
+  zoom: string;
+};
