@@ -11,7 +11,7 @@ import { PagedResponse } from '@/@types/util';
 import useQueryParams from '@/hooks/useQueryParams';
 
 interface NaverMapProps {
-  restaurants: PagedResponse<Restaurant>;
+  restaurants: PagedResponse<Restaurant> | null;
   cn: string;
 }
 
@@ -65,7 +65,7 @@ function NaverMap({ restaurants, cn }: NaverMapProps) {
     if (!map) return;
 
     // 마커 등록
-    restaurants.contents.forEach(({ id, latitude, longitude, visitedCelebrities }) => {
+    restaurants?.contents.forEach(({ id, latitude, longitude, visitedCelebrities }) => {
       if (markers.has(id)) return;
 
       const newMarker = new naver.maps.Marker({

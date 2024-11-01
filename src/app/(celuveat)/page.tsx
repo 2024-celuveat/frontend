@@ -94,14 +94,15 @@ export default async function Home() {
             <span className="text-main-700 body-13-rg">내 주변</span>
           </div>
           {representativeRegions.map(region => (
-            <div
+            <Link
+              href={`/restaurants/region?region=${region.name}&centerX=${region.longitude}&centerY=${region.latitude}`}
               key={region.name}
               className="relative flex h-[64px] w-[64px] flex-none items-center justify-center overflow-hidden rounded-full bg-gray-200"
             >
               <Image src={region.imageUrl} alt={region.name} fill sizes="100%" className="object-cover" />
               <div className="absolute h-full w-full bg-gray-900 opacity-50" />
               <span className="z-10 text-white body-13-rg">{region.name}</span>
-            </div>
+            </Link>
           ))}
         </div>
       </section>
