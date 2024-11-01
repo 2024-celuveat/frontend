@@ -2,7 +2,7 @@ import { getCelebritiesInRestaurants } from '@/app/(actions)/celebs/actions';
 import { getRestaurantsCount } from '@/app/(actions)/restaurants/actions';
 import CelebrityFilter from '@/components/CelebrityFilter';
 
-import RestaurantSection from './_components/RestaurantSection';
+import RestaurantSection from '../_components/RestaurantSection';
 
 async function RestaurantListPage({ searchParams }: { searchParams: { category: string; celebrityId: string } }) {
   const restaurantsCountData = getRestaurantsCount(
