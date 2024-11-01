@@ -18,6 +18,11 @@ export const clientApi = async <T>(
     body: JSON.stringify(options?.data),
   });
 
+  if (response.status === 401) {
+    document.cookie = 'accessToken=; expires=Thu, 01 Jan 1970 00:00:00 GMT';
+    window.location.reload();
+  }
+
   const contentType = response.headers.get('content-type');
   if (contentType === 'application/json') return response.json();
   if (contentType === 'text') return (await response.text()) as T;
