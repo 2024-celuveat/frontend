@@ -19,7 +19,10 @@ async function RestaurantListPage({
       })
     : null;
   const restaurantsCountData = getRestaurantsCount({
-    region: searchParams.region,
+    lowLatitude,
+    lowLongitude,
+    highLatitude,
+    highLongitude,
   });
   const [restaurants, restaurantsCount] = await Promise.all([restaurantsData, restaurantsCountData]);
 
