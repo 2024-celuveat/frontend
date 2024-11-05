@@ -5,11 +5,11 @@ import Link from 'next/link';
 import { ChangeEvent, useCallback, useState } from 'react';
 
 import { SearchResult } from '@/@types';
-import { getSearchResult } from '@/app/(actions)/search/actions';
 import IconHere from '@/components/@icon/IconHere';
 import IconSearch from '@/components/@icon/IconSearch';
 import Avatar from '@/components/Avatar';
 import { colors } from '@/constants/colors';
+import { clientApi } from '@/utils/clientApi';
 
 import IconArrowLeftGoBack from './IconArrowLeftGoBack';
 
@@ -30,7 +30,7 @@ function Search() {
   const [searchValue, setSearchValue] = useState<string>(' ');
 
   const fetchSearchResults = async (value: string) => {
-    const newData = await getSearchResult(value);
+    const newData = await clientApi<SearchResult>(`/search/integrated?name=${value}`);
     setData(newData);
   };
 
@@ -65,7 +65,11 @@ function Search() {
             <h2 className="mt-12 px-20 text-gray-800 body-14-md">지역</h2>
             <ul>
               {data.regionResults.map(region => (
-                <Link href={`/region/${region.id}`} className="flex items-center px-20 py-[15px]" key={region.id}>
+                <Link
+                  href={`/restaurants/region?region=${region.name}&centerX=${region.longitude}&centerY=${region.latitude}`}
+                  className="flex items-center px-20 py-[15px]"
+                  key={region.id}
+                >
                   <IconHere width={20} height={20} fill={colors.gray[400]} />
                   <div>
                     <span className="ml-8 text-gray-900 body-16-md">{highlightMatch(region.name, searchValue)}</span>
