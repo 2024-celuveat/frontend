@@ -5,9 +5,9 @@ import { getCelebritiesBest, getRecommendedRestaurantsByCelebrities } from '@/ap
 import * as Icon from '@/assets/icons/food-category';
 import IconAlarm from '@/components/@icon/IconAlarm';
 import IconArrowRight from '@/components/@icon/IconArrowRight';
-import IconLocation from '@/components/@icon/IconLocation';
 import IconNotice from '@/components/@icon/IconNotice';
 import IconSearch from '@/components/@icon/IconSearch';
+import MyPositionButton from '@/components/MyPositionButton';
 import { colors } from '@/constants/colors';
 
 import CelebBestSection from './_components/CelebBestSection';
@@ -89,10 +89,7 @@ export default async function Home() {
       <section className="mt-48">
         <h1 className="px-20 title-20-md">어디로 가시나요?</h1>
         <div className="scrollbar-hide mt-[16px] flex gap-[16px] overflow-x-scroll px-20">
-          <div className="flex h-[64px] w-[64px] flex-none flex-col items-center justify-center gap-[3px] rounded-full bg-mainDim-15">
-            <IconLocation fill={colors.main[700]} />
-            <span className="text-main-700 body-13-rg">내 주변</span>
-          </div>
+          <MyPositionButton />
           {representativeRegions.map(region => (
             <Link
               href={`/restaurants/region?region=${region.name}&centerX=${region.longitude}&centerY=${region.latitude}`}
