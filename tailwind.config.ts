@@ -153,7 +153,7 @@ const config: Config = {
           borderRight: '10px solid transparent',
           content: '',
           position: 'absolute',
-          top: '80px',
+          top: '64px',
           left: '50%',
           transform: 'translateX(-50%)',
         },
