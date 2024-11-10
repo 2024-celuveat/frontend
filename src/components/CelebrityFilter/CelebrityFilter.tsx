@@ -1,12 +1,18 @@
 'use client';
 
-import { getCelebritiesInRestaurants } from '@/app/(actions)/celebs/actions';
+import { useSearchParams } from 'next/navigation';
+
+import { useCelebritiesInRestaurantsQuery } from '@/hooks/server/celebs';
 import useQueryParams from '@/hooks/useQueryParams';
 
 import Tab from '../Tab';
 
-function CelebrityFilter({ celebrities }: { celebrities: Awaited<ReturnType<typeof getCelebritiesInRestaurants>> }) {
-  const { searchParams, overrideQueryParams, deleteQueryParams } = useQueryParams();
+function CelebrityFilter() {
+  const searchParams = useSearchParams();
+  const { data: celebrities } = useCelebritiesInRestaurantsQuery({
+    category: searchParams.get('category') ?? undefined,
+  });
+  const { overrideQueryParams, deleteQueryParams } = useQueryParams();
 
   const onClickTab = (id: number | '전체') => {
     overrideQueryParams([['celebrityId', id.toString()]], { replace: true });

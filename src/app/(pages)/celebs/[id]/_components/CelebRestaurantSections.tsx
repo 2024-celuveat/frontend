@@ -1,32 +1,19 @@
 'use client';
 
 import { ChangeEvent, useCallback, useState } from 'react';
-import useSWRInfinite from 'swr/infinite';
 
-import { Restaurant } from '@/@types';
-import { PagedResponse } from '@/@types/util';
 import RestaurantCardRowInfiniteList from '@/components/RestaurantCardRowInfiniteList';
-import { clientApi } from '@/utils/clientApi';
+import { useCelebrityRestaurantsCountQuery, useRestaurantsQuery } from '@/hooks/server/restaurants';
 
 interface CelebRestaurantSectionsProps {
-  celebrityRestaurantsCount: number;
   celebrityId: number;
 }
 
-function CelebRestaurantSections({ celebrityId, celebrityRestaurantsCount }: CelebRestaurantSectionsProps) {
-  const [sortValue, setSortValue] = useState('like');
-  const { data, setSize, isValidating } = useSWRInfinite<PagedResponse<Restaurant>>(
-    (pageIndex, prevData: PagedResponse<Restaurant>) => {
-      if (prevData && !prevData.hasNext) return null;
-      return `/restaurants/celebrity/${celebrityId}?page=${pageIndex}&sort=${sortValue}&size=10`;
-    },
-    clientApi,
-  );
+function CelebRestaurantSections({ celebrityId }: CelebRestaurantSectionsProps) {
+  const { data: celebrityRestaurantsCount } = useCelebrityRestaurantsCountQuery(celebrityId);
 
-  const eventHandler = () => {
-    if (isValidating) return;
-    setSize(size => size + 1);
-  };
+  const [sortValue, setSortValue] = useState('like');
+  const { data, fetchNextPage } = useRestaurantsQuery({ celebrityId });
 
   const handleSortValueChange = useCallback((e: ChangeEvent<HTMLSelectElement>) => {
     setSortValue(e.target.value);
@@ -43,9 +30,9 @@ function CelebRestaurantSections({ celebrityId, celebrityRestaurantsCount }: Cel
         </select>
       </div>
       <RestaurantCardRowInfiniteList
-        data={data ?? []}
-        isValidating={isValidating}
-        onIntersect={eventHandler}
+        data={data?.pages ?? []}
+        isValidating
+        onIntersect={fetchNextPage}
         className="mt-24 flex flex-col gap-20"
       />
     </>

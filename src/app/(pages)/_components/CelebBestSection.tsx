@@ -4,15 +4,12 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 
-import { getCelebritiesBest } from '@/app/(actions)/restaurants/actions';
 import IconArrowRight from '@/components/@icon/IconArrowRight';
 import RestaurantLikeButton from '@/components/RestaurantLikeButton';
+import { useCelebritiesBestQuery } from '@/hooks/server/restaurants';
 
-interface CelebBestSectionProps {
-  bestCelebrities: Awaited<ReturnType<typeof getCelebritiesBest>>;
-}
-
-function CelebBestSection({ bestCelebrities }: CelebBestSectionProps) {
+function CelebBestSection() {
+  const { data: bestCelebrities } = useCelebritiesBestQuery();
   const [sequence, setSequence] = useState<number>(0);
 
   const handleClickCelebProfile = async (index: number) => {

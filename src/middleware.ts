@@ -1,16 +1,19 @@
-import { NextResponse, type NextRequest } from 'next/server';
+// middleware.ts
+import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
 
-export async function middleware(request: NextRequest) {
-  const headers = new Headers(request.headers);
-  headers.set('Set-Cookie', request.cookies.get('accessToken')?.value ?? '');
+export function middleware(request: NextRequest) {
+  const token = request.cookies.get('token')?.value;
 
-  return NextResponse.next({
-    request: {
-      headers,
-    },
-  });
+  if (token) {
+    // Authorization 헤더에 토큰을 추가하여 백엔드 서버로 요청 전달
+    request.headers.set('Authorization', `Bearer ${token}`);
+  }
+
+  return NextResponse.next();
 }
 
+// 특정 경로에 대해 middleware를 적용
 export const config = {
-  matcher: ['/celebs/:path*', '/interested/:path*', '/map/:path*', '/my/:path*', '/restaurants/:path*', '/'],
+  matcher: ['/api/:path*'], // 예: /api/ 경로의 모든 요청에 적용
 };

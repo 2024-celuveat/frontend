@@ -4,8 +4,8 @@ import useToast from './useToast';
 
 interface Props {
   liked: boolean;
-  onClickLike: () => Promise<void>;
-  onClickCancelLike: () => Promise<void>;
+  onClickLike: () => void;
+  onClickCancelLike: () => void;
 }
 
 const useOptimisticLike = ({ liked, onClickLike, onClickCancelLike }: Props) => {

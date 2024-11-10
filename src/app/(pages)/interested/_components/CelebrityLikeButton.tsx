@@ -1,8 +1,8 @@
 'use client';
 
-import { postInterestedCelebrity, deleteInterestedCelebrity } from '@/app/(actions)/celebs/actions';
 import IconHeartFilled from '@/components/@icon/IconHeartFilled';
 import IconHeartOutlined from '@/components/@icon/IconHeartOutlined';
+import { useDeleteInterestedCelebrityMutation, useInterestedCelebrityMutation } from '@/hooks/server/celebs';
 import useOptimisticLike from '@/hooks/useOptimisticLike';
 
 interface CelebrityLikeButtonProps {
@@ -10,10 +10,12 @@ interface CelebrityLikeButtonProps {
 }
 
 function CelebrityLikeButton({ celebrityId }: CelebrityLikeButtonProps) {
+  const { mutate: mutateLike } = useInterestedCelebrityMutation();
+  const { mutate: mutateCancelLike } = useDeleteInterestedCelebrityMutation();
   const { isLiked, handleClickLike, handleClickCancelLike } = useOptimisticLike({
     liked: true,
-    onClickLike: () => postInterestedCelebrity(celebrityId),
-    onClickCancelLike: () => deleteInterestedCelebrity(celebrityId),
+    onClickLike: () => mutateLike(celebrityId),
+    onClickCancelLike: () => mutateCancelLike(celebrityId),
   });
 
   return isLiked ? (

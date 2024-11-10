@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 
-import { deleteInterestedRestaurant, postInterestedRestaurant } from '@/app/(actions)/restaurants/actions';
+import { useDeleteInterestedRestaurantMutation, useInterestedRestaurantMutation } from '@/hooks/server/restaurants';
 import useOptimisticLike from '@/hooks/useOptimisticLike';
 
 import IconHeartFilled from '../@icon/IconHeartFilled';
@@ -15,10 +15,12 @@ interface RestaurantLikeButtonProps {
 }
 
 function RestaurantLikeButton({ liked, restaurantId, isRow }: RestaurantLikeButtonProps) {
+  const { mutate: mutateLike } = useInterestedRestaurantMutation();
+  const { mutate: mutateCancelLike } = useDeleteInterestedRestaurantMutation();
   const { isLiked, handleClickLike, handleClickCancelLike } = useOptimisticLike({
     liked,
-    onClickLike: () => postInterestedRestaurant(restaurantId),
-    onClickCancelLike: () => deleteInterestedRestaurant(restaurantId),
+    onClickLike: () => mutateLike(restaurantId),
+    onClickCancelLike: () => mutateCancelLike(restaurantId),
   });
 
   return (

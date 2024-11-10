@@ -1,36 +1,20 @@
 'use client';
 
 import { ChangeEvent, useCallback, useState } from 'react';
-import useSWRInfinite from 'swr/infinite';
 
-import { Restaurant } from '@/@types';
-import { PagedResponse } from '@/@types/util';
 import RestaurantCardRowInfiniteList from '@/components/RestaurantCardRowInfiniteList';
+import { useRestaurantsCountQuery, useRestaurantsQuery } from '@/hooks/server/restaurants';
 import useQueryParams from '@/hooks/useQueryParams';
-import { api } from '@/utils/api';
 
-interface RestaurantSectionProps {
-  category: string;
-  restaurantsCount: number;
-}
-
-function RestaurantSection({ category, restaurantsCount }: RestaurantSectionProps) {
+function RestaurantSection() {
   const [sortValue, setSortValue] = useState('like');
   const { searchParams } = useQueryParams();
-  const { data, setSize, isValidating } = useSWRInfinite<PagedResponse<Restaurant>>(
-    (pageIndex, prevData: PagedResponse<Restaurant>) => {
-      if (prevData && !prevData.hasNext) return null;
-
-      const id = searchParams.get('celebrityId') ?? '';
-      return `/restaurants?category=${category}&page=${pageIndex}&celebrityId=${id}&sort=${sortValue}&size=10`;
-    },
-    api,
-  );
-
-  const eventHandler = () => {
-    if (isValidating) return;
-    setSize(size => size + 1);
-  };
+  const { data: restaurantsCount } = useRestaurantsCountQuery({ category: searchParams.get('category') ?? undefined });
+  const { data, fetchNextPage } = useRestaurantsQuery({
+    category: searchParams.get('category') ?? undefined,
+    celebrityId: searchParams.get('celebrityId') ? Number(searchParams.get('celebrityId')) : undefined,
+    sort: [sortValue],
+  });
 
   const handleSortValueChange = useCallback((e: ChangeEvent<HTMLSelectElement>) => {
     setSortValue(e.target.value);
@@ -49,9 +33,9 @@ function RestaurantSection({ category, restaurantsCount }: RestaurantSectionProp
         </select>
       </div>
       <RestaurantCardRowInfiniteList
-        data={data ?? []}
-        isValidating={isValidating}
-        onIntersect={eventHandler}
+        data={data?.pages ?? []}
+        isValidating
+        onIntersect={fetchNextPage}
         className="mt-24 flex flex-col gap-20"
       />
     </>

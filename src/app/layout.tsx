@@ -2,7 +2,6 @@ import type { Metadata, Viewport } from 'next';
 import localFont from 'next/font/local';
 import Script from 'next/script';
 
-import { getIsLogin } from '@/app/(actions)/social-login/actions';
 import '@/app/globals.css';
 import Provider from '@/app/provider';
 import BottomNavbar from '@/components/BottomNavbar';
@@ -35,7 +34,6 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const isLogin = await getIsLogin();
   return (
     <html lang="ko" className={myFont.className}>
       <body className="relative mx-auto my-0 min-h-svh max-w-[495px] shadow-lg font-synthesis-none">
@@ -47,7 +45,7 @@ export default async function RootLayout({
         <Provider>
           <Header />
           {children}
-          <BottomNavbar isLogin={isLogin} />
+          <BottomNavbar />
         </Provider>
       </body>
     </html>

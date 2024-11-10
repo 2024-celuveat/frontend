@@ -4,23 +4,25 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { overlay } from 'overlay-kit';
 
-import { deleteReview, Review } from '@/app/(actions)/reviews/actions';
 import IconMore from '@/components/@icon/IconMore';
 import BottomSheet from '@/components/@ui/BottomSheet';
 import Avatar from '@/components/Avatar';
 import RestaurantReviewLikeButton from '@/components/RestaurantReviewLikeButton';
 import { colors } from '@/constants/colors';
+import { useDeleteReviewMutation } from '@/hooks/server/reviews';
 import useToast from '@/hooks/useToast';
+import { Review } from '@/remotes/reviews';
 import { formatDate } from '@/utils/formatDate';
 
 import IconStarFilled from '../@icon/IconStarFilled';
 
 interface ReviewCardProps {
-  review: Review;
   isMyReview: boolean;
+  review: Review;
 }
 
 function ReviewCard({ review, isMyReview }: ReviewCardProps) {
+  const { mutate: mutateDeleteReview } = useDeleteReviewMutation();
   const showToast = useToast();
   const router = useRouter();
 
@@ -32,7 +34,7 @@ function ReviewCard({ review, isMyReview }: ReviewCardProps) {
       };
 
       const handleDeleteReview = async () => {
-        await deleteReview(review.id);
+        await mutateDeleteReview(review.id);
         close();
         showToast('리뷰가 삭제되었습니다.');
       };

@@ -5,6 +5,13 @@ const useQueryParams = () => {
   const pathname = usePathname();
   const router = useRouter();
 
+  const coordinate = {
+    lowLatitude: searchParams.get('lowLatitude')!,
+    lowLongitude: searchParams.get('lowLongitude')!,
+    highLatitude: searchParams.get('highLatitude')!,
+    highLongitude: searchParams.get('highLongitude')!,
+  };
+
   const initializeQueryParams = (params: [string, string][]) => {
     const newSearchParams = new URLSearchParams(searchParams.toString());
     params.forEach(([key, value]) => {
@@ -47,6 +54,7 @@ const useQueryParams = () => {
 
   return {
     searchParams,
+    coordinate,
     initializeQueryParams,
     overrideQueryParams,
     pushQueryParams,

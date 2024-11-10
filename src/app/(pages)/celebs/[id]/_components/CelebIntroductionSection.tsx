@@ -2,40 +2,51 @@
 
 import Link from 'next/link';
 import { overlay } from 'overlay-kit';
+import { Fragment } from 'react';
 
-import { CelebrityDetail } from '@/@types';
-import { deleteInterestedCelebrity, postInterestedCelebrity } from '@/app/(actions)/celebs/actions';
 import IconBullet from '@/components/@icon/IconBullet';
 import IconHeartFilled from '@/components/@icon/IconHeartFilled';
 import IconPlus from '@/components/@icon/IconPlus';
 import BottomSheet from '@/components/@ui/BottomSheet';
 import Avatar from '@/components/Avatar';
 import { colors } from '@/constants/colors';
+import {
+  useCelebrityQuery,
+  useDeleteInterestedCelebrityMutation,
+  useInterestedCelebrityMutation,
+} from '@/hooks/server/celebs';
 import useOptimisticLike from '@/hooks/useOptimisticLike';
 import { formatToTenThousandUnits } from '@/utils/formatToTenThousandUnits';
 
 interface CelebIntroductionSectionProps {
-  celebrityInfo: CelebrityDetail;
+  celebrityId: number;
 }
 
-function CelebIntroductionSection({ celebrityInfo }: CelebIntroductionSectionProps) {
+function CelebIntroductionSection({ celebrityId }: CelebIntroductionSectionProps) {
+  const { data } = useCelebrityQuery(celebrityId);
+  const { mutate: mutateLike } = useInterestedCelebrityMutation();
+  const { mutate: mutateCancelLike } = useDeleteInterestedCelebrityMutation();
   const { isLiked, handleClickLike, handleClickCancelLike } = useOptimisticLike({
-    liked: celebrityInfo.interested,
-    onClickLike: () => postInterestedCelebrity(celebrityInfo.celebrity.id),
-    onClickCancelLike: () => deleteInterestedCelebrity(celebrityInfo.celebrity.id),
+    liked: !!data?.interested,
+    onClickLike: () => mutateLike(celebrityId),
+    onClickCancelLike: () => mutateCancelLike(celebrityId),
   });
+
+  if (!data) {
+    return <p>Loading...</p>;
+  }
 
   const openBottomSheet = () => {
     overlay.open(({ isOpen, unmount }) => {
       return (
         <BottomSheet open={isOpen} onClose={unmount}>
-          {celebrityInfo?.celebrity.youtubeContentResults.map(({ id, channelUrl, contentsName }, index) => (
-            <>
+          {data?.celebrity.youtubeContentResults.map(({ id, channelUrl, contentsName }, index) => (
+            <Fragment key={id}>
               {index !== 0 && <hr className="h-1 w-full bg-gray-100" />}
               <Link key={id} href={channelUrl} className="flex h-56 w-full items-center justify-center">
                 <span className="title-16-sb">채널 {contentsName} 바로가기</span>
               </Link>
-            </>
+            </Fragment>
           ))}
           <button
             type="button"
@@ -53,26 +64,24 @@ function CelebIntroductionSection({ celebrityInfo }: CelebIntroductionSectionPro
     <>
       <div className="flex">
         <div className="flex-1">
-          <span className="title-22-md">{celebrityInfo?.celebrity.name}</span>
+          <span className="title-22-md">{data?.celebrity.name}</span>
           <div className="mt-6 flex items-center gap-5">
             <div>
               <span className="body-14-rg">추천 맛집</span>
-              <span className="ml-2 body-14-md">
-                {celebrityInfo?.celebrity.youtubeContentResults[0].restaurantCount}개
-              </span>
+              <span className="ml-2 body-14-md">{data?.celebrity.youtubeContentResults[0].restaurantCount}개</span>
             </div>
             <IconBullet />
             <div>
               <span className="body-14-rg">구독자</span>
               <span className="ml-2 body-14-md">
-                {formatToTenThousandUnits(celebrityInfo?.celebrity.youtubeContentResults[0].subscriberCount)}명
+                {formatToTenThousandUnits(data?.celebrity.youtubeContentResults[0].subscriberCount)}명
               </span>
             </div>
           </div>
-          <p className="mt-14 pr-16 body-13-rg">{celebrityInfo?.celebrity.introduction}</p>
+          <p className="mt-14 pr-16 body-13-rg">{data?.celebrity.introduction}</p>
         </div>
         <div>
-          <Avatar imageUrl={celebrityInfo?.celebrity.profileImageUrl} size={72} alt={celebrityInfo?.celebrity.name} />
+          <Avatar imageUrl={data?.celebrity.profileImageUrl} size={72} alt={data?.celebrity.name} />
         </div>
       </div>
       <div className="mt-20 flex gap-10">

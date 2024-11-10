@@ -5,10 +5,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 
-import { getInterestedCelebrities } from '@/app/(actions)/celebs/actions';
-import { getInterestedRestaurants, getInterestedRestaurantsCount } from '@/app/(actions)/restaurants/actions';
 import IconCaution from '@/components/@icon/iconCaution';
 import RestaurantCardRow from '@/components/RestaurantCardRow';
+import { useInterestedCelebritiesQuery } from '@/hooks/server/celebs';
+import { useInterestedRestaurantsCountQuery, useInterestedRestaurantsQuery } from '@/hooks/server/restaurants';
 import { formatToTenThousandUnits } from '@/utils/formatToTenThousandUnits';
 
 import CelebrityLikeButton from './CelebrityLikeButton';
@@ -25,13 +25,12 @@ function EmptyCaseUI({ tab }: { tab: '맛집' | '셀럽' }) {
     </div>
   );
 }
-interface InterestedProps {
-  interestedRestaurants: Awaited<ReturnType<typeof getInterestedRestaurants>>;
-  interestedRestaurantsCount: Awaited<ReturnType<typeof getInterestedRestaurantsCount>>;
-  interestedCelebrities: Awaited<ReturnType<typeof getInterestedCelebrities>>;
-}
 
-function Interested({ interestedRestaurants, interestedRestaurantsCount, interestedCelebrities }: InterestedProps) {
+function Interested() {
+  const { data: interestedRestaurants } = useInterestedRestaurantsQuery();
+  const { data: interestedRestaurantsCount } = useInterestedRestaurantsCountQuery();
+  const { data: interestedCelebrities } = useInterestedCelebritiesQuery();
+
   const [tab, setTab] = useState<'맛집' | '셀럽'>('맛집');
 
   return (

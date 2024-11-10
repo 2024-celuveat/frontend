@@ -6,21 +6,25 @@
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 
-import { Restaurant } from '@/@types';
-import { PagedResponse } from '@/@types/util';
+import { useRestaurantsQuery } from '@/hooks/server/restaurants';
 import useQueryParams from '@/hooks/useQueryParams';
 
 interface NaverMapProps {
-  restaurants: PagedResponse<Restaurant> | null;
   cn: string;
 }
 
-function NaverMap({ restaurants, cn }: NaverMapProps) {
+function NaverMap({ cn }: NaverMapProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [map, setMap] = useState<naver.maps.Map | null>(null);
   const [markers, setMarkers] = useState(new Map());
   const searchParams = useSearchParams();
   const { overrideQueryParams } = useQueryParams();
+  const { data: restaurants } = useRestaurantsQuery({
+    lowLatitude: searchParams.get('lowLatitude')!,
+    lowLongitude: searchParams.get('lowLongitude')!,
+    highLatitude: searchParams.get('highLatitude')!,
+    highLongitude: searchParams.get('highLongitude')!,
+  });
 
   useEffect(() => {
     if (!ref.current) return;
@@ -65,7 +69,7 @@ function NaverMap({ restaurants, cn }: NaverMapProps) {
     if (!map) return;
 
     // 마커 등록
-    restaurants?.contents.forEach(({ id, latitude, longitude, visitedCelebrities }) => {
+    restaurants?.pages[0].contents.forEach(({ id, latitude, longitude, visitedCelebrities }) => {
       if (markers.has(id)) return;
 
       const newMarker = new naver.maps.Marker({

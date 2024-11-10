@@ -1,19 +1,16 @@
-import Image from 'next/image';
 import Link from 'next/link';
 
-import { getCelebritiesBest, getRecommendedRestaurantsByCelebrities } from '@/app/(actions)/restaurants/actions';
 import * as Icon from '@/assets/icons/food-category';
 import IconAlarm from '@/components/@icon/IconAlarm';
 import IconArrowRight from '@/components/@icon/IconArrowRight';
 import IconNotice from '@/components/@icon/IconNotice';
 import IconSearch from '@/components/@icon/IconSearch';
-import MyPositionButton from '@/components/MyPositionButton';
 import { colors } from '@/constants/colors';
 
 import CelebBestSection from './_components/CelebBestSection';
 import CelebritiesRecommendedRestaurantsInformation from './_components/CelebritiesRecommendedRestaurantsInformation';
+import RepresentativeRegionsSection from './_components/RepresentativeRegionsSection';
 import RestaurantRecommendedSection from './_components/RestaurantRecommendedSection';
-import { getRepresentativeRegions } from '../(actions)/regions/actions';
 
 const FOOD_CATEGORY = [
   { name: '한식', icon: <Icon.Korean /> },
@@ -31,16 +28,6 @@ const FOOD_CATEGORY = [
 ];
 
 export default async function Home() {
-  const bestCelebritiesData = getCelebritiesBest();
-  const recommendedRestaurantsByCelebritiesData = getRecommendedRestaurantsByCelebrities();
-  const representativeRegionsData = getRepresentativeRegions();
-
-  const [bestCelebrities, recommendedRestaurantsByCelebrities, representativeRegions] = await Promise.all([
-    bestCelebritiesData,
-    recommendedRestaurantsByCelebritiesData,
-    representativeRegionsData,
-  ]);
-
   return (
     <main>
       <section className="flex items-center gap-16 px-20 pt-20">
@@ -53,13 +40,13 @@ export default async function Home() {
         </Link>
         <IconAlarm fill={colors.gray[800]} width={24} height={24} />
       </section>
-      <CelebBestSection bestCelebrities={bestCelebrities} />
+      <CelebBestSection />
       <section className="mt-48">
         <div className="flex gap-2">
           <h1 className="pl-20 title-20-md">셀럽들의 추천 맛집</h1>
           <CelebritiesRecommendedRestaurantsInformation />
         </div>
-        <RestaurantRecommendedSection restaurants={recommendedRestaurantsByCelebrities} />
+        <RestaurantRecommendedSection />
       </section>
       <section className="mt-48 px-20">
         <Link
@@ -86,26 +73,10 @@ export default async function Home() {
           ))}
         </div>
       </section>
-      <section className="mt-48">
-        <h1 className="px-20 title-20-md">어디로 가시나요?</h1>
-        <div className="scrollbar-hide mt-[16px] flex gap-[16px] overflow-x-scroll px-20">
-          <MyPositionButton />
-          {representativeRegions.map(region => (
-            <Link
-              href={`/restaurants/region?region=${region.name}&centerX=${region.longitude}&centerY=${region.latitude}`}
-              key={region.name}
-              className="relative flex h-[64px] w-[64px] flex-none items-center justify-center overflow-hidden rounded-full bg-gray-200"
-            >
-              <Image src={region.imageUrl} alt={region.name} fill sizes="100%" className="object-cover" />
-              <div className="absolute h-full w-full bg-gray-900 opacity-50" />
-              <span className="z-10 text-white body-13-rg">{region.name}</span>
-            </Link>
-          ))}
-        </div>
-      </section>
+      <RepresentativeRegionsSection />
       <section className="mt-48">
         <h1 className="px-20 title-20-md">지금 인기 있는 맛집!</h1>
-        <RestaurantRecommendedSection restaurants={recommendedRestaurantsByCelebrities} />
+        <RestaurantRecommendedSection />
       </section>
       <div className="h-16" />
     </main>

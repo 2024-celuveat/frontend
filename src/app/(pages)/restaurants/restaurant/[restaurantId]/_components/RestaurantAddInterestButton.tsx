@@ -1,9 +1,9 @@
 'use client';
 
-import { deleteInterestedRestaurant, postInterestedRestaurant } from '@/app/(actions)/restaurants/actions';
 import IconHeartFilled from '@/components/@icon/IconHeartFilled';
 import IconPlus from '@/components/@icon/IconPlus';
 import { colors } from '@/constants/colors';
+import { useDeleteInterestedRestaurantMutation, useInterestedRestaurantMutation } from '@/hooks/server/restaurants';
 import useOptimisticLike from '@/hooks/useOptimisticLike';
 
 interface RestaurantAddInterestButtonProps {
@@ -12,10 +12,12 @@ interface RestaurantAddInterestButtonProps {
 }
 
 function RestaurantAddInterestButton({ liked, restaurantId }: RestaurantAddInterestButtonProps) {
+  const { mutate: mutateLike } = useInterestedRestaurantMutation();
+  const { mutate: mutateCancelLike } = useDeleteInterestedRestaurantMutation();
   const { isLiked, handleClickLike, handleClickCancelLike } = useOptimisticLike({
     liked,
-    onClickLike: () => postInterestedRestaurant(restaurantId),
-    onClickCancelLike: () => deleteInterestedRestaurant(restaurantId),
+    onClickLike: () => mutateLike(restaurantId),
+    onClickCancelLike: () => mutateCancelLike(restaurantId),
   });
 
   return isLiked ? (

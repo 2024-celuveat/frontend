@@ -1,7 +1,7 @@
 'use client';
 
-import { deleteReviewHelpful, postReviewHelpful } from '@/app/(actions)/reviews/actions';
 import { colors } from '@/constants/colors';
+import { useDeleteReviewHelpfulMutation, usePostReviewHelpfulMutation } from '@/hooks/server/reviews';
 import useOptimisticLike from '@/hooks/useOptimisticLike';
 
 import IconThumbsUpFilled from '../@icon/IconThumbsUpFilled';
@@ -14,10 +14,12 @@ interface RestaurantReviewLikeButtonProps {
 }
 
 function RestaurantReviewLikeButton({ reviewId, helps, clickedHelpful }: RestaurantReviewLikeButtonProps) {
+  const { mutate: mutateLike } = usePostReviewHelpfulMutation();
+  const { mutate: mutateCancelLike } = useDeleteReviewHelpfulMutation();
   const { isLiked, handleClickLike, handleClickCancelLike } = useOptimisticLike({
     liked: clickedHelpful,
-    onClickLike: () => postReviewHelpful(reviewId),
-    onClickCancelLike: () => deleteReviewHelpful(reviewId),
+    onClickLike: () => mutateLike(reviewId),
+    onClickCancelLike: () => mutateCancelLike(reviewId),
   });
 
   return isLiked ? (
