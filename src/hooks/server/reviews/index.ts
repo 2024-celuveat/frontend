@@ -2,8 +2,6 @@ import { useSuspenseInfiniteQuery, useMutation, useSuspenseQuery } from '@tansta
 
 import {
   getReview,
-  updateReview,
-  postReview,
   deleteReview,
   postReviewHelpful,
   deleteReviewHelpful,
@@ -17,12 +15,6 @@ export const useReviewQuery = (reviewId: number) =>
     queryKey: ['getReview', reviewId],
     queryFn: () => getReview(reviewId),
   });
-
-// 손볼곳
-export const useUpdateReviewMutation = () => useMutation({ mutationFn: updateReview });
-
-// 리뷰 작성
-export const usePostReviewMutation = () => useMutation({ mutationFn: postReview });
 
 // 리뷰 삭제
 export const useDeleteReviewMutation = () => useMutation({ mutationFn: deleteReview });
