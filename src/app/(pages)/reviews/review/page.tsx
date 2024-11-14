@@ -1,14 +1,15 @@
 import Image from 'next/image';
 
-import { getRestaurant } from '@/app/(actions)/restaurants/actions';
-import { getReview, postReview, updateReview } from '@/app/(actions)/reviews/actions';
 import IconBullet from '@/components/@icon/IconBullet';
 
 import ReviewForm from '../_components/ReviewForm';
+import { useRestaurantQuery } from '@/hooks/server/restaurants';
+import { useReviewQuery } from '@/hooks/server/reviews';
+import { postReview, updateReview } from '../actions';
 
 async function ReviewFormPage({ searchParams }: { searchParams: { restaurantId: string; reviewId: string } }) {
-  const restaurant = await getRestaurant(Number(searchParams.restaurantId));
-  const review = searchParams.reviewId ? await getReview(Number(searchParams.reviewId)) : null;
+  const { data: restaurant } = useRestaurantQuery(Number(searchParams.restaurantId));
+  const { data: review } = useReviewQuery(Number(searchParams.reviewId));
   const action = searchParams.reviewId ? updateReview : postReview;
 
   return (

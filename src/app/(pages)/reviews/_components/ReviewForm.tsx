@@ -1,10 +1,12 @@
 'use client';
 
+import { Review } from '@/remotes/reviews';
+
 const RATING = [1, 2, 3, 4, 5] as const;
 
 interface ReviewFormProps {
   restaurantId: string;
-  // review: Review | null;
+  review: Review | null;
 }
 
 function ReviewForm({ restaurantId }: ReviewFormProps) {
