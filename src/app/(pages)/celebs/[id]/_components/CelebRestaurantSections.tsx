@@ -2,8 +2,9 @@
 
 import { ChangeEvent, useCallback, useState } from 'react';
 
-import RestaurantCardRowInfiniteList from '@/components/RestaurantCardRowInfiniteList';
+import RestaurantCardRow from '@/components/RestaurantCardRow';
 import { useCelebrityRestaurantsCountQuery, useRestaurantsQuery } from '@/hooks/server/restaurants';
+import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 
 interface CelebRestaurantSectionsProps {
   celebrityId: number;
@@ -14,6 +15,10 @@ function CelebRestaurantSections({ celebrityId }: CelebRestaurantSectionsProps) 
 
   const [sortValue, setSortValue] = useState('like');
   const { data, fetchNextPage } = useRestaurantsQuery({ celebrityId });
+
+  const ref = useInfiniteScroll({
+    eventHandler: fetchNextPage,
+  });
 
   const handleSortValueChange = useCallback((e: ChangeEvent<HTMLSelectElement>) => {
     setSortValue(e.target.value);
@@ -29,12 +34,10 @@ function CelebRestaurantSections({ celebrityId }: CelebRestaurantSectionsProps) 
           <option value="like">좋아요순</option>
         </select>
       </div>
-      <RestaurantCardRowInfiniteList
-        data={data?.pages ?? []}
-        isValidating
-        onIntersect={fetchNextPage}
-        className="mt-24 flex flex-col gap-20"
-      />
+      <ul className="flex w-full flex-col gap-24 px-20">
+        {data?.pages.map(({ contents }) => contents.map(props => <RestaurantCardRow key={props.id} {...props} />))}
+        {data?.pages.at(-1)?.hasNext && <div ref={ref} />}
+      </ul>
     </>
   );
 }
