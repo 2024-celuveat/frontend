@@ -1,9 +1,10 @@
 'use client';
 
 import CelebrityFilter from '@/components/CelebrityFilter';
-import RestaurantCardRowInfiniteList from '@/components/RestaurantCardRowInfiniteList';
+import RestaurantCardRow from '@/components/RestaurantCardRow';
 import { useCelebritiesInRestaurantsQuery } from '@/hooks/server/celebs';
 import { useRestaurantsCountQuery, useRestaurantsQuery } from '@/hooks/server/restaurants';
+import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 import useQueryParams from '@/hooks/useQueryParams';
 
 function RestaurantListSection() {
@@ -11,6 +12,11 @@ function RestaurantListSection() {
   const { data: restaurantsCount } = useRestaurantsCountQuery(coordinate);
   const { data, fetchNextPage } = useRestaurantsQuery(coordinate);
   const { data: celebrities } = useCelebritiesInRestaurantsQuery(coordinate);
+
+  const ref = useInfiniteScroll({
+    eventHandler: fetchNextPage,
+    observerOptions: { threshold: 1 },
+  });
 
   return (
     <div className="z-[100] flex w-full flex-1 flex-col overflow-hidden bg-white">
@@ -33,12 +39,10 @@ function RestaurantListSection() {
         </div>
       )}
       <div className="mt-16 flex-1 overflow-y-scroll pb-8">
-        <RestaurantCardRowInfiniteList
-          data={data?.pages ?? []}
-          isValidating
-          onIntersect={fetchNextPage}
-          className="flex w-full flex-col gap-24 px-20"
-        />
+        <ul className="flex w-full flex-col gap-24 px-20">
+          {data?.pages.map(({ contents }) => contents.map(props => <RestaurantCardRow key={props.id} {...props} />))}
+          {data?.pages.at(-1)?.hasNext && <div ref={ref} />}
+        </ul>
       </div>
     </div>
   );

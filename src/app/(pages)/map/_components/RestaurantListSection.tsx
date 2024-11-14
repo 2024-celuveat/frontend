@@ -3,9 +3,10 @@
 import { useState } from 'react';
 
 import CelebrityFilter from '@/components/CelebrityFilter';
-import RestaurantCardRowInfiniteList from '@/components/RestaurantCardRowInfiniteList';
+import RestaurantCardRow from '@/components/RestaurantCardRow';
 import { useCelebritiesInRestaurantsQuery } from '@/hooks/server/celebs';
 import { useRestaurantsCountQuery, useRestaurantsQuery } from '@/hooks/server/restaurants';
+import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 import useQueryParams from '@/hooks/useQueryParams';
 
 function RestaurantListSection() {
@@ -15,6 +16,10 @@ function RestaurantListSection() {
   const [isList, setIsList] = useState(false);
   const { data, fetchNextPage } = useRestaurantsQuery(coordinate);
   const { data: celebrities } = useCelebritiesInRestaurantsQuery(coordinate);
+
+  const ref = useInfiniteScroll({
+    eventHandler: fetchNextPage,
+  });
 
   const handleClickDrawer = () => {
     if (!restaurantsCount) return;
@@ -47,12 +52,10 @@ function RestaurantListSection() {
       )}
       {isList && (
         <div className="mt-16 h-[calc(100vh-224px)] overflow-y-scroll pb-8">
-          <RestaurantCardRowInfiniteList
-            data={data?.pages ?? []}
-            isValidating
-            onIntersect={fetchNextPage}
-            className="flex w-full flex-col gap-24 px-20"
-          />
+          <ul className="flex w-full flex-col gap-24 px-20">
+            {data?.pages.map(({ contents }) => contents.map(props => <RestaurantCardRow key={props.id} {...props} />))}
+            {data?.pages.at(-1)?.hasNext && <div ref={ref} />}
+          </ul>
           <button
             type="button"
             className="fixed bottom-[104px] left-[50%] z-[100] -translate-x-[50%] rounded-[100px] bg-gray-900 px-24 py-16 text-white body-15-rg"

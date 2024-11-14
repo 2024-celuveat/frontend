@@ -20,8 +20,8 @@ import {
 // 음식점 조건 조회
 export const useRestaurantsQuery = (params: Parameters<typeof getRestaurants>[0]) =>
   useInfiniteQuery({
-    queryKey: ['getRestaurants', params],
-    queryFn: () => getRestaurants(params),
+    queryKey: ['getRestaurants', params.category, params.celebrityId, params.sort, params.region],
+    queryFn: ({ pageParam }) => getRestaurants({ page: pageParam, size: 5, ...params }),
     getNextPageParam: (lastPage, _, lastPageNumber) => (lastPage.hasNext ? lastPageNumber + 1 : undefined),
     initialPageParam: 0,
   });

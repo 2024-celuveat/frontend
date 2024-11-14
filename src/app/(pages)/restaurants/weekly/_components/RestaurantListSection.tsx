@@ -2,10 +2,16 @@
 
 import RestaurantCardRow from '@/components/RestaurantCardRow';
 import { useWeeklyRestaurantsCountQuery, useWeeklyRestaurantsQuery } from '@/hooks/server/restaurants';
+import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 
 function RestaurantListSection() {
-  const { data } = useWeeklyRestaurantsQuery();
+  const { data, fetchNextPage } = useWeeklyRestaurantsQuery();
   const { data: restaurantsCount } = useWeeklyRestaurantsCountQuery();
+
+  const ref = useInfiniteScroll({
+    eventHandler: fetchNextPage,
+    observerOptions: { threshold: 1 },
+  });
 
   return (
     <>
@@ -15,6 +21,7 @@ function RestaurantListSection() {
       </div>
       <ul className="mt-24 flex flex-col gap-20">
         {data.pages.map(page => page.contents.map(props => <RestaurantCardRow key={props.id} {...props} />))}
+        {data?.pages.at(-1)?.hasNext && <div ref={ref} />}
       </ul>
     </>
   );
