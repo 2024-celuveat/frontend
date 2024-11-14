@@ -10,7 +10,7 @@ import google from '@/assets/icons/social-login/google_symbol.webp';
 import kakao from '@/assets/icons/social-login/kakao_symbol.webp';
 import naver from '@/assets/icons/social-login/naver_symbol.webp';
 import { colors } from '@/constants/colors';
-import { useUserProfileQuery } from '@/hooks/server/members';
+import useLogin from '@/hooks/useLogin';
 
 import IconHeartFilled from '../@icon/IconHeartFilled';
 import IconHomeFilled from '../@icon/IconHomeFilled';
@@ -26,8 +26,7 @@ function BottomNavbar() {
   const pathname = usePathname();
   const firstPath = pathname?.split('/')[1];
   const router = useRouter();
-  const { data } = useUserProfileQuery();
-  const isLogin = !!data;
+  const { isLogin } = useLogin();
 
   const handleClickLoginButton = async (socialLoginType: SocialLoginType) => {
     const response = await fetch(

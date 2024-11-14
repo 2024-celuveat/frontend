@@ -13,7 +13,6 @@ import IconHere from '@/components/@icon/IconHere';
 import Avatar from '@/components/Avatar';
 import RestaurantCard from '@/components/RestaurantCard';
 import ReviewCard from '@/components/ReviewCard';
-import { useUserProfileQuery } from '@/hooks/server/members';
 import { useRestaurantQuery, useRestaurantVideosQuery, useRestaurantsNearbyQuery } from '@/hooks/server/restaurants';
 import { useRestaurantReviewsQuery, useReviewCountQuery } from '@/hooks/server/reviews';
 import { formatToTenThousandUnits } from '@/utils/formatToTenThousandUnits';
@@ -32,7 +31,6 @@ function RestaurantDetailPage({ restaurantId }: Props) {
   const { data: restaurantsNearby } = useRestaurantsNearbyQuery(Number(restaurantId));
   const { data: reviews } = useRestaurantReviewsQuery(Number(restaurantId), { size: 3 });
   const { data: reviewCount } = useReviewCountQuery(Number(restaurantId));
-  const { data: myProfile } = useUserProfileQuery();
 
   return (
     <div>
@@ -155,7 +153,7 @@ function RestaurantDetailPage({ restaurantId }: Props) {
               {reviews?.pages.map(page =>
                 page.contents.map(review => (
                   <Fragment key={review.id}>
-                    <ReviewCard review={review} isMyReview={myProfile?.id === review.writer.id} />
+                    <ReviewCard review={review} isMyReview={false} />
                     <hr className="my-16 h-1 w-full bg-gray-100" />
                   </Fragment>
                 )),
@@ -165,7 +163,6 @@ function RestaurantDetailPage({ restaurantId }: Props) {
 
           <ReviewAddButton
             restaurantId={Number(restaurantId)}
-            isLogin={!!myProfile}
             innerText={reviewCount === 0 ? '첫 방문 리뷰 남기기' : '방문 리뷰 남기기'}
           />
         </section>

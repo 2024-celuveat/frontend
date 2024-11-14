@@ -32,10 +32,6 @@ function CelebIntroductionSection({ celebrityId }: CelebIntroductionSectionProps
     onClickCancelLike: () => mutateCancelLike(celebrityId),
   });
 
-  if (!data) {
-    return <p>Loading...</p>;
-  }
-
   const openBottomSheet = () => {
     overlay.open(({ isOpen, unmount }) => {
       return (

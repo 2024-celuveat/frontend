@@ -4,15 +4,21 @@ import { api } from '@/utils/api';
 
 // 음식점 조건 조회
 export const getRestaurants = async (
-  params: FilterOption & PaginationOption & (CoordinateOption | {}) & { celebrityId?: number },
+  params: (FilterOption & PaginationOption & (CoordinateOption | {}) & { celebrityId?: number }) | string,
 ): Promise<PagedResponse<Restaurant>> => {
+  if (typeof params === 'string') {
+    return await api.get(`/restaurants?${params}`);
+  }
   return await api.get('/restaurants', { params });
 };
 
 // 음식점 갯수 조회
 export const getRestaurantsCount = async (
-  params: FilterOption & (CoordinateOption | {}) & { celebrityId?: number },
+  params: (FilterOption & (CoordinateOption | {}) & { celebrityId?: number }) | string,
 ): Promise<number> => {
+  if (typeof params === 'string') {
+    return await api.get(`/restaurants/count?${params}`);
+  }
   return await api.get('/restaurants/count', { params });
 };
 

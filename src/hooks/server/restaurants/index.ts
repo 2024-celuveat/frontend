@@ -20,7 +20,7 @@ import {
 // 음식점 조건 조회
 export const useRestaurantsQuery = (params: Parameters<typeof getRestaurants>[0]) =>
   useInfiniteQuery({
-    queryKey: ['getRestaurants'],
+    queryKey: ['getRestaurants', params],
     queryFn: () => getRestaurants(params),
     getNextPageParam: (lastPage, _, lastPageNumber) => (lastPage.hasNext ? lastPageNumber + 1 : undefined),
     initialPageParam: 0,
@@ -29,7 +29,7 @@ export const useRestaurantsQuery = (params: Parameters<typeof getRestaurants>[0]
 // 음식점 갯수 조회
 export const useRestaurantsCountQuery = (params: Parameters<typeof getRestaurantsCount>[0]) =>
   useSuspenseQuery({
-    queryKey: ['getRestaurantsCount'],
+    queryKey: ['getRestaurantsCount', params],
     queryFn: () => getRestaurantsCount(params),
   });
 

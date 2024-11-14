@@ -3,17 +3,18 @@
 import { useRouter } from 'next/navigation';
 
 import { Restaurant } from '@/@types';
+import useLogin from '@/hooks/useLogin';
 import useToast from '@/hooks/useToast';
 
 interface ReviewAddButtonProps {
   restaurantId: Restaurant['id'];
-  isLogin: boolean;
   innerText: string;
 }
 
-function ReviewAddButton({ restaurantId, isLogin, innerText }: ReviewAddButtonProps) {
+function ReviewAddButton({ restaurantId, innerText }: ReviewAddButtonProps) {
   const router = useRouter();
   const showToast = useToast();
+  const { isLogin } = useLogin();
 
   const handleClick = () => {
     if (isLogin) {

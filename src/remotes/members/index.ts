@@ -10,3 +10,17 @@ export const getUserProfile = async (): Promise<UserProfile> => {
 export const updateUserProfile = async (data: { nickname: string; profileImageUrl: string }) => {
   return await api.patch('/members/profile', data);
 };
+
+export const getIsMember = async (): Promise<{ isMember: false }> => {
+  return await api.get('/members/me');
+};
+
+export const getToken = async ({
+  socialLoginType,
+  authCode,
+}: {
+  socialLoginType: string;
+  authCode: string;
+}): Promise<{ accessToken: string }> => {
+  return await api.get(`/social-login/${socialLoginType}?authCode=${authCode}`);
+};
