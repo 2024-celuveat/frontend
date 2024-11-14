@@ -1,6 +1,5 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
 import { useTokenQuery } from '@/hooks/server/members';
@@ -11,7 +10,6 @@ interface Props {
 }
 
 function OAuth({ socialLoginType, authCode }: Props) {
-  const router = useRouter();
   const { data } = useTokenQuery({ socialLoginType, authCode });
 
   useEffect(() => {

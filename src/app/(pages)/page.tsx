@@ -1,3 +1,4 @@
+import dynamic from 'next/dynamic';
 import Link from 'next/link';
 
 import * as Icon from '@/assets/icons/food-category';
@@ -7,10 +8,12 @@ import IconNotice from '@/components/@icon/IconNotice';
 import IconSearch from '@/components/@icon/IconSearch';
 import { colors } from '@/constants/colors';
 
-import CelebBestSection from './_components/CelebBestSection';
-import CelebritiesRecommendedRestaurantsInformation from './_components/CelebritiesRecommendedRestaurantsInformation';
-import RepresentativeRegionsSection from './_components/RepresentativeRegionsSection';
-import RestaurantRecommendedSection from './_components/RestaurantRecommendedSection';
+const CelebBestSection = dynamic(() => import('./_components/CelebBestSection'));
+const CelebritiesRecommendedRestaurantsInformation = dynamic(
+  () => import('./_components/CelebritiesRecommendedRestaurantsInformation'),
+);
+const RepresentativeRegionsSection = dynamic(() => import('./_components/RepresentativeRegionsSection'));
+const RestaurantRecommendedSection = dynamic(() => import('./_components/RestaurantRecommendedSection'));
 
 const FOOD_CATEGORY = [
   { name: '한식', icon: <Icon.Korean /> },

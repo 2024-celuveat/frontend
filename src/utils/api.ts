@@ -1,5 +1,5 @@
+/* eslint-disable no-param-reassign */
 import axios from 'axios';
-import { config } from 'process';
 
 export const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BACKEND_SERVER_BASE_URL,

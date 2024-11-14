@@ -91,6 +91,7 @@ function MyPage() {
       <Menu label="기타" menus={MENUS2} />
       <section className="px-20 py-16">
         <button
+          type="button"
           className="flex h-[50px] w-full items-center justify-center rounded-[8px] bg-gray-100 text-gray-700 body-16-md"
           onClick={onClickLogout}
         >

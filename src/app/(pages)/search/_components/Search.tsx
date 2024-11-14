@@ -1,15 +1,13 @@
 'use client';
 
-import { throttle } from 'lodash';
 import Link from 'next/link';
-import { ChangeEvent, useCallback, useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 
-import { SearchResult } from '@/@types';
 import IconHere from '@/components/@icon/IconHere';
 import IconSearch from '@/components/@icon/IconSearch';
 import Avatar from '@/components/Avatar';
 import { colors } from '@/constants/colors';
-import { clientApi } from '@/utils/clientApi';
+import { useSearchResultQuery } from '@/hooks/server/search';
 
 import IconArrowLeftGoBack from './IconArrowLeftGoBack';
 
@@ -26,15 +24,9 @@ function highlightMatch(text: string, query: string) {
 }
 
 function Search() {
-  const [data, setData] = useState<SearchResult>();
   const [searchValue, setSearchValue] = useState<string>(' ');
 
-  const fetchSearchResults = async (value: string) => {
-    const newData = await clientApi<SearchResult>(`/search/integrated?name=${value}`);
-    setData(newData);
-  };
-
-  const throttledFetchSearchResults = useCallback(throttle(fetchSearchResults, 1000), []);
+  const { data } = useSearchResultQuery(searchValue);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.value.match(/[^가-힣\s]/)) {
@@ -42,7 +34,6 @@ function Search() {
     }
 
     setSearchValue(e.target.value);
-    throttledFetchSearchResults(e.target.value); // 스로틀링 적용된 함수 호출
   };
 
   return (
