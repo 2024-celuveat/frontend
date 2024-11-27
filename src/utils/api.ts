@@ -6,11 +6,12 @@ export const api = axios.create({
   withCredentials: true,
 });
 
-api.interceptors.response.use(({ data }) => data);
-api.interceptors.request.use(config => {
-  if (typeof window === 'undefined') return config;
-  if (localStorage.getItem('accessToken')) {
-    config.headers.Authorization = localStorage.getItem('accessToken');
-  }
-  return config;
-});
+api.interceptors.response.use(
+  ({ data }) => data,
+  error => {
+    if (error.response.status === 401) {
+      return null;
+    }
+    return Promise.reject(error);
+  },
+);
