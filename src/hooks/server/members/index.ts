@@ -1,6 +1,6 @@
 import { useMutation, useSuspenseQuery } from '@tanstack/react-query';
 
-import { getToken, getUserProfile, updateUserProfile } from '@/remotes/members';
+import { getLogout, getToken, getUserProfile, updateUserProfile } from '@/remotes/members';
 
 // 유저 프로필 조회
 export const useUserProfileQuery = () =>
@@ -21,3 +21,5 @@ export const useTokenQuery = (params: Parameters<typeof getToken>[0]) =>
     queryKey: ['getToken'],
     queryFn: () => getToken(params),
   });
+
+export const useLogoutMutation = () => useMutation({ mutationFn: getLogout });

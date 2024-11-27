@@ -1,13 +1,14 @@
 'use client';
 
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 import IconArrowRight from '@/components/@icon/IconArrowRight';
 import IconHeartFilled from '@/components/@icon/IconHeartFilled';
 import IconReviewFilled from '@/components/@icon/IconReviewFilled';
 import Avatar from '@/components/Avatar';
 import { colors } from '@/constants/colors';
-import { useUserProfileQuery } from '@/hooks/server/members';
+import { useLogoutMutation, useUserProfileQuery } from '@/hooks/server/members';
 
 interface MenuProps {
   label: string;
@@ -45,10 +46,15 @@ const MENUS2 = [
 
 function MyPage() {
   const { data: myProfile } = useUserProfileQuery();
+  const router = useRouter();
+  const { mutate } = useLogoutMutation();
 
   const onClickLogout = () => {
-    localStorage.removeItem('accessToken');
-    window.location.href = '/';
+    mutate(undefined, {
+      onSuccess: () => {
+        router.push('/');
+      },
+    });
   };
 
   return (

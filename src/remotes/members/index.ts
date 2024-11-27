@@ -14,13 +14,10 @@ export const updateUserProfile = async (data: { nickname: string; profileImageUr
 export const getIsMember = async (): Promise<{ isMember: false }> => {
   return await api.get('/members/me');
 };
+export const getLogout = async () => {
+  return await api.get('/social-login/logout');
+};
 
-export const getToken = async ({
-  socialLoginType,
-  authCode,
-}: {
-  socialLoginType: string;
-  authCode: string;
-}): Promise<{ accessToken: string }> => {
+export const getToken = async ({ socialLoginType, authCode }: { socialLoginType: string; authCode: string }) => {
   return await api.get(`/social-login/${socialLoginType}?authCode=${authCode}`);
 };
