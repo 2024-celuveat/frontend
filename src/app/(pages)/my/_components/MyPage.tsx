@@ -1,7 +1,6 @@
 'use client';
 
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 
 import IconArrowRight from '@/components/@icon/IconArrowRight';
 import IconHeartFilled from '@/components/@icon/IconHeartFilled';
@@ -46,13 +45,12 @@ const MENUS2 = [
 
 function MyPage() {
   const { data: myProfile } = useUserProfileQuery();
-  const router = useRouter();
   const { mutate } = useLogoutMutation();
 
   const onClickLogout = () => {
     mutate(undefined, {
       onSuccess: () => {
-        router.push('/');
+        window.location.href = '/';
       },
     });
   };
