@@ -1,16 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useUserProfileQuery } from './server/members';
 
 const useLogin = () => {
-  const [isLogin, setIsLogin] = useState(false);
+  const { data } = useUserProfileQuery();
 
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
-    if (localStorage.getItem('accessToken')) {
-      setIsLogin(true);
-    }
-  }, []);
-
-  return { isLogin };
+  return { isLogin: !!data };
 };
 
 export default useLogin;
