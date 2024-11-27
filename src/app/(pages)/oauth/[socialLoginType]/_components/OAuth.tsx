@@ -1,8 +1,10 @@
 'use client';
 
+import { useQueryClient } from '@tanstack/react-query';
+import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
-import { useTokenQuery } from '@/hooks/server/members';
+import { api } from '@/utils/api';
 
 interface Props {
   socialLoginType: string;
@@ -10,13 +12,17 @@ interface Props {
 }
 
 function OAuth({ socialLoginType, authCode }: Props) {
-  const { data } = useTokenQuery({ socialLoginType, authCode });
+  const router = useRouter();
+  const queryClient = useQueryClient();
 
   useEffect(() => {
-    if (typeof window === 'undefined') return;
-    if (!data) return;
-    localStorage.setItem('accessToken', data.accessToken);
-    window.location.href = '/';
+    const fetch = async () => {
+      await api.get(`/social-login/${socialLoginType}?authCode=${authCode}`);
+      queryClient.clear();
+      router.push('/');
+    };
+
+    fetch();
   }, []);
 
   return (
