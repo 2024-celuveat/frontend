@@ -1,6 +1,7 @@
 'use client';
 
 import { useQueryClient } from '@tanstack/react-query';
+import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
@@ -18,6 +19,9 @@ function OAuth({ socialLoginType, authCode }: Props) {
   useEffect(() => {
     const fetch = async () => {
       await api.get(`/social-login/${socialLoginType}?authCode=${authCode}`);
+      await axios.get('/api/login', {
+        withCredentials: true,
+      });
       queryClient.clear();
       router.push('/');
     };
