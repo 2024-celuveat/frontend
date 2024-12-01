@@ -50,7 +50,7 @@ function OnBoarding() {
   useEffect(() => {
     if (!localStorage.getItem('onboarding')) {
       setIsOpen(true);
-      localStorage.setItem('onboarding', 'true');
+      // localStorage.setItem('onboarding', 'true');
     }
   }, []);
 
@@ -58,10 +58,10 @@ function OnBoarding() {
     isOpen && (
       <>
         <div className="fixed left-1/2 z-[999] h-full w-full max-w-[495px] -translate-x-1/2 bg-dim-85" />
-        <div className="fixed left-1/2 z-[999] flex h-full w-full -translate-x-1/2 items-center justify-center">
+        <div className="fixed left-1/2 z-[999] flex h-full w-full -translate-x-1/2 flex-col items-center justify-center">
           <AnimatePresence initial={false} custom={direction}>
             <motion.div
-              className="absolute h-[479px] w-[311px] flex-none overflow-hidden rounded-[24px] bg-white"
+              className="absolute h-[479px] w-[311px] flex-none overflow-hidden"
               key={page}
               custom={direction}
               variants={variants}
@@ -114,6 +114,35 @@ function OnBoarding() {
               </button>
             </motion.div>
           </AnimatePresence>
+          <div className="absolute bottom-[calc(50%_-_240px)] z-[1000] flex h-20 w-full items-center justify-center gap-8">
+            {[0, 1, 2, 3, 4].map(index => (
+              <>
+                {index === page ? (
+                  <svg
+                    key={index}
+                    width="15"
+                    height="14"
+                    viewBox="0 0 15 14"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <circle cx="7.5" cy="7" r="7" fill="#FFC42E" />
+                  </svg>
+                ) : (
+                  <svg
+                    key={index}
+                    width="9"
+                    height="8"
+                    viewBox="0 0 9 8"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <circle cx="4.5" cy="4" r="4" fill="white" />
+                  </svg>
+                )}
+              </>
+            ))}
+          </div>
         </div>
       </>
     )
