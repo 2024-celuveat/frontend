@@ -1,5 +1,6 @@
 'use client';
 
+import useScrollLock from '@/hooks/useScrollLock';
 import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
 import { useCallback, useEffect, useState } from 'react';
@@ -45,6 +46,7 @@ function OnBoarding() {
     setDirection(-1);
   }, []);
 
+  useScrollLock(isOpen);
   useEffect(() => {
     if (!localStorage.getItem('onboarding')) {
       setIsOpen(true);
