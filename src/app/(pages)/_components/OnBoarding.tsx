@@ -1,16 +1,8 @@
 'use client';
 
-import { AnimatePresence, wrap, motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
 import { ReactNode, useCallback, useEffect, useState } from 'react';
-
-const IMAGES: { id: number; bottom: ReactNode }[] = [
-  { id: 1, bottom: '셀럽들의 추천 맛집을 간편하게 볼 수 있다면?' },
-  { id: 2, bottom: '인기 셀럽들의 최고의 맛집을 만나보세요!' },
-  { id: 3, bottom: '여러 셀럽들이 추천한 맛집도 확인할 수 있어요' },
-  { id: 4, bottom: '지도로 내 주변 셀럽 맛집을 찾아요' },
-  { id: 5, bottom: '셀럽의 영상과 맛집 정보를 한눈에 확인해요' },
-];
 
 const variants = {
   enter: (direction: number) => {
