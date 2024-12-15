@@ -1,13 +1,16 @@
 'use client';
 
 import Image, { StaticImageData } from 'next/image';
+import { useRouter } from 'next/navigation';
+import { useCallback, useState } from 'react';
 
 import { SocialLoginType } from '@/@types';
 import google from '@/assets/icons/social-login/google_symbol.webp';
 import kakao from '@/assets/icons/social-login/kakao_symbol.webp';
 import naver from '@/assets/icons/social-login/naver_symbol.webp';
 import Avatar from '@/components/Avatar';
-import { useUserProfileQuery } from '@/hooks/server/members';
+import { useUpdateUserProfileMutation, useUserProfileQuery } from '@/hooks/server/members';
+import useToast from '@/hooks/useToast';
 
 const LOGO: Record<SocialLoginType, StaticImageData> = {
   KAKAO: kakao,
@@ -17,6 +20,27 @@ const LOGO: Record<SocialLoginType, StaticImageData> = {
 
 function Form() {
   const { data: myProfile } = useUserProfileQuery();
+  const { mutate } = useUpdateUserProfileMutation();
+  const [nickname, setNickname] = useState<string>(myProfile.nickname);
+
+  const router = useRouter();
+  const showToast = useToast();
+
+  const handleClickSave = () => {
+    mutate(
+      { nickname, profileImageUrl: myProfile.profileImageUrl },
+      {
+        onSuccess: () => {
+          showToast('프로필이 정상적으로 수정되었습니다.');
+          router.back();
+        },
+      },
+    );
+  };
+
+  const handleChangeNickname = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    setNickname(e.target.value);
+  }, []);
 
   return (
     <>
@@ -27,7 +51,8 @@ function Form() {
         <h2 className="h-[33px] text-gray-400 body-14-md">별명</h2>
         <input
           className="flex h-48 w-full items-center gap-10 rounded-[12px] bg-gray-100 pl-14 shadow-sm title-15-md"
-          defaultValue={myProfile.nickname}
+          onChange={handleChangeNickname}
+          value={nickname}
         />
       </section>
       <section className="px-20 pb-8 pt-20">
@@ -41,6 +66,7 @@ function Form() {
         <button
           type="button"
           className="mt-20 h-[50px] w-full rounded-[8px] bg-main-600 text-white title-16-sb disabled:bg-gray-200"
+          onClick={handleClickSave}
         >
           저장하기
         </button>
