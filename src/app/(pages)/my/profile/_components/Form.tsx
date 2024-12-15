@@ -19,7 +19,7 @@ const LOGO: Record<SocialLoginType, StaticImageData> = {
 };
 
 function Form() {
-  const { data: myProfile } = useUserProfileQuery();
+  const { data: myProfile, refetch } = useUserProfileQuery();
   const { mutate } = useUpdateUserProfileMutation();
   const [nickname, setNickname] = useState<string>(myProfile.nickname);
 
@@ -32,6 +32,7 @@ function Form() {
       {
         onSuccess: () => {
           showToast('프로필이 정상적으로 수정되었습니다.');
+          refetch();
           router.back();
         },
       },
@@ -65,8 +66,9 @@ function Form() {
       <section className="absolute bottom-[100px] left-0 w-full px-20">
         <button
           type="button"
-          className="mt-20 h-[50px] w-full rounded-[8px] bg-main-600 text-white title-16-sb disabled:bg-gray-200"
+          className="mt-20 h-[50px] w-full rounded-[8px] bg-main-600 text-white title-16-sb disabled:bg-mainDim-15 disabled:text-main-700"
           onClick={handleClickSave}
+          disabled={nickname === myProfile.nickname}
         >
           저장하기
         </button>
