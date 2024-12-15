@@ -42,6 +42,7 @@ function Header() {
   }
 
   if (pathValues[1] === 'my') {
+    if (pathValues[2] === 'profile') return <HeaderType1 title="프로필 수정" />;
     return <HeaderType2 title="마이" />;
   }
 
