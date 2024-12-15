@@ -1,19 +1,26 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import { overlay } from 'overlay-kit';
 
 import BottomSheet from '@/components/@ui/BottomSheet';
+import { useWithDrawMutation } from '@/hooks/server/members';
+import useToast from '@/hooks/useToast';
 
-interface WithDrawButtonProps {
-  action: () => Promise<void>;
-}
+function WithDrawButton() {
+  const { mutate } = useWithDrawMutation();
+  const showToast = useToast();
+  const router = useRouter();
 
-function WithDrawButton({ action }: WithDrawButtonProps) {
   const onClickWithDrawButton = async () => {
     overlay.open(({ isOpen, close }) => {
       const withDraw = async () => {
-        // 탈퇴하기 로직
-        action();
+        mutate(undefined, {
+          onSuccess: () => {
+            router.push('/');
+            showToast('탈퇴가 완료되었습니다.');
+          },
+        });
         close();
       };
 

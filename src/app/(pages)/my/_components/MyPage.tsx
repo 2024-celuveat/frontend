@@ -9,6 +9,8 @@ import Avatar from '@/components/Avatar';
 import { colors } from '@/constants/colors';
 import { useLogoutMutation, useUserProfileQuery } from '@/hooks/server/members';
 
+import WithDrawButton from './WithDrawButton';
+
 interface MenuProps {
   label: string;
   menus: {
@@ -104,7 +106,7 @@ function MyPage() {
         >
           로그아웃
         </button>
-        {/* <WithDrawButton action={deleteAccount} /> */}
+        <WithDrawButton />
       </section>
     </>
   );
