@@ -63,9 +63,12 @@ function MyPage() {
             <Avatar imageUrl={myProfile.profileImageUrl} size={52} alt="프로필 이미지" />
             <span className="title-20-md">{myProfile.nickname}</span>
           </div>
-          <button type="button" className="h-36 flex-none rounded-[8px] bg-gray-100 px-12 body-13-rg">
+          <Link
+            href="/my/profile"
+            className="flex h-36 flex-none items-center justify-center rounded-[8px] bg-gray-100 px-12 body-13-rg"
+          >
             프로필 수정
-          </button>
+          </Link>
         </div>
 
         <div className="px-20">
