@@ -1,9 +1,10 @@
 'use client';
 
-import useScrollLock from '@/hooks/useScrollLock';
 import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
-import { useCallback, useEffect, useState } from 'react';
+import { Fragment, useCallback, useEffect, useState } from 'react';
+
+import useScrollLock from '@/hooks/useScrollLock';
 
 const variants = {
   enter: (direction: number) => {
@@ -116,6 +117,7 @@ function OnBoarding() {
           </AnimatePresence>
           <div className="absolute bottom-[calc(50%_-_240px)] z-[1000] flex h-20 w-full items-center justify-center gap-8">
             {[0, 1, 2, 3, 4].map(index => (
+              // eslint-disable-next-line react/jsx-no-useless-fragment
               <>
                 {index === page ? (
                   <svg
