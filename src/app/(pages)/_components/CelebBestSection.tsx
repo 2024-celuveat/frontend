@@ -60,7 +60,9 @@ function CelebBestSection() {
                   href={`/restaurants/restaurant/${id}`}
                   className="relative aspect-square overflow-hidden rounded-[8px] bg-gray-200"
                 >
-                  <Image fill alt={name} src={images[0].url} sizes="100%" className="object-cover" />
+                  {images[0]?.url && (
+                    <Image fill alt={name} src={images[0].url} sizes="100%" className="object-cover" />
+                  )}
                 </Link>
                 <div className="mt-10 flex flex-col gap-3 px-2">
                   <span className="body-14-md">{name}</span>

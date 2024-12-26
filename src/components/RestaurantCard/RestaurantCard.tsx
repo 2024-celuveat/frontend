@@ -10,13 +10,17 @@ function RestaurantCard({ id, name, category, images, roadAddress, visitedCelebr
   return (
     <div className="relative flex w-[128px] flex-none flex-col">
       <Link href={`/restaurants/restaurant/${id}`}>
-        <Image
-          src={images[0].url}
-          width={150}
-          height={150}
-          alt={name}
-          className="aspect-square rounded-[8px] bg-gray-200 object-cover"
-        />
+        {images[0]?.url ? (
+          <Image
+            src={images[0].url}
+            width={128}
+            height={128}
+            alt={name}
+            className="aspect-square rounded-[8px] bg-gray-200 object-cover"
+          />
+        ) : (
+          <div className="h-[128px] w-[128px] rounded-[8px] bg-gray-200" />
+        )}
         <div className="mt-12 overflow-x-hidden text-ellipsis whitespace-nowrap">
           <span className="title-15-md">{name}</span>
           <span className="ml-4 caption-12-rg">{category}</span>
